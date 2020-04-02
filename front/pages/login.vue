@@ -13,7 +13,8 @@
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="show1 = !show1"
         ></v-text-field>
-        <v-btn class="mr-4" @click="login">submit</v-btn>
+        <v-btn class="mr-4 px-7" color="#f5851d" @click="login">LOCK!</v-btn>
+        <v-icon color="red">mdi-heart</v-icon>
         <p v-if="error" class="errors">{{error}}</p>
       </form>
     </v-col>
