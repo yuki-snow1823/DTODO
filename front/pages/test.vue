@@ -5,6 +5,7 @@
       :items="desserts"
     >
       <template v-slot:item.name="props">
+        <!-- アイテムの名前にpropsを入れるということ --> 
         <v-edit-dialog
           :return-value.sync="props.item.name"
           @save="save"
@@ -22,6 +23,8 @@
             ></v-text-field>
           </template>
         </v-edit-dialog>
+
+
       </template>
     </v-data-table>
 
@@ -33,7 +36,7 @@
   </div>
 </template>
 
-z<script>
+<script>
   export default {
     data () {
       return {
