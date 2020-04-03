@@ -27,12 +27,13 @@ export default {
       headers: [
         { 
           text: "チェック！", 
-          width: '170' ,
+          width: '170',
           value: "title"
           // 幅の固定もできる
         },
        { 
           text: "TASK POINT", 
+          value: "point",
           width: '170' 
           // 幅の固定もできる
         },
