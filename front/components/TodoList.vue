@@ -4,8 +4,10 @@
       <h2>TODO</h2>
       <v-spacer></v-spacer>
       <!-- <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field> -->
+      <!-- 残してもいいかも -->
     </v-card-title>
     <v-data-table :headers="headers" :items="todos" :search="search">
+      <!-- ここにアイテムの名前が表示される -->
       <template v-slot:item.action="{ item }">
         <v-icon small @click="deleteItem(item)">delete</v-icon>
       </template>
