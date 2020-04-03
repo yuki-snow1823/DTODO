@@ -1,5 +1,5 @@
 class TodoSerializer < ActiveModel::Serializer
-  attributes :id, :title, :user_id, :username
+  attributes :id, :title, :user_id, :point, :username
   belongs_to :user
 
   def username

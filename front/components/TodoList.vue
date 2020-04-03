@@ -8,10 +8,18 @@
     </v-card-title>
     <v-data-table :headers="headers" :items="todos" :search="search">
       <!-- ここにアイテムの名前が表示される -->
+
       <template v-slot:item.action="{ item }">
         <v-icon small @click="deleteItem(item)">delete</v-icon>
       </template>
+
+      <template v-slot:item.baction="{ item }">
+        <v-icon big @click="createItem(item)">mdi-heart</v-icon>
+        <!-- やったことを送信する -->
+      </template>
+
     </v-data-table>
+    
   </v-card>
 </template>
 
@@ -28,8 +36,7 @@ export default {
         { 
           text: "チェック！", 
           width: '170',
-          value: "title"
-          // 幅の固定もできる
+          value: "baction"
         },
        { 
           text: "TASK POINT", 
