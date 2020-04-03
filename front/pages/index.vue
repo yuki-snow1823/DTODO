@@ -75,8 +75,39 @@
       </v-row>
 
       <v-row>
-        <v-col cols="12" sm="12" md="6" lg="6">新規登録（押したら画面上に）</v-col>
-        <v-col cols="12" sm="12" md="6" lg="6">ログイン（押したらウィンドウ）</v-col>
+        <!-- モータルウィンドウ作成 -->
+        <div id="app">
+          <button v-on:click="openModal">ログイン</button>
+          <div id="overlay" v-show="showContent">
+            <div id="content">
+                <v-row>
+    <v-col cols="12" md="12">
+      <h2>Login</h2>
+      <form>
+        <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
+        <v-text-field
+          v-model="password"
+          label="password"
+          data-vv-name="password"
+          required
+          :type="show1 ? 'text' : 'password'"
+          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="show1 = !show1"
+        ></v-text-field>
+        <v-btn class="mr-4 px-7" color="#f5851d" @click="login">LOCK!</v-btn>
+        <v-icon color="red">mdi-heart</v-icon>
+        <p v-if="error" class="errors">{{error}}</p>
+      </form>
+    </v-col>
+  </v-row>
+              <button v-on:click="closeModal">Close</button>
+            </div>
+          </div>
+        </div>
+
+        <v-col class="text-center" cols="6" sm="6" md="6" lg="6">新規登録</v-col>
+        <v-col class="text-center" cols="6" sm="6" md="6" lg="6">ログイン</v-col>
+
       </v-row>
     </div>
 
@@ -98,7 +129,8 @@
         show1: false,
         show2: false,
         error: "",
-        items: ["画像1","画像2"]
+        items: ["画像1", "画像2"],
+        showContent: false
       };
       // ログインに必要な初期値
     },
@@ -177,6 +209,12 @@
               }
             })(error.code);
           });
+      },
+      openModal: function () {
+        this.showContent = true
+      },
+      closeModal: function () {
+        this.showContent = false
       }
     }
   };
@@ -207,5 +245,25 @@
 
   .v-window__container {
     border: solid 5px white;
+  }
+
+
+  /* モータルウィンドウ */
+  #overlay {
+    /*　要素を重ねた時の順番　*/
+    z-index: 1;
+
+    /*　画面全体を覆う設定　*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    /*　画面の中央に要素を表示させる設定　*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
