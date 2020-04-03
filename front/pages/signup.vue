@@ -3,8 +3,12 @@
     <v-col cols="12" md="4">
       <h2>Sign Up</h2>
       <form>
-        <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
-        <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
+        <v-text-field v-model="name" :counter="10" label="Name" 
+        data-vv-name="name" required
+        ></v-text-field>
+        <v-text-field v-model="email" :counter="20" label="Email" 
+        data-vv-name="email" required
+        ></v-text-field>
         <v-text-field
           v-model="password"
           label="password"
