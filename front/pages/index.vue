@@ -75,38 +75,32 @@
       </v-row>
 
       <v-row>
-        <!-- モータルウィンドウ作成 -->
+        <!-- モータルウィンドウ -->
         <div id="app">
-          <button v-on:click="openModal">ログイン</button>
+          <v-btn v-on:click="openModal">ログイン</v-btn>
+          <v-btn v-on:click="moveToTop">新規登録</v-btn>
           <div id="overlay" v-show="showContent">
             <div id="content">
-                <v-row>
-    <v-col cols="12" md="12">
-      <h2>Login</h2>
-      <form>
-        <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
-        <v-text-field
-          v-model="password"
-          label="password"
-          data-vv-name="password"
-          required
-          :type="show1 ? 'text' : 'password'"
-          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="show1 = !show1"
-        ></v-text-field>
-        <v-btn class="mr-4 px-7" color="#f5851d" @click="login">LOCK!</v-btn>
-        <v-icon color="red">mdi-heart</v-icon>
-        <p v-if="error" class="errors">{{error}}</p>
-      </form>
-    </v-col>
-  </v-row>
-              <button v-on:click="closeModal">Close</button>
+              <v-row>
+                <v-col cols="12" md="12">
+                  <h2>Login</h2>
+                  <form>
+                    <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required>
+                    </v-text-field>
+                    <v-text-field v-model="password" label="password" data-vv-name="password" required
+                      :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="show1 = !show1"></v-text-field>
+                    <v-btn class="mr-4 px-7" color="#f5851d" @click="login">LOCK!</v-btn>
+                    <v-icon color="red">mdi-heart</v-icon>
+                    <p v-if="error" class="errors">{{error}}</p>
+                  </form>
+                </v-col>
+              </v-row>
+              <button v-on:click="closeModal">Back</button>
             </div>
           </div>
         </div>
 
-        <v-col class="text-center" cols="6" sm="6" md="6" lg="6">新規登録</v-col>
-        <v-col class="text-center" cols="6" sm="6" md="6" lg="6">ログイン</v-col>
 
       </v-row>
     </div>
@@ -210,11 +204,35 @@
             })(error.code);
           });
       },
+      login() {
+        this.$store.dispatch("login", {
+          email: this.email,
+          password: this.password
+        });
+      },
       openModal: function () {
         this.showContent = true
       },
       closeModal: function () {
         this.showContent = false
+      },
+      moveToTop() {
+
+        const duration = 1000; // 移動速度（1秒で終了）
+        const interval = 25; // 0.025秒ごとに移動
+        const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
+        const timer = setInterval(() => {
+
+          window.scrollBy(0, step); // スクロール位置を移動
+
+          if (window.scrollY <= 0) {
+
+            clearInterval(timer);
+            // 動ききった後に新規登録をハイライトさせたい。
+          }
+
+        }, interval);
+
       }
     }
   };
