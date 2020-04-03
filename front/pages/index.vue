@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <div v-if="user">
-      <p>{{user.name}}</p>
-      <p>{{user.id}}</p>
+      <p>お名前：{{user.name}}</p>
+      <!-- <p>{{user.id}}</p> -->
       <AddTodo @submit="addTodo" />
       <TodoList :todos="user.todos" />
     </div>
@@ -84,8 +84,8 @@
 </template>
 
 <script>
-  // import AddTodo from "@/components/AddTodo";
-  // import TodoList from "@/components/TodoList";
+  import AddTodo from "@/components/AddTodo";
+  import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
   export default {
@@ -97,7 +97,8 @@
         passwordConfirm: "",
         show1: false,
         show2: false,
-        error: ""
+        error: "",
+        items: ["画像1","画像2"]
       };
       // ログインに必要な初期値
     },
@@ -116,7 +117,8 @@
     },
     // ナビゲーションガード（監視）
     components: {
-
+      AddTodo,
+      TodoList
     },
     // ログイン時のくるくるをいれたい
     computed: {
@@ -126,19 +128,19 @@
       // カレントユーザーの定義
     },
     methods: {
-      // async addTodo(todo) {
-      //   const {
-      //     data
-      //   } = await axios.post("/v1/todos", {
-      //     todo
-      //   });
-      //   //追加
-      //   this.$store.commit("setUser", {
-      //     ...this.user,
-      //     todos: [...this.user.todos, data]
-      //     // 初期値ではなくpostできるように
-      //   });
-      // },
+      async addTodo(todo) {
+        const {
+          data
+        } = await axios.post("/v1/todos", {
+          todo
+        });
+        //追加
+        this.$store.commit("setUser", {
+          ...this.user,
+          todos: [...this.user.todos, data]
+          // 初期値ではなくpostできるように
+        });
+      },
       signup() {
         if (this.password !== this.passwordConfirm) {
           this.error = "※パスワードとパスワード確認が一致していません";
