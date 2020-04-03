@@ -3,7 +3,10 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" xs="6" sm="6" md="4" lg="4">
+        <v-col cols="2" xs="6" sm="6" md="1" lg="1">
+          <v-select>test</v-select>
+        </v-col>
+        <v-col cols="10" xs="6" sm="6" md="4" lg="4">
           <!-- ここまでvuetifyの力 -->
           <v-text-field v-model="title" :counter="10" label="todo" required></v-text-field>
         </v-col>
@@ -45,9 +48,9 @@ export default {
   background-color: black !important;
   margin: 0 auto !important;
 }
-
 .bo:hover{
   border: 2px solid yellow;
   color: yellow;
 }
+
 </style>

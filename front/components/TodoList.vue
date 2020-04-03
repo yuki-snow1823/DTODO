@@ -24,7 +24,15 @@ export default {
       search: "",
       headers: [
         { 
-          text: "チェック！"
+          text: "チェック！", 
+          width: '170' ,
+          value: "title"
+          // 幅の固定もできる
+        },
+       { 
+          text: "TASK POINT", 
+          width: '170' 
+          // 幅の固定もできる
         },
         // これ押したらチェックするみたいな感じにしたい
         {
@@ -34,7 +42,9 @@ export default {
           value: "title"
         },
         // { text: "ユーザー名", value: "username" },
-        { text: "Actions", value: "action", sortable: false }
+        { text: "Actions", 
+          value: "action", 
+          sortable: false }
       ]
     };
   },
