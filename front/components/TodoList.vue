@@ -10,14 +10,18 @@
       <!-- ここにアイテムの名前が表示される -->
 
       <template v-slot:item.action="{ item }">
-        <v-icon small @click="deleteItem(item)">delete</v-icon>
+        <v-icon midium @click="deleteItem(item)">delete</v-icon>
       </template>
 
-      <template v-slot:item.baction="{ item }">
-        <v-icon big @click="doneItem(item)">mdi-heart</v-icon>
+      <template v-slot:item.complete="{ item }">
+        <v-icon big @click="completeItem(item)">mdi-heart</v-icon>
         <!-- やったことを送信する -->
       </template>
 
+      <template v-slot:item.edit="{ item }">
+        <v-icon smaill @click="editItem(item)">create</v-icon>
+        <!-- 編集ボタン -->
+      </template>
     </v-data-table>
     
   </v-card>
@@ -34,27 +38,31 @@ export default {
       search: "",
       headers: [
         { 
-          text: "チェック！", 
+          text: "check", 
           width: '170',
-          value: "baction"
+          value: "complete"
         },
        { 
-          text: "TASK POINT", 
+          text: "TP", 
           value: "point",
           width: '170' 
           // 幅の固定もできる
         },
         // これ押したらチェックするみたいな感じにしたい
         {
-          text: "内容",
+          text: "content",
           align: "left",
           sortable: false,
           value: "title"
         },
         // { text: "ユーザー名", value: "username" },
-        { text: "Actions", 
-          value: "action", 
-          sortable: false }
+        { text: "edit", 
+          value: "edit",  
+          sortable: false },
+        { text: "delete", 
+          value: "action",  
+          sortable: false 
+        }
       ]
     };
   },
@@ -79,8 +87,8 @@ export default {
       }
     },
     // 完了メソッド
-    async doneItem(item) {
-      // const res = confirm("本当に削除しますか？");
+    async completeItem(item) {
+      const res = confirm("本当に達成しますか？");
       if (res) {
         await axios.delete(`/v1/todos/${item.id}`);
         // ここにその持っているタスク分ユーザーにポイントを追加するメソッドを書く
