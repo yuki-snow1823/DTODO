@@ -1,9 +1,9 @@
 <template>
   <v-card>
     <v-card-title>
-      Todo List
+      <h2>TODO</h2>
       <v-spacer></v-spacer>
-      <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
+      <!-- <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field> -->
     </v-card-title>
     <v-data-table :headers="headers" :items="todos" :search="search">
       <template v-slot:item.action="{ item }">
@@ -23,13 +23,17 @@ export default {
       selected: [],
       search: "",
       headers: [
+        { 
+          text: "チェック！"
+        },
+        // これ押したらチェックするみたいな感じにしたい
         {
-          text: "タイトル",
+          text: "内容",
           align: "left",
           sortable: false,
           value: "title"
         },
-        { text: "ユーザー名", value: "username" },
+        // { text: "ユーザー名", value: "username" },
         { text: "Actions", value: "action", sortable: false }
       ]
     };

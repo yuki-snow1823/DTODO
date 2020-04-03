@@ -43,6 +43,7 @@ export default {
   padding: 10px 40px !important;
   border: 2px solid #fc7b03;
   background-color: black !important;
+  margin: 0 auto !important;
 }
 
 .bo:hover{
