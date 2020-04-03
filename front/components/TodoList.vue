@@ -14,7 +14,7 @@
       </template>
 
       <template v-slot:item.baction="{ item }">
-        <v-icon big @click="createItem(item)">mdi-heart</v-icon>
+        <v-icon big @click="doneItem(item)">mdi-heart</v-icon>
         <!-- やったことを送信する -->
       </template>
 
@@ -77,10 +77,31 @@ export default {
         };
         this.$store.commit("setUser", newUser);
       }
-    }
+    },
+    // 完了メソッド
+    async doneItem(item) {
+      // const res = confirm("本当に削除しますか？");
+      if (res) {
+        await axios.delete(`/v1/todos/${item.id}`);
+        // ここにその持っているタスク分ユーザーにポイントを追加するメソッドを書く
+        const todos = this.user.todos.filter(todo => {
+          return todo.id !== item.id;
+        });
+        const newUser = {
+          ...this.user,
+          todos
+        };
+        this.$store.commit("setUser", newUser);
+      }
+    } 
   }
 };
 </script>
 
 <style>
+
+.v-icon {
+  display: flex;
+  justify-content: center;
+}
 </style>
