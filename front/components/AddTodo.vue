@@ -3,12 +3,12 @@
   <v-form>
     <v-container>
       <v-row>
-        <v-col cols="12" md="4">
+        <v-col cols="12" xs="6" sm="6" md="4" lg="4">
           <!-- ここまでvuetifyの力 -->
           <v-text-field v-model="title" :counter="10" label="todo" required></v-text-field>
         </v-col>
-        <v-col cols="12" md="4">
-          <v-btn @click="handleSubmit">作成</v-btn>
+        <v-col cols="12" xs="6" sm="6" md="4" lg="4">
+          <v-btn class="bo" @click="handleSubmit">DETERMINATION</v-btn>
           <!-- v-on -->
         </v-col>
       </v-row>
@@ -38,4 +38,15 @@ export default {
 </script>
 
 <style>
+.col-md-4 > .bo {
+  color: #fc7b03;
+  padding: 10px 40px !important;
+  border: 2px solid #fc7b03;
+  background-color: black !important;
+}
+
+.bo:hover{
+  border: 2px solid yellow;
+  color: yellow;
+}
 </style>
