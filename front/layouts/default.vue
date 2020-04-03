@@ -26,7 +26,9 @@
       <!-- <v-btn icon @click.stop="fixed = !fixed"> -->
         <!-- <v-icon>mdi-minus</v-icon> -->
       <!-- </v-btn> -->
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title>
+        <router-link v-text="title" to="/" class="toolbar-title"></router-link>
+      </v-toolbar-title>
       <v-spacer />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
@@ -66,7 +68,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "DTODO" //追加
+      title: "DTODO"  //追加、できればリンクつけたい
     };
   },
     components: {
