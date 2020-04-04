@@ -18,8 +18,10 @@ class V1::TodosController < ApplicationController
     def complete
       # ここに飛ばすことはできた。
         todo = Todo.find(params[:id])
+        
         if todo.destroy
             render json: todo
+            # render json: {posts: @posts, user: @user }もしかするとこう
         end
         # ユーザーのパラメーター取得をしないと
     end
