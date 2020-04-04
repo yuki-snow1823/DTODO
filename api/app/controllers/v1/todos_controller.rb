@@ -15,6 +15,15 @@ class V1::TodosController < ApplicationController
         end
     end
 
+    def complete
+      # ここに飛ばすことはできた。
+        todo = Todo.find(params[:id])
+        if todo.destroy
+            render json: todo
+        end
+        # ユーザーのパラメーター取得をしないと
+    end
+
     private
       def todo_params
         params.require(:todo).permit(:title, :user_id, :point)
