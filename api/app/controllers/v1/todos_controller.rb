@@ -24,8 +24,9 @@ class V1::TodosController < ApplicationController
       user.update(point: getpoint)
       # ポイントを加算to_iはいずれ消す
       # なぜかキャッシュから読み込むから変数に入れる
+      # binding.pry
         if todo.destroy
-            render json: {todo: todo, user: user}
+          render json: {todo: todo, user: user}
         end
     end
 
