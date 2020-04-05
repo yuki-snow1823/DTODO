@@ -16,14 +16,17 @@ class V1::TodosController < ApplicationController
     end
 
     def complete
-      # ここに飛ばすことはできた。
-        todo = Todo.find(params[:id])
-        binding.pry
-        # if todo.destroy
-            render json: todo
-            # render json: {posts: @posts, user: @user }もしかするとこう
-        # end
-        # ユーザーのパラメーター取得をしないと
+      todo = Todo.find(params[:id])
+      user = User.find(todo.user_id)
+      getpoint = user.point.to_i
+      getpoint += todo.point
+      user.point = getpoint
+      user.update(point: getpoint)
+      # ポイントを加算to_iはいずれ消す
+      # なぜかキャッシュから読み込むから変数に入れる
+        if todo.destroy
+            render json: {todo: todo, user: user}
+        end
     end
 
     private

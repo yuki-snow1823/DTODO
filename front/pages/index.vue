@@ -2,6 +2,7 @@
   <v-container>
     <div v-if="user">
       <p>お名前：{{user.name}}</p>
+      <p>タスクポイント：{{user.point}}</p>
       <!-- <p>{{user.id}}</p> -->
       <AddTodo @submit="addTodo" />
       <TodoList :todos="user.todos" />
@@ -100,8 +101,6 @@
             </div>
           </div>
         </div>
-
-
       </v-row>
     </div>
 
@@ -118,6 +117,7 @@
       return {
         email: "",
         name: "",
+        point: "",
         password: "",
         passwordConfirm: "",
         show1: false,

@@ -98,7 +98,9 @@ export default {
         // ここにその持っているタスク分ユーザーにポイントを追加するメソッドを書く
         // this.user.point += this.todos.point;
         // 予想→うまく行かなかった
-        const todos = this.todos.point;
+        const todos = this.user.todos.filter(todo => {
+          return todo.id !== item.id;
+        });
         // 多分ここは何もしなくていいはず
         const newUser = {
           ...this.user,
