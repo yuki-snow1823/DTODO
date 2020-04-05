@@ -41,6 +41,9 @@ https://docs.google.com/spreadsheets/d/1IAgz7H7wgIluBo9_TDhby5vTlwxm4ZIweP-k-RA9
 ER図・ワイヤーフレーム・UIFLOW  
 https://app.diagrams.net/#G1iM99ckAc5K6EpIfgPj1gO0QEtyo8FFti
 
+アクセスできない場合はこちら  
+https://drive.google.com/file/d/1iM99ckAc5K6EpIfgPj1gO0QEtyo8FFti/view?usp=sharing
+
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/10EkgefVrWOcUwnqEYp09vCmVcveE4DfNdiKm0f2-4Qg/edit?usp=sharing
 
