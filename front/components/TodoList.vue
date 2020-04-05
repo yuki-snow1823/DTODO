@@ -93,14 +93,15 @@ export default {
         await axios.get(`/v1/todos/${item.id}`,
           {
             params: {
-            point: this.todos.point
+            point: this.todos[0].point
             // 反応しない
           }});
         const todos = this.user.todos.filter(todo => {
           return todo.id !== item.id;
         });
-        const points = this.user.point
-        // 多分ここは何もしなくていいはず
+        const points = this.user.point + this.todos[0].point
+        console.log(this.todos[0].point)
+        // ここが原因
         const newUser = {
           ...this.user,
           todos,
@@ -108,7 +109,7 @@ export default {
         };
         this.$store.commit("setUser", newUser);
         // this.user.point = response.user.point;
-        // console.log(json)
+        console.log(this.user.point)
       }
     } 
   }

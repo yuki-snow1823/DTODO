@@ -2,9 +2,7 @@
   <v-container>
     <div v-if="user">
       <p>お名前：{{user.name}}</p>
-      <v-card class="user-tp d-inline-block mx-auto" color="#fc7b03">
-        <v-card-text >タスクポイント：{{user.point}}</v-card-text>
-        </v-card>
+      <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
       <!-- <p>{{user.id}}</p> -->
       <AddTodo @submit="addTodo" />
       <TodoList :todos="user.todos" />
@@ -286,6 +284,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .user-tp {
+    border: white solid 2px;
   }
 
 
