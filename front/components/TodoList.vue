@@ -90,13 +90,16 @@ export default {
     async completeItem(item) {
       const res = confirm("本当に達成しますか？");
       if (res) {
-        await axios.get(`/v1/todos/${item.id}`);
+        await axios.get(`/v1/todos/${item.id}`,
+          {
+            params: {
+            point: this.todos.point
+          }});
         // ここにその持っているタスク分ユーザーにポイントを追加するメソッドを書く
         // this.user.point += this.todos.point;
         // 予想→うまく行かなかった
-        const todos = this.user.todos.filter(todo => {
-          return todo.id !== item.id;
-        });
+        const todos = this.todos.point;
+        // 多分ここは何もしなくていいはず
         const newUser = {
           ...this.user,
           todos,
