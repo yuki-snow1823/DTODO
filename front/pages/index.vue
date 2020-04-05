@@ -155,6 +155,7 @@
     },
     methods: {
       async addTodo(todo) {
+        // 子から送られてきたtodoを持っている
         const {
           data
         } = await axios.post("/v1/todos", {

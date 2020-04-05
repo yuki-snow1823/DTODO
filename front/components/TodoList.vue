@@ -90,11 +90,7 @@ export default {
     async completeItem(item) {
       const res = confirm("本当に達成しますか？");
       if (res) {
-        await axios.get(`/v1/todos/${item.id}`,
-          {
-            params: {
-            point: this.todos.point
-          }});
+        await axios.get(`/v1/todos/${item.id}`);
         // ここにその持っているタスク分ユーザーにポイントを追加するメソッドを書く
         // this.user.point += this.todos.point;
         // 予想→うまく行かなかった
