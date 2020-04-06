@@ -1,20 +1,12 @@
 <template>
   <v-container>
-
+      <p>ご褒美ページです</p>
       <p>お名前：{{user.name}}</p>
       <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
-      <!-- <p>{{user.id}}</p> -->
-      <AddTodo @submit="addTodo" />
-      <TodoList :todos="user.todos" />
-
- 
-
   </v-container>
 </template>
 
 <script>
-  import AddTodo from "@/components/AddTodo";
-  import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   export default {
     data() {
@@ -43,8 +35,6 @@
     },
     // ナビゲーションガード（監視）
     components: {
-      AddTodo,
-      TodoList
     },
     // ログイン時のくるくるをいれたい
     computed: {

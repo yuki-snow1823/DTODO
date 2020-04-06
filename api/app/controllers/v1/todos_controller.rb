@@ -1,6 +1,5 @@
 class V1::TodosController < ApplicationController
     def create
-      binding.pry
       todo = Todo.new(todo_params)
       if todo.save
         render json: todo, status: :created
