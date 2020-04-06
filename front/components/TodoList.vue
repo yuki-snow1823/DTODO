@@ -1,5 +1,7 @@
 <template>
   <v-card>
+
+    <!-- 編集画面 -->
     <v-card-title>
       <h2>TODO</h2>
       <v-spacer></v-spacer>
@@ -8,8 +10,6 @@
     </v-card-title>
     <v-data-table :headers="headers" :items="todos" :search="search">
       <!-- ここにアイテムの名前が表示される -->
-
-      
 
       <template v-slot:item.action="{ item }">
         <v-icon midium @click="deleteItem(item)">delete</v-icon>
@@ -23,11 +23,18 @@
       <template v-slot:item.edit="{ item }">
         <v-icon smaill @click="editItem(item)">create</v-icon>
         <!-- 編集ボタン -->
+        <div v-if="editOn"></div>
+        <div v-else class="edit-window">
+          <p>編集画面</p>
+          {{ todos[0].title }}
+          <v-text-field input="changeItem([$event,'text1'])" label="Edit" counter></v-text-field>
+          <v-icon smaill @click="changeItem">update</v-icon>
+        </div>
       </template>
     </v-data-table>
-
   </v-card>
 </template>
+
 
 <script>
   import axios from "@/plugins/axios";
@@ -38,6 +45,7 @@
         singleSelect: true,
         selected: [],
         search: "",
+        editOn: true,
         headers: [{
             text: "check",
             width: '170',
@@ -112,24 +120,12 @@
           // ミューテーションに飛ばす
         }
       },
-      save () {
-        this.snack = true
-        this.snackColor = 'success'
-        this.snackText = 'Data saved'
+      async editItem(item) {
+        this.editOn = !this.editOn
       },
-      cancel () {
-        this.snack = true
-        this.snackColor = 'error'
-        this.snackText = 'Canceled'
-      },
-      open () {
-        this.snack = true
-        this.snackColor = 'info'
-        this.snackText = 'Dialog opened'
-      },
-      close () {
-        console.log('Dialog closed')
-      },
+      async changeItem(item){
+
+      }
     }
   };
 </script>
@@ -137,6 +133,24 @@
 <style>
   .v-icon {
     display: flex;
+    justify-content: center;
+  }
+
+  .edit-window {
+    /*　要素を重ねた時の順番　*/
+    z-index: 1;
+
+    /*　画面全体を覆う設定　*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 30, 0.5);
+
+    /*　画面の中央に要素を表示させる設定　*/
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 </style>
