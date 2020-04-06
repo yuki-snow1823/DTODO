@@ -12,7 +12,9 @@
           @cancel="cancel"
           @open="open"
           @close="close"
-        > {{ props.item.name }}
+        > {{ props.item.name }}<br>
+        {{ props }}
+        
           <template v-slot:input>
             <v-text-field
               v-model="props.item.name"
@@ -91,4 +93,5 @@
       },
     },
   }
+// console.log(this.props);
 </script>

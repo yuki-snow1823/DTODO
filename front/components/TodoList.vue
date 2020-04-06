@@ -8,14 +8,8 @@
     </v-card-title>
     <v-data-table :headers="headers" :items="todos" :search="search">
       <!-- ここにアイテムの名前が表示される -->
- <template v-slot:items.name="props">
-      <v-edit-dialog :return-value.sync="props.todos.name" @save="save" @cancel="cancel" @open="open" @close="close">
-        {{ todos.name }}
-        <template v-slot:input>
-          <v-text-field v-model="props.todos.name" :rules="[max25chars]" label="Edit" single-line counter></v-text-field>
-        </template>
-      </v-edit-dialog>
-      </template>
+
+      
 
       <template v-slot:item.action="{ item }">
         <v-icon midium @click="deleteItem(item)">delete</v-icon>
