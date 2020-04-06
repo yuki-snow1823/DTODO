@@ -94,22 +94,19 @@ export default {
           {
             params: {
             point: this.todos[0].point
-            // 反応しない
           }});
         const todos = this.user.todos.filter(todo => {
           return todo.id !== item.id;
         });
-        const points = this.user.point + this.todos[0].point
-        console.log(this.todos[0].point)
+        this.user.point = this.user.point + this.todos[0].point
         // ここが原因
         const newUser = {
           ...this.user,
-          todos,
-          points
+          todos
         };
         this.$store.commit("setUser", newUser);
         // this.user.point = response.user.point;
-        console.log(this.user.point)
+        console.log(newUser);
       }
     } 
   }
