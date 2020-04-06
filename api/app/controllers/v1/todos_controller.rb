@@ -1,5 +1,6 @@
 class V1::TodosController < ApplicationController
     def create
+      binding.pry
       todo = Todo.new(todo_params)
       if todo.save
         render json: todo, status: :created
@@ -8,11 +9,18 @@ class V1::TodosController < ApplicationController
       end
     end
 
+    def update
+      todo = Todo.find(params[:id])
+      # binding.pry
+      todo.update(todo_params)
+      render json: todo
+    end
+
     def destroy
-        todo = Todo.find(params[:id])
-        if todo.destroy
-            render json: todo
-        end
+      todo = Todo.find(params[:id])
+      if todo.destroy
+        render json: todo
+      end
     end
 
     def complete
@@ -25,9 +33,9 @@ class V1::TodosController < ApplicationController
       # ポイントを加算to_iはいずれ消す
       # なぜかキャッシュから読み込むから変数に入れる
       # binding.pry
-        if todo.destroy
-          render json: {todo: todo, user: user}
-        end
+      if todo.destroy
+        render json: {todo: todo, user: user}
+      end
     end
 
     private
