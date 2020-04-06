@@ -26,8 +26,7 @@
         <div v-if="editOn"></div>
         <div v-else class="edit-window">
           <p>編集画面</p>
-          {{ todos[0].title }}
-          <v-text-field input="changeItem([$event,'text1'])" label="Edit" counter></v-text-field>
+          <v-text-field label="Edit" counter></v-text-field>
           <v-icon smaill @click="changeItem">update</v-icon>
         </div>
       </template>
@@ -124,7 +123,6 @@
         this.editOn = !this.editOn
       },
       async changeItem(item){
-
       }
     }
   };

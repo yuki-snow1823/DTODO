@@ -5,6 +5,7 @@
       <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
       <!-- <p>{{user.id}}</p> -->
       <AddTodo @submit="addTodo" />
+      <v-btn outlined href="/reward">ご褒美へ</v-btn>
       <TodoList :todos="user.todos" />
     </div>
 
