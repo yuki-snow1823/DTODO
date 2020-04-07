@@ -10,9 +10,9 @@
 </template>
 
 <script>
-  import axios from "@/plugins/axios";
   import AddReward from "@/components/AddReward";
   import RewardList from "@/components/RewardList";
+  import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
   export default {
     data() {
@@ -59,11 +59,9 @@
         } = await axios.post("/v1/rewards", {
           reward
         });
-        //追加
         this.$store.commit("setUser", {
           ...this.user,
           rewards: [...this.user.rewards, data]
-          // 初期値ではなくpostできるように
         });
       },
       openModal: function () {

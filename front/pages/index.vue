@@ -151,18 +151,13 @@
       AddTodo,
       TodoList
     },
-    // ログイン時のくるくるをいれたい
     computed: {
       user() {
         return this.$store.state.currentUser;
       }
-      // カレントユーザーの定義
     },
     methods: {
       async addTodo(todo) {
-        console.log(todo);
-
-        // 子から送られてきたtodoを持っている
         const {
           data
         } = await axios.post("/v1/todos", {
