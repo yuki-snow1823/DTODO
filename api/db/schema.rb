@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_143059) do
+ActiveRecord::Schema.define(version: 2020_04_07_225415) do
 
   create_table "level_settings", force: :cascade do |t|
     t.integer "level"
-    t.integer "threshold"
+    t.integer "thresold"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_143059) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "point"
     t.integer "level", default: 1
+    t.integer "experience_point", default: 0
   end
 
 end
