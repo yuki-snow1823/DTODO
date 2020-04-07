@@ -24,6 +24,8 @@ class V1::RewardsController < ApplicationController
 
     def complete
       reward = Reward.find(params[:id])
+      # binding.pry
+      reward.update(status: true)
       user = User.find(reward.user_id)
       losepoint = user.point.to_i
       losepoint -= reward.point
@@ -36,6 +38,6 @@ class V1::RewardsController < ApplicationController
 
     private
       def reward_params
-        params.require(:reward).permit(:title, :user_id, :point)
+        params.require(:reward).permit(:title, :user_id, :point, :status)
       end
 end

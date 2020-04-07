@@ -37,8 +37,8 @@
         </template>
 
         <template v-slot:item.complete="{ item }">
-          <v-icon v-if="lock" big color="yellow" @click="completeItem(item)">lock</v-icon>
-          <v-icon v-else big color="yellow" @click="completeItem(item)">lock_open</v-icon>
+          <v-icon v-if="item.status" big color="yellow" @click="completeItem(item)">lock_open</v-icon>
+          <v-icon v-else big color="yellow" @click="completeItem(item)">lock</v-icon>
         </template>
 
       </v-data-table>
@@ -67,11 +67,9 @@
         search: "",
         editOn: true,
         items: numberRange,
-        lock: true,
         snack: false,
         snackColor: "",
         snackText: "",
-
         headers: [{
             text: "check",
             width: "170",
@@ -102,7 +100,7 @@
     computed: {
       user() {
         return this.$store.state.currentUser;
-      }
+      },
     },
     methods: {
       async deleteItem(item) {
@@ -142,7 +140,6 @@
           this.snackColor = "success";
           this.snackText = "Data saved";
           // ここに宝箱の状態を切り替えるメソッドを入れる
-          this.lock = false;
         }
       },
       async editItem(item) {
