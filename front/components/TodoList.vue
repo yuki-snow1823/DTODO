@@ -12,11 +12,12 @@
         <!-- ここにアイテムの名前が表示される/itemsをitemに入れるのがv-data-tableの機能-->
 
         <template v-slot:item.point="props">
-          <v-edit-dialog :return-value.sync="props.item.point" @save="save" @cancel="cancel" @open="open" @close="close">
+          <v-edit-dialog @save="save" @cancel="cancel" @open="open" @close="close"
+            :return-value="props.item.point">
             {{ props.item.point }}
             <template v-slot:input>
-              <v-select @change="updatePoint(props.item.id, props.item.point)" @save="save" @cancel="cancel"
-                @open="open" @close="close" v-model="props.item.point" :items="items" single-line></v-select>
+              <v-select @change="updatePoint(props.item.id, props.item.point)" v-model="props.item.point" :items="items"
+                single-line :value="props.item.point"></v-select>
               <!-- itemsは元々v-selectに存在している -->
             </template>
           </v-edit-dialog>
@@ -39,13 +40,12 @@
 
         <template v-slot:item.complete="{ item }">
           <v-hover>
-          <v-icon big color="red" @click="completeItem(item)">mdi-heart</v-icon>
+            <v-icon big color="red" @click="completeItem(item)">mdi-heart</v-icon>
           </v-hover>
         </template>
 
       </v-data-table>
     </v-card>
-
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
@@ -68,11 +68,9 @@
         search: "",
         editOn: true,
         items: numberRange,
-
         snack: false,
         snackColor: "",
         snackText: "",
-
         headers: [{
             text: "check",
             width: "170",
@@ -152,6 +150,7 @@
         this.editOn = !this.editOn;
       },
       async updateTitle(id, value) {
+        console.log("title");
         await axios.patch(`/v1/todos/${id}`, {
           todo: {
             title: value
@@ -159,11 +158,15 @@
         });
       },
       async updatePoint(id, value) {
+        console.log(this.todos[0].point)
+        let result = 
         await axios.patch(`/v1/todos/${id}`, {
           todo: {
             point: value
           }
         });
+        console.log(result);
+        console.log(this.todos[0].point)
       },
       save() {
         this.snack = true;
@@ -182,6 +185,11 @@
       },
       close() {
         console.log("Dialog closed");
+      }
+    },
+    watch: {
+      todos: function (newHoge, oldHoge) {
+        console.log('hogeが' + oldHoge + 'から' + newHoge + 'に変更されました');
       }
     }
   };
