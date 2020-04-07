@@ -31,10 +31,7 @@ class V1::RewardsController < ApplicationController
       user.update(point: losepoint)
       # ポイントを加算to_iはいずれ消す
       # なぜかキャッシュから読み込むから変数に入れる
-      # binding.pry
-      if reward.destroy
-        render json: {reward: reward, user: user}
-      end
+      render json: {reward: reward, user: user}
     end
 
     private

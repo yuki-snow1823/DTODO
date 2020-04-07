@@ -131,9 +131,7 @@
               point: this.rewards[0].point
             }
           });
-          // const rewards = this.user.rewards.filter(reward => {
-          //   return reward.id !== item.id;
-          // });
+          const rewards = this.rewards
           this.user.point = this.user.point - this.rewards[0].point;
           const newUser = {
             ...this.user,
