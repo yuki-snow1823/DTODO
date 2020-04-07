@@ -11,7 +11,7 @@
         <!-- ここにアイテムの名前が表示される/itemsをitemに入れるのがv-data-tableの機能-->
 
         <template v-slot:item.point="props">
-          <v-edit-dialog :return-value.sync="props.item.point" @save="save" @cancel="cancel" @open="open" @close="close">
+          <v-edit-dialog :return-value="props.item.point" @save="save" @cancel="cancel" @open="open" @close="close">
             {{ props.item.point }}
             <template v-slot:input>
               <v-select @change="updatePoint(props.item.id, props.item.point)" @save="save" @cancel="cancel"
