@@ -11,10 +11,10 @@ const authCheck = ({
         data
       } = await axios.get(`/v1/users?uid=${user.uid}`)
       store.commit("setUser", data)
-      console.log("hoge");
+      // console.log("hoge");
     } else {
       store.commit("setUser", null)
-      console.log("hoge2");
+      // console.log("hoge2");
     }
   });
 }

@@ -126,11 +126,12 @@
         if (res) {
           await axios.get(`/v1/rewards/${item.id}`, {
             params: {
-              point: this.rewards[0].point
+              point: item.point
             }
           });
+          item.status = true;
           const rewards = this.rewards
-          this.user.point = this.user.point - this.rewards[0].point;
+          this.user.point = this.user.point - item.point;
           const newUser = {
             ...this.user,
             rewards
@@ -140,6 +141,8 @@
           this.snackColor = "success";
           this.snackText = "Data saved";
           // ここに宝箱の状態を切り替えるメソッドを入れる
+          console.log(item.point);
+          
         }
       },
       async editItem(item) {
