@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-card>
-      <!-- 編集画面 -->
       <v-card-title>
         <h2>Reward</h2>
         <v-spacer></v-spacer>
@@ -38,22 +37,18 @@
         </template>
 
         <template v-slot:item.complete="{ item }">
-          <v-icon big @click="completeItem(item)">mdi-heart</v-icon>
-          <!-- やったことを送信する -->
+          <v-icon v-if="lock" big color="yellow" @click="completeItem(item)">lock</v-icon>
+          <v-icon v-else big color="yellow" @click="completeItem(item)">lock_open</v-icon>
         </template>
-        <!-- 編集ボタン -->
-        <!-- <div v-if="editOn"></div>
-        <div v-else class="edit-window">
-          <p>編集画面</p>
-          <v-text-field label="Edit" counter></v-text-field>
-          <v-icon smaill @click="changeItem">update</v-icon>
-        </div>-->
+
       </v-data-table>
     </v-card>
+
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
     </v-snackbar>
+
   </div>
 
 </template>
@@ -72,7 +67,7 @@
         search: "",
         editOn: true,
         items: numberRange,
-
+        lock: true,
         snack: false,
         snackColor: "",
         snackText: "",
@@ -136,20 +131,20 @@
               point: this.rewards[0].point
             }
           });
-          const rewards = this.user.rewards.filter(reward => {
-            return reward.id !== item.id;
-          });
-          this.user.point = this.user.point + this.rewards[0].point;
-          // ポイントを加算
+          // const rewards = this.user.rewards.filter(reward => {
+          //   return reward.id !== item.id;
+          // });
+          this.user.point = this.user.point - this.rewards[0].point;
           const newUser = {
             ...this.user,
             rewards
           };
           this.$store.commit("setUser", newUser);
-          // ミューテーションに飛ばす
           this.snack = true;
           this.snackColor = "success";
           this.snackText = "Data saved";
+          // ここに宝箱の状態を切り替えるメソッドを入れる
+          this.lock = false;
         }
       },
       async editItem(item) {

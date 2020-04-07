@@ -27,9 +27,6 @@ export default {
   data() {
     return {
       title: "",
-      // v-modelと紐づいているからここも書き変わる
-
-      // ここからタスクポイントに関する記述
       items: numberRange,
       number: '',
     };
