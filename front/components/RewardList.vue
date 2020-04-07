@@ -71,26 +71,26 @@
         snackColor: "",
         snackText: "",
         headers: [{
-            text: "check",
+            text: "状態",
             width: "170",
             value: "complete"
           },
           {
-            text: "TP",
+            text: "消費TP",
             value: "point",
             width: "170"
             // 幅の固定もできる
           },
           // これ押したらチェックするみたいな感じにしたい
           {
-            text: "content",
+            text: "内容",
             align: "left",
             sortable: false,
             value: "title"
           },
           // { text: "ユーザー名", value: "username" },
           {
-            text: "delete",
+            text: "削除",
             value: "action",
             sortable: false
           }
