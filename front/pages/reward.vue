@@ -1,13 +1,16 @@
 <template>
   <v-container>
-      <p>ご褒美ページです</p>
-      <p>お名前：{{user.name}}</p>
-      <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
+    <p>ご褒美ページです</p>
+    <p>お名前：{{user.name}}</p>
+    <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
+    <AddReward @submit="addTodo" />
+
   </v-container>
 </template>
 
 <script>
   import axios from "@/plugins/axios";
+  import AddReward from "@/components/AddReward";
   export default {
     data() {
       return {
@@ -35,7 +38,7 @@
     },
     // ナビゲーションガード（監視）
     components: {
-
+      AddReward
     },
     // ログイン時のくるくるをいれたい
     computed: {
@@ -136,6 +139,4 @@
   .user-tp {
     border: white solid 2px;
   }
-
-
 </style>
