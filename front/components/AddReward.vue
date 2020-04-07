@@ -8,10 +8,10 @@
         </v-col>
         <v-col cols="10" xs="6" sm="6" md="4" lg="4">
           <!-- ここまでvuetifyの力 -->
-          <v-text-field v-model="title" :counter="20" label="todo" required></v-text-field>
+          <v-text-field v-model="title" :counter="20" label="reward" required></v-text-field>
         </v-col>
         <v-col cols="12" xs="6" sm="6" md="4" lg="4">
-          <v-btn class="bo" @click="handleSubmit">DETERMINATION</v-btn>
+          <v-btn class="bo" @click="handleSubmit">Create!</v-btn>
           <!-- v-on -->
         </v-col>
       </v-row>
@@ -36,12 +36,12 @@ export default {
   },
   methods: {
     handleSubmit() {
-      const todo = {
+      const reward = {
         title: this.title,
         user_id: this.$store.state.currentUser.id,
         point: this.number
       };
-      this.$emit("submit", todo);
+      this.$emit("submit", reward);
       this.title = "";
       this.number = "";
     }

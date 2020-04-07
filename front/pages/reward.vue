@@ -3,7 +3,8 @@
     <p>ご褒美ページです</p>
     <p>お名前：{{user.name}}</p>
     <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
-    <AddReward @submit="addTodo" />
+    <AddReward @submit="addReward" />
+    <RewardList :rewards="user.rewards" />
 
   </v-container>
 </template>
@@ -11,6 +12,8 @@
 <script>
   import axios from "@/plugins/axios";
   import AddReward from "@/components/AddReward";
+  import RewardList from "@/components/RewardList";
+  import firebase from "@/plugins/firebase";
   export default {
     data() {
       return {
@@ -38,7 +41,8 @@
     },
     // ナビゲーションガード（監視）
     components: {
-      AddReward
+      AddReward,
+      RewardList
     },
     // ログイン時のくるくるをいれたい
     computed: {
@@ -48,17 +52,17 @@
       // カレントユーザーの定義
     },
     methods: {
-      async addTodo(todo) {
-        // 子から送られてきたtodoを持っている
+      async addReward(reward) {
+        // 子から送られてきたrewardを持っている
         const {
           data
-        } = await axios.post("/v1/todos", {
-          todo
+        } = await axios.post("/v1/rewards", {
+          reward
         });
         //追加
         this.$store.commit("setUser", {
           ...this.user,
-          todos: [...this.user.todos, data]
+          rewards: [...this.user.rewards, data]
           // 初期値ではなくpostできるように
         });
       },
