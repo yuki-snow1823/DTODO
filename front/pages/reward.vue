@@ -1,13 +1,20 @@
 <template>
   <v-container>
+    <div v-if="user">
       <p>ご褒美ページです</p>
       <p>お名前：{{user.name}}</p>
       <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
+      <AddReward @submit="addReward" />
+      <RewardList :rewards="user.rewards" />
+    </div>
   </v-container>
 </template>
 
 <script>
+  import AddReward from "@/components/AddReward";
+  import RewardList from "@/components/RewardList";
   import axios from "@/plugins/axios";
+  import firebase from "@/plugins/firebase";
   export default {
     data() {
       return {
@@ -35,27 +42,25 @@
     },
     // ナビゲーションガード（監視）
     components: {
+      AddReward,
+      RewardList
     },
     // ログイン時のくるくるをいれたい
     computed: {
       user() {
         return this.$store.state.currentUser;
       }
-      // カレントユーザーの定義
     },
     methods: {
-      async addTodo(todo) {
-        // 子から送られてきたtodoを持っている
+      async addReward(reward) {
         const {
           data
-        } = await axios.post("/v1/todos", {
-          todo
+        } = await axios.post("/v1/rewards", {
+          reward
         });
-        //追加
         this.$store.commit("setUser", {
           ...this.user,
-          todos: [...this.user.todos, data]
-          // 初期値ではなくpostできるように
+          rewards: [...this.user.rewards, data]
         });
       },
       openModal: function () {
@@ -69,17 +74,12 @@
         const interval = 25; // 0.025秒ごとに移動
         const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
         const timer = setInterval(() => {
-
           window.scrollBy(0, step); // スクロール位置を移動
-
           if (window.scrollY <= 0) {
-
             clearInterval(timer);
             // 動ききった後に新規登録をハイライトさせたい。
           }
-
         }, interval);
-
       }
     }
   };
@@ -135,6 +135,4 @@
   .user-tp {
     border: white solid 2px;
   }
-
-
 </style>

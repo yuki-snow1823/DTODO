@@ -24,21 +24,20 @@ class V1::RewardsController < ApplicationController
 
     def complete
       reward = Reward.find(params[:id])
+      # binding.pry
+      reward.update(status: true)
       user = User.find(reward.user_id)
-      getpoint = user.point.to_i
-      getpoint += reward.point
-      user.point = getpoint
-      user.update(point: getpoint)
+      losepoint = user.point.to_i
+      losepoint -= reward.point
+      user.point = losepoint
+      user.update(point: losepoint)
       # ポイントを加算to_iはいずれ消す
       # なぜかキャッシュから読み込むから変数に入れる
-      # binding.pry
-      if reward.destroy
-        render json: {reward: reward, user: user}
-      end
+      render json: {reward: reward, user: user}
     end
 
     private
       def reward_params
-        params.require(:reward).permit(:title, :user_id, :point)
+        params.require(:reward).permit(:title, :user_id, :point, :status)
       end
 end

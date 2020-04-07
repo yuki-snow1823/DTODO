@@ -38,18 +38,14 @@
         </template>
 
         <template v-slot:item.complete="{ item }">
-          <v-icon big @click="completeItem(item)">mdi-heart</v-icon>
-          <!-- やったことを送信する -->
+          <v-hover>
+          <v-icon big color="red" @click="completeItem(item)">mdi-heart</v-icon>
+          </v-hover>
         </template>
-        <!-- 編集ボタン -->
-        <!-- <div v-if="editOn"></div>
-        <div v-else class="edit-window">
-          <p>編集画面</p>
-          <v-text-field label="Edit" counter></v-text-field>
-          <v-icon smaill @click="changeItem">update</v-icon>
-        </div>-->
+
       </v-data-table>
     </v-card>
+
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
