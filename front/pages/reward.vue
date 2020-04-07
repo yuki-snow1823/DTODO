@@ -1,11 +1,12 @@
 <template>
   <v-container>
-    <p>ご褒美ページです</p>
-    <p>お名前：{{user.name}}</p>
-    <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
-    <AddReward @submit="addReward" />
-    <RewardList :rewards="user.rewards" />
-
+    <div v-if="user">
+      <p>ご褒美ページです</p>
+      <p>お名前：{{user.name}}</p>
+      <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
+      <AddReward @submit="addReward" />
+      <RewardList :rewards="user.rewards" />
+    </div>
   </v-container>
 </template>
 
@@ -49,11 +50,9 @@
       user() {
         return this.$store.state.currentUser;
       }
-      // カレントユーザーの定義
     },
     methods: {
       async addReward(reward) {
-        // 子から送られてきたrewardを持っている
         const {
           data
         } = await axios.post("/v1/rewards", {
@@ -75,17 +74,12 @@
         const interval = 25; // 0.025秒ごとに移動
         const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
         const timer = setInterval(() => {
-
           window.scrollBy(0, step); // スクロール位置を移動
-
           if (window.scrollY <= 0) {
-
             clearInterval(timer);
             // 動ききった後に新規登録をハイライトさせたい。
           }
-
         }, interval);
-
       }
     }
   };
