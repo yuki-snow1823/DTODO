@@ -78,9 +78,6 @@
       </v-col>
     </v-row>
 
-
-
-
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
         <div class="mb-10››">
@@ -90,44 +87,48 @@
           </v-carousel>
         </div>
         <v-hover v-slot:default="{ hover }">
-          <v-btn class="bottom-btn" v-on:click="openModal">
+          <v-btn class="bottom-btn" @click.stop="dialog = true">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
           </v-btn>
         </v-hover>
         <v-hover v-slot:default="{ hover }">
-
           <v-btn class="bottom-btn" v-on:click="moveToTop">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>新規登録
           </v-btn>
         </v-hover>
-
       </v-col>
     </v-row>
 
-    <v-row>
-      <div id="app">
-        <div id="overlay" v-show="showContent">
-          <div id="content">
-            <v-row>
-              <v-col cols="12" md="12">
-                <h2>Login</h2>
-                <form>
-                  <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required>
-                  </v-text-field>
-                  <v-text-field v-model="password" label="password" data-vv-name="password" required
-                    :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append="show1 = !show1"></v-text-field>
-                  <v-btn class="mr-4 px-7" color="#f5851d" @click="login">LOCK!</v-btn>
-                  <v-icon color="red">mdi-heart</v-icon>
-                  <p v-if="error" class="errors">{{error}}</p>
-                </form>
-              </v-col>
-            </v-row>
-            <button v-on:click="closeModal">Back</button>
-          </div>
-        </div>
-      </div>
+    <v-row justify="center">
+      <v-btn color="primary" dark @click.stop="dialog = true">
+        Open Dialog
+      </v-btn>
+
+      <v-dialog v-model="dialog" max-width="60%">
+        <v-card>
+
+          <h2>Login</h2>
+          <form>
+            <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
+            <v-text-field v-model="password" label="password" data-vv-name="password" required
+              :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show1 = !show1"></v-text-field>
+            <v-btn class="mr-4 px-7" color="#f5851d" @click="login">LOCK!</v-btn>
+            <v-icon color="red">mdi-heart</v-icon>
+            <p v-if="error" class="errors">{{error}}</p>
+          </form>
+
+          <v-card-actions>
+            <v-btn color="green darken-1" text @click="dialog = false">
+              閉じる
+            </v-btn>
+          </v-card-actions>
+
+        </v-card>
+      </v-dialog>
     </v-row>
+
+
   </v-container>
 
 </template>
@@ -151,6 +152,7 @@
         show1: false,
         show2: false,
         error: "",
+        dialog: false,
         items: [{
             // src: AssetsImage,
             src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
@@ -241,12 +243,6 @@
           password: this.password
         });
       },
-      openModal: function () {
-        this.showContent = true;
-      },
-      closeModal: function () {
-        this.showContent = false;
-      },
       moveToTop() {
         const duration = 1000;
         const interval = 25;
@@ -318,16 +314,15 @@
         border: 2px solid $main-color;
         color: $main-color;
         width: 100%;
-        
+
         &:hover {
-        border: 2px solid yellow;
-        color: yellow;
-      }
+          border: 2px solid yellow;
+          color: yellow;
+        }
       }
     }
 
     .introduction {
-
       img {
         width: 50%;
         height: 50%;
@@ -349,6 +344,7 @@
     .mdi-heart {
       color: red !important;
     }
+
     .checked {
       color: yellow
     }
@@ -358,10 +354,11 @@
 
       .bottom-btn {
         @include index-bottom-btn;
+
         &:hover {
-        border: 2px solid yellow;
-        color: yellow;
-      }
+          border: 2px solid yellow;
+          color: yellow;
+        }
       }
     }
   }
