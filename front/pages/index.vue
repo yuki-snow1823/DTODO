@@ -99,38 +99,27 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center">
-      <v-btn color="primary" dark @click.stop="dialog = true">
-        Open Dialog
-      </v-btn>
-
-      <v-dialog v-model="dialog" max-width="60%">
-        <v-card>
-
-          <h2>Login</h2>
+    <v-dialog content-class="dialog" v-model="dialog" max-width="60%">
+      <v-card>
+        <v-card-title class="headline">Login</v-card-title>
+        <v-card-text>
           <form>
             <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
             <v-text-field v-model="password" label="password" data-vv-name="password" required
               :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="show1 = !show1"></v-text-field>
-            <v-btn class="mr-4 px-7" color="#f5851d" @click="login">LOCK!</v-btn>
-            <v-icon color="red">mdi-heart</v-icon>
+            <v-hover v-slot:default="{ hover }">
+              <v-btn content-class="bottom-btn" @click="login">
+                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
+              </v-btn>
+            </v-hover>
             <p v-if="error" class="errors">{{error}}</p>
           </form>
-
-          <v-card-actions>
-            <v-btn color="green darken-1" text @click="dialog = false">
-              閉じる
-            </v-btn>
-          </v-card-actions>
-
-        </v-card>
-      </v-dialog>
-    </v-row>
-
+        </v-card-text>
+      </v-card>
+    </v-dialog>
 
   </v-container>
-
 </template>
 
 <script>
@@ -351,8 +340,17 @@
 
     .index-button-wrapper {
       text-align: center;
-
       .bottom-btn {
+        @include index-bottom-btn;
+
+        &:hover {
+          border: 2px solid yellow;
+          color: yellow;
+        }
+      }
+    }
+    .dialog {
+      .bottom-btn{
         @include index-bottom-btn;
 
         &:hover {
@@ -365,18 +363,5 @@
 
   .v-window__container {
     border: solid 5px white;
-  }
-
-  #overlay {
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 30, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 </style>
