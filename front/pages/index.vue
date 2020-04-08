@@ -27,10 +27,14 @@
             :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="show2 = !show2"></v-text-field>
 
-
           <p v-if="error" class="errors">{{error}}</p>
         </form>
-        <v-btn class="index-button" @click="signup">Sigin up</v-btn>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="index-button" @click="signup">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
+            sign up
+          </v-btn>
+        </v-hover>
       </v-col>
     </v-row>
 
@@ -131,13 +135,13 @@
         show1: false,
         show2: false,
         error: "",
-        items: [
-          {
+        items: [{
             src: AssetsImage,
           },
           {
             src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          }],
+          }
+        ],
         showContent: false
       };
     },
@@ -235,6 +239,7 @@
           window.scrollBy(0, step);
           if (window.scrollY <= 0) {
             clearInterval(timer);
+            // ここにクラス追加を書く
           }
         }, interval);
       }
@@ -264,16 +269,20 @@
         color: $main-color;
       }
     }
+
     .index-subtitle {
       @include explain
     }
+
     .index-form-title {
       @include explain
     }
+
     .index-explain {
       text-align: center;
       margin: 30px 0;
     }
+
     .index-button-wrapper {
       .index-button {
         background-color: black !important;
@@ -282,6 +291,7 @@
         width: 100%;
       }
     }
+
     .introduction {
 
       img {
@@ -290,16 +300,26 @@
         display: block;
         margin: 0 auto 30px;
       }
+
       .sub-introduction {
         text-align: center;
       }
     }
+
     h1 {
       text-align: center;
       // color: $accent-color;
       margin: 30px 0;
     }
-
+    .mdi-heart {
+      color: red !important;
+    }
+    .index-button{
+      &:hover{
+        border: 2px solid yellow;
+        color: yellow;
+      }
+    }
   }
 
   .v-window__container {
@@ -318,5 +338,4 @@
     align-items: center;
     justify-content: center;
   }
-
 </style>
