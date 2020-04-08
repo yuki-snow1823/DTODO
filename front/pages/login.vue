@@ -38,6 +38,8 @@ export default {
         email: this.email,
         password: this.password
       });
+      // this.$router.push("/user");
+      console.log("hoge");
     }
   }
 };

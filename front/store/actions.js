@@ -15,7 +15,8 @@ const actions = {
         setTimeout(() => {
           commit("setNotice", {});
         }, 2000);
-        this.$router.push("/");
+        this.$router.push("/user");
+
       })
       .catch(error => {
         console.log(error);

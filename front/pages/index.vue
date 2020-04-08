@@ -190,7 +190,7 @@
               .then(res => {
                 this.$store.commit("setLoading", false); 
                 this.$store.commit("setUser", res.data); 
-                this.$router.push("/");
+                this.$router.push("/user");
               });
           })
           .catch(error => {
