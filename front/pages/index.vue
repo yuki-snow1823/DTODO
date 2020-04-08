@@ -16,7 +16,7 @@
       </v-col>
 
       <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
-        <h2 class="index-form-title text-center">新規登録はこちらから</h2>
+        <h2 id="index-signup" class="index-form-title text-center">新規登録はこちらから</h2>
         <form>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
           <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
@@ -238,7 +238,12 @@
           window.scrollBy(0, step);
           if (window.scrollY <= 0) {
             clearInterval(timer);
-            // ここにクラス追加を書く
+            const title = document.getElementById('index-signup');
+            const check = function(name){
+              title.classList.add(name);
+              }
+            setTimeout(check,1000,"checked");
+            console.log("hoge");
           }
         }, interval);
       }
@@ -318,6 +323,9 @@
         border: 2px solid yellow;
         color: yellow;
       }
+    }
+    .checked {
+      color: yellow
     }
   }
 
