@@ -79,20 +79,20 @@
     </v-row>
 
     <v-row>
-      <v-col cols="12" sm="12" md="12" lg="12">
-        <div class="carousel">
+      <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
+        <div class="mb-10">
           <v-carousel height="100%">
             <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
               transition="fade-transition"></v-carousel-item>
           </v-carousel>
         </div>
+    <v-btn class="bottom-btn" v-on:click="openModal">ログイン</v-btn>
+    <v-btn class="bottom-btn" v-on:click="moveToTop">新規登録</v-btn>
       </v-col>
     </v-row>
 
     <v-row>
       <div id="app">
-        <v-btn v-on:click="openModal">ログイン</v-btn>
-        <v-btn v-on:click="moveToTop">新規登録</v-btn>
         <div id="overlay" v-show="showContent">
           <div id="content">
             <v-row>
@@ -116,6 +116,7 @@
       </div>
     </v-row>
   </v-container>
+
 </template>
 
 <script>
@@ -264,6 +265,14 @@
     margin-bottom: 10px;
   }
 
+  @mixin index-bottom-btn {
+    background-color: black !important;
+    border: 2px solid $main-color;
+    color: $main-color;
+    display: inline-block;
+    width: 49%;
+  }
+
   .index-page {
 
     .index-title {
@@ -275,16 +284,20 @@
         color: $main-color;
       }
     }
+
     .index-subtitle {
       @include explain
     }
+
     .index-form-title {
       @include explain
     }
+
     .index-explain {
       text-align: center;
       margin: 30px 0;
     }
+
     .index-button-wrapper {
       .index-button {
         background-color: black !important;
@@ -293,6 +306,7 @@
         width: 100%;
       }
     }
+
     .introduction {
 
       img {
@@ -321,6 +335,12 @@
     }
     .checked {
       color: yellow
+    }
+    .index-button-wrapper {
+      text-align: center;
+      .bottom-btn {
+        @include index-bottom-btn
+      }
     }
   }
 
