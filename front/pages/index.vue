@@ -78,16 +78,29 @@
       </v-col>
     </v-row>
 
+
+
+
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
-        <div class="mb-10">
+        <div class="mb-10››">
           <v-carousel height="100%">
             <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
               transition="fade-transition"></v-carousel-item>
           </v-carousel>
         </div>
-    <v-btn class="bottom-btn" v-on:click="openModal">ログイン</v-btn>
-    <v-btn class="bottom-btn" v-on:click="moveToTop">新規登録</v-btn>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="bottom-btn" v-on:click="openModal">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
+          </v-btn>
+        </v-hover>
+        <v-hover v-slot:default="{ hover }">
+
+          <v-btn class="bottom-btn" v-on:click="moveToTop">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>新規登録
+          </v-btn>
+        </v-hover>
+
       </v-col>
     </v-row>
 
@@ -304,6 +317,11 @@
         border: 2px solid $main-color;
         color: $main-color;
         width: 100%;
+        
+        &:hover {
+        border: 2px solid yellow;
+        color: yellow;
+      }
       }
     }
 
@@ -315,31 +333,34 @@
         display: block;
         margin: 0 auto 30px;
       }
+
       .sub-introduction {
         text-align: center;
       }
     }
+
     h1 {
       text-align: center;
       // color: $accent-color;
       margin: 30px 0;
     }
+
     .mdi-heart {
       color: red !important;
-    }
-    .index-button {
-      &:hover {
-        border: 2px solid yellow;
-        color: yellow;
-      }
     }
     .checked {
       color: yellow
     }
+
     .index-button-wrapper {
       text-align: center;
+
       .bottom-btn {
-        @include index-bottom-btn
+        @include index-bottom-btn;
+        &:hover {
+        border: 2px solid yellow;
+        color: yellow;
+      }
       }
     }
   }
