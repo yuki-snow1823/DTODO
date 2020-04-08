@@ -5,7 +5,7 @@
 
     <v-row>
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h2 class="index-subtitle mb-3 text-center">DTODOとは</h2>
+        <h2 class="index-subtitle text-center">DTODOとは</h2>
         <h3 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
@@ -15,7 +15,7 @@
         <p>ログインしている人にはフォームは見えません</p>
       </v-col>
 
-      <v-col v-else cols="12" sm="12" md="6" lg="6">
+      <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
         <h2 class="index-form-title text-center">新規登録はこちらから</h2>
         <form>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
@@ -26,44 +26,48 @@
           <v-text-field v-model="passwordConfirm" label="passwordConfirm" data-vv-name="passwordConfirm" required
             :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="show2 = !show2"></v-text-field>
-          <div class="index-button-wrapper">
-            <v-btn class="index-button" @click="signup">submit</v-btn>
-          </div>
+
+
           <p v-if="error" class="errors">{{error}}</p>
         </form>
+        <v-btn class="index-button" @click="signup">Sigin up</v-btn>
+      </v-col>
+    </v-row>
+
+    <v-row class="my-10">
+      <v-col class="sub-introduction" cols="12" sm="12" md="12" lg="12">
+        <h1>やらなければならないことを楽しむ</h1>
+        <h3>毎日のタスクを</h3>
+
       </v-col>
     </v-row>
 
     <v-row class="introduction">
-      <v-col cols="12" sm="12" md="4" lg="4">
-        <v-img width="50%" height="50%"
-          src="https://4.bp.blogspot.com/-PDD_C43ZQ9A/V5AXrn_GD6I/AAAAAAAA8Z4/0KzHBvARnV4itcdlfhCpbtPSTwHYqPzcgCLcB/s800/vr_game_pad.png">
-        </v-img>
-        <h3>特徴の１つめです</h3>
-        <p>
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-        </p>
-      </v-col>
-      <v-col cols="12" sm="12" md="4" lg="4">
-        <v-img width="50%" height="50%"
-          src="https://4.bp.blogspot.com/-PDD_C43ZQ9A/V5AXrn_GD6I/AAAAAAAA8Z4/0KzHBvARnV4itcdlfhCpbtPSTwHYqPzcgCLcB/s800/vr_game_pad.png">
-        </v-img>
-        <h3>特徴の１つめです</h3>
-        <p>
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-        </p>
-      </v-col>
-      <v-col cols="12" sm="12" md="4" lg="4">
-        <v-img width="50%" height="50%"
-          src="https://4.bp.blogspot.com/-PDD_C43ZQ9A/V5AXrn_GD6I/AAAAAAAA8Z4/0KzHBvARnV4itcdlfhCpbtPSTwHYqPzcgCLcB/s800/vr_game_pad.png">
-        </v-img>
 
-        <h3>特徴の１つめです</h3>
+      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+        <img class="" src="../assets/point.png">
+        <h3 class="index-subtitle">タスクポイントを設定しよう！</h3>
         <p>
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
+          DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
+          TPはごほうびの解放に使用できます。難しいTPほどより高いタスクポイントを設定しましょう。
+        </p>
+      </v-col>
+
+      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+        <img src="../assets/point.png">
+        <h3 class="index-subtitle">レベルアップを目指そう！</h3>
+        <p>
+          TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
+          レベルが高くなると、何かいいことが…？
+        </p>
+      </v-col>
+
+      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+        <img src="../assets/point.png">
+        <h3 class="index-subtitle">自分にごほうびをあげよう！</h3>
+        <p>
+          DTODOを利用する際は、まずごほうびを作成しましょう。作成の際には、ごほうびの解放に必要なTPを設定することができます。
+          TODOをたくさん完了してTPが貯まったら、ご褒美を解放することができます。（TPは消費されます。）
         </p>
       </v-col>
     </v-row>
@@ -234,38 +238,60 @@
   $sub-color: #33dddd;
   $accent-color: #f0353f;
 
+  @mixin explain {
+    color: $sub-color;
+    font-family: 'ヒラギノ角ゴシック';
+    margin-bottom: 10px;
+  }
+
   .index-page {
 
     .index-title {
       text-align: center;
-      font-size: 80px;
+      font-size: 70px;
       font-family: 'Comic Sans MS';
+
       .index-title-first {
         color: $main-color;
       }
     }
     .index-subtitle {
-      color: $sub-color;
-      font-family: 'ヒラギノ角ゴシック';
+      @include explain
     }
     .index-form-title {
-      color: $sub-color;
-      font-family: 'ヒラギノ角ゴシック';
+      @include explain
     }
     .index-explain {
       text-align: center;
       margin-bottom: 30px;
     }
     .index-button-wrapper {
-      text-align: center;
       .index-button {
         background-color: black !important;
         border: 2px solid $main-color;
         color: $main-color;
-        padding: 0 41%;
+        width: 100%;
       }
     }
+    .introduction {
 
+      img {
+        width: 50%;
+        height: 50%;
+        display: block;
+        margin: 0 auto 30px;
+      }
+      .sub-introduction {
+        text-align: center;
+      }
+    }
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+    }
+    p {
+      text-align: center;
+    }
   }
 
 
@@ -282,22 +308,6 @@
 
 
 
-  #title {
-    display: inline-block;
-    background-color: #fc7b03;
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  .introduction {
-    margin-top: 50px;
-  }
-
-  .introduction h3 {
-    text-align: center;
-    margin: 0 auto;
-    color: aqua !important;
-  }
 
   .v-img {
     text-align: center;
@@ -320,7 +330,4 @@
     justify-content: center;
   }
 
-  .user-tp {
-    border: white solid 2px;
-  }
 </style>
