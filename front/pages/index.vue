@@ -243,7 +243,7 @@
   };
 </script>
 
-<style>
+<style lang="scss">
   #title {
     display: inline-block;
     background-color: #fc7b03;
