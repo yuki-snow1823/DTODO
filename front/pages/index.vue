@@ -283,7 +283,8 @@
     border: 2px solid $main-color;
     color: $main-color;
     display: inline-block;
-    width: 49%;
+    margin: 15px;
+    width: 45%;
   }
 
   .index-page {
