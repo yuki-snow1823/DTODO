@@ -36,7 +36,7 @@
 
 <script>
 import firebase from "@/plugins/firebase";
-import axios from "@/plugins/axios" //追加
+import axios from "@/plugins/axios"
 export default {
   data() {
     return {
@@ -48,7 +48,6 @@ export default {
       show2: false,
       error: ""
     };
-    // 初期値
   },
 methods: {
    signup() {
@@ -56,7 +55,7 @@ methods: {
         this.error = "※パスワードとパスワード確認が一致していません";
       }
 
-      this.$store.commit("setLoading", true);　//ローディングをonにする
+      this.$store.commit("setLoading", true);
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
@@ -66,9 +65,9 @@ methods: {
             name: this.name,
             uid: res.user.uid
           };
-          axios.post("/v1/users", { user }).then(res => {　//追加
-            this.$store.commit("setLoading", false);　//ローディングをoffにする
-            this.$store.commit("setUser", res.data); //promiseの値をstoreに入れる
+          axios.post("/v1/users", { user }).then(res => {　
+            this.$store.commit("setLoading", false);
+            this.$store.commit("setUser", res.data); 
             this.$router.push("/");
           });
         })

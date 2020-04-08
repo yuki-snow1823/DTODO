@@ -1,15 +1,12 @@
 <template>
   <div>
     <v-card>
-      <!-- 編集画面 -->
       <v-card-title>
         <h2>TODO</h2>
         <v-spacer></v-spacer>
         <!-- <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field> -->
-        <!-- 残してもいいかも -->
       </v-card-title>
       <v-data-table :headers="headers" :items="todos" :search="search">
-        <!-- ここにアイテムの名前が表示される/itemsをitemに入れるのがv-data-tableの機能-->
 
         <template v-slot:item.point="props">
           <v-edit-dialog @save="save" @cancel="cancel" @open="open" @close="close"
@@ -18,7 +15,6 @@
             <template v-slot:input>
               <v-select @change="updatePoint(props.item.id, props.item.point)" v-model="props.item.point" :items="items"
                 single-line :value="props.item.point"></v-select>
-              <!-- itemsは元々v-selectに存在している -->
             </template>
           </v-edit-dialog>
         </template>
@@ -56,7 +52,7 @@
 
 
 <script>
-  const maxNumber = 11; //表示したい数字より+1で設定。
+  const maxNumber = 11;
   const numberRange = [...Array(maxNumber).keys()]
   import axios from "@/plugins/axios";
   export default {
@@ -80,16 +76,13 @@
             text: "TP",
             value: "point",
             width: "170"
-            // 幅の固定もできる
           },
-          // これ押したらチェックするみたいな感じにしたい
           {
             text: "content",
             align: "left",
             sortable: false,
             value: "title"
           },
-          // { text: "ユーザー名", value: "username" },
           {
             text: "delete",
             value: "action",
@@ -121,7 +114,6 @@
           this.snackText = "Data deleted";
         }
       },
-      // 完了メソッド
       async completeItem(item) {
         const res = confirm("本当に達成しますか？");
         if (res) {
@@ -140,7 +132,6 @@
             todos
           };
           this.$store.commit("setUser", newUser);
-          // ミューテーションに飛ばす
           this.snack = true;
           this.snackColor = "success";
           this.snackText = "Data saved";
@@ -157,15 +148,12 @@
         });
       },
       async updatePoint(id, value) {
-        console.log(this.todos[0].point)
         let result = 
         await axios.patch(`/v1/todos/${id}`, {
           todo: {
             point: value
           }
         });
-        console.log(result);
-        console.log(this.todos[0].point)
       },
       save() {
         this.snack = true;
@@ -187,9 +175,6 @@
       }
     },
     watch: {
-      todos: function (newHoge, oldHoge) {
-        console.log('hogeが' + oldHoge + 'から' + newHoge + 'に変更されました');
-      }
     }
   };
 </script>
@@ -201,18 +186,13 @@
   }
 
   .edit-window {
-    /*　要素を重ねた時の順番　*/
     z-index: 1;
-
-    /*　画面全体を覆う設定　*/
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 30, 0.5);
-
-    /*　画面の中央に要素を表示させる設定　*/
     display: flex;
     align-items: center;
     justify-content: center;

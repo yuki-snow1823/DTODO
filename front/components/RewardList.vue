@@ -5,18 +5,15 @@
         <h2>Reward</h2>
         <v-spacer></v-spacer>
         <!-- <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field> -->
-        <!-- 残してもいいかも -->
       </v-card-title>
-      <v-data-table :headers="headers" :items="rewards" :search="search">
-        <!-- ここにアイテムの名前が表示される/itemsをitemに入れるのがv-data-tableの機能-->
 
+      <v-data-table :headers="headers" :items="rewards" :search="search">
         <template v-slot:item.point="props">
           <v-edit-dialog :return-value="props.item.point" @save="save" @cancel="cancel" @open="open" @close="close">
             {{ props.item.point }}
             <template v-slot:input>
               <v-select @change="updatePoint(props.item.id, props.item.point)" @save="save" @cancel="cancel"
                 @open="open" @close="close" v-model="props.item.point" :items="items" single-line></v-select>
-              <!-- itemsは元々v-selectに存在している -->
             </template>
           </v-edit-dialog>
         </template>
@@ -55,7 +52,7 @@
 
 
 <script>
-  const maxNumber = 11; //表示したい数字より+1で設定。
+  const maxNumber = 11;
   const numberRange = [...Array(maxNumber).keys()]
   import axios from "@/plugins/axios";
   export default {
@@ -79,16 +76,13 @@
             text: "消費TP",
             value: "point",
             width: "170"
-            // 幅の固定もできる
           },
-          // これ押したらチェックするみたいな感じにしたい
           {
             text: "内容",
             align: "left",
             sortable: false,
             value: "title"
           },
-          // { text: "ユーザー名", value: "username" },
           {
             text: "削除",
             value: "action",
@@ -120,7 +114,6 @@
           this.snackText = "Data deleted";
         }
       },
-      // 完了メソッド
       async completeItem(item) {
         const res = confirm("本当に達成しますか？");
         if (res) {
@@ -140,7 +133,6 @@
           this.snack = true;
           this.snackColor = "success";
           this.snackText = "Data saved";
-          // ここに宝箱の状態を切り替えるメソッドを入れる
           console.log(item.point);
           
         }
@@ -191,10 +183,7 @@
   }
 
   .edit-window {
-    /*　要素を重ねた時の順番　*/
     z-index: 1;
-
-    /*　画面全体を覆う設定　*/
     position: fixed;
     top: 0;
     left: 0;
@@ -202,7 +191,6 @@
     height: 100%;
     background-color: rgba(0, 0, 30, 0.5);
 
-    /*　画面の中央に要素を表示させる設定　*/
     display: flex;
     align-items: center;
     justify-content: center;

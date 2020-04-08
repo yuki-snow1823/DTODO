@@ -25,7 +25,6 @@
         error: "",
         showContent: false
       };
-      // ログインに必要な初期値
     },
     fetch({
       store,
@@ -40,12 +39,10 @@
         }
       );
     },
-    // ナビゲーションガード（監視）
     components: {
       AddReward,
       RewardList
     },
-    // ログイン時のくるくるをいれたい
     computed: {
       user() {
         return this.$store.state.currentUser;
@@ -70,14 +67,13 @@
         this.showContent = false
       },
       moveToTop() {
-        const duration = 1000; // 移動速度（1秒で終了）
-        const interval = 25; // 0.025秒ごとに移動
-        const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
+        const duration = 1000;
+        const interval = 25;
+        const step = -window.scrollY / Math.ceil(duration / interval);
         const timer = setInterval(() => {
-          window.scrollBy(0, step); // スクロール位置を移動
+          window.scrollBy(0, step);
           if (window.scrollY <= 0) {
             clearInterval(timer);
-            // 動ききった後に新規登録をハイライトさせたい。
           }
         }, interval);
       }
@@ -103,7 +99,6 @@
     color: aqua !important;
   }
 
-  /* 指定がうまくいかない */
   .v-img {
     text-align: center;
   }
@@ -113,20 +108,14 @@
   }
 
 
-  /* モータルウィンドウ */
   #overlay {
-    /*　要素を重ねた時の順番　*/
     z-index: 1;
-
-    /*　画面全体を覆う設定　*/
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 30, 0.5);
-
-    /*　画面の中央に要素を表示させる設定　*/
     display: flex;
     align-items: center;
     justify-content: center;

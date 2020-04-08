@@ -24,7 +24,6 @@ export default {
         .then(() => {
           this.$store.commit("setUser", null);
           this.$router.push("/login");
-          // 移動さき
         })
         .catch(error => {
           console.log(error);

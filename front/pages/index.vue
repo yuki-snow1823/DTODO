@@ -6,7 +6,6 @@
         <p>レベル：{{user.level}}</p>
         <p>現在の経験値：{{user.experience_point}}</p>
         <p>タスクポイント：{{user.point}}</p>
-        <!-- <p>{{user.id}}</p> -->
         <router-link to="/reward">ご褒美ページへ</router-link>
       </div>
         <AddTodo @submit="addTodo" />
@@ -24,7 +23,6 @@
           </h3>
         </v-col>
         <v-col cols="12" sm="12" md="6" lg="6">
-          <!-- サインアップフォームはここ -->
           <form>
             <h2 class="text-center">新規登録はコチラ</h2>
             <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
@@ -36,7 +34,6 @@
               :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="show2 = !show2"></v-text-field>
             <v-btn class="mr-4" @click="signup">submit</v-btn>
-            <!-- 押したらサインアップメソッドにいく -->
             <p v-if="error" class="errors">{{error}}</p>
           </form>
         </v-col>
@@ -86,7 +83,6 @@
       </v-row>
 
       <v-row>
-        <!-- モータルウィンドウ -->
         <div id="app">
           <v-btn v-on:click="openModal">ログイン</v-btn>
           <v-btn v-on:click="moveToTop">新規登録</v-btn>
@@ -158,7 +154,7 @@
     computed: {
       user() {
         return this.$store.state.currentUser;
-      }
+      },
     },
     methods: {
       async addTodo(todo) {
@@ -171,14 +167,13 @@
         this.$store.commit("setUser", {
           ...this.user,
           todos: [...this.user.todos, data]
-          // 初期値ではなくpostできるように
         });
       },
       signup() {
         if (this.password !== this.passwordConfirm) {
           this.error = "※パスワードとパスワード確認が一致していません";
         }
-        this.$store.commit("setLoading", false); //ローディングをonにする、一旦falseにした
+        this.$store.commit("setLoading", true); 
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
@@ -193,9 +188,8 @@
                 user
               })
               .then(res => {
-                //追加
-                this.$store.commit("setLoading", false); //ローディングをoffにする、ここで本来オフになる
-                this.$store.commit("setUser", res.data); //promiseの値をstoreに入れる
+                this.$store.commit("setLoading", false); 
+                this.$store.commit("setUser", res.data); 
                 this.$router.push("/");
               });
           })
@@ -227,15 +221,13 @@
         this.showContent = false;
       },
       moveToTop() {
-        const duration = 1000; // 移動速度（1秒で終了）
-        const interval = 25; // 0.025秒ごとに移動
-        const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
+        const duration = 1000;
+        const interval = 25;
+        const step = -window.scrollY / Math.ceil(duration / interval);
         const timer = setInterval(() => {
-          window.scrollBy(0, step); // スクロール位置を移動
-
+          window.scrollBy(0, step);
           if (window.scrollY <= 0) {
             clearInterval(timer);
-            // 動ききった後に新規登録をハイライトさせたい。
           }
         }, interval);
       }
@@ -261,7 +253,6 @@
     color: aqua !important;
   }
 
-  /* 指定がうまくいかない */
   .v-img {
     text-align: center;
   }
@@ -270,20 +261,14 @@
     border: solid 5px white;
   }
 
-  /* モータルウィンドウ */
   #overlay {
-    /*　要素を重ねた時の順番　*/
     z-index: 1;
-
-    /*　画面全体を覆う設定　*/
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 30, 0.5);
-
-    /*　画面の中央に要素を表示させる設定　*/
     display: flex;
     align-items: center;
     justify-content: center;

@@ -20,9 +20,8 @@
 
 </template>
 <script>
-const maxNumber = 10; //表示したい数字より+1で設定。
+const maxNumber = 11;
 const numberRange = [...Array(maxNumber).keys()]
-
 export default {
   data() {
     return {

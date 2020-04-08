@@ -7,12 +7,10 @@
           <v-select label="TP" v-model="number" :items="items">test</v-select>
         </v-col>
         <v-col cols="10" xs="6" sm="6" md="4" lg="4">
-          <!-- ここまでvuetifyの力 -->
           <v-text-field v-model="title" :counter="20" label="todo" required></v-text-field>
         </v-col>
         <v-col cols="12" xs="6" sm="6" md="4" lg="4">
           <v-btn class="bo" @click="handleSubmit">DETERMINATION</v-btn>
-          <!-- v-on -->
         </v-col>
       </v-row>
     </v-container>
@@ -20,16 +18,13 @@
 
 </template>
 <script>
-const maxNumber = 10; //表示したい数字より+1で設定。
+const maxNumber = 11;
 const numberRange = [...Array(maxNumber).keys()]
 
 export default {
   data() {
     return {
       title: "",
-      // v-modelと紐づいているからここも書き変わる
-
-      // ここからタスクポイントに関する記述
       items: numberRange,
       number: '',
     };
