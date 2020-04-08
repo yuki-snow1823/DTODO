@@ -1,20 +1,24 @@
 <template>
-  <v-container>
-    <h1 id="title" class="text-center">DTODO</h1>
+  <v-container class="index-page">
+
+      <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
+
     <v-row>
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h2 class="mb-3 text-center">タスク管理をゲームに！</h2>
+        <h2 class="index-subtitle mb-3 text-center">何のためにTODOをこなすのか？</h2>
         <h3>
           これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。
           これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介
         </h3>
       </v-col>
+
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
         <p>ログインしている人にはフォームは見えません</p>
       </v-col>
+
       <v-col v-else cols="12" sm="12" md="6" lg="6">
+          <h2 class="index-form-title text-center">新規登録はこちらから</h2>
         <form>
-          <h2 class="text-center">新規登録はコチラ</h2>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
           <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
           <v-text-field v-model="password" label="password" data-vv-name="password" required
@@ -225,6 +229,46 @@
 </script>
 
 <style lang="scss">
+  $main-color: #fc7b03;
+  $sub-color: #33dddd;
+  $accent-color: #f0353f;
+
+  .index-page {
+
+    .index-title {
+      text-align: center;
+      font-size: 80px;
+      font-family: 'Comic Sans MS';
+
+      .index-title-first {
+        color: $main-color;
+      }
+    }
+    .index-subtitle {
+      color: $sub-color;
+      // font-family: sans-serif;
+    }
+    .index-form-title {
+      color: $accent-color;
+
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   #title {
     display: inline-block;
     background-color: #fc7b03;
