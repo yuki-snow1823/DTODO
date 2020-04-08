@@ -127,14 +127,14 @@
         if (res) {
           await axios.get(`/v1/todos/${item.id}`, {
             params: {
-              point: this.todos[0].point
+              point: item.point
             }
           });
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
           });
-          this.user.point = this.user.point + this.todos[0].point;
-          // ポイントを加算
+          this.user.point += item.point;
+          this.user.experience_point += item.point;
           const newUser = {
             ...this.user,
             todos
@@ -150,7 +150,6 @@
         this.editOn = !this.editOn;
       },
       async updateTitle(id, value) {
-        console.log("title");
         await axios.patch(`/v1/todos/${id}`, {
           todo: {
             title: value

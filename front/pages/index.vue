@@ -1,12 +1,16 @@
 <template>
   <v-container>
     <div v-if="user">
-      <p>お名前：{{user.name}}</p>
-      <p class="user-tp d-inline-block">タスクポイント：{{user.point}}</p>
-      <!-- <p>{{user.id}}</p> -->
-      <router-link to="/reward">ご褒美ページへ</router-link>
-      <AddTodo @submit="addTodo" />
-      <TodoList :todos="user.todos" />
+      <div class="user-tp v-inline-block">
+        <p>お名前：{{user.name}}</p>
+        <p>レベル：{{user.level}}</p>
+        <p>現在の経験値：{{user.experience_point}}</p>
+        <p>タスクポイント：{{user.point}}</p>
+        <!-- <p>{{user.id}}</p> -->
+        <router-link to="/reward">ご褒美ページへ</router-link>
+      </div>
+        <AddTodo @submit="addTodo" />
+        <TodoList :todos="user.todos" />
     </div>
 
     <div v-else>
@@ -122,7 +126,9 @@
       return {
         email: "",
         name: "",
+        level: "",
         point: "",
+        experience_point: "",
         password: "",
         passwordConfirm: "",
         show1: false,
@@ -131,7 +137,6 @@
         items: ["画像1", "画像2"],
         showContent: false
       };
-      // ログインに必要な初期値
     },
     fetch({
       store,
@@ -146,7 +151,6 @@
         }
       );
     },
-    // ナビゲーションガード（監視）
     components: {
       AddTodo,
       TodoList
