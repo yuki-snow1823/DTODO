@@ -1,14 +1,13 @@
 <template>
   <v-container class="index-page">
 
-      <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
+    <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
 
     <v-row>
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h2 class="index-subtitle mb-3 text-center">何のためにTODOをこなすのか？</h2>
-        <h3>
-          これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。
-          これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介
+        <h2 class="index-subtitle mb-3 text-center">DTODOとは</h2>
+        <h3 class="index-explain">
+          TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
       </v-col>
 
@@ -17,7 +16,7 @@
       </v-col>
 
       <v-col v-else cols="12" sm="12" md="6" lg="6">
-          <h2 class="index-form-title text-center">新規登録はこちらから</h2>
+        <h2 class="index-form-title text-center">新規登録はこちらから</h2>
         <form>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
           <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
@@ -27,7 +26,9 @@
           <v-text-field v-model="passwordConfirm" label="passwordConfirm" data-vv-name="passwordConfirm" required
             :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="show2 = !show2"></v-text-field>
-          <v-btn class="mr-4" @click="signup">submit</v-btn>
+          <div class="index-button-wrapper">
+            <v-btn class="index-button" @click="signup">submit</v-btn>
+          </div>
           <p v-if="error" class="errors">{{error}}</p>
         </form>
       </v-col>
@@ -239,18 +240,30 @@
       text-align: center;
       font-size: 80px;
       font-family: 'Comic Sans MS';
-
       .index-title-first {
         color: $main-color;
       }
     }
     .index-subtitle {
       color: $sub-color;
-      // font-family: sans-serif;
+      font-family: 'ヒラギノ角ゴシック';
     }
     .index-form-title {
-      color: $accent-color;
-
+      color: $sub-color;
+      font-family: 'ヒラギノ角ゴシック';
+    }
+    .index-explain {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .index-button-wrapper {
+      text-align: center;
+      .index-button {
+        background-color: black !important;
+        border: 2px solid $main-color;
+        color: $main-color;
+        padding: 0 41%;
+      }
     }
 
   }
