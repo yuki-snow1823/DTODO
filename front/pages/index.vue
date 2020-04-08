@@ -79,11 +79,13 @@
     </v-row>
 
     <v-row>
-      <v-col cols="12" sm="12" md="12" lg="10">
-        <v-carousel height="100%">
-          <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
-            transition="fade-transition"></v-carousel-item>
-        </v-carousel>
+      <v-col cols="12" sm="12" md="12" lg="12">
+        <div class="carousel">
+          <v-carousel height="100%">
+            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
+              transition="fade-transition"></v-carousel-item>
+          </v-carousel>
+        </div>
       </v-col>
     </v-row>
 
@@ -136,7 +138,8 @@
         show2: false,
         error: "",
         items: [{
-            src: AssetsImage,
+            // src: AssetsImage,
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
           },
           {
             src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
@@ -239,11 +242,10 @@
           if (window.scrollY <= 0) {
             clearInterval(timer);
             const title = document.getElementById('index-signup');
-            const check = function(name){
+            const check = function (name) {
               title.classList.add(name);
-              }
-            setTimeout(check,1000,"checked");
-            console.log("hoge");
+            }
+            setTimeout(check, 1000, "checked");
           }
         }, interval);
       }
@@ -273,20 +275,16 @@
         color: $main-color;
       }
     }
-
     .index-subtitle {
       @include explain
     }
-
     .index-form-title {
       @include explain
     }
-
     .index-explain {
       text-align: center;
       margin: 30px 0;
     }
-
     .index-button-wrapper {
       .index-button {
         background-color: black !important;
@@ -295,7 +293,6 @@
         width: 100%;
       }
     }
-
     .introduction {
 
       img {
@@ -304,12 +301,10 @@
         display: block;
         margin: 0 auto 30px;
       }
-
       .sub-introduction {
         text-align: center;
       }
     }
-
     h1 {
       text-align: center;
       // color: $accent-color;
@@ -318,8 +313,8 @@
     .mdi-heart {
       color: red !important;
     }
-    .index-button{
-      &:hover{
+    .index-button {
+      &:hover {
         border: 2px solid yellow;
         color: yellow;
       }
