@@ -35,9 +35,9 @@ class V1::TodosController < ApplicationController
       user.update(point: totalPoint,experience_point: totalExp)
       # ポイントを加算to_iはいずれ消す
       # なぜかキャッシュから読み込むから変数に入れる
-      levelSetting = LevelSetting.find_by(level: user.level + 1);
-
-      if levelSetting.thresold <= user.experience_point
+      levelSetting = LevelSetting.find_by(level: user.level + 1)
+      if levelSetting.present? 
+        levelSetting.thresold <= user.experience_point
         user.level = user.level + 1
         user.update(level: user.level)
       end

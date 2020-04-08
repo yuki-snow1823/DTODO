@@ -37,8 +37,10 @@
     <v-row class="my-10">
       <v-col class="sub-introduction" cols="12" sm="12" md="12" lg="12">
         <h1>やらなければならないことを楽しむ</h1>
-        <h3>毎日のタスクを</h3>
-
+        <h3 class="index-explain">毎日、何かやらなければならないTODOに追われていませんか？</h3>
+        <h3 class="index-explain">めんどくさい、後回しにしたい、やりたくない…好きなことだけをしたい。</h3>
+        <h3 class="index-explain">じゃあ、そのTODOすらも楽しいものに変えてみましょう！</h3>
+        <h3 class="index-explain">DTODOがお手伝いします。</h3>
       </v-col>
     </v-row>
 
@@ -46,35 +48,35 @@
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
         <img class="" src="../assets/point.png">
-        <h3 class="index-subtitle">タスクポイントを設定しよう！</h3>
-        <p>
+        <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
+        <h3 class="index-explain">
           DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
-          TPはごほうびの解放に使用できます。難しいTPほどより高いタスクポイントを設定しましょう。
-        </p>
+          TPはご褒美の解放に使用できます。
+        </h3>
       </v-col>
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
         <img src="../assets/point.png">
-        <h3 class="index-subtitle">レベルアップを目指そう！</h3>
-        <p>
+        <h2 class="index-subtitle text-center">レベルアップを目指そう！</h2>
+        <h3 class="index-explain">
           TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
           レベルが高くなると、何かいいことが…？
-        </p>
+        </h3>
       </v-col>
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
         <img src="../assets/point.png">
-        <h3 class="index-subtitle">自分にごほうびをあげよう！</h3>
-        <p>
-          DTODOを利用する際は、まずごほうびを作成しましょう。作成の際には、ごほうびの解放に必要なTPを設定することができます。
-          TODOをたくさん完了してTPが貯まったら、ご褒美を解放することができます。（TPは消費されます。）
-        </p>
+        <h2 class="index-subtitle text-center">自分にごほうびをあげよう！</h2>
+        <h3 class="index-explain">
+          DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
+          たくさんのTODOをこなして、自分にごほうびをあげましょう。
+        </h3>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col cols="8" sm="8" md="8" lg="8" offset="2">
-        <v-carousel>
+      <v-col cols="12" sm="12" md="12" lg="10">
+        <v-carousel height="100%">
           <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
             transition="fade-transition"></v-carousel-item>
         </v-carousel>
@@ -115,6 +117,7 @@
   import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
+  import AssetsImage from "@/assets/point.png";
   export default {
     data() {
       return {
@@ -128,7 +131,13 @@
         show1: false,
         show2: false,
         error: "",
-        items: ["画像1", "画像2"],
+        items: [
+          {
+            src: AssetsImage,
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          }],
         showContent: false
       };
     },
@@ -263,7 +272,7 @@
     }
     .index-explain {
       text-align: center;
-      margin-bottom: 30px;
+      margin: 30px 0;
     }
     .index-button-wrapper {
       .index-button {
@@ -287,30 +296,10 @@
     }
     h1 {
       text-align: center;
-      margin-top: 30px;
+      // color: $accent-color;
+      margin: 30px 0;
     }
-    p {
-      text-align: center;
-    }
-  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  .v-img {
-    text-align: center;
   }
 
   .v-window__container {
