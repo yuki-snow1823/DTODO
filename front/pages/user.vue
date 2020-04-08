@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="user">
     <div class="user-tp v-inline-block">
       <p>お名前：{{user.name}}</p>
       <p>レベル：{{user.level}}</p>

@@ -1,20 +1,23 @@
 <template>
-  <v-container>
-    <h1 id="title" class="text-center">DTODO</h1>
+  <v-container class="index-page">
+
+    <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
+
     <v-row>
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h2 class="mb-3 text-center">タスク管理をゲームに！</h2>
-        <h3>
-          これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。
-          これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介文です。これは紹介
+        <h2 class="index-subtitle text-center">DTODOとは</h2>
+        <h3 class="index-explain">
+          TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
       </v-col>
+
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
         <p>ログインしている人にはフォームは見えません</p>
       </v-col>
-      <v-col v-else cols="12" sm="12" md="6" lg="6">
+
+      <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
+        <h2 class="index-form-title text-center">新規登録はこちらから</h2>
         <form>
-          <h2 class="text-center">新規登録はコチラ</h2>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
           <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
           <v-text-field v-model="password" label="password" data-vv-name="password" required
@@ -23,49 +26,57 @@
           <v-text-field v-model="passwordConfirm" label="passwordConfirm" data-vv-name="passwordConfirm" required
             :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="show2 = !show2"></v-text-field>
-          <v-btn class="mr-4" @click="signup">submit</v-btn>
+
+
           <p v-if="error" class="errors">{{error}}</p>
         </form>
+        <v-btn class="index-button" @click="signup">Sigin up</v-btn>
+      </v-col>
+    </v-row>
+
+    <v-row class="my-10">
+      <v-col class="sub-introduction" cols="12" sm="12" md="12" lg="12">
+        <h1>やらなければならないことを楽しむ</h1>
+        <h3 class="index-explain">毎日、何かやらなければならないTODOに追われていませんか？</h3>
+        <h3 class="index-explain">めんどくさい、後回しにしたい、やりたくない…好きなことだけをしたい。</h3>
+        <h3 class="index-explain">じゃあ、そのTODOすらも楽しいものに変えてみましょう！</h3>
+        <h3 class="index-explain">DTODOがお手伝いします。</h3>
       </v-col>
     </v-row>
 
     <v-row class="introduction">
-      <v-col cols="12" sm="12" md="4" lg="4">
-        <v-img width="50%" height="50%"
-          src="https://4.bp.blogspot.com/-PDD_C43ZQ9A/V5AXrn_GD6I/AAAAAAAA8Z4/0KzHBvARnV4itcdlfhCpbtPSTwHYqPzcgCLcB/s800/vr_game_pad.png">
-        </v-img>
-        <h3>特徴の１つめです</h3>
-        <p>
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-        </p>
-      </v-col>
-      <v-col cols="12" sm="12" md="4" lg="4">
-        <v-img width="50%" height="50%"
-          src="https://4.bp.blogspot.com/-PDD_C43ZQ9A/V5AXrn_GD6I/AAAAAAAA8Z4/0KzHBvARnV4itcdlfhCpbtPSTwHYqPzcgCLcB/s800/vr_game_pad.png">
-        </v-img>
-        <h3>特徴の１つめです</h3>
-        <p>
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-        </p>
-      </v-col>
-      <v-col cols="12" sm="12" md="4" lg="4">
-        <v-img width="50%" height="50%"
-          src="https://4.bp.blogspot.com/-PDD_C43ZQ9A/V5AXrn_GD6I/AAAAAAAA8Z4/0KzHBvARnV4itcdlfhCpbtPSTwHYqPzcgCLcB/s800/vr_game_pad.png">
-        </v-img>
 
-        <h3>特徴の１つめです</h3>
-        <p>
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-          説明文です。説明文です。説明文です。説明文です。説明文です。説明文です。
-        </p>
+      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+        <img class="" src="../assets/point.png">
+        <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
+        <h3 class="index-explain">
+          DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
+          TPはご褒美の解放に使用できます。
+        </h3>
+      </v-col>
+
+      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+        <img src="../assets/point.png">
+        <h2 class="index-subtitle text-center">レベルアップを目指そう！</h2>
+        <h3 class="index-explain">
+          TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
+          レベルが高くなると、何かいいことが…？
+        </h3>
+      </v-col>
+
+      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+        <img src="../assets/point.png">
+        <h2 class="index-subtitle text-center">自分にごほうびをあげよう！</h2>
+        <h3 class="index-explain">
+          DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
+          たくさんのTODOをこなして、自分にごほうびをあげましょう。
+        </h3>
       </v-col>
     </v-row>
 
     <v-row>
-      <v-col cols="8" sm="8" md="8" lg="8" offset="2">
-        <v-carousel>
+      <v-col cols="12" sm="12" md="12" lg="10">
+        <v-carousel height="100%">
           <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
             transition="fade-transition"></v-carousel-item>
         </v-carousel>
@@ -106,6 +117,7 @@
   import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
+  import AssetsImage from "@/assets/point.png";
   export default {
     data() {
       return {
@@ -119,7 +131,13 @@
         show1: false,
         show2: false,
         error: "",
-        items: ["画像1", "画像2"],
+        items: [
+          {
+            src: AssetsImage,
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          }],
         showContent: false
       };
     },
@@ -225,25 +243,63 @@
 </script>
 
 <style lang="scss">
-  #title {
-    display: inline-block;
-    background-color: #fc7b03;
-    text-align: center;
-    margin: 0 auto;
+  $main-color: #fc7b03;
+  $sub-color: #33dddd;
+  $accent-color: #f0353f;
+
+  @mixin explain {
+    color: $sub-color;
+    font-family: 'ヒラギノ角ゴシック';
+    margin-bottom: 10px;
   }
 
-  .introduction {
-    margin-top: 50px;
-  }
+  .index-page {
 
-  .introduction h3 {
-    text-align: center;
-    margin: 0 auto;
-    color: aqua !important;
-  }
+    .index-title {
+      text-align: center;
+      font-size: 70px;
+      font-family: 'Comic Sans MS';
 
-  .v-img {
-    text-align: center;
+      .index-title-first {
+        color: $main-color;
+      }
+    }
+    .index-subtitle {
+      @include explain
+    }
+    .index-form-title {
+      @include explain
+    }
+    .index-explain {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .index-button-wrapper {
+      .index-button {
+        background-color: black !important;
+        border: 2px solid $main-color;
+        color: $main-color;
+        width: 100%;
+      }
+    }
+    .introduction {
+
+      img {
+        width: 50%;
+        height: 50%;
+        display: block;
+        margin: 0 auto 30px;
+      }
+      .sub-introduction {
+        text-align: center;
+      }
+    }
+    h1 {
+      text-align: center;
+      // color: $accent-color;
+      margin: 30px 0;
+    }
+
   }
 
   .v-window__container {
@@ -263,7 +319,4 @@
     justify-content: center;
   }
 
-  .user-tp {
-    border: white solid 2px;
-  }
 </style>
