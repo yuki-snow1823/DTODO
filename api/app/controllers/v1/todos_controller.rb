@@ -10,7 +10,6 @@ class V1::TodosController < ApplicationController
 
     def update
       todo = Todo.find(params[:id])
-      # binding.pry
       todo.update(todo_params)
       render json: todo
     end
@@ -25,13 +24,24 @@ class V1::TodosController < ApplicationController
     def complete
       todo = Todo.find(params[:id])
       user = User.find(todo.user_id)
-      getpoint = user.point.to_i
-      getpoint += todo.point
-      user.point = getpoint
-      user.update(point: getpoint)
+
+      totalPoint = user.point.to_i
+      totalPoint += todo.point
+      user.point = totalPoint
+
+      totalExp = user.experience_point
+      totalExp += todo.point
+      user.experience_point = totalExp
+      user.update(point: totalPoint,experience_point: totalExp)
       # ポイントを加算to_iはいずれ消す
       # なぜかキャッシュから読み込むから変数に入れる
-      # binding.pry
+      levelSetting = LevelSetting.find_by(level: user.level + 1);
+
+      if levelSetting.thresold <= user.experience_point
+        user.level = user.level + 1
+        user.update(level: user.level)
+      end
+
       if todo.destroy
         render json: {todo: todo, user: user}
       end
