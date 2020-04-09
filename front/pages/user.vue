@@ -3,8 +3,6 @@
 
     <v-row class="user-status" justify="center">
 
-      <!-- <v-col class="user-status" cols="12" xs="12" sm="12" md="12" lg="8"> -->
-      <!-- <v-row> -->
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
         <h1>STATUS</h1>
         <p>NAME：{{user.name}}</p>
@@ -28,9 +26,6 @@
         </v-hover>
       </v-col>
 
-      <!-- </v-row> -->
-
-      <!-- </v-col> -->
     </v-row>
 
     <v-row justify="center">
@@ -166,13 +161,21 @@
     .user-status {
       @include pc {
         width: 100% !important;
-      };
+      }
+
+      ;
+
       @include tab {
         width: 100% !important;
-      };
+      }
+
+      ;
+
       @include sp {
         width: 100% !important;
-      };
+      }
+
+      ;
     }
 
     .user-btn {
