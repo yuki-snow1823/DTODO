@@ -16,8 +16,8 @@
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>
-        <router-link to="/" class="toolbar-title"><span class="title-first">D</span>TODO</router-link>
+      <v-toolbar-title class="pl-0">
+        <router-link to="/" class="toolbar-title"><v-icon class="mb-2" size="38">mdi-skull-outline</v-icon><span class="title-first">D</span>TODO</router-link>
       </v-toolbar-title>
       <v-spacer />
     </v-app-bar>
@@ -35,7 +35,8 @@
 
 <script>
 import Loading from "@/components/Loading";
-import Success from "@/components/Success"
+import Success from "@/components/Success";
+
 
 export default {
   data() {
@@ -61,9 +62,14 @@ export default {
       if (this.user) {
         return [
           {
-            icon: "mdi-apps",
-            title: "Todos",
-            to: "/"
+            icon: "mdi-heart",
+            title: "TODO",
+            to: "/user"
+          },
+          {
+            icon: "mdi-lock",
+            title: "ごほうび",
+            to: "/reward"
           },
           {
             icon: "mdi-chart-bubble",

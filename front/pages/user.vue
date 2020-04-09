@@ -1,26 +1,31 @@
 <template>
   <v-container class="user-page" v-if="user">
     <v-row justify="center">
-      <v-col cols="12" xs="6" sm="8" md="10" lg="8">
-        <div class="user-status v-inline-block">
-          <div id="a">
+      <v-col class="user-status" cols="12" xs="6" sm="8" md="10" lg="7">
+        <v-row>
+        <v-col cols="12" xs="6" sm="8" md="10" lg="6">
             <h2>ステータス</h2>
             <p>お名前：{{user.name}}</p>
             <p>レベル：{{user.level}}</p>
             <p>経験値：{{user.experience_point}}</p>
             <p>TP：{{user.point}}</p>
-          </div>
+        </v-col>
+        <v-col cols="12" xs="6" sm="8" md="5" lg="6">
+          <p>右半分</p>
+          <router-link to="/reward">ご褒美ページへ</router-link>
+        </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+
+    <v-row justify="center">
+      <v-col cols="12" xs="6" sm="12" md="12" lg="8">
           <div>
             <AddTodo @submit="addTodo" />
           </div>
-        </div>
       </v-col>
     </v-row>
-    <router-link to="/reward">ご褒美ページへ</router-link>
-    <v-row justify="center">
-      <v-col cols="12" xs="6" sm="12" md="12" lg="12">
-      </v-col>
-    </v-row>
+    
     <TodoList :todos="user.todos" />
   </v-container>
 </template>
@@ -143,7 +148,5 @@
       // display: inline-block;
     }
   }
-  #a{
-    display: inline-block;
-  }
+
 </style>
