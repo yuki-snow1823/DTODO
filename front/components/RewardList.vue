@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <v-card-title>
-        <h2>Reward</h2>
+        <h2>REWARD LIST</h2>
         <v-spacer></v-spacer>
         <!-- <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field> -->
       </v-card-title>
@@ -134,7 +134,7 @@
           this.snackColor = "success";
           this.snackText = "Data saved";
           console.log(item.point);
-          
+
         }
       },
       async editItem(item) {
@@ -153,6 +153,18 @@
             point: value
           }
         });
+      },
+      logOut() {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            this.$store.commit("setUser", null);
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+          });
       },
       save() {
         this.snack = true;
@@ -195,5 +207,4 @@
     align-items: center;
     justify-content: center;
   }
-
 </style>
