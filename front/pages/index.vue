@@ -12,8 +12,11 @@
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
-        <v-icon class="mb-2" size="80">mdi-skull-outline</v-icon>
-        <div><p>＊使い方を学んだら、さっさと戻ってTODOに取り掛かるんだな。<button>▼</button></p></div>
+        <v-icon class="mb-2 skull" size="80">mdi-skull-outline</v-icon>
+        <div class="instead-of-form">
+          <p>＊ログインしているな？</p>
+          <p>＊使い方を学んだら、さっさと戻ってTODOに取り掛かるんだな。</p>
+          </div>
       </v-col>
 
       <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
@@ -307,6 +310,13 @@
           color: yellow;
         }
       }
+    }
+    .skull {
+      padding-left: 40%;
+    }
+    .instead-of-form {
+      border: 2px white solid;
+      padding-top: 20px;
     }
 
     .introduction {
