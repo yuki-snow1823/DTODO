@@ -101,17 +101,18 @@
       closeModal: function () {
         this.showContent = false
       },
-      moveToTop() {
-        const duration = 1000;
-        const interval = 25;
-        const step = -window.scrollY / Math.ceil(duration / interval);
-        const timer = setInterval(() => {
-          window.scrollBy(0, step);
-          if (window.scrollY <= 0) {
-            clearInterval(timer);
-          }
-        }, interval);
-      }
+      logOut() {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            this.$store.commit("setUser", null);
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
     }
   };
 </script>

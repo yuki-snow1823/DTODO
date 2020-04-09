@@ -104,11 +104,11 @@
           const rewards = this.user.rewards.filter(reward => {
             return reward.id !== item.id;
           });
-          const newUser = {
+          const updateUser = {
             ...this.user,
             rewards
           };
-          this.$store.commit("setUser", newUser);
+          this.$store.commit("setUser", updateUser);
           this.snack = true;
           this.snackColor = "warning";
           this.snackText = "Data deleted";
@@ -117,19 +117,21 @@
       async completeItem(item) {
         const res = confirm("本当に達成しますか？");
         if (res) {
-          await axios.get(`/v1/rewards/${item.id}`, {
+          const getUser = await axios.get(`/v1/rewards/${item.id}`, {
             params: {
               point: item.point
             }
           });
           item.status = true;
           const rewards = this.rewards
-          this.user.point = this.user.point - item.point;
-          const newUser = {
+          this.user.level =getUser.data.user.level;
+          this.user.point = getUser.data.user.point;
+          this.user.experience_point = getUser.data.user.experience_point;
+          const updateUser = {
             ...this.user,
             rewards
           };
-          this.$store.commit("setUser", newUser);
+          this.$store.commit("setUser", updateUser);
           this.snack = true;
           this.snackColor = "success";
           this.snackText = "Data saved";
