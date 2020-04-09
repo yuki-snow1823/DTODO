@@ -77,7 +77,7 @@
         state => state.currentUser,
         (newUser, oldUser) => {
           if (!newUser) {
-            return redirect("/login");
+            return redirect("/");
           }
         }
       );
