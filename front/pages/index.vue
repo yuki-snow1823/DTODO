@@ -16,7 +16,7 @@
         <div class="instead-of-form">
           <p>＊ログインしているな？</p>
           <p>＊使い方を学んだら、さっさと戻ってTODOに取り掛かるんだな。</p>
-          </div>
+        </div>
       </v-col>
 
       <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
@@ -96,7 +96,7 @@
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
           </v-btn>
         </v-hover>
-        
+
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
           <v-btn v-else class="bottom-btn" v-on:click="moveToTop">
@@ -215,6 +215,13 @@
               .then(res => {
                 this.$store.commit("setLoading", false);
                 this.$store.commit("setUser", res.data);
+                this.$store.commit("setNotice", {
+                  status: true,
+                  message: "新規登録が完了しました"
+                });
+                setTimeout(() => {
+                  this.$store.commit("setNotice", {});
+                }, 2000); 
                 this.$router.push("/user");
               });
           })
@@ -292,9 +299,11 @@
       }
     }
 
-    .index-subtitle, .index-form-title {
+    .index-subtitle,
+    .index-form-title {
       @include explain
     }
+
     .index-explain {
       text-align: center;
       margin: 30px 0;
@@ -313,9 +322,11 @@
         }
       }
     }
+
     .skull {
       padding-left: 40%;
     }
+
     .instead-of-form {
       border: 2px white solid;
       padding-top: 20px;
@@ -333,6 +344,7 @@
         text-align: center;
       }
     }
+
     .main {
       border: 1px white solid;
     }
@@ -353,6 +365,7 @@
 
     .index-button-wrapper {
       text-align: center;
+
       .bottom-btn {
         @include index-bottom-btn;
 
@@ -362,8 +375,9 @@
         }
       }
     }
+
     .dialog {
-      .bottom-btn{
+      .bottom-btn {
         @include index-bottom-btn;
 
         &:hover {

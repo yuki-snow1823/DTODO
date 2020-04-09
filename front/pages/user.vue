@@ -192,7 +192,7 @@
       }
     }
 
-    h2,
+    .list-title,
     h1 {
       text-align: center;
       color: $sub-color;

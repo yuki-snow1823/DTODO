@@ -1,7 +1,7 @@
 const state = {
    currentUser: null,
    loading: false,
-   notification: { //追加
+   notification: { 
      status: false,
      message: ""
    }
