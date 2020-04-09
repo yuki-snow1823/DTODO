@@ -75,12 +75,12 @@ export default {
       } else {
         return [
           {
-            icon: "mdi-apps",
+            icon: "mdi-key-variant",
             title: "ログイン",
             to: "/login"
           },
           {
-            icon: "mdi-chart-bubble",
+            icon: "mdi-account-arrow-right",
             title: "新規登録",
             to: "/signup"
           }
