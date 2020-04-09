@@ -35,8 +35,8 @@
         </template>
 
         <template v-slot:item.complete="{ item }">
-          <v-hover>
-            <v-icon big color="red" @click="completeItem(item)">mdi-heart</v-icon>
+          <v-hover v-slot:default="{ hover }">
+            <v-icon big color="red" @click="completeItem(item)" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'"></v-icon>
           </v-hover>
         </template>
 
