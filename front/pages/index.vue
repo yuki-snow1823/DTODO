@@ -12,8 +12,11 @@
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
-        <v-icon class="mb-2" size="80">mdi-skull-outline</v-icon>
-        <div><p>＊使い方を学んだら、さっさと戻ってTODOに取り掛かるんだな。<button>▼</button></p></div>
+        <v-icon class="mb-2 skull" size="80">mdi-skull-outline</v-icon>
+        <div class="instead-of-form">
+          <p>＊ログインしているな？</p>
+          <p>＊使い方を学んだら、さっさと戻ってTODOに取り掛かるんだな。</p>
+          </div>
       </v-col>
 
       <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
@@ -88,13 +91,15 @@
           </v-carousel>
         </div>
         <v-hover v-slot:default="{ hover }">
-          <v-btn class="bottom-btn" @click.stop="dialog = true">
+          <div v-if="user"></div>
+          <v-btn v-else class="bottom-btn" @click.stop="dialog = true">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
           </v-btn>
         </v-hover>
         
         <v-hover v-slot:default="{ hover }">
-          <v-btn class="bottom-btn" v-on:click="moveToTop">
+          <div v-if="user"></div>
+          <v-btn v-else class="bottom-btn" v-on:click="moveToTop">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>新規登録
           </v-btn>
         </v-hover>
@@ -307,6 +312,13 @@
           color: yellow;
         }
       }
+    }
+    .skull {
+      padding-left: 40%;
+    }
+    .instead-of-form {
+      border: 2px white solid;
+      padding-top: 20px;
     }
 
     .introduction {
