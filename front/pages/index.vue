@@ -91,13 +91,15 @@
           </v-carousel>
         </div>
         <v-hover v-slot:default="{ hover }">
-          <v-btn class="bottom-btn" @click.stop="dialog = true">
+          <div v-if="user"></div>
+          <v-btn v-else class="bottom-btn" @click.stop="dialog = true">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
           </v-btn>
         </v-hover>
         
         <v-hover v-slot:default="{ hover }">
-          <v-btn class="bottom-btn" v-on:click="moveToTop">
+          <div v-if="user"></div>
+          <v-btn v-else class="bottom-btn" v-on:click="moveToTop">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>新規登録
           </v-btn>
         </v-hover>
