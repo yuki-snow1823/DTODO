@@ -42,7 +42,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app>
-      <span>&copy; 2019</span>
+      <span>You are filled with DETERMINATION.</span>
     </v-footer>
   </v-app>
 </template>

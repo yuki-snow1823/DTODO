@@ -39,11 +39,11 @@
     </v-row>
 
     <v-row class="my-10">
-      <v-col class="sub-introduction" cols="12" sm="12" md="12" lg="12">
+      <v-col class="sub-introduction main" cols="12" sm="12" md="12" lg="12">
         <h1>やらなければならないことを楽しむ</h1>
         <h3 class="index-explain">毎日、何かやらなければならないTODOに追われていませんか？</h3>
         <h3 class="index-explain">めんどくさい、後回しにしたい、やりたくない…好きなことだけをしたい。</h3>
-        <h3 class="index-explain">じゃあ、そのTODOすらも楽しいものに変えてみましょう！</h3>
+        <h3 class="index-explain">では、そのTODOすらも楽しいものに変えてみましょう！</h3>
         <h3 class="index-explain">DTODOがお手伝いします。</h3>
       </v-col>
     </v-row>
@@ -322,6 +322,9 @@
       .sub-introduction {
         text-align: center;
       }
+    }
+    .main {
+      border: 1px white solid;
     }
 
     h1 {
