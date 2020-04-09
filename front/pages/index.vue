@@ -270,6 +270,7 @@
     display: inline-block;
     margin: 15px;
     width: 45%;
+    font-weight: bold;
   }
 
   .index-page {

@@ -1,40 +1,22 @@
 <template>
   <v-container class="user-page" v-if="user">
     <v-row justify="center">
-      <v-col class="user-status" cols="12" xs="12" sm="12" md="12" lg="8">
+      <v-col class="user-status" cols="12" xs="6" sm="8" md="10" lg="7">
         <v-row>
-          <v-col cols="12" xs="5" sm="5" md="5" lg="6">
+        <v-col cols="12" xs="6" sm="8" md="10" lg="6">
             <h2>ステータス</h2>
             <p>お名前：{{user.name}}</p>
             <p>レベル：{{user.level}}</p>
             <p>経験値：{{user.experience_point}}</p>
             <p>TP：{{user.point}}</p>
-          </v-col>
-          <v-col cols="12" xs="5" sm="5" md="5" lg="6">
-            <router-link to="/reward">
-              <v-btn class="user-btn">ごほうびページへ</v-btn>
-            </router-link>
-          </v-col>
+        </v-col>
+        <v-col cols="12" xs="6" sm="8" md="5" lg="6">
+          <p>右半分</p>
+          <router-link to="/reward">ご褒美ページへ</router-link>
+        </v-col>
         </v-row>
       </v-col>
     </v-row>
-
-    <v-row justify="center">
-      <v-col cols="12" xs="12" sm="12" md="12" lg="8">
-        <div>
-          <AddTodo @submit="addTodo" />
-        </div>
-      </v-col>
-    </v-row>
-
-    <v-row justify="center">
-      <v-col cols="12" xs="12" sm="12" md="12" lg="8">
-        <div>
-          <TodoList :todos="user.todos" />
-        </div>
-      </v-col>
-    </v-row>
-
   </v-container>
 </template>
 
@@ -56,8 +38,6 @@
         show1: false,
         show2: false,
         error: "",
-        items: ["画像1", "画像2"],
-        showContent: false
       };
     },
     fetch({
@@ -150,31 +130,11 @@
 </script>
 
 <style lang="scss">
-  $main-color: #fc7b03;
   .user-page {
     .user-status {
       border: 2px white solid;
       // display: inline-block;
     }
-    .user-btn {
-      background-color: black !important;
-      border: 2px solid $main-color;
-      color: $main-color;
-      width: 100%;
-      font-weight: bold;
-      font-size: 18px;
-      &:hover {
-        border: 2px solid yellow;
-        color: yellow;
-      }
-    }
-    a{
-      text-decoration: none;
-
-    }
-    p {
-      font-size: 20px;
-      font-weight: bold;
-    }
   }
+
 </style>

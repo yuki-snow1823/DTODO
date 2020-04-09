@@ -68,7 +68,7 @@
         snackColor: "",
         snackText: "",
         headers: [{
-            text: "check",
+            text: "",
             width: "170",
             value: "complete"
           },
