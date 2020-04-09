@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app class="app" dark>
     <Loading />
     <Success />
     <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
@@ -17,7 +17,9 @@
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>
-        <router-link v-text="title" to="/" class="toolbar-title"></router-link>
+
+        <router-link to="/" class="toolbar-title"><span class="title-first">D</span>TODO</router-link>
+
       </v-toolbar-title>
       <v-spacer />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
@@ -103,8 +105,23 @@ export default {
 
 </script>
 
-<style>
-.v-content__wrap {
-  background-color: black !important;
+<style lang="scss">
+
+$main-color: #fc7b03;
+
+.app{
+  .toolbar-title {
+    color: white;
+    text-decoration: none;
+    font-family: 'Comic Sans MS';
+    font-size: 30px;
+    font-weight: bold;
+    .title-first {
+      color: $main-color;
+    }
+  }
+  .v-content__wrap {
+    background-color: black !important;
+  }
 }
 </style>
