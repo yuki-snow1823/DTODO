@@ -16,7 +16,7 @@
       </v-col>
 
       <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
-        <h2 class="index-form-title text-center">新規登録はこちらから</h2>
+        <h2 id="index-signup" class="index-form-title text-center">新規登録はこちらから</h2>
         <form>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
           <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
@@ -39,11 +39,11 @@
     </v-row>
 
     <v-row class="my-10">
-      <v-col class="sub-introduction" cols="12" sm="12" md="12" lg="12">
+      <v-col class="sub-introduction main" cols="12" sm="12" md="12" lg="12">
         <h1>やらなければならないことを楽しむ</h1>
         <h3 class="index-explain">毎日、何かやらなければならないTODOに追われていませんか？</h3>
         <h3 class="index-explain">めんどくさい、後回しにしたい、やりたくない…好きなことだけをしたい。</h3>
-        <h3 class="index-explain">じゃあ、そのTODOすらも楽しいものに変えてみましょう！</h3>
+        <h3 class="index-explain">では、そのTODOすらも楽しいものに変えてみましょう！</h3>
         <h3 class="index-explain">DTODOがお手伝いします。</h3>
       </v-col>
     </v-row>
@@ -79,40 +79,46 @@
     </v-row>
 
     <v-row>
-      <v-col cols="12" sm="12" md="12" lg="10">
-        <v-carousel height="100%">
-          <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
-            transition="fade-transition"></v-carousel-item>
-        </v-carousel>
+      <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
+        <div class="mb-10››">
+          <v-carousel height="100%">
+            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
+              transition="fade-transition"></v-carousel-item>
+          </v-carousel>
+        </div>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="bottom-btn" @click.stop="dialog = true">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
+          </v-btn>
+        </v-hover>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="bottom-btn" v-on:click="moveToTop">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>新規登録
+          </v-btn>
+        </v-hover>
       </v-col>
     </v-row>
 
-    <v-row>
-      <div id="app">
-        <v-btn v-on:click="openModal">ログイン</v-btn>
-        <v-btn v-on:click="moveToTop">新規登録</v-btn>
-        <div id="overlay" v-show="showContent">
-          <div id="content">
-            <v-row>
-              <v-col cols="12" md="12">
-                <h2>Login</h2>
-                <form>
-                  <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required>
-                  </v-text-field>
-                  <v-text-field v-model="password" label="password" data-vv-name="password" required
-                    :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append="show1 = !show1"></v-text-field>
-                  <v-btn class="mr-4 px-7" color="#f5851d" @click="login">LOCK!</v-btn>
-                  <v-icon color="red">mdi-heart</v-icon>
-                  <p v-if="error" class="errors">{{error}}</p>
-                </form>
-              </v-col>
-            </v-row>
-            <button v-on:click="closeModal">Back</button>
-          </div>
-        </div>
-      </div>
-    </v-row>
+    <v-dialog content-class="dialog" v-model="dialog" max-width="60%">
+      <v-card>
+        <v-card-title class="headline">Login</v-card-title>
+        <v-card-text>
+          <form>
+            <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
+            <v-text-field v-model="password" label="password" data-vv-name="password" required
+              :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show1 = !show1"></v-text-field>
+            <v-hover v-slot:default="{ hover }">
+              <v-btn content-class="bottom-btn" @click="login">
+                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
+              </v-btn>
+            </v-hover>
+            <p v-if="error" class="errors">{{error}}</p>
+          </form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
   </v-container>
 </template>
 
@@ -135,8 +141,10 @@
         show1: false,
         show2: false,
         error: "",
+        dialog: false,
         items: [{
-            src: AssetsImage,
+            // src: AssetsImage,
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
           },
           {
             src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
@@ -224,12 +232,6 @@
           password: this.password
         });
       },
-      openModal: function () {
-        this.showContent = true;
-      },
-      closeModal: function () {
-        this.showContent = false;
-      },
       moveToTop() {
         const duration = 1000;
         const interval = 25;
@@ -238,7 +240,11 @@
           window.scrollBy(0, step);
           if (window.scrollY <= 0) {
             clearInterval(timer);
-            // ここにクラス追加を書く
+            const title = document.getElementById('index-signup');
+            const check = function (name) {
+              title.classList.add(name);
+            }
+            setTimeout(check, 1000, "checked");
           }
         }, interval);
       }
@@ -255,6 +261,15 @@
     color: $sub-color;
     font-family: 'ヒラギノ角ゴシック';
     margin-bottom: 10px;
+  }
+
+  @mixin index-bottom-btn {
+    background-color: black !important;
+    border: 2px solid $main-color;
+    color: $main-color;
+    display: inline-block;
+    margin: 15px;
+    width: 45%;
   }
 
   .index-page {
@@ -288,11 +303,15 @@
         border: 2px solid $main-color;
         color: $main-color;
         width: 100%;
+
+        &:hover {
+          border: 2px solid yellow;
+          color: yellow;
+        }
       }
     }
 
     .introduction {
-
       img {
         width: 50%;
         height: 50%;
@@ -304,37 +323,48 @@
         text-align: center;
       }
     }
+    .main {
+      border: 1px white solid;
+    }
 
     h1 {
       text-align: center;
       // color: $accent-color;
       margin: 30px 0;
     }
+
     .mdi-heart {
       color: red !important;
     }
-    .index-button{
-      &:hover{
-        border: 2px solid yellow;
-        color: yellow;
+
+    .checked {
+      color: yellow
+    }
+
+    .index-button-wrapper {
+      text-align: center;
+      .bottom-btn {
+        @include index-bottom-btn;
+
+        &:hover {
+          border: 2px solid yellow;
+          color: yellow;
+        }
+      }
+    }
+    .dialog {
+      .bottom-btn{
+        @include index-bottom-btn;
+
+        &:hover {
+          border: 2px solid yellow;
+          color: yellow;
+        }
       }
     }
   }
 
   .v-window__container {
     border: solid 5px white;
-  }
-
-  #overlay {
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 30, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 </style>
