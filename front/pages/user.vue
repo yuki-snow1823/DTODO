@@ -3,17 +3,27 @@
     <v-row justify="center">
       <v-col class="user-status" cols="12" xs="12" sm="12" md="12" lg="8">
         <v-row>
-          <v-col cols="12" xs="5" sm="5" md="5" lg="6">
-            <h2>Status</h2>
+          <v-col cols="12" xs="5" sm="6" md="5" lg="6">
+            <h1>Status</h1>
             <p>NAME：{{user.name}}</p>
             <p>LV：{{user.level}}</p>
             <p>EXP：{{user.experience_point}}</p>
             <p>TP：{{user.point}}</p>
           </v-col>
-          <v-col cols="12" xs="5" sm="5" md="5" lg="6">
-            <router-link to="/reward">
-              <v-btn class="user-btn">ごほうびページへ</v-btn>
-            </router-link>
+          <v-col cols="12" xs="5" sm="6" md="5" lg="6">
+              <v-hover v-slot:default="{ hover }">
+                <router-link to="/reward">
+                  <v-btn class="user-btn my-10">
+                    <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>PRIZE PAGE
+                  </v-btn>
+                </router-link>
+              </v-hover>
+
+              <v-hover v-slot:default="{ hover }">
+                <v-btn class="user-btn" @click="logOut">
+                  <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT
+                </v-btn>
+              </v-hover>
           </v-col>
         </v-row>
       </v-col>
@@ -94,50 +104,17 @@
           todos: [...this.user.todos, data]
         });
       },
-      signup() {
-        if (this.password !== this.passwordConfirm) {
-          this.error = "※パスワードとパスワード確認が一致していません";
-        }
-        this.$store.commit("setLoading", true);
+      logOut() {
         firebase
           .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then(res => {
-            const user = {
-              email: res.user.email,
-              name: this.name,
-              uid: res.user.uid
-            };
-            axios
-              .post("/v1/users", {
-                user
-              })
-              .then(res => {
-                this.$store.commit("setLoading", false);
-                this.$store.commit("setUser", res.data);
-                this.$router.push("/user");
-              });
+          .signOut()
+          .then(() => {
+            this.$store.commit("setUser", null);
+            this.$router.push("/");
           })
           .catch(error => {
-            this.error = (code => {
-              switch (code) {
-                case "auth/email-already-in-use":
-                  return "既にそのメールアドレスは使われています";
-                case "auth/wrong-password":
-                  return "※パスワードが正しくありません";
-                case "auth/weak-password":
-                  return "※パスワードは最低6文字以上にしてください";
-                default:
-                  return "※メールアドレスとパスワードをご確認ください";
-              }
-            })(error.code);
+            console.log(error);
           });
-      },
-      login() {
-        this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password
-        });
       },
       openModal: function () {
         this.showContent = true;
@@ -152,11 +129,13 @@
 <style lang="scss">
   $main-color: #fc7b03;
   $sub-color: #33dddd;
+
   .user-page {
     .user-status {
       border: 2px white solid;
       // display: inline-block;
     }
+
     .user-btn {
       background-color: black !important;
       border: 2px solid $main-color;
@@ -164,21 +143,30 @@
       width: 100%;
       font-weight: bold;
       font-size: 18px;
+
       &:hover {
         border: 2px solid yellow;
         color: yellow;
       }
     }
-    h2 {
+
+    h2,
+    h1 {
       text-align: center;
       color: $sub-color;
     }
-    a{
+
+    a {
       text-decoration: none;
     }
+
     p {
       font-size: 20px;
       font-weight: bold;
+    }
+
+    .mdi-heart {
+      color: red !important;
     }
   }
 </style>

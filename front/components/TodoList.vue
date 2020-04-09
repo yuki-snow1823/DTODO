@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <v-card-title>
-        <h2>TODO</h2>
+        <h2>TODO LIST</h2>
         <v-spacer></v-spacer>
         <!-- <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field> -->
       </v-card-title>
