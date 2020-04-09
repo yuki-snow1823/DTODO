@@ -1,32 +1,36 @@
 <template>
   <v-container class="user-page" v-if="user">
-    <v-row justify="center">
-      <v-col class="user-status" cols="12" xs="12" sm="12" md="12" lg="8">
-        <v-row>
-          <v-col cols="12" xs="5" sm="6" md="5" lg="6">
-            <h1>Status</h1>
-            <p>NAME：{{user.name}}</p>
-            <p>LV：{{user.level}}</p>
-            <p>EXP：{{user.experience_point}}</p>
-            <p>TP：{{user.point}}</p>
-          </v-col>
-          <v-col cols="12" xs="5" sm="6" md="5" lg="6">
-              <v-hover v-slot:default="{ hover }">
-                <router-link to="/reward">
-                  <v-btn class="user-btn my-10">
-                    <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>PRIZE PAGE
-                  </v-btn>
-                </router-link>
-              </v-hover>
 
-              <v-hover v-slot:default="{ hover }">
-                <v-btn class="user-btn" @click="logOut">
-                  <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT
-                </v-btn>
-              </v-hover>
-          </v-col>
-        </v-row>
+    <v-row class="user-status" justify="center">
+
+      <!-- <v-col class="user-status" cols="12" xs="12" sm="12" md="12" lg="8"> -->
+      <!-- <v-row> -->
+      <v-col cols="12" xs="5" sm="6" md="5" lg="4">
+        <h1>STATUS</h1>
+        <p>NAME：{{user.name}}</p>
+        <p>LV：{{user.level}}</p>
+        <p>EXP：{{user.experience_point}}</p>
+        <p>TP：{{user.point}}</p>
       </v-col>
+
+      <v-col cols="12" xs="5" sm="6" md="5" lg="4">
+        <v-hover v-slot:default="{ hover }">
+          <router-link to="/reward">
+            <v-btn class="user-btn my-10">
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>REWARD PAGE
+            </v-btn>
+          </router-link>
+        </v-hover>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="user-btn" @click="logOut">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT
+          </v-btn>
+        </v-hover>
+      </v-col>
+
+      <!-- </v-row> -->
+
+      <!-- </v-col> -->
     </v-row>
 
     <v-row justify="center">
@@ -130,10 +134,45 @@
   $main-color: #fc7b03;
   $sub-color: #33dddd;
 
+  $pc: 1024px;
+  $tab: 680px;
+  $sp: 480px;
+
+  @mixin pc {
+    @media (max-width: ($pc)) {
+      @content;
+    }
+  }
+
+  @mixin tab {
+    @media (max-width: ($tab)) {
+      @content;
+    }
+  }
+
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
+  }
+
   .user-page {
     .user-status {
       border: 2px white solid;
-      // display: inline-block;
+      margin: 0 auto;
+      width: 66%;
+    }
+
+    .user-status {
+      @include pc {
+        width: 100% !important;
+      };
+      @include tab {
+        width: 100% !important;
+      };
+      @include sp {
+        width: 100% !important;
+      };
     }
 
     .user-btn {

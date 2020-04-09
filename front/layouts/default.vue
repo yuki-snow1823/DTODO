@@ -68,13 +68,8 @@ export default {
           },
           {
             icon: "mdi-lock",
-            title: "ごほうび",
+            title: "Reward",
             to: "/reward"
-          },
-          {
-            icon: "mdi-chart-bubble",
-            title: "mypage",
-            to: "/mypage"
           }
         ];
       } else {

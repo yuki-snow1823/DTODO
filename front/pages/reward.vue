@@ -1,12 +1,47 @@
 <template>
-  <v-container>
-    <div v-if="user">
-      <p>ご褒美ページです</p>
-      <p>お名前：{{user.name}}</p>
-      <p class="user-tp d-inline-block ">タスクポイント：{{user.point}}</p>
-      <AddReward @submit="addReward" />
-      <RewardList :rewards="user.rewards" />
-    </div>
+  <v-container class="user-page" v-if="user">
+
+    <v-row class="user-status" justify="center">
+
+      <v-col cols="12" xs="5" sm="6" md="5" lg="4">
+        <h1>STATUS</h1>
+        <p>NAME：{{user.name}}</p>
+        <p>LV：{{user.level}}</p>
+        <p>EXP：{{user.experience_point}}</p>
+        <p>TP：{{user.point}}</p>
+      </v-col>
+
+      <v-col cols="12" xs="5" sm="6" md="5" lg="4">
+        <v-hover v-slot:default="{ hover }">
+          <router-link to="/user">
+            <v-btn class="user-btn my-10">
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>TODO PAGE
+            </v-btn>
+          </router-link>
+        </v-hover>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="user-btn" @click="logOut">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT
+          </v-btn>
+        </v-hover>
+      </v-col>
+    </v-row>
+
+    <v-row justify="center">
+      <v-col cols="12" xs="12" sm="12" md="12" lg="8">
+        <div>
+          <AddReward @submit="addReward" />
+        </div>
+      </v-col>
+    </v-row>
+
+    <v-row justify="center">
+      <v-col cols="12" xs="12" sm="12" md="12" lg="8">
+        <div>
+          <RewardList :rewards="user.rewards" />
+        </div>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -81,47 +116,90 @@
   };
 </script>
 
-<style>
-  #title {
-    display: inline-block;
-    background-color: #fc7b03;
-    text-align: center;
-    margin: 0 auto;
+<style lang="scss">
+  $main-color: #fc7b03;
+  $sub-color: #33dddd;
+
+  $pc: 1024px;
+  $tab: 680px;
+  $sp: 480px;
+
+  @mixin pc {
+    @media (max-width: ($pc)) {
+      @content;
+    }
   }
 
-  .introduction {
-    margin-top: 50px;
+  @mixin tab {
+    @media (max-width: ($tab)) {
+      @content;
+    }
   }
 
-  .introduction h3 {
-    text-align: center;
-    margin: 0 auto;
-    color: aqua !important;
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
   }
 
-  .v-img {
-    text-align: center;
-  }
+  .user-page {
+    .user-status {
+      border: 2px white solid;
+      margin: 0 auto;
+      width: 66%;
+    }
 
-  .v-window__container {
-    border: solid 5px white;
-  }
+    .user-status {
+      @include pc {
+        width: 100% !important;
+      }
 
+      ;
 
-  #overlay {
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 30, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+      @include tab {
+        width: 100% !important;
+      }
 
-  .user-tp {
-    border: white solid 2px;
+      ;
+
+      @include sp {
+        width: 100% !important;
+      }
+
+      ;
+    }
+
+    .user-btn {
+      background-color: black !important;
+      border: 2px solid $main-color;
+      color: $main-color;
+      width: 100%;
+      font-weight: bold;
+      font-size: 18px;
+
+      &:hover {
+        border: 2px solid yellow;
+        color: yellow;
+      }
+    }
+
+    h2,
+    h1 {
+      text-align: center;
+      color: $sub-color;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .mdi-heart {
+      color: red !important;
+    }
   }
 </style>
