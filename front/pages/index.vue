@@ -185,7 +185,6 @@
         if (this.password !== this.passwordConfirm) {
           this.error = "※パスワードとパスワード確認が一致していません";
         }
-        this.$store.commit("setLoading", true);
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
@@ -195,6 +194,7 @@
               name: this.name,
               uid: res.user.uid
             };
+                this.$store.commit("setLoading", true);
             axios
               .post("/v1/users", {
                 user
@@ -220,9 +220,9 @@
                 case "auth/wrong-password":
                   return "※パスワードが正しくありません";
                 case "auth/weak-password":
-                  return "※パスワードは最低6文字以上にしてください";
+                  return "パスワードは最低6文字以上にしてください";
                 default:
-                  return "※メールアドレスとパスワードをご確認ください";
+                  return "メールアドレスとパスワードをご確認ください";
               }
             })(error.code);
           });
@@ -372,6 +372,9 @@
           color: yellow;
         }
       }
+    }
+    .errors {
+      color: $accent-color;
     }
   }
 

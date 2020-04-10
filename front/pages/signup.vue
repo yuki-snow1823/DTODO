@@ -43,7 +43,6 @@
         if (this.password !== this.passwordConfirm) {
           this.error = "※パスワードとパスワード確認が一致していません";
         }
-
         this.$store.commit("setLoading", true);
         firebase
           .auth()
