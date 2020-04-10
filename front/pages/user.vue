@@ -42,6 +42,7 @@
           <TodoList :todos="user.todos" />
         </div>
       </v-col>
+
     </v-row>
 
   </v-container>
@@ -93,15 +94,26 @@
     },
     methods: {
       async addTodo(todo) {
-        const {
-          data
-        } = await axios.post("/v1/todos", {
-          todo
-        });
-        this.$store.commit("setUser", {
-          ...this.user,
-          todos: [...this.user.todos, data]
-        });
+        try {
+          const {
+            data
+          } = await axios.post("/v1/todos", {
+            todo
+          });
+          this.$store.commit("setUser", {
+            ...this.user,
+            todos: [...this.user.todos, data]
+          });
+          this.$store.commit("clearErrors");
+        } catch (error) {
+          const {
+            status
+          } = error.response;
+          if (status === 422) {
+            this.$store.commit("setError", "タイトルが空です");
+            // console.log(setError);どうやって拾うかわからない
+          }
+        }
       },
       logOut() {
         firebase
@@ -121,6 +133,8 @@
       closeModal: function () {
         this.showContent = false;
       },
+    },
+    watch: {
     }
   };
 </script>

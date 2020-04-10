@@ -7,6 +7,12 @@ const mutations = {
   },
   setNotice(state, payload) {
     state.notification = payload
+  },
+  setError(state, payload) {
+    state.errors = [...state.errors, payload]
+  },
+  clearErrors(state, _) {
+    state.errors = []
   }
 }
 

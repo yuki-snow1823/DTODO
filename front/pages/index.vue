@@ -116,7 +116,7 @@
               :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="show1 = !show1"></v-text-field>
             <v-hover v-slot:default="{ hover }">
-              <v-btn content-class="bottom-btn" @click="login">
+              <v-btn class="bottom-btn" @click="login">
                 <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
               </v-btn>
             </v-hover>
