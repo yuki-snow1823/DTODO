@@ -16,7 +16,6 @@ const actions = {
           commit("setNotice", {});
         }, 2000);
         this.$router.push("/user");
-
       })
       .catch(error => {
         console.log(error);

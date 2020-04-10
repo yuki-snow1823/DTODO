@@ -1,6 +1,6 @@
 <template>
   <v-row class="login-wrapper">
-    <v-col cols="12" md="4">
+    <v-col cols="12" md="6">
       <h2 class="login-title">Login</h2>
       <form>
         <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
@@ -30,11 +30,25 @@
     },
     methods: {
       login() {
-        this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password
-        });
-        console.log("hoge");
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+            this.error = (code => {
+              switch (code) {
+                case "auth/user-not-found":
+                  return "メールアドレスが間違っています";
+                case "auth/wrong-password":
+                  return "※パスワードが正しくありません";
+                default:
+                  return "※メールアドレスとパスワードをご確認ください";
+              }
+            })(error.code);
+          });
       }
     }
   };
@@ -60,6 +74,7 @@
       color: red;
       margin-top: 20px;
     }
+
     .login-title {
       color: $sub-color;
     }
@@ -72,6 +87,7 @@
         color: yellow;
       }
     }
+
     .mdi-heart {
       color: red !important;
     }
