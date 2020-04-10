@@ -1,6 +1,6 @@
 <template>
   <v-row class="signup-wrapper">
-    <v-col cols="12" md="4">
+    <v-col cols="12" md="6">
       <h2 class="signup-title">Sign Up</h2>
       <form>
         <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
@@ -43,7 +43,6 @@
         if (this.password !== this.passwordConfirm) {
           this.error = "※パスワードとパスワード確認が一致していません";
         }
-        this.$store.commit("setLoading", true);
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
@@ -53,6 +52,7 @@
               name: this.name,
               uid: res.user.uid
             };
+            this.$store.commit("setLoading", true);
             axios.post("/v1/users", {
               user
             }).then(res => {
