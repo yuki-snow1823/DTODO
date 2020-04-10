@@ -194,7 +194,7 @@
               name: this.name,
               uid: res.user.uid
             };
-                this.$store.commit("setLoading", true);
+            this.$store.commit("setLoading", true);
             axios
               .post("/v1/users", {
                 user
@@ -208,7 +208,7 @@
                 });
                 setTimeout(() => {
                   this.$store.commit("setNotice", {});
-                }, 2000); 
+                }, 2000);
                 this.$router.push("/user");
               });
           })
@@ -373,6 +373,7 @@
         }
       }
     }
+
     .errors {
       color: $accent-color;
     }
