@@ -36,6 +36,9 @@
         </div>
       </v-col>
     </v-row>
+    <div class="errors text-center" v-if="$store.state.errors">
+      {{$store.state.errors[0]}}
+    </div>
 
     <v-row justify="center">
       <v-col cols="12" xs="12" sm="12" md="12" lg="8">
@@ -45,9 +48,6 @@
       </v-col>
 
     </v-row>
-    <div v-if="$store.state.errors">
-      {{$store.state.errors[0]}}
-    </div>
   </v-container>
 </template>
 
@@ -117,9 +117,8 @@
           } = error.response;
           //console.log(data)
           if (data.error_msg === "タイトルを入力してください") {
-            this.$store.commit("setError", "タイトルが空です");
+            this.$store.commit("setError", "タイトルを入力してください");
             console.log(this.$store.state.errors)
-            // console.log(setError);どうやって拾うかわからない
           }
         }
       },
@@ -143,6 +142,7 @@
 <style lang="scss">
   $main-color: #fc7b03;
   $sub-color: #33dddd;
+  $accent-color: #f0353f;
 
   $pc: 1024px;
   $tab: 680px;
@@ -224,6 +224,9 @@
 
     .mdi-heart {
       color: red !important;
+    }
+    .errors {
+      color: $accent-color;
     }
   }
 </style>
