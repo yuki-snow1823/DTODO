@@ -9,15 +9,20 @@
         <h3 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
-        <div>
-        <img class="mon" src="../assets/mon_284.gif">
-        <img class="mon" src="../assets/mon_199.gif"><br>
+        <div class="monster">
+          <img class="mon" src="../assets/mon_284.gif">
+          <img class="mon" src="../assets/mon_199.gif">
+          <img class="mon" src="../assets/mon_100.gif">
+          <img class="mon" src="../assets/mon_091.gif">
         </div>
-               <v-hover v-slot:default="{ hover }">
-              <v-btn class="bottom-btn" @click="guestLogin">
-                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>簡易ログインはこちらです
-              </v-btn>
-            </v-hover>
+        <div v-if="user"></div>
+        <div class="guest" v-else>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="guest-btn" @click="guestLogin">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログインはこちらです
+          </v-btn>
+        </v-hover>
+        </div>
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
@@ -92,12 +97,13 @@
 
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
+
         <div class="mb-10">
           <v-carousel height="100%">
-            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
-              transition="fade-transition"></v-carousel-item>
+            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
           </v-carousel>
         </div>
+
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
           <v-btn v-else class="bottom-btn" @click.stop="dialog = true">
@@ -116,7 +122,9 @@
 
     <v-dialog content-class="dialog" v-model="dialog" max-width="60%">
       <v-card>
-        <v-card-title class="headline"><h3>Login</h3></v-card-title>
+        <v-card-title class="headline">
+          <h3>Login</h3>
+        </v-card-title>
         <v-card-text>
           <form>
             <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
@@ -124,7 +132,7 @@
               :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="show1 = !show1"></v-text-field>
             <v-hover v-slot:default="{ hover }">
-              <v-btn class="bottom-btn" @click="login">
+              <v-btn class="dialog-btn" @click="login">
                 <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>START
               </v-btn>
             </v-hover>
@@ -311,16 +319,19 @@
   @mixin index-bottom-btn {
     background-color: black !important;
     border: 2px solid $main-color;
-    color: $main-color;
+    color: $main-color !important;
     display: inline-block;
     margin: 15px;
-    width: 45%;
+    width: 80%;
     font-weight: bold;
   }
 
   .index-page {
     .mon {
-      width :10%;
+      width: 10%;
+    }
+    .monster {
+      text-align: center;
     }
 
     .index-title {
@@ -367,7 +378,7 @@
     }
 
     .introduction {
-      margin: 100px auto;
+      margin: 100px auto 50px;
 
       img {
         margin: 0 auto 30px;
@@ -429,7 +440,7 @@
     }
   }
 
-  .bottom-btn {
+  .dialog-btn {
     background-color: rgb(29, 29, 29) !important;
     border: 2px solid $main-color;
     color: $main-color !important;
@@ -437,6 +448,7 @@
     margin: 15px;
     width: 45%;
     font-weight: bold;
+
     .mdi-heart {
       color: red !important;
     }
@@ -446,7 +458,21 @@
       color: yellow;
     }
   }
+
   .headline {
     color: $sub-color;
   }
+
+.guest {
+  text-align: center;
+  margin-top: 59px;
+  .guest-btn {
+    @include index-bottom-btn;
+
+    &:hover {
+      border: 2px solid yellow;
+      color: yellow;
+    }
+  }
+}
 </style>
