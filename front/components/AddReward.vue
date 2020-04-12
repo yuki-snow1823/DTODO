@@ -45,6 +45,7 @@ export default {
       this.title = "";
       this.number = "";
     }
+    
   }
 };
 </script>

@@ -44,7 +44,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="my-10">
+    <v-row class="introduction">
       <v-col class="sub-introduction main" cols="12" sm="12" md="12" lg="12">
         <h1>やらなければならないことを楽しむ</h1>
         <h3 class="index-explain">毎日、何かやらなければならないTODOに追われていませんか？</h3>
@@ -55,7 +55,6 @@
     </v-row>
 
     <v-row class="introduction">
-
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
         <img src="../assets/mon_259.gif">
         <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
