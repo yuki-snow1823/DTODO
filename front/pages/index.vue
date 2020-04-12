@@ -232,7 +232,7 @@
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
-            this.$router.push("/");
+            this.$router.push("/user");
           })
           .catch(error => {
             console.log(error);
@@ -396,5 +396,15 @@
 
   .v-window__container {
     border: solid 5px white;
+  }
+
+
+  .bottom-btn {
+    @include index-bottom-btn;
+
+    &:hover {
+      border: 2px solid yellow;
+      color: yellow;
+    }
   }
 </style>
