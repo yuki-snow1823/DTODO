@@ -12,6 +12,8 @@
         <div class="monster">
           <img class="mon" src="../assets/mon_284.gif">
           <img class="mon" src="../assets/mon_199.gif">
+          <img class="mon" src="../assets/mon_100.gif">
+          <img class="mon" src="../assets/mon_091.gif">
         </div>
         <div v-if="user"></div>
         <div class="guest" v-else>
@@ -95,12 +97,13 @@
 
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
+
         <div class="mb-10">
           <v-carousel height="100%">
-            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
-              transition="fade-transition"></v-carousel-item>
+            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
           </v-carousel>
         </div>
+
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
           <v-btn v-else class="bottom-btn" @click.stop="dialog = true">
@@ -327,6 +330,9 @@
     .mon {
       width: 10%;
     }
+    .monster {
+      text-align: center;
+    }
 
     .index-title {
       text-align: center;
@@ -372,7 +378,7 @@
     }
 
     .introduction {
-      margin: 100px auto;
+      margin: 100px auto 50px;
 
       img {
         margin: 0 auto 30px;
@@ -459,6 +465,7 @@
 
 .guest {
   text-align: center;
+  margin-top: 59px;
   .guest-btn {
     @include index-bottom-btn;
 
