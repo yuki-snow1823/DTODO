@@ -394,13 +394,17 @@
     }
   }
 
-  .v-window__container {
-    border: solid 5px white;
-  }
-
-
   .bottom-btn {
-    @include index-bottom-btn;
+    background-color: rgb(29, 29, 29) !important;
+    border: 2px solid $main-color;
+    color: $main-color !important;
+    display: inline-block;
+    margin: 15px;
+    width: 45%;
+    font-weight: bold;
+    .mdi-heart {
+      color: red !important;
+    }
 
     &:hover {
       border: 2px solid yellow;
