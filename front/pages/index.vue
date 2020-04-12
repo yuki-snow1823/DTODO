@@ -10,6 +10,7 @@
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
         <img class="mon" src="../assets/mon_284.gif">
+        <img class="mon" src="../assets/mon_199.gif">
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
@@ -56,7 +57,7 @@
     <v-row class="introduction">
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img class="" src="../assets/point.png">
+        <img src="../assets/mon_259.gif">
         <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
         <h3 class="index-explain">
           DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
@@ -65,7 +66,7 @@
       </v-col>
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img src="../assets/point.png">
+        <img class="mon"  src="../assets/mon_237.gif">
         <h2 class="index-subtitle text-center">レベルアップを目指そう！</h2>
         <h3 class="index-explain">
           TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
@@ -74,7 +75,7 @@
       </v-col>
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img src="../assets/point.png">
+        <img class="mon" src="../assets/mon_278.gif">
         <h2 class="index-subtitle text-center">自分にごほうびをあげよう！</h2>
         <h3 class="index-explain">
           DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
@@ -292,7 +293,7 @@
 
   .index-page {
     .mon {
-      width :20%
+      width :20%;
     }
 
     .index-title {
@@ -339,11 +340,13 @@
     }
 
     .introduction {
+
       img {
-        width: 50%;
-        height: 50%;
-        display: block;
         margin: 0 auto 30px;
+        display: block;
+        // height: 30%;
+        width: 30%;
+
       }
 
       .sub-introduction {
