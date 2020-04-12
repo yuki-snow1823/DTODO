@@ -9,8 +9,15 @@
         <h3 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
+        <div>
         <img class="mon" src="../assets/mon_284.gif">
-        <img class="mon" src="../assets/mon_199.gif">
+        <img class="mon" src="../assets/mon_199.gif"><br>
+        </div>
+               <v-hover v-slot:default="{ hover }">
+              <v-btn class="bottom-btn" @click="guestLogin">
+                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>簡易ログインはこちらです
+              </v-btn>
+            </v-hover>
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
@@ -43,7 +50,6 @@
         </v-hover>
       </v-col>
     </v-row>
-    <v-btn class="index-button" @click="guestLogin">ゲストログイン</v-btn>
 
     <v-row class="introduction">
       <v-col class="sub-introduction main" cols="12" sm="12" md="12" lg="12">
@@ -314,7 +320,7 @@
 
   .index-page {
     .mon {
-      width :20%;
+      width :10%;
     }
 
     .index-title {

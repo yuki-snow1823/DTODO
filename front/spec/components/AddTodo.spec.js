@@ -2,6 +2,13 @@ import Vuex from 'vuex'
 import {
   mount,
   createLocalVue
-} from '@vue/test-utils'
+} from "@vue/test-utils";
 import * as store from '@/store'
-import TodoForm from '@/components/TodoForm.vue'
+import Hoge from "./Hoge.vue";
+
+describe("Component", () => {
+  test("is a Vue instance", () => {
+    const wrapper = mount(Hoge);
+    expect(wrapper.isVueInstance()).toBeTruthy();
+  });
+});
