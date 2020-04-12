@@ -34,7 +34,7 @@
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
-            this.$router.push("/");
+            this.$router.push("/user");
           })
           .catch(error => {
             console.log(error);

@@ -9,6 +9,8 @@
         <h3 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
+        <img class="mon" src="../assets/mon_284.gif">
+        <img class="mon" src="../assets/mon_199.gif">
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
@@ -36,13 +38,13 @@
         <v-hover v-slot:default="{ hover }">
           <v-btn class="index-button" @click="signup">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
-            sign up
+            START
           </v-btn>
         </v-hover>
       </v-col>
     </v-row>
 
-    <v-row class="my-10">
+    <v-row class="introduction">
       <v-col class="sub-introduction main" cols="12" sm="12" md="12" lg="12">
         <h1>やらなければならないことを楽しむ</h1>
         <h3 class="index-explain">毎日、何かやらなければならないTODOに追われていませんか？</h3>
@@ -53,9 +55,8 @@
     </v-row>
 
     <v-row class="introduction">
-
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img class="" src="../assets/point.png">
+        <img src="../assets/mon_259.gif">
         <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
         <h3 class="index-explain">
           DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
@@ -64,7 +65,7 @@
       </v-col>
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img src="../assets/point.png">
+        <img src="../assets/mon_237.gif">
         <h2 class="index-subtitle text-center">レベルアップを目指そう！</h2>
         <h3 class="index-explain">
           TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
@@ -73,7 +74,7 @@
       </v-col>
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img src="../assets/point.png">
+        <img class="pt-10" src="../assets/mon_278.gif">
         <h2 class="index-subtitle text-center">自分にごほうびをあげよう！</h2>
         <h3 class="index-explain">
           DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
@@ -84,7 +85,7 @@
 
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
-        <div class="mb-10››">
+        <div class="mb-10">
           <v-carousel height="100%">
             <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
               transition="fade-transition"></v-carousel-item>
@@ -108,7 +109,7 @@
 
     <v-dialog content-class="dialog" v-model="dialog" max-width="60%">
       <v-card>
-        <v-card-title class="headline">Login</v-card-title>
+        <v-card-title class="headline"><h3>Login</h3></v-card-title>
         <v-card-text>
           <form>
             <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
@@ -116,8 +117,8 @@
               :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="show1 = !show1"></v-text-field>
             <v-hover v-slot:default="{ hover }">
-              <v-btn content-class="bottom-btn" @click="login">
-                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
+              <v-btn class="bottom-btn" @click="login">
+                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>START
               </v-btn>
             </v-hover>
             <p v-if="error" class="errors">{{error}}</p>
@@ -232,7 +233,7 @@
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
-            this.$router.push("/");
+            this.$router.push("/user");
           })
           .catch(error => {
             console.log(error);
@@ -290,6 +291,9 @@
   }
 
   .index-page {
+    .mon {
+      width :20%;
+    }
 
     .index-title {
       text-align: center;
@@ -335,11 +339,14 @@
     }
 
     .introduction {
+      margin: 100px auto;
+
       img {
-        width: 50%;
-        height: 50%;
-        display: block;
         margin: 0 auto 30px;
+        display: block;
+        // height: 30%;
+        // width: 30%;
+
       }
 
       .sub-introduction {
@@ -394,7 +401,24 @@
     }
   }
 
-  .v-window__container {
-    border: solid 5px white;
+  .bottom-btn {
+    background-color: rgb(29, 29, 29) !important;
+    border: 2px solid $main-color;
+    color: $main-color !important;
+    display: inline-block;
+    margin: 15px;
+    width: 45%;
+    font-weight: bold;
+    .mdi-heart {
+      color: red !important;
+    }
+
+    &:hover {
+      border: 2px solid yellow;
+      color: yellow;
+    }
+  }
+  .headline {
+    color: $sub-color;
   }
 </style>

@@ -32,9 +32,13 @@
       <v-col cols="12" xs="12" sm="12" md="12" lg="8">
         <div>
           <AddTodo @submit="addTodo" />
+          <!-- addTodoここのファイル内にないのに動く理由は？ -->
         </div>
       </v-col>
     </v-row>
+    <div class="errors text-center" v-if="$store.state.errors">
+      {{$store.state.errors[0]}}
+    </div>
 
     <v-row justify="center">
       <v-col cols="12" xs="12" sm="12" md="12" lg="8">
@@ -42,8 +46,8 @@
           <TodoList :todos="user.todos" />
         </div>
       </v-col>
-    </v-row>
 
+    </v-row>
   </v-container>
 </template>
 
@@ -60,12 +64,9 @@
         level: "",
         point: "",
         experience_point: "",
-        password: "",
-        passwordConfirm: "",
         show1: false,
         show2: false,
         error: "",
-        items: ["画像1", "画像2"],
         showContent: false
       };
     },
@@ -93,15 +94,33 @@
     },
     methods: {
       async addTodo(todo) {
-        const {
-          data
-        } = await axios.post("/v1/todos", {
-          todo
-        });
-        this.$store.commit("setUser", {
-          ...this.user,
-          todos: [...this.user.todos, data]
-        });
+        try {
+          const {
+            data
+          } = await axios.post("/v1/todos", {
+            todo
+          });
+          this.$store.commit("setUser", {
+            ...this.user,
+            todos: [...this.user.todos, data]
+          });
+          this.$store.commit("clearErrors");
+        } catch (error) {
+          console.log(error.response);
+          // error.reponse
+          // {
+                //status:422
+                //msg:hogehoge
+         // }
+          const {
+            data
+          } = error.response;
+          //console.log(data)
+          if (data.error_msg === "タイトルを入力してください") {
+            this.$store.commit("setError", "タイトルを入力してください");
+            console.log(this.$store.state.errors)
+          }
+        }
       },
       logOut() {
         firebase
@@ -115,19 +134,15 @@
             console.log(error);
           });
       },
-      openModal: function () {
-        this.showContent = true;
-      },
-      closeModal: function () {
-        this.showContent = false;
-      },
-    }
+    },
   };
+
 </script>
 
 <style lang="scss">
   $main-color: #fc7b03;
   $sub-color: #33dddd;
+  $accent-color: #f0353f;
 
   $pc: 1024px;
   $tab: 680px;
@@ -209,6 +224,9 @@
 
     .mdi-heart {
       color: red !important;
+    }
+    .errors {
+      color: $accent-color;
     }
   }
 </style>
