@@ -9,6 +9,7 @@
         <h3 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
+        <img class="mon" src="../assets/mon_284.gif">
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
@@ -36,7 +37,7 @@
         <v-hover v-slot:default="{ hover }">
           <v-btn class="index-button" @click="signup">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
-            sign up
+            START
           </v-btn>
         </v-hover>
       </v-col>
@@ -108,7 +109,7 @@
 
     <v-dialog content-class="dialog" v-model="dialog" max-width="60%">
       <v-card>
-        <v-card-title class="headline">Login</v-card-title>
+        <v-card-title class="headline"><h3>Login</h3></v-card-title>
         <v-card-text>
           <form>
             <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
@@ -117,7 +118,7 @@
               @click:append="show1 = !show1"></v-text-field>
             <v-hover v-slot:default="{ hover }">
               <v-btn class="bottom-btn" @click="login">
-                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
+                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>START
               </v-btn>
             </v-hover>
             <p v-if="error" class="errors">{{error}}</p>
@@ -290,6 +291,9 @@
   }
 
   .index-page {
+    .mon {
+      width :20%
+    }
 
     .index-title {
       text-align: center;
@@ -410,5 +414,8 @@
       border: 2px solid yellow;
       color: yellow;
     }
+  }
+  .headline {
+    color: $sub-color;
   }
 </style>
