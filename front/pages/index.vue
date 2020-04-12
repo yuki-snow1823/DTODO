@@ -9,8 +9,15 @@
         <h3 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h3>
+        <div>
         <img class="mon" src="../assets/mon_284.gif">
-        <img class="mon" src="../assets/mon_199.gif">
+        <img class="mon" src="../assets/mon_199.gif"><br>
+        </div>
+               <v-hover v-slot:default="{ hover }">
+              <v-btn class="bottom-btn" @click="guestLogin">
+                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>簡易ログインはこちらです
+              </v-btn>
+            </v-hover>
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
@@ -249,6 +256,27 @@
             })(error.code);
           });
       },
+      guestLogin() {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword("user7@gmail.com", "aaaaaa")
+          .then(() => {
+            this.$router.push("/user");
+          })
+          .catch(error => {
+            console.log(error);
+            this.error = (code => {
+              switch (code) {
+                case "auth/user-not-found":
+                  return "メールアドレスが間違っています";
+                case "auth/wrong-password":
+                  return "※パスワードが正しくありません";
+                default:
+                  return "※メールアドレスとパスワードをご確認ください";
+              }
+            })(error.code);
+          });
+      },
       moveToTop() {
         const duration = 1000;
         const interval = 25;
@@ -292,7 +320,7 @@
 
   .index-page {
     .mon {
-      width :20%;
+      width :10%;
     }
 
     .index-title {
