@@ -1,14 +1,13 @@
-import Vuex from 'vuex'
-import {
-  mount,
-  createLocalVue
-} from "@vue/test-utils";
-import * as store from '@/store'
-import Hoge from "./Hoge.vue";
+import AddTodo from "@/components/AddTodo";
+import { mount } from "@vue/test-utils";
+// Vue.component('add-todo', AddTodo);
 
-describe("Component", () => {
-  test("is a Vue instance", () => {
-    const wrapper = mount(Hoge);
-    expect(wrapper.isVueInstance()).toBeTruthy();
-  });
-});
+describe('AddTodo', () => {
+  // コンポーネントがマウントされ、ラッパが作成されます。
+  const wrapper = mount(AddTodo)
+
+  // 要素の存在を確認することも簡単です
+  it('追加ボタンが存在する', () => {
+    expect(wrapper.contains('v-hover')).toBe(true)
+  })
+})
