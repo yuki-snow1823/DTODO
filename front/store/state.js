@@ -5,7 +5,7 @@ const state = {
     status: false,
     message: ""
   },
-  errors: []
+  errors:[]
 }
  
 export default state

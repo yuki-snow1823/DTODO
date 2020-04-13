@@ -38,6 +38,7 @@
     </v-row>
     <div class="errors text-center" v-if="$store.state.errors">
       {{$store.state.errors[0]}}
+      <!-- <li v-for="(error, key) in errors" :key="key">{{ errors }}</li> -->
     </div>
 
     <v-row justify="center">
@@ -67,7 +68,9 @@
         show1: false,
         show2: false,
         error: "",
-        showContent: false
+        showContent: false,
+        // errors: [$store.state.errors]
+        // これだと表示できないが、thisをとるとエラーになる
       };
     },
     fetch({
