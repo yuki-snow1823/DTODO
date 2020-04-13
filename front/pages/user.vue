@@ -106,20 +106,13 @@
           });
           this.$store.commit("clearErrors");
         } catch (error) {
-          console.log(error.response);
-          // error.reponse
-          // {
-                //status:422
-                //msg:hogehoge
-         // }
           const {
             data
           } = error.response;
-          //console.log(data)
-          if (data.error_msg === "タイトルを入力してください") {
-            this.$store.commit("setError", "タイトルを入力してください");
-            console.log(this.$store.state.errors)
-          }
+          console.log(data.error_msg)
+          this.$store.commit("setError", data.error_msg);
+          console.log(this.$store.state)
+          console.log(this.$store.state.errors)
         }
       },
       logOut() {
