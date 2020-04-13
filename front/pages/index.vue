@@ -17,11 +17,11 @@
         </div>
         <div v-if="user"></div>
         <div class="guest" v-else>
-        <v-hover v-slot:default="{ hover }">
-          <v-btn class="guest-btn" @click="guestLogin">
-            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログインはこちらです
-          </v-btn>
-        </v-hover>
+          <v-hover v-slot:default="{ hover }">
+            <v-btn class="guest-btn" @click="guestLogin">
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログインはこちらです
+            </v-btn>
+          </v-hover>
         </div>
       </v-col>
 
@@ -150,7 +150,6 @@
   import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
-  import AssetsImage from "@/assets/point.png";
   export default {
     data() {
       return {
@@ -301,7 +300,13 @@
           }
         }, interval);
       }
-    }
+    },
+    created() {
+      this.$vuetify.lang = {
+        t: () => {},
+      }
+      //testを実行する際に直接関係ないエラーを回避する為に記述してあります。
+    },
   };
 </script>
 
@@ -330,6 +335,7 @@
     .mon {
       width: 10%;
     }
+
     .monster {
       text-align: center;
     }
@@ -463,16 +469,17 @@
     color: $sub-color;
   }
 
-.guest {
-  text-align: center;
-  margin-top: 59px;
-  .guest-btn {
-    @include index-bottom-btn;
+  .guest {
+    text-align: center;
+    margin-top: 59px;
 
-    &:hover {
-      border: 2px solid yellow;
-      color: yellow;
+    .guest-btn {
+      @include index-bottom-btn;
+
+      &:hover {
+        border: 2px solid yellow;
+        color: yellow;
+      }
     }
   }
-}
 </style>

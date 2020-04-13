@@ -48,7 +48,13 @@
         this.title = "";
         this.number = "";
       }
-    }
+    },
+    created() {
+      this.$vuetify.lang = {
+        t : () => {},
+      }
+      //testを実行する際に直接関係ないエラーを回避する為に記述してあります。
+    }, 
   };
 </script>
 
