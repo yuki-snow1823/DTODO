@@ -150,7 +150,6 @@
   import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
-  import AssetsImage from "@/assets/point.png";
   export default {
     data() {
       return {

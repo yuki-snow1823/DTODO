@@ -17,14 +17,14 @@ describe('components/AddTodo.vue', () => {
 
   describe('template', () => {
     test('入力フォームが存在すること', () => {
-      expect(wrapper.contains('v-text-field')).toBe(true)
       expect(wrapper.contains('.todo-btn')).toBe(true)
     })
 
-    // describe('フォームの操作', () => {
-    //   beforeEach(() => {
-    //     wrapper.find('input[type="text"]').setValue('this title')
-    //   })
+    describe('フォームの操作', () => {
+      beforeEach(() => {
+        wrapper.find('input[type="text"]').setValue('this title')
+      })
+    })
 
     //   test('dataに入力が反映されること', () => {
     //     expect(wrapper.vm.todoForm.title).toBe('this title')
