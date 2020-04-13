@@ -38,6 +38,7 @@
     </v-row>
     <div class="errors text-center" v-if="$store.state.errors">
       {{$store.state.errors[0]}}
+      <!-- <li v-for="(error, key) in errors" :key="key">{{ errors }}</li> -->
     </div>
 
     <v-row justify="center">
@@ -67,7 +68,9 @@
         show1: false,
         show2: false,
         error: "",
-        showContent: false
+        showContent: false,
+        // errors: [$store.state.errors]
+        // これだと表示できないが、thisをとるとエラーになる
       };
     },
     fetch({
@@ -106,20 +109,13 @@
           });
           this.$store.commit("clearErrors");
         } catch (error) {
-          console.log(error.response);
-          // error.reponse
-          // {
-                //status:422
-                //msg:hogehoge
-         // }
           const {
             data
           } = error.response;
-          //console.log(data)
-          if (data.error_msg === "タイトルを入力してください") {
-            this.$store.commit("setError", "タイトルを入力してください");
-            console.log(this.$store.state.errors)
-          }
+          console.log(data.error_msg)
+          this.$store.commit("setError", data.error_msg);
+          console.log(this.$store.state)
+          console.log(this.$store.state.errors)
         }
       },
       logOut() {
