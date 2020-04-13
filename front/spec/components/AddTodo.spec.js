@@ -1,13 +1,43 @@
 import AddTodo from "@/components/AddTodo";
-import { mount } from "@vue/test-utils";
-// Vue.component('add-todo', AddTodo);
+import Vuex from 'vuex'
+import { mount, createLocalVue } from '@vue/test-utils'
+import * as store from '@/store'
 
-describe('AddTodo', () => {
-  // コンポーネントがマウントされ、ラッパが作成されます。
-  const wrapper = mount(AddTodo)
+const localVue = createLocalVue()
+localVue.use(Vuex)
 
-  // 要素の存在を確認することも簡単です
-  it('追加ボタンが存在する', () => {
-    expect(wrapper.contains('v-hover')).toBe(true)
+describe('components/TodoForm.vue', () => {
+  let wrapper
+  beforeEach(() => {
+    wrapper = mount(AddTodo, {
+      store: store,
+      localVue
+    })
+  })
+
+  describe('template', () => {
+    test('入力フォームが存在すること', () => {
+      expect(wrapper.contains('input[type="text"]')).toBe(true)
+      expect(wrapper.contains('button')).toBe(true)
+    })
+
+    describe('フォームの操作', () => {
+      beforeEach(() => {
+        wrapper.find('input[type="text"]').setValue('this title')
+      })
+
+      test('dataに入力が反映されること', () => {
+        expect(wrapper.vm.todoForm.title).toBe('this title')
+      })
+
+      test('ボタンクリックでhandleAddTodoが呼ばれること', () => {
+        const mock = jest.fn()
+        wrapper.setMethods({
+          handleAddTodo: mock
+        })
+        wrapper.find('button').trigger('click')
+        expect(mock).toBeCalled()
+      })
+    })
   })
 })
