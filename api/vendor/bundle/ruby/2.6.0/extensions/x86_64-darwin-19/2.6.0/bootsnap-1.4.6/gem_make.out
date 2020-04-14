@@ -1,0 +1,15 @@
+current directory: /Users/yuki/Desktop/DTODO_PRA/api/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.6/ext/bootsnap
+/Users/yuki/.rbenv/versions/2.6.3/bin/ruby -I /Users/yuki/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20200414-74467-1klhe4b.rb extconf.rb
+creating Makefile
+
+current directory: /Users/yuki/Desktop/DTODO_PRA/api/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.6/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/yuki/Desktop/DTODO_PRA/api/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.6/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/yuki/Desktop/DTODO_PRA/api/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.4.6/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20200414-74467-iqq8bz/bootsnap
