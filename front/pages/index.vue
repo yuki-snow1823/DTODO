@@ -201,7 +201,7 @@
           this.error = "パスワード確認が一致していません";
           return
         }
-        if (this.name == ""){
+        if (this.name == "") {
           this.error = "名前を入力してください";
           return
         }
@@ -248,10 +248,21 @@
           });
       },
       login() {
+        this.$store.commit("setLoading", true);
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
+            this.$store.commit("setNotice", {
+              status: true,
+              message: "ログインに成功しました"
+            });
+            setTimeout(() => {
+              this.$store.commit("setLoading", false);
+            }, 1500);
+            setTimeout(() => {
+              this.$store.commit("setNotice", {});
+            }, 2000);
             this.$router.push("/user");
           })
           .catch(error => {
@@ -269,10 +280,21 @@
           });
       },
       guestLogin() {
+        this.$store.commit("setLoading", true);
         firebase
           .auth()
           .signInWithEmailAndPassword("user7@gmail.com", "aaaaaa")
           .then(() => {
+            this.$store.commit("setNotice", {
+              status: true,
+              message: "ログインに成功しました"
+            });
+            setTimeout(() => {
+              this.$store.commit("setLoading", false);
+            }, 1500);
+            setTimeout(() => {
+              this.$store.commit("setNotice", {});
+            }, 2000);
             this.$router.push("/user");
           })
           .catch(error => {
