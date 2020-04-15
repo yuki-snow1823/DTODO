@@ -4,16 +4,12 @@ class V1::TodosController < ApplicationController
       if todo.save
         render json: todo, status: :created
       else
-        # render json: todo.errors, status: :unprocessable_entity
-        # binding.pry
-        if todo.errors.full_messages.first == "Title can't be blank"
-          render json: {error_msg: "タイトルを入力してください"}, status: :unprocessable_entity
-          # statusをcatchで拾っている/unp...=modelのバリデーションで出しているステータス
+        if todo.errors.present?
+          # binding.pry
+          render json: {error_msg: todo.errors.full_messages}, status: :unprocessable_entity
         else 
           render json: todo.errors, status: :unprocessable_entity
-          # render json: {error_msg: "error2", status: 422}
         end
-        # render json: {error_msg: "error", status: 422}
       end
     end
 

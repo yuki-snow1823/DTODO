@@ -6,7 +6,7 @@
         <v-col class="pr-0" cols="3" xs="6" sm="2" md="1" lg="1">
           <v-select label="TP" v-model="number" :items="items">test</v-select>
         </v-col>
-        <v-col class="pl-0" cols="9" xs="5" sm="6" md="4" lg="7">
+        <v-col class="pl-0" cols="9" xs="5" sm="6" md="7" lg="7">
           <v-text-field v-model="title" :counter="20" label="todo" required></v-text-field>
         </v-col>
         <v-col class="px-0" cols="12" xs="6" sm="4" md="4" lg="4">
@@ -48,7 +48,13 @@
         this.title = "";
         this.number = "";
       }
-    }
+    },
+    created() {
+      this.$vuetify.lang = {
+        t : () => {},
+      }
+      //testを実行する際に直接関係ないエラーを回避する為に記述してあります。
+    }, 
   };
 </script>
 

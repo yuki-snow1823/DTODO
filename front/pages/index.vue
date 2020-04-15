@@ -150,7 +150,6 @@
   import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
-  import AssetsImage from "@/assets/point.png";
   export default {
     data() {
       return {
@@ -199,7 +198,12 @@
       },
       signup() {
         if (this.password !== this.passwordConfirm) {
-          this.error = "※パスワードとパスワード確認が一致していません";
+          this.error = "パスワード確認が一致していません";
+          return
+        }
+        if (this.name == "") {
+          this.error = "名前を入力してください";
+          return
         }
         firebase
           .auth()
@@ -244,10 +248,21 @@
           });
       },
       login() {
+        this.$store.commit("setLoading", true);
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
+            this.$store.commit("setNotice", {
+              status: true,
+              message: "ログインに成功しました"
+            });
+            setTimeout(() => {
+              this.$store.commit("setLoading", false);
+            }, 1500);
+            setTimeout(() => {
+              this.$store.commit("setNotice", {});
+            }, 2000);
             this.$router.push("/user");
           })
           .catch(error => {
@@ -265,10 +280,21 @@
           });
       },
       guestLogin() {
+        this.$store.commit("setLoading", true);
         firebase
           .auth()
           .signInWithEmailAndPassword("user7@gmail.com", "aaaaaa")
           .then(() => {
+            this.$store.commit("setNotice", {
+              status: true,
+              message: "ログインに成功しました"
+            });
+            setTimeout(() => {
+              this.$store.commit("setLoading", false);
+            }, 1500);
+            setTimeout(() => {
+              this.$store.commit("setNotice", {});
+            }, 2000);
             this.$router.push("/user");
           })
           .catch(error => {
@@ -301,7 +327,13 @@
           }
         }, interval);
       }
-    }
+    },
+    created() {
+      this.$vuetify.lang = {
+        t: () => {},
+      }
+      //testを実行する際に直接関係ないエラーを回避する為に記述してあります。
+    },
   };
 </script>
 
