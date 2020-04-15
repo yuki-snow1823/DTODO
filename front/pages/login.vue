@@ -30,10 +30,21 @@
     },
     methods: {
       login() {
+        this.$store.commit("setLoading", true);
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
+            this.$store.commit("setNotice", {
+              status: true,
+              message: "ログインに成功しました"
+            });
+            setTimeout(() => {
+              this.$store.commit("setLoading", false);
+            }, 1500);
+            setTimeout(() => {
+              this.$store.commit("setNotice", {});
+            }, 2000);
             this.$router.push("/user");
           })
           .catch(error => {
@@ -49,7 +60,7 @@
               }
             })(error.code);
           });
-      }
+      },
     }
   };
 </script>

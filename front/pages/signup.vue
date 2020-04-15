@@ -41,7 +41,12 @@
     methods: {
       signup() {
         if (this.password !== this.passwordConfirm) {
-          this.error = "※パスワードとパスワード確認が一致していません";
+          this.error = "パスワード確認が一致していません";
+          return
+        }
+        if (this.name == "") {
+          this.error = "名前を入力してください";
+          return
         }
         firebase
           .auth()
@@ -53,13 +58,22 @@
               uid: res.user.uid
             };
             this.$store.commit("setLoading", true);
-            axios.post("/v1/users", {
-              user
-            }).then(res => {
-              this.$store.commit("setLoading", false);
-              this.$store.commit("setUser", res.data);
-              this.$router.push("/");
-            });
+            axios
+              .post("/v1/users", {
+                user
+              })
+              .then(res => {
+                this.$store.commit("setLoading", false);
+                this.$store.commit("setUser", res.data);
+                this.$store.commit("setNotice", {
+                  status: true,
+                  message: "新規登録が完了しました"
+                });
+                setTimeout(() => {
+                  this.$store.commit("setNotice", {});
+                }, 2000);
+                this.$router.push("/user");
+              });
           })
           .catch(error => {
             this.error = (code => {
@@ -69,13 +83,13 @@
                 case "auth/wrong-password":
                   return "※パスワードが正しくありません";
                 case "auth/weak-password":
-                  return "※パスワードは最低6文字以上にしてください";
+                  return "パスワードは最低6文字以上にしてください";
                 default:
-                  return "※メールアドレスとパスワードをご確認ください";
+                  return "メールアドレスとパスワードをご確認ください";
               }
             })(error.code);
           });
-      }
+      },
     }
   };
 </script>
