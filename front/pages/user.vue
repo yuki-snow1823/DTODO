@@ -112,10 +112,7 @@
           const {
             data
           } = error.response;
-          console.log(data.error_msg)
           this.$store.commit("setError", data.error_msg);
-          console.log(this.$store.state)
-          console.log(this.$store.state.errors)
         }
       },
       logOut() {
@@ -171,7 +168,7 @@
 
     .user-status {
       @include pc {
-        width: 100% !important;
+        width: 100%;
       }
 
       ;

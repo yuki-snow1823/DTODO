@@ -4,7 +4,12 @@ class V1::RewardsController < ApplicationController
       if reward.save
         render json: reward, status: :created
       else
-        render json: reward.errors, status: :unprocessable_entity
+        if reward.errors.present?
+          # binding.pry
+          render json: {error_msg: reward.errors.full_messages}, status: :unprocessable_entity
+        else 
+          render json: reward.errors, status: :unprocessable_entity
+        end
       end
     end
 

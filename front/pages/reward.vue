@@ -34,6 +34,10 @@
         </div>
       </v-col>
     </v-row>
+    <div class="errors text-center" v-if="$store.state.errors">
+      {{$store.state.errors[0]}}
+      <!-- <li v-for="(error, key) in errors" :key="key">{{ errors }}</li> -->
+    </div>
 
     <v-row justify="center">
       <v-col cols="12" xs="12" sm="12" md="12" lg="8">
@@ -85,15 +89,23 @@
     },
     methods: {
       async addReward(reward) {
-        const {
-          data
-        } = await axios.post("/v1/rewards", {
-          reward
-        });
-        this.$store.commit("setUser", {
-          ...this.user,
-          rewards: [...this.user.rewards, data]
-        });
+        try {
+          const {
+            data
+          } = await axios.post("/v1/rewards", {
+            reward
+          });
+          this.$store.commit("setUser", {
+            ...this.user,
+            rewards: [...this.user.rewards, data]
+          });
+          this.$store.commit("clearErrors");
+        } catch (error) {
+          const {
+            data
+          } = error.response;
+          this.$store.commit("setError", data.error_msg);
+        }
       },
       openModal: function () {
         this.showContent = true
