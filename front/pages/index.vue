@@ -66,7 +66,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="introduction">
+    <v-row class="introduction mb-0">
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
         <img src="../assets/mon_259.gif">
         <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
@@ -97,12 +97,12 @@
 
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
-
+<!-- 
         <div class="mb-10">
           <v-carousel height="100%">
             <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
           </v-carousel>
-        </div>
+        </div> -->
 
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
