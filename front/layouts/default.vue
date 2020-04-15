@@ -100,7 +100,7 @@ $main-color: #fc7b03;
   .toolbar-title {
     color: white;
     text-decoration: none;
-    font-family: 'Comic Sans MS';
+    font-family: 'Comic Sans MS','American Typewriter';
     font-size: 30px;
     font-weight: bold;
     .title-first {

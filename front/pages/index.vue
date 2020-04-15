@@ -5,10 +5,10 @@
 
     <v-row>
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h2 class="index-subtitle text-center">DTODOとは</h2>
-        <h3 class="index-explain">
+        <h1 class="index-subtitle text-center">DTODOとは</h1>
+        <h2 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
-        </h3>
+        </h2>
         <div class="monster">
           <img class="mon" src="../assets/mon_284.gif">
           <img class="mon" src="../assets/mon_199.gif">
@@ -19,7 +19,7 @@
         <div class="guest" v-else>
           <v-hover v-slot:default="{ hover }">
             <v-btn class="guest-btn" @click="guestLogin">
-              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログインはこちらです
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログイン
             </v-btn>
           </v-hover>
         </div>
@@ -34,7 +34,7 @@
       </v-col>
 
       <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
-        <h2 id="index-signup" class="index-form-title text-center">新規登録はこちらから</h2>
+        <h1 id="index-signup" class="index-form-title text-center">新規登録はこちらから</h1>
         <form>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
           <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
@@ -66,7 +66,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="introduction">
+    <v-row class="introduction mb-0">
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
         <img src="../assets/mon_259.gif">
         <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
@@ -97,12 +97,12 @@
 
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
-
+<!-- 
         <div class="mb-10">
           <v-carousel height="100%">
             <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
           </v-carousel>
-        </div>
+        </div> -->
 
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
@@ -358,9 +358,35 @@
     font-weight: bold;
   }
 
+  $pc: 1024px;
+  $tab: 680px;
+  $sp: 480px;
+
+  @mixin pc {
+    @media (max-width: ($pc)) {
+      @content;
+    }
+  }
+
+  @mixin tab {
+    @media (max-width: ($tab)) {
+      @content;
+    }
+  }
+
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
+  }
+
   .index-page {
     .mon {
-      width: 10%;
+      width: 9%;
+      
+      @include sp {
+        width: 20%;
+      }
     }
 
     .monster {
@@ -371,6 +397,7 @@
       text-align: center;
       font-size: 70px;
       font-family: 'Comic Sans MS';
+      margin-bottom: 0px;
 
       .index-title-first {
         color: $main-color;
@@ -416,9 +443,6 @@
       img {
         margin: 0 auto 30px;
         display: block;
-        // height: 30%;
-        // width: 30%;
-
       }
 
       .sub-introduction {
@@ -432,7 +456,6 @@
 
     h1 {
       text-align: center;
-      // color: $accent-color;
       margin: 30px 0;
     }
 
@@ -498,15 +521,21 @@
 
   .guest {
     text-align: center;
-    margin-top: 59px;
 
     .guest-btn {
       @include index-bottom-btn;
-
       &:hover {
         border: 2px solid yellow;
-        color: yellow;
+        color: yellow !important;
       }
+      @include sp {
+        font-size: 25px;
+        width: 80% !important;
+        height: 70px !important;
+      }
+      
     }
+
+
   }
 </style>
