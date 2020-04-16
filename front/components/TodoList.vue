@@ -4,43 +4,14 @@
       <v-card-title>
         <h2 class="list-title">TODO LIST</h2>
         <v-spacer></v-spacer>
-        <!-- <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field> -->
       </v-card-title>
-      <v-data-table :headers="headers" :items="todos" :search="search">
+      <ul>
+        <li><span>【達成ボタン】</span>あああ【編集ボタン】</li>
+        <li v-for="todo in todos" :key="todo">
+          {{ todo.title }}
+          </li>
 
-        <template v-slot:item.point="props">
-          <v-edit-dialog @save="save" @cancel="cancel" @open="open" @close="close"
-            :return-value="props.item.point">
-            {{ props.item.point }}
-            <template v-slot:input>
-              <v-select @change="updatePoint(props.item.id, props.item.point)" v-model="props.item.point" :items="items"
-                single-line :value="props.item.point"></v-select>
-            </template>
-          </v-edit-dialog>
-        </template>
-
-        <template v-slot:item.title="props">
-          <v-edit-dialog @save="save" @cancel="cancel" @open="open" @close="close"
-            :return-value.sync="props.item.title">
-            {{ props.item.title }}
-            <template v-slot:input>
-              <v-text-field @change="updateTitle(props.item.id, props.item.title)" v-model="props.item.title"
-                label="Edit" single-line counter></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </template>
-
-        <template v-slot:item.action="{ item }">
-          <v-icon midium @click="deleteItem(item)">delete</v-icon>
-        </template>
-
-        <template v-slot:item.complete="{ item }">
-          <v-hover v-slot:default="{ hover }">
-            <v-icon big color="red" @click="completeItem(item)" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'"></v-icon>
-          </v-hover>
-        </template>
-
-      </v-data-table>
+      </ul>
     </v-card>
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
@@ -67,28 +38,6 @@
         snack: false,
         snackColor: "",
         snackText: "",
-        headers: [{
-            text: "",
-            width: "170",
-            value: "complete"
-          },
-          {
-            text: "TP",
-            value: "point",
-            width: "170"
-          },
-          {
-            text: "content",
-            align: "left",
-            sortable: false,
-            value: "title"
-          },
-          {
-            text: "delete",
-            value: "action",
-            sortable: false
-          }
-        ]
       };
     },
     computed: {
