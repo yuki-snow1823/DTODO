@@ -8,7 +8,16 @@
       <ul>
         <draggable v-model="todos" :options="{ animation: 200, delay: 50 }">
           <li class="todo-list" v-for="todo in todos" :key="todo.point">
-            <v-btn class="todo-list-btn" >達成</v-btn>ポイント{{ todo.point }}：{{ todo.title }}
+            <v-hover v-slot:default="{ hover }">
+              <v-icon big color="red"  v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
+              </v-icon>
+            </v-hover>
+            <v-hover v-slot:default="{ hover }">
+              <v-icon big color="red"  v-text="hover ? 'mdi-pencil-plus' : 'mdi-pencil-plus-outline'">
+              </v-icon>
+            </v-hover>
+            <span class="todo-point">{{ todo.point }}</span>
+            {{ todo.title }}
           </li>
         </draggable>
       </ul>
@@ -152,10 +161,21 @@
   }
 
   .todo-list {
-    background-color: rgb(212, 193, 193);
-    margin: 10px 0;
+    // display: inline-block;
+    list-style: none;
+    color: black;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #7f7f7f;
+    border-radius: 10px;
+    background-color: #ffffff;
+
     .todo-list-btn {
       background-color: rgb(206, 204, 87) !important;
+    }
+    .todo-point {
+      color: rgb(75, 75, 243);
+      font-weight: bold;
     }
   }
 </style>
