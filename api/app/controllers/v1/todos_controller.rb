@@ -43,6 +43,7 @@ class V1::TodosController < ApplicationController
       levelSetting = LevelSetting.find_by(level: user.level + 1)
       if levelSetting.present? && levelSetting.thresold <= user.experience_point
         user.level = user.level + 1
+        
         user.update(level: user.level)
       end
 
@@ -52,13 +53,15 @@ class V1::TodosController < ApplicationController
     end
 
     def sort
-      params[:todos].each_with_index do |t,i|
-
-      render json: {todo: todo}
+      params[:todo].each_with_index do |t,i|
+        @todo = Todo.find(t[:id])
+        @todo.update( point: i )
+      end
+      render json: {result: "ok"}
     end
 
     private
       def todo_params
-        params.require(:todo).permit(:title, :user_id, :point)
+        params.require(:todo).permit(:id, :title, :user_id, :point)
       end
 end

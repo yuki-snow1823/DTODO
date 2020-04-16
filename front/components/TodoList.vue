@@ -6,14 +6,14 @@
         <v-spacer></v-spacer>
       </v-card-title>
       <ul>
-        <draggable v-model="todos" :options="{ animation: 200, delay: 50 }" @start="onStart" @end="atEnd">
+        <draggable v-model="todos" :options="{ animation: 200, delay: 50 }"  @end="atEnd">
           <li class="todo-list" v-for="todo in todos" :key="todo.point">
             <v-hover v-slot:default="{ hover }">
               <v-icon big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
               </v-icon>
             </v-hover>
             <v-hover v-slot:default="{ hover }">
-              <v-icon big color="red" v-text="hover ? 'mdi-pencil-plus' : 'mdi-pencil-plus-outline'">
+              <v-icon @click="completeItem(todo)" big color="red" v-text="hover ? 'mdi-pencil-plus' : 'mdi-pencil-plus-outline'">
               </v-icon>
             </v-hover>
             <span class="todo-point">{{ todo.point }}</span>
@@ -33,8 +33,6 @@
 <script>
   const maxNumber = 11;
   const numberRange = [...Array(maxNumber).keys()]
-  // import draggable from '@/plugins/vue-draggable';
-  // 追記した
   import axios from "@/plugins/axios";
   export default {
     props: ["todos"],
@@ -48,8 +46,6 @@
         snack: false,
         snackColor: "",
         snackText: "",
-        // draggable: true
-        // これが必要
       };
     },
     computed: {
@@ -118,15 +114,18 @@
             }
           });
       },
-      onStart() {
-        console.log(this.todos)
-      },
       async atEnd() {
-        console.log(this.todos)
         let result =
           await axios.patch(`v1/todos`, {
-            todos: this.todos
+            todo: this.todos
           });
+          const updateUser = {
+            ...this.user,
+            todos: this.todos
+          };
+          this.$store.commit("setUser", updateUser);
+          // this.todos = result.data
+          // 最後に入れ込んで反映させる
       },
       save() {
         this.snack = true;
