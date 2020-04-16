@@ -1,4 +1,7 @@
-import Vue from 'vue'
-import VueDraggable from 'vuedraggable'
+import Draggable from 'vuedraggable';
+import Vue from 'vue';
 
-Vue.use(VueDraggable)
+Vue.component('draggable', Draggable);
+// 第二引数を第一引数の名前とするって意味だと思う
+
+// export default draggable
