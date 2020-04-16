@@ -6,10 +6,9 @@
         <v-spacer></v-spacer>
       </v-card-title>
       <ul>
-          <li><span>【達成ボタン】</span>あああ【編集ボタン】</li>
-        <draggable v-model="todos">
-          <li v-for="todo in todos" :key="todo.point">
-            ポイント{{ todo.point }}：{{ todo.title }}
+        <draggable v-model="todos" :options="{ animation: 200, delay: 50 }">
+          <li class="todo-list" v-for="todo in todos" :key="todo.point">
+            <v-btn class="todo-list-btn" >達成</v-btn>ポイント{{ todo.point }}：{{ todo.title }}
           </li>
         </draggable>
       </ul>
@@ -133,7 +132,7 @@
   };
 </script>
 
-<style>
+<style lang="scss">
   .v-icon {
     display: flex;
     justify-content: center;
@@ -150,5 +149,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .todo-list {
+    background-color: rgb(212, 193, 193);
+    margin: 10px 0;
+    .todo-list-btn {
+      background-color: rgb(206, 204, 87) !important;
+    }
   }
 </style>
