@@ -51,6 +51,12 @@ class V1::TodosController < ApplicationController
       end
     end
 
+    def sort
+      params[:todos].each_with_index do |t,i|
+
+      render json: {todo: todo}
+    end
+
     private
       def todo_params
         params.require(:todo).permit(:title, :user_id, :point)

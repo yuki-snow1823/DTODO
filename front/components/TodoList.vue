@@ -6,14 +6,14 @@
         <v-spacer></v-spacer>
       </v-card-title>
       <ul>
-        <draggable v-model="todos" :options="{ animation: 200, delay: 50 }">
+        <draggable v-model="todos" :options="{ animation: 200, delay: 50 }" @start="onStart" @end="atEnd">
           <li class="todo-list" v-for="todo in todos" :key="todo.point">
             <v-hover v-slot:default="{ hover }">
-              <v-icon big color="red"  v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
+              <v-icon big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
               </v-icon>
             </v-hover>
             <v-hover v-slot:default="{ hover }">
-              <v-icon big color="red"  v-text="hover ? 'mdi-pencil-plus' : 'mdi-pencil-plus-outline'">
+              <v-icon big color="red" v-text="hover ? 'mdi-pencil-plus' : 'mdi-pencil-plus-outline'">
               </v-icon>
             </v-hover>
             <span class="todo-point">{{ todo.point }}</span>
@@ -118,6 +118,16 @@
             }
           });
       },
+      onStart() {
+        console.log(this.todos)
+      },
+      async atEnd() {
+        console.log(this.todos)
+        let result =
+          await axios.patch(`v1/todos`, {
+            todos: this.todos
+          });
+      },
       save() {
         this.snack = true;
         this.snackColor = "success";
@@ -173,6 +183,7 @@
     .todo-list-btn {
       background-color: rgb(206, 204, 87) !important;
     }
+
     .todo-point {
       color: rgb(75, 75, 243);
       font-weight: bold;
