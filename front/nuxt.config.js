@@ -42,7 +42,8 @@ export default {
    */
   plugins: [
     "@/plugins/vuetify", //追加
-    "@/plugins/auth-check"
+    "@/plugins/auth-check",
+    "@/plugins/vue-draggable"
   ],
   /*
    ** Nuxt.js dev-modules

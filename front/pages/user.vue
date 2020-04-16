@@ -84,7 +84,7 @@ export default {
   },
   components: {
     AddTodo,
-    TodoList
+    TodoList,
   },
   computed: {
     user() {

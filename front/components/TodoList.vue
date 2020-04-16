@@ -6,11 +6,12 @@
         <v-spacer></v-spacer>
       </v-card-title>
       <ul>
-        <li><span>【達成ボタン】</span>あああ【編集ボタン】</li>
-        <li v-for="todo in todos" :key="todo">
-          {{ todo.title }}
+          <li><span>【達成ボタン】</span>あああ【編集ボタン】</li>
+        <draggable>
+          <li v-for="todo in todos" :key="todo">
+            ポイント{{ todo.point }}：{{ todo.title }}
           </li>
-
+        </draggable>
       </ul>
     </v-card>
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
@@ -25,6 +26,7 @@
 <script>
   const maxNumber = 11;
   const numberRange = [...Array(maxNumber).keys()]
+  import draggable from 'vuedraggable'
   import axios from "@/plugins/axios";
   export default {
     props: ["todos"],
@@ -75,7 +77,7 @@
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
           });
-          this.user.level =getUser.data.user.level;
+          this.user.level = getUser.data.user.level;
           this.user.point = getUser.data.user.point;
           this.user.experience_point = getUser.data.user.experience_point;
           const updateUser = {
@@ -99,12 +101,12 @@
         });
       },
       async updatePoint(id, value) {
-        let result = 
-        await axios.patch(`/v1/todos/${id}`, {
-          todo: {
-            point: value
-          }
-        });
+        let result =
+          await axios.patch(`/v1/todos/${id}`, {
+            todo: {
+              point: value
+            }
+          });
       },
       save() {
         this.snack = true;
@@ -125,8 +127,7 @@
         console.log("Dialog closed");
       }
     },
-    watch: {
-    }
+    watch: {}
   };
 </script>
 
