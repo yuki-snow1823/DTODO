@@ -11,7 +11,7 @@
             <v-icon @click="completeItem(todo)" big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
             </v-icon>
           </v-hover>
-          <v-icon @click.stop="dialog = true" big>mdi-pencil-plus</v-icon>
+          <v-icon @click="dialog = true; editItem(todo)" big>mdi-pencil-plus</v-icon>
           <v-icon midium @click="deleteItem(todo)">delete</v-icon>
           <span class="todo-point">{{ todo.point }}</span>
           {{ todo.title }}
@@ -19,8 +19,16 @@
       </draggable>
     </v-card>
 
-  <v-dialog class="edit-dialog" v-model="dialog" max-width="60%">
-    <v-card>あああ</v-card>
+    <v-dialog class="edit-dialog" v-model="dialog" max-width="60%">
+      <v-card>
+        <v-card-title>
+          <h2 class="list-title">TODO編集</h2>
+        </v-card-title>
+        <v-card-text>タイトル</v-card-text>
+        <v-text-field v-model="todos"></v-text-field>
+        <div>あああああ</div>
+        <div>あああああ</div>
+      </v-card>
     </v-dialog>
 
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
@@ -99,9 +107,9 @@
           this.snackText = "Data saved";
         }
       },
-      // async editItem(item) {
-      //   this.editOn = !this.editOn;
-      // },
+      async editItem(todo) {
+        console.log(todo);
+      },
       // async updateTitle(id, value) {
       //   await axios.patch(`/v1/todos/${id}`, {
       //     todo: {
