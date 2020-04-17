@@ -1,8 +1,9 @@
 class V1::UsersController < ApplicationController
   def index
     if params[:uid] 
-      @user = User.find_by(uid: params[:uid])
-      render json: @user
+      user = User.find_by(uid: params[:uid])
+      todos = user.todos.order(point: "ASC")
+      render json: {user: user, todos: todos}
     else 
       @users = User.all
       render json: @users

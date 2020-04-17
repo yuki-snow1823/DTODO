@@ -56,6 +56,8 @@ import AddTodo from "@/components/AddTodo";
 import TodoList from "@/components/TodoList";
 import axios from "@/plugins/axios";
 import firebase from "@/plugins/firebase";
+// import draggable from '@/plugins/vue-draggable';
+// 追記した
 export default {
   data() {
     return {
@@ -84,7 +86,7 @@ export default {
   },
   components: {
     AddTodo,
-    TodoList
+    TodoList,
   },
   computed: {
     user() {

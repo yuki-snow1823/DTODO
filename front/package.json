@@ -25,7 +25,8 @@
     "loaders.css": "^0.1.2",
     "material-design-icons-iconfont": "^5.0.1",
     "nuxt": "^2.0.0",
-    "vue-jest": "^3.0.5"
+    "vue-jest": "^3.0.5",
+    "vuedraggable": "^2.23.2"
   },
   "devDependencies": {
     "@nuxtjs/dotenv": "^1.4.1",

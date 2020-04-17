@@ -4,43 +4,23 @@
       <v-card-title>
         <h2 class="list-title">TODO LIST</h2>
         <v-spacer></v-spacer>
-        <!-- <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field> -->
       </v-card-title>
-      <v-data-table :headers="headers" :items="todos" :search="search">
-
-        <template v-slot:item.point="props">
-          <v-edit-dialog @save="save" @cancel="cancel" @open="open" @close="close"
-            :return-value="props.item.point">
-            {{ props.item.point }}
-            <template v-slot:input>
-              <v-select @change="updatePoint(props.item.id, props.item.point)" v-model="props.item.point" :items="items"
-                single-line :value="props.item.point"></v-select>
-            </template>
-          </v-edit-dialog>
-        </template>
-
-        <template v-slot:item.title="props">
-          <v-edit-dialog @save="save" @cancel="cancel" @open="open" @close="close"
-            :return-value.sync="props.item.title">
-            {{ props.item.title }}
-            <template v-slot:input>
-              <v-text-field @change="updateTitle(props.item.id, props.item.title)" v-model="props.item.title"
-                label="Edit" single-line counter></v-text-field>
-            </template>
-          </v-edit-dialog>
-        </template>
-
-        <template v-slot:item.action="{ item }">
-          <v-icon midium @click="deleteItem(item)">delete</v-icon>
-        </template>
-
-        <template v-slot:item.complete="{ item }">
-          <v-hover v-slot:default="{ hover }">
-            <v-icon big color="red" @click="completeItem(item)" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'"></v-icon>
-          </v-hover>
-        </template>
-
-      </v-data-table>
+      <ul>
+        <draggable v-model="todos" :options="{ animation: 200, delay: 50 }"  @end="atEnd">
+          <li class="todo-list" v-for="todo in todos" :key="todo.point">
+            <v-hover v-slot:default="{ hover }">
+              <v-icon big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
+              </v-icon>
+            </v-hover>
+            <v-hover v-slot:default="{ hover }">
+              <v-icon @click="completeItem(todo)" big color="red" v-text="hover ? 'mdi-pencil-plus' : 'mdi-pencil-plus-outline'">
+              </v-icon>
+            </v-hover>
+            <span class="todo-point">{{ todo.point }}</span>
+            {{ todo.title }}
+          </li>
+        </draggable>
+      </ul>
     </v-card>
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
@@ -49,7 +29,6 @@
   </div>
 
 </template>
-
 
 <script>
   const maxNumber = 11;
@@ -67,28 +46,6 @@
         snack: false,
         snackColor: "",
         snackText: "",
-        headers: [{
-            text: "",
-            width: "170",
-            value: "complete"
-          },
-          {
-            text: "TP",
-            value: "point",
-            width: "170"
-          },
-          {
-            text: "content",
-            align: "left",
-            sortable: false,
-            value: "title"
-          },
-          {
-            text: "delete",
-            value: "action",
-            sortable: false
-          }
-        ]
       };
     },
     computed: {
@@ -126,7 +83,7 @@
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
           });
-          this.user.level =getUser.data.user.level;
+          this.user.level = getUser.data.user.level;
           this.user.point = getUser.data.user.point;
           this.user.experience_point = getUser.data.user.experience_point;
           const updateUser = {
@@ -150,12 +107,25 @@
         });
       },
       async updatePoint(id, value) {
-        let result = 
-        await axios.patch(`/v1/todos/${id}`, {
-          todo: {
-            point: value
-          }
-        });
+        let result =
+          await axios.patch(`/v1/todos/${id}`, {
+            todo: {
+              point: value
+            }
+          });
+      },
+      async atEnd() {
+        let result =
+          await axios.patch(`v1/todos`, {
+            todo: this.todos
+          });
+          const updateUser = {
+            ...this.user,
+            todos: this.todos
+          };
+          this.$store.commit("setUser", updateUser);
+          // this.todos = result.data
+          // 最後に入れ込んで反映させる
       },
       save() {
         this.snack = true;
@@ -176,12 +146,11 @@
         console.log("Dialog closed");
       }
     },
-    watch: {
-    }
+    watch: {}
   };
 </script>
 
-<style>
+<style lang="scss">
   .v-icon {
     display: flex;
     justify-content: center;
@@ -198,5 +167,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .todo-list {
+    // display: inline-block;
+    list-style: none;
+    color: black;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #7f7f7f;
+    border-radius: 10px;
+    background-color: #ffffff;
+
+    .todo-list-btn {
+      background-color: rgb(206, 204, 87) !important;
+    }
+
+    .todo-point {
+      color: rgb(75, 75, 243);
+      font-weight: bold;
+    }
   }
 </style>
