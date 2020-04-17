@@ -55,7 +55,6 @@ class V1::TodosController < ApplicationController
     def sort
       params[:todo].each_with_index do |t,i|
         @todo = Todo.find(t[:id])
-        binding.pry
         @todo.update( point: i )
       end
       render json: {result: "ok"}

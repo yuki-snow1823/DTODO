@@ -1,31 +1,28 @@
 <template>
   <div>
-    <v-card>
+    <v-card class="pb-5">
       <v-card-title>
         <h2 class="list-title">TODO LIST</h2>
         <v-spacer></v-spacer>
       </v-card-title>
-      <ul>
-        <draggable v-model="todos" :options="{ animation: 200, delay: 50 }"  @end="atEnd">
-          <li class="todo-list" v-for="todo in todos" :key="todo.point">
-            <v-hover v-slot:default="{ hover }">
-              <v-icon big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
-              </v-icon>
-            </v-hover>
-            <v-hover v-slot:default="{ hover }">
-              <v-icon @click="completeItem(todo)" big color="red" v-text="hover ? 'mdi-pencil-plus' : 'mdi-pencil-plus-outline'">
-              </v-icon>
-            </v-hover>
-            <span class="todo-point">{{ todo.point }}</span>
-            {{ todo.title }}
-          </li>
-        </draggable>
-      </ul>
+      <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
+        <li class="todo-list" v-for="todo in todos" :key="todo.point">
+          <v-hover v-slot:default="{ hover }">
+            <v-icon @click="completeItem(todo)" big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
+            </v-icon>
+          </v-hover>
+          <v-icon @click="editItem(todo)" big>mdi-pencil-plus</v-icon>
+          <v-icon midium @click="deleteItem(todo)">delete</v-icon>
+          <span class="todo-point">{{ todo.point }}</span>
+          {{ todo.title }}
+        </li>
+      </draggable>
     </v-card>
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
     </v-snackbar>
+
   </div>
 
 </template>
@@ -119,13 +116,11 @@
           await axios.patch(`v1/todos`, {
             todo: this.todos
           });
-          const updateUser = {
-            ...this.user,
-            todos: this.todos
-          };
-          this.$store.commit("setUser", updateUser);
-          // this.todos = result.data
-          // 最後に入れ込んで反映させる
+        const updateUser = {
+          ...this.user,
+          todos: this.todos
+        };
+        this.$store.commit("setUser", updateUser);
       },
       save() {
         this.snack = true;
@@ -176,8 +171,8 @@
     margin: 10px;
     padding: 10px;
     border: 1px solid #7f7f7f;
-    border-radius: 10px;
-    background-color: #ffffff;
+    border-radius: 6px;
+    background-color: #aab1b9;
 
     .todo-list-btn {
       background-color: rgb(206, 204, 87) !important;
