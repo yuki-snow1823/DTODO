@@ -116,9 +116,6 @@
         this.dialogText = todo;
       },
       async updateItem(id, title, point) {
-        console.log(id);
-        console.log(title);
-        console.log(point);
         await axios.patch(`/v1/todos/${id}`, {
           todo: {
             title: title,
