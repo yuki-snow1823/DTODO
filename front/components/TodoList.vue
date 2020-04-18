@@ -193,12 +193,14 @@
 
   .todo-list {
     list-style: none;
+    border-left: solid 8px $sub-color !important;
+    border-bottom: solid 2px rgb(121, 117, 117) !important;
     color: black;
     margin: 10px;
     padding: 10px;
     border: 1px solid #7f7f7f;
     border-radius: 6px;
-    background-color: #aab1b9;
+    background-color: #d2e2f5;
     cursor: grab;
 
     .todo-list-btn {
