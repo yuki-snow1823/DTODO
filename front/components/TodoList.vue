@@ -19,16 +19,17 @@
       </draggable>
     </v-card>
 
-    <v-dialog class="edit-dialog" v-model="dialog" max-width="40%">
+    <v-dialog class="edit-dialog" v-model="dialog">
       <v-card>
         <v-card-title>
           <h2 class="list-title">TODO編集</h2>
         </v-card-title>
-        <v-card-text>タイトル</v-card-text>
-        {{ dialogText }}
-        <v-text-field v-model="dialogText.title"></v-text-field>
-        <v-select single-line :items="items" v-model="dialogText.point" :value="dialogText.point"></v-select>
-        <v-btn @click="updateItem()">更新</v-btn>
+        <p>内容</p>
+        <v-text-field class="dialog-title" v-model="dialogText.title" filled></v-text-field>
+        <p>ポイント</p>
+        <v-select class="dialog-point" single-line :items="items" v-model="dialogText.point" :value="dialogText.point"
+          filled ></v-select>
+        <v-btn class="update-btn" @click="updateItem()">保存</v-btn>
       </v-card>
     </v-dialog>
 
@@ -167,6 +168,20 @@
 </script>
 
 <style lang="scss">
+  $main-color: #fc7b03;
+  $sub-color: #33dddd;
+  $accent-color: #f0353f;
+
+  @mixin btn {
+    background-color: rgb(29, 29, 29) !important;
+    border: 2px solid $main-color;
+    color: $main-color !important;
+    display: inline-block;
+    margin: 0px 5% 15px;
+    width: 70%;
+    font-weight: bold;
+  }
+
   .v-icon {
     display: flex;
     justify-content: center;
@@ -186,7 +201,6 @@
   }
 
   .todo-list {
-    // display: inline-block;
     list-style: none;
     color: black;
     margin: 10px;
@@ -200,8 +214,31 @@
     }
 
     .todo-point {
-      color: rgb(75, 75, 243);
+      color: rgb(206, 206, 248);
       font-weight: bold;
     }
+  }
+
+  .v-dialog {
+    width: 70%;
+
+    h2 {
+      color: $sub-color;
+    }
+    p {
+      margin-left: 5%;
+    }
+    .dialog-title {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .dialog-point {
+      width: 40%;
+      margin-left: 5%;
+    }
+    .update-btn {
+      @include btn
+    }
+
   }
 </style>
