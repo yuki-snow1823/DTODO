@@ -207,7 +207,7 @@
     cursor: grab;
 
     .todo-list-icon {
-    margin-left: auto;
+      margin-left: auto;
     }
 
     .todo-list-btn {
@@ -215,7 +215,8 @@
     }
 
     .todo-title {
-      padding-top: 3px;
+      padding-top: 2px;
+      margin-left: 10px;
     }
     .todo-point {
       color: rgb(41, 79, 160);
@@ -226,11 +227,8 @@
       text-align: center;
       background: rgb(250, 253, 71);
       color: $sub-color;
-      // text-shadow: -1px -1px rgba(255, 255, 255, 0.44), 1px 1px rgba(0, 0, 0, 0.38);
       box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.08);
       border-bottom: solid 2px #b1a60c;
-      // border-right: solid 2px #b1a60c;
-      
     }
   }
 
