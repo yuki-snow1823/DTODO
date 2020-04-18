@@ -15,21 +15,22 @@
           <v-icon midium @click="deleteItem(todo)">delete</v-icon>
           <span class="todo-point">{{ todo.point }}</span>
           {{ todo.title }}
+
+          <v-dialog class="edit-dialog" v-model="dialog" max-width="60%" :return-value="todos">
+            <v-card>
+              <v-card-title>
+                <h2 class="list-title">TODO編集</h2>
+              </v-card-title>
+              <v-card-text>タイトル</v-card-text>
+              <v-text-field v-model="todos"></v-text-field>
+              <v-btn @click="updateItem()">update</v-btn>
+            </v-card>
+          </v-dialog>
+
         </li>
       </draggable>
     </v-card>
 
-    <v-dialog class="edit-dialog" v-model="dialog" max-width="60%">
-      <v-card>
-        <v-card-title>
-          <h2 class="list-title">TODO編集</h2>
-        </v-card-title>
-        <v-card-text>タイトル</v-card-text>
-        <v-text-field v-model="todos"></v-text-field>
-        <div>あああああ</div>
-        <div>あああああ</div>
-      </v-card>
-    </v-dialog>
 
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
