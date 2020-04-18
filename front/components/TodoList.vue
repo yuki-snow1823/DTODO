@@ -11,26 +11,24 @@
             <v-icon @click="completeItem(todo)" big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
             </v-icon>
           </v-hover>
-          <v-icon @click="dialog = true; editItem(todo)" big>mdi-pencil-plus</v-icon>
+          <v-icon @click="editItem(todo)" big>mdi-pencil-plus</v-icon>
           <v-icon midium @click="deleteItem(todo)">delete</v-icon>
           <span class="todo-point">{{ todo.point }}</span>
           {{ todo.title }}
-
-          <v-dialog class="edit-dialog" v-model="dialog" max-width="60%" :return-value="todos">
-            <v-card>
-              <v-card-title>
-                <h2 class="list-title">TODO編集</h2>
-              </v-card-title>
-              <v-card-text>タイトル</v-card-text>
-              <v-text-field v-model="todos"></v-text-field>
-              <v-btn @click="updateItem()">update</v-btn>
-            </v-card>
-          </v-dialog>
-
         </li>
       </draggable>
     </v-card>
 
+    <v-dialog class="edit-dialog" v-model="dialog" max-width="60%">
+      <v-card>
+        <v-card-title>
+          <h2 class="list-title">TODO編集</h2>
+        </v-card-title>
+        <v-card-text>タイトル</v-card-text>
+        <v-text-field v-model="dialogText.title"></v-text-field>
+        <v-btn @click="updateItem()">update</v-btn>
+      </v-card>
+    </v-dialog>
 
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
@@ -57,6 +55,7 @@
         snack: false,
         snackColor: "",
         snackText: "",
+        dialogText: "",
         dialog: false
       };
     },
@@ -110,6 +109,11 @@
       },
       async editItem(todo) {
         console.log(todo);
+        this.dialog = true;
+
+        this.dialogText = todo;
+
+        // console.log(this.dialogText);
       },
       // async updateTitle(id, value) {
       //   await axios.patch(`/v1/todos/${id}`, {
