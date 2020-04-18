@@ -26,7 +26,7 @@
         </v-card-title>
         <v-card-text>タイトル</v-card-text>
         <v-text-field v-model="dialogText.title"></v-text-field>
-        <v-btn @click="updateItem()">update</v-btn>
+        <v-btn @click="updateItem()">更新</v-btn>
       </v-card>
     </v-dialog>
 
