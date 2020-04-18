@@ -41,8 +41,16 @@ class V1::RewardsController < ApplicationController
       render json: {reward: reward, user: user}
     end
 
+    def sort
+      params[:todo].each_with_index do |t,i|
+        @todo = Todo.find(t[:id])
+        @todo.update( sort: i )
+      end
+      render json: {result: "ok"}
+    end
+
     private
       def reward_params
-        params.require(:reward).permit(:title, :user_id, :point, :status)
+        params.require(:reward).permit(:title, :user_id, :point, :status, :sort)
       end
 end

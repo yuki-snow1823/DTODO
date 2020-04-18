@@ -6,7 +6,7 @@
         <v-spacer></v-spacer>
       </v-card-title>
       <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
-        <li class="todo-list" v-for="todo in todos" :key="todo.point">
+        <li class="todo-list" v-for="todo in todos" :key="todo.sort">
           <span class="todo-point">{{ todo.point }}</span>
           <!-- <v-hover v-slot:default="{ hover }">
             <v-icon @click="completeItem(todo)" size="25px" color="blue" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
