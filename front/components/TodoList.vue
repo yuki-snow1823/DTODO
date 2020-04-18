@@ -1,31 +1,43 @@
 <template>
   <div>
-    <v-card>
+    <v-card class="pb-5">
       <v-card-title>
         <h2 class="list-title">TODO LIST</h2>
         <v-spacer></v-spacer>
       </v-card-title>
-      <ul>
-        <draggable v-model="todos" :options="{ animation: 200, delay: 50 }"  @end="atEnd">
-          <li class="todo-list" v-for="todo in todos" :key="todo.point">
-            <v-hover v-slot:default="{ hover }">
-              <v-icon big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
-              </v-icon>
-            </v-hover>
-            <v-hover v-slot:default="{ hover }">
-              <v-icon @click="completeItem(todo)" big color="red" v-text="hover ? 'mdi-pencil-plus' : 'mdi-pencil-plus-outline'">
-              </v-icon>
-            </v-hover>
-            <span class="todo-point">{{ todo.point }}</span>
-            {{ todo.title }}
-          </li>
-        </draggable>
-      </ul>
+      <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
+        <li class="todo-list" v-for="todo in todos" :key="todo.point">
+          <v-hover v-slot:default="{ hover }">
+            <v-icon @click="completeItem(todo)" big color="red" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
+            </v-icon>
+          </v-hover>
+          <v-icon @click="editItem(todo)" big>mdi-pencil-plus</v-icon>
+          <v-icon midium @click="deleteItem(todo)">delete</v-icon>
+          <span class="todo-point">{{ todo.point }}</span>
+          {{ todo.title }}
+        </li>
+      </draggable>
     </v-card>
+
+    <v-dialog class="edit-dialog" v-model="dialog">
+      <v-card>
+        <v-card-title>
+          <h2 class="list-title">TODO編集</h2>
+        </v-card-title>
+        <p>内容</p>
+        <v-text-field class="dialog-title" v-model="dialogText.title" filled></v-text-field>
+        <p>ポイント</p>
+        <v-select class="dialog-point" single-line :items="items" v-model="dialogText.point" :value="dialogText.point"
+          filled ></v-select>
+        <v-btn class="update-btn" @click="updateItem(dialogText.id, dialogText.title, dialogText.point)">保存</v-btn>
+      </v-card>
+    </v-dialog>
+
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
     </v-snackbar>
+
   </div>
 
 </template>
@@ -46,6 +58,8 @@
         snack: false,
         snackColor: "",
         snackText: "",
+        dialogText: "",
+        dialog: false
       };
     },
     computed: {
@@ -96,36 +110,30 @@
           this.snackText = "Data saved";
         }
       },
-      async editItem(item) {
-        this.editOn = !this.editOn;
+      async editItem(todo) {
+        console.log(todo);
+        this.dialog = true;
+        this.dialogText = todo;
       },
-      async updateTitle(id, value) {
+      async updateItem(id, title, point) {
         await axios.patch(`/v1/todos/${id}`, {
           todo: {
-            title: value
+            title: title,
+            point: point
           }
         });
-      },
-      async updatePoint(id, value) {
-        let result =
-          await axios.patch(`/v1/todos/${id}`, {
-            todo: {
-              point: value
-            }
-          });
+        this.dialog =false;
       },
       async atEnd() {
         let result =
           await axios.patch(`v1/todos`, {
             todo: this.todos
           });
-          const updateUser = {
-            ...this.user,
-            todos: this.todos
-          };
-          this.$store.commit("setUser", updateUser);
-          // this.todos = result.data
-          // 最後に入れ込んで反映させる
+        const updateUser = {
+          ...this.user,
+          todos: this.todos
+        };
+        this.$store.commit("setUser", updateUser);
       },
       save() {
         this.snack = true;
@@ -151,6 +159,20 @@
 </script>
 
 <style lang="scss">
+  $main-color: #fc7b03;
+  $sub-color: #33dddd;
+  $accent-color: #f0353f;
+
+  @mixin btn {
+    background-color: rgb(29, 29, 29) !important;
+    border: 2px solid $main-color;
+    color: $main-color !important;
+    display: inline-block;
+    margin: 0px 5% 15px;
+    width: 70%;
+    font-weight: bold;
+  }
+
   .v-icon {
     display: flex;
     justify-content: center;
@@ -170,22 +192,45 @@
   }
 
   .todo-list {
-    // display: inline-block;
     list-style: none;
     color: black;
     margin: 10px;
     padding: 10px;
     border: 1px solid #7f7f7f;
-    border-radius: 10px;
-    background-color: #ffffff;
+    border-radius: 6px;
+    background-color: #aab1b9;
+    cursor: grab;
 
     .todo-list-btn {
       background-color: rgb(206, 204, 87) !important;
     }
 
     .todo-point {
-      color: rgb(75, 75, 243);
+      color: rgb(206, 206, 248);
       font-weight: bold;
     }
+  }
+
+  .v-dialog {
+    width: 70%;
+
+    h2 {
+      color: $sub-color;
+    }
+    p {
+      margin-left: 5%;
+    }
+    .dialog-title {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .dialog-point {
+      width: 40%;
+      margin-left: 5%;
+    }
+    .update-btn {
+      @include btn
+    }
+
   }
 </style>
