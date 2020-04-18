@@ -19,13 +19,15 @@
       </draggable>
     </v-card>
 
-    <v-dialog class="edit-dialog" v-model="dialog" max-width="60%">
+    <v-dialog class="edit-dialog" v-model="dialog" max-width="40%">
       <v-card>
         <v-card-title>
           <h2 class="list-title">TODO編集</h2>
         </v-card-title>
         <v-card-text>タイトル</v-card-text>
+        {{ dialogText }}
         <v-text-field v-model="dialogText.title"></v-text-field>
+        <v-select single-line :items="items" v-model="dialogText.point" :value="dialogText.point"></v-select>
         <v-btn @click="updateItem()">更新</v-btn>
       </v-card>
     </v-dialog>
