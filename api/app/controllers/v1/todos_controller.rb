@@ -55,13 +55,13 @@ class V1::TodosController < ApplicationController
     def sort
       params[:todo].each_with_index do |t,i|
         @todo = Todo.find(t[:id])
-        @todo.update( point: i )
+        @todo.update( sort: i )
       end
       render json: {result: "ok"}
     end
 
     private
       def todo_params
-        params.require(:todo).permit(:id, :title, :user_id, :point)
+        params.require(:todo).permit(:id, :title, :user_id, :point, :sort)
       end
 end

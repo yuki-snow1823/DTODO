@@ -199,6 +199,7 @@
     border: 1px solid #7f7f7f;
     border-radius: 6px;
     background-color: #aab1b9;
+    cursor: grab;
 
     .todo-list-btn {
       background-color: rgb(206, 204, 87) !important;
