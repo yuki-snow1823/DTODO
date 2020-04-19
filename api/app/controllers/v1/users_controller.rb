@@ -1,14 +1,14 @@
 class V1::UsersController < ApplicationController
-  def index
-    if params[:uid] 
-      user = User.find_by(uid: params[:uid])
-      todos = user.todos.order(sort: "ASC")
-      render json: {user: user, todos: todos}
-    else 
-      @users = User.all
-      render json: @users
+    def index
+      if params[:uid] 
+        user = User.find_by(uid: params[:uid])
+        todos = user.todos.order(sort: "ASC")
+        render json: {user: user, todos: todos}
+      else 
+        @users = User.all
+        render json: @users
+      end
     end
-  end
 
     def create
       user = User.new(user_params)
