@@ -14,6 +14,7 @@
             </v-icon>
           </v-hover>
           <span class="reward-title">{{ reward.title }}</span>
+          {{ reward.status }}
           <div class="reward-list-icon">
             <v-icon @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
             <v-icon midium @click="deleteItem(reward)">delete</v-icon>
@@ -96,21 +97,18 @@
               point: item.point
             }
           });
-          const rewards = this.user.rewards.filter(reward => {
-            return reward.id !== item.id;
-          });
+          const rewards = this.user.rewards;
           const updateUser = {
             // ...this.user,
             user: getUser.data.user,
             rewards,
-            untilPercentage: getUser.data.untilPercentage,
-            untilLevel: getUser.data.untilLevel,
+            // untilPercentage: getUser.data.untilPercentage,
+            // untilLevel: getUser.data.untilLevel,
           };
-          // this.user.level = getUser.data.user.level;
           this.$store.commit("setUser", updateUser);
           this.snack = true;
           this.snackColor = "success";
-          this.snackText = item.point + "タスクポイントと経験値を獲得した！";
+          this.snackText = "ごほうびを解放した！";
         }
       },
       async editItem(reward) {
