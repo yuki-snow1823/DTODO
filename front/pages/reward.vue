@@ -97,13 +97,13 @@
           } = await axios.post("/v1/rewards", {
             reward
           });
-          console.log(error);
           this.$store.commit("setUser", {
             ...this.user,
             rewards: [...this.user.rewards, data]
           });
           this.$store.commit("clearErrors");
         } catch (error) {
+          console.log(error);
           const {
             data
           } = error.response;

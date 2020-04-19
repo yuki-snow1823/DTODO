@@ -1,11 +1,15 @@
 const state = {
-  currentUser: {},
+  currentUser: {
+    user: {},
+    todos: [],
+    rewards: []
+  },
   loading: false,
-  notification: { 
+  notification: {
     status: false,
     message: ""
   },
-  errors:[]
+  errors: []
 }
- 
+
 export default state

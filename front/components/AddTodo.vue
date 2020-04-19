@@ -41,7 +41,7 @@
       handleSubmit() {
         const todo = {
           title: this.title,
-          user_id: this.$store.state.currentUser.id,
+          user_id: this.$store.state.currentUser.user.id,
           point: this.number
         };
         this.$emit("submit", todo);

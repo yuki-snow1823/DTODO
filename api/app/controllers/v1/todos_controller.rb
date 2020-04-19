@@ -38,10 +38,7 @@ class V1::TodosController < ApplicationController
       totalExp += todo.point
       user.experience_point = totalExp
       user.update(point: totalPoint,experience_point: totalExp)
-      # ポイントを加算to_iはいずれ消す
-      # なぜかキャッシュから読み込むから変数に入れる
       levelSetting = LevelSetting.find_by(level: user.level + 1)
-      binding.pry
       if levelSetting.present? && levelSetting.thresold <= user.experience_point
         user.level = user.level + 1
         user.update(level: user.level)
