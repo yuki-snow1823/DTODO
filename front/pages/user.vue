@@ -5,11 +5,11 @@
         <h1>STATUS</h1>
         <p>NAME：{{ currentUser.user.name }}</p>
         <p>レベル：{{ currentUser.user.level }}</p>
-        <p>次のレベルまであと {{ currentUser.untilLevel }}</p>
+        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }}</p>
         <v-progress-linear
           :height="12"
           :rounded="true"
-          :value="currentUser.untilPercentage"
+          :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0"
           color="light-blue"
         >
         </v-progress-linear>
@@ -100,14 +100,15 @@ export default {
         const { data } = await axios.post("/v1/todos", {
           todo
         });
-        console.log(data);
+        console.log(this.currentUser);
+        const userTodo = this.currentUser.todos ? this.currentUser.todos : []
         this.$store.commit("setUser", {
           ...this.currentUser,
-          todos: [...this.currentUser.todos, data]
+          todos: [...userTodo, data]
         });
         this.$store.commit("clearErrors");
       } catch (error) {
-        console.log("UserPage: 112", error);
+        console.log("UserPage: 110", error);
         const { data } = error.response;
         this.$store.commit("setError", data.error_msg);
       }

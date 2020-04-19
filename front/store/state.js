@@ -1,6 +1,8 @@
 const state = {
   currentUser: {
-    user: {},
+    user: {
+      experience_point: 0
+    },
     todos: [],
     rewards: [],
     untilPercentage: null,

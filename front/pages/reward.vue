@@ -5,7 +5,7 @@
         <h1>STATUS</h1>
         <p>NAME：{{currentUser.user.name}}</p>
         <p>LV：{{currentUser.user.level}}</p>
-        <p>EXP：{{currentUser.user.experience_point}}</p>
+        <p>EXP：{{currentUser.user.experience_point ? currentUser.user.experience_point : 50}}</p>
         <p>TP：{{currentUser.user.point}}</p>
       </v-col>
 
@@ -64,7 +64,7 @@
         show1: false,
         show2: false,
         error: "",
-        showContent: false
+        showContent: false,
       };
     },
     fetch({

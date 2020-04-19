@@ -60,7 +60,6 @@ export default {
           this.$router.push("/user");
         })
         .catch(error => {
-          console.log(error);
           this.error = (code => {
             switch (code) {
               case "auth/user-not-found":

@@ -8,6 +8,7 @@
       <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
         <li class="todo-list" v-for="todo in todos" :key="todo.sort">
           <span class="todo-point">{{ todo.point }}</span>
+          <v-icon size="30px">mdi-numeric-{{todo.point}}-box-outline</v-icon>
           <v-hover v-slot:default="{ hover }">
             <v-icon @click="completeItem(todo)" size="25px" color="blue" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
             </v-icon>
@@ -95,20 +96,17 @@
               point: item.point
             }
           });
-          console.log(getUser);
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
           });
-          // this.user.level = getUser.data.user.level;
-          // this.user.point = getUser.data.user.point;
-          // this.user.experience_point = getUser.data.user.experience_point;
           const updateUser = {
-            ...this.user,
-            // user: getUser.data.user,
+            // ...this.user,
+            user: getUser.data.user,
             todos,
             untilPercentage: getUser.data.untilPercentage,
             untilLevel: getUser.data.untilLevel,
           };
+          // this.user.level = getUser.data.user.level;
           this.$store.commit("setUser", updateUser);
           this.snack = true;
           this.snackColor = "success";
