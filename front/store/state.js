@@ -2,7 +2,9 @@ const state = {
   currentUser: {
     user: {},
     todos: [],
-    rewards: []
+    rewards: [],
+    untilPercentage: null,
+    untilLevel: null,
   },
   loading: false,
   notification: {

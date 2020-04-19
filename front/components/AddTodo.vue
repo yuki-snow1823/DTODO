@@ -28,7 +28,6 @@
   const maxNumber = 11;
   const numberRange = [...Array(maxNumber).keys()]
   
-
   export default {
     data() {
       return {

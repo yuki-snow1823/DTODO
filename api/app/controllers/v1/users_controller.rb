@@ -4,6 +4,7 @@ class V1::UsersController < ApplicationController
         user = User.find_by(uid: params[:uid])
         todos = user.todos.order(sort: "ASC")
         rewards = user.rewards.order(sort: "ASC")
+        
         render json: {user: user, todos: todos, rewards: rewards}
       else 
         @users = User.all

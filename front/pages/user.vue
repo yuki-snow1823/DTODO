@@ -5,11 +5,11 @@
         <h1>STATUS</h1>
         <p>NAME：{{ currentUser.user.name }}</p>
         <p>レベル：{{ currentUser.user.level }}</p>
-        <p>次のレベルまであと {{}}</p>
+        <p>次のレベルまであと {{ currentUser.untilLevel }}</p>
         <v-progress-linear
           :height="12"
           :rounded="true"
-          :value="40"
+          :value="currentUser.untilPercentage"
           color="light-blue"
         >
         </v-progress-linear>

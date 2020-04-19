@@ -99,12 +99,15 @@
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
           });
-          this.user.level = getUser.data.user.level;
-          this.user.point = getUser.data.user.point;
-          this.user.experience_point = getUser.data.user.experience_point;
+          // this.user.level = getUser.data.user.level;
+          // this.user.point = getUser.data.user.point;
+          // this.user.experience_point = getUser.data.user.experience_point;
           const updateUser = {
             ...this.user,
-            todos
+            // user: getUser.data.user,
+            todos,
+            untilPercentage: getUser.data.untilPercentage,
+            untilLevel: getUser.data.untilLevel,
           };
           this.$store.commit("setUser", updateUser);
           this.snack = true;

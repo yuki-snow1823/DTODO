@@ -1,12 +1,12 @@
 <template>
-  <v-container class="user-page" v-if="user">
+  <v-container class="user-page" v-if="currentUser">
     <v-row class="user-status" justify="center">
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
         <h1>STATUS</h1>
-        <p>NAME：{{user.name}}</p>
-        <p>LV：{{user.level}}</p>
-        <p>EXP：{{user.experience_point}}</p>
-        <p>TP：{{user.point}}</p>
+        <p>NAME：{{currentUser.user.name}}</p>
+        <p>LV：{{currentUser.user.level}}</p>
+        <p>EXP：{{currentUser.user.experience_point}}</p>
+        <p>TP：{{currentUser.user.point}}</p>
       </v-col>
 
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
@@ -41,7 +41,7 @@
     <v-row justify="center">
       <v-col cols="12" xs="12" sm="12" md="12" lg="8">
         <div>
-          <RewardList :rewards="user.rewards" />
+          <RewardList :rewards="currentUser.rewards" />
         </div>
       </v-col>
     </v-row>
@@ -85,7 +85,7 @@
       RewardList
     },
     computed: {
-      user() {
+      currentUser() {
         return this.$store.state.currentUser;
       }
     },
@@ -97,9 +97,10 @@
           } = await axios.post("/v1/rewards", {
             reward
           });
+          console.log(data);
           this.$store.commit("setUser", {
-            ...this.user,
-            rewards: [...this.user.rewards, data]
+            ...this.currentUser,
+            rewards: [...this.currentUser.rewards, data]
           });
           this.$store.commit("clearErrors");
         } catch (error) {
