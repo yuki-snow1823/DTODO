@@ -1,5 +1,6 @@
 const mutations = {
   setUser(state, payload) {
+    // console.log(payload)
     state.currentUser = payload
   },
   setLoading(state, payload) {
@@ -7,6 +8,12 @@ const mutations = {
   },
   setNotice(state, payload) {
     state.notification = payload
+  },
+  setError(state, payload) {
+    state.errors = payload
+  },
+  clearErrors(state, _) {
+    state.errors = []
   }
 }
 

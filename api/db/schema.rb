@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_07_225415) do
+ActiveRecord::Schema.define(version: 2020_04_18_231812) do
 
   create_table "level_settings", force: :cascade do |t|
     t.integer "level"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_225415) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "status", default: false, null: false
+    t.integer "sort", default: 0
   end
 
   create_table "todos", force: :cascade do |t|
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_225415) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "point"
+    t.integer "sort", default: 0
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_07_225415) do
     t.string "uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "point"
+    t.integer "point", default: 0
     t.integer "level", default: 1
     t.integer "experience_point", default: 0
   end

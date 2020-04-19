@@ -1,6 +1,6 @@
 <template>
   <v-row class="signup-wrapper">
-    <v-col cols="12" md="4">
+    <v-col cols="12" md="6">
       <h2 class="signup-title">Sign Up</h2>
       <form>
         <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
@@ -41,10 +41,13 @@
     methods: {
       signup() {
         if (this.password !== this.passwordConfirm) {
-          this.error = "※パスワードとパスワード確認が一致していません";
+          this.error = "パスワード確認が一致していません";
+          return
         }
-
-        this.$store.commit("setLoading", true);
+        if (this.name == "") {
+          this.error = "名前を入力してください";
+          return
+        }
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
@@ -54,13 +57,23 @@
               name: this.name,
               uid: res.user.uid
             };
-            axios.post("/v1/users", {
-              user
-            }).then(res => {
-              this.$store.commit("setLoading", false);
-              this.$store.commit("setUser", res.data);
-              this.$router.push("/");
-            });
+            this.$store.commit("setLoading", true);
+            axios
+              .post("/v1/users", {
+                user
+              })
+              .then(res => {
+                this.$store.commit("setLoading", false);
+                this.$store.commit("setUser", res.data);
+                this.$store.commit("setNotice", {
+                  status: true,
+                  message: "新規登録が完了しました"
+                });
+                setTimeout(() => {
+                  this.$store.commit("setNotice", {});
+                }, 2000);
+                this.$router.push("/user");
+              });
           })
           .catch(error => {
             this.error = (code => {
@@ -70,13 +83,13 @@
                 case "auth/wrong-password":
                   return "※パスワードが正しくありません";
                 case "auth/weak-password":
-                  return "※パスワードは最低6文字以上にしてください";
+                  return "パスワードは最低6文字以上にしてください";
                 default:
-                  return "※メールアドレスとパスワードをご確認ください";
+                  return "メールアドレスとパスワードをご確認ください";
               }
             })(error.code);
           });
-      }
+      },
     }
   };
 </script>

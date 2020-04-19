@@ -5,10 +5,24 @@
 
     <v-row>
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h2 class="index-subtitle text-center">DTODOとは</h2>
-        <h3 class="index-explain">
+        <h1 class="index-subtitle text-center">DTODOとは</h1>
+        <h2 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
-        </h3>
+        </h2>
+        <div class="monster">
+          <img class="mon" src="../assets/mon_284.gif">
+          <img class="mon" src="../assets/mon_199.gif">
+          <img class="mon" src="../assets/mon_100.gif">
+          <img class="mon" src="../assets/mon_091.gif">
+        </div>
+        <div v-if="user"></div>
+        <div class="guest" v-else>
+          <v-hover v-slot:default="{ hover }">
+            <v-btn class="guest-btn" @click="guestLogin">
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログイン
+            </v-btn>
+          </v-hover>
+        </div>
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
@@ -20,7 +34,7 @@
       </v-col>
 
       <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
-        <h2 id="index-signup" class="index-form-title text-center">新規登録はこちらから</h2>
+        <h1 id="index-signup" class="index-form-title text-center">新規登録はこちらから</h1>
         <form>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
           <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
@@ -36,13 +50,13 @@
         <v-hover v-slot:default="{ hover }">
           <v-btn class="index-button" @click="signup">
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
-            sign up
+            START
           </v-btn>
         </v-hover>
       </v-col>
     </v-row>
 
-    <v-row class="my-10">
+    <v-row class="introduction">
       <v-col class="sub-introduction main" cols="12" sm="12" md="12" lg="12">
         <h1>やらなければならないことを楽しむ</h1>
         <h3 class="index-explain">毎日、何かやらなければならないTODOに追われていませんか？</h3>
@@ -52,10 +66,9 @@
       </v-col>
     </v-row>
 
-    <v-row class="introduction">
-
+    <v-row class="introduction mb-0">
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img class="" src="../assets/point.png">
+        <img src="../assets/mon_259.gif">
         <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
         <h3 class="index-explain">
           DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
@@ -64,7 +77,7 @@
       </v-col>
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img src="../assets/point.png">
+        <img src="../assets/mon_237.gif">
         <h2 class="index-subtitle text-center">レベルアップを目指そう！</h2>
         <h3 class="index-explain">
           TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
@@ -73,7 +86,7 @@
       </v-col>
 
       <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
-        <img src="../assets/point.png">
+        <img class="pt-10" src="../assets/mon_278.gif">
         <h2 class="index-subtitle text-center">自分にごほうびをあげよう！</h2>
         <h3 class="index-explain">
           DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
@@ -84,12 +97,13 @@
 
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
-        <div class="mb-10››">
+<!-- 
+        <div class="mb-10">
           <v-carousel height="100%">
-            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" reverse-transition="fade-transition"
-              transition="fade-transition"></v-carousel-item>
+            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
           </v-carousel>
-        </div>
+        </div> -->
+
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
           <v-btn v-else class="bottom-btn" @click.stop="dialog = true">
@@ -108,7 +122,9 @@
 
     <v-dialog content-class="dialog" v-model="dialog" max-width="60%">
       <v-card>
-        <v-card-title class="headline">Login</v-card-title>
+        <v-card-title class="headline">
+          <h3>Login</h3>
+        </v-card-title>
         <v-card-text>
           <form>
             <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
@@ -116,8 +132,8 @@
               :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="show1 = !show1"></v-text-field>
             <v-hover v-slot:default="{ hover }">
-              <v-btn content-class="bottom-btn" @click="login">
-                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
+              <v-btn class="dialog-btn" @click="login">
+                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>START
               </v-btn>
             </v-hover>
             <p v-if="error" class="errors">{{error}}</p>
@@ -134,7 +150,6 @@
   import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
-  import AssetsImage from "@/assets/point.png";
   export default {
     data() {
       return {
@@ -160,19 +175,6 @@
         showContent: false
       };
     },
-    fetch({
-      store,
-      redirect
-    }) {
-      store.watch(
-        state => state.currentUser,
-        (newUser, oldUser) => {
-          if (!newUser) {
-            return redirect("/");
-          }
-        }
-      );
-    },
     components: {
       AddTodo,
       TodoList
@@ -196,9 +198,13 @@
       },
       signup() {
         if (this.password !== this.passwordConfirm) {
-          this.error = "※パスワードとパスワード確認が一致していません";
+          this.error = "パスワード確認が一致していません";
+          return
         }
-        this.$store.commit("setLoading", true);
+        if (this.name == "") {
+          this.error = "名前を入力してください";
+          return
+        }
         firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
@@ -208,20 +214,24 @@
               name: this.name,
               uid: res.user.uid
             };
+            this.$store.commit("setLoading", true);
             axios
               .post("/v1/users", {
                 user
               })
               .then(res => {
                 this.$store.commit("setLoading", false);
-                this.$store.commit("setUser", res.data);
+                let param = {
+                  user : res.data
+                }
+                this.$store.commit("setUser", param);
                 this.$store.commit("setNotice", {
                   status: true,
                   message: "新規登録が完了しました"
                 });
                 setTimeout(() => {
                   this.$store.commit("setNotice", {});
-                }, 2000); 
+                }, 2000);
                 this.$router.push("/user");
               });
           })
@@ -233,18 +243,76 @@
                 case "auth/wrong-password":
                   return "※パスワードが正しくありません";
                 case "auth/weak-password":
-                  return "※パスワードは最低6文字以上にしてください";
+                  return "パスワードは最低6文字以上にしてください";
+                default:
+                  return "メールアドレスとパスワードをご確認ください";
+              }
+            })(error.code);
+          });
+      },
+      login() {
+        this.$store.commit("setLoading", true);
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(() => {
+            this.$store.commit("setNotice", {
+              status: true,
+              message: "ログインに成功しました"
+            });
+            setTimeout(() => {
+              this.$store.commit("setLoading", false);
+            }, 1500);
+            setTimeout(() => {
+              this.$store.commit("setNotice", {});
+            }, 2000);
+            this.$router.push("/user");
+          })
+          .catch(error => {
+            console.log(error);
+            this.error = (code => {
+              switch (code) {
+                case "auth/user-not-found":
+                  return "メールアドレスが間違っています";
+                case "auth/wrong-password":
+                  return "※パスワードが正しくありません";
                 default:
                   return "※メールアドレスとパスワードをご確認ください";
               }
             })(error.code);
           });
       },
-      login() {
-        this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password
-        });
+      guestLogin() {
+        this.$store.commit("setLoading", true);
+        firebase
+          .auth()
+          .signInWithEmailAndPassword("test111@gmail.com", "aaaaaa")
+          .then(() => {
+            this.$store.commit("setNotice", {
+              status: true,
+              message: "ログインに成功しました"
+            });
+            setTimeout(() => {
+              this.$store.commit("setLoading", false);
+            }, 1500);
+            setTimeout(() => {
+              this.$store.commit("setNotice", {});
+            }, 2000);
+            this.$router.push("/user");
+          })
+          .catch(error => {
+            console.log(error);
+            this.error = (code => {
+              switch (code) {
+                case "auth/user-not-found":
+                  return "メールアドレスが間違っています";
+                case "auth/wrong-password":
+                  return "※パスワードが正しくありません";
+                default:
+                  return "※メールアドレスとパスワードをご確認ください";
+              }
+            })(error.code);
+          });
       },
       moveToTop() {
         const duration = 1000;
@@ -262,7 +330,13 @@
           }
         }, interval);
       }
-    }
+    },
+    created() {
+      this.$vuetify.lang = {
+        t: () => {},
+      }
+      //testを実行する際に直接関係ないエラーを回避する為に記述してあります。
+    },
   };
 </script>
 
@@ -280,19 +354,53 @@
   @mixin index-bottom-btn {
     background-color: black !important;
     border: 2px solid $main-color;
-    color: $main-color;
+    color: $main-color !important;
     display: inline-block;
     margin: 15px;
-    width: 45%;
+    width: 80%;
     font-weight: bold;
   }
 
+  $pc: 1024px;
+  $tab: 680px;
+  $sp: 480px;
+
+  @mixin pc {
+    @media (max-width: ($pc)) {
+      @content;
+    }
+  }
+
+  @mixin tab {
+    @media (max-width: ($tab)) {
+      @content;
+    }
+  }
+
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
+  }
+
   .index-page {
+    .mon {
+      width: 9%;
+      
+      @include sp {
+        width: 20%;
+      }
+    }
+
+    .monster {
+      text-align: center;
+    }
 
     .index-title {
       text-align: center;
       font-size: 70px;
       font-family: 'Comic Sans MS';
+      margin-bottom: 0px;
 
       .index-title-first {
         color: $main-color;
@@ -333,11 +441,11 @@
     }
 
     .introduction {
+      margin: 100px auto 50px;
+
       img {
-        width: 50%;
-        height: 50%;
-        display: block;
         margin: 0 auto 30px;
+        display: block;
       }
 
       .sub-introduction {
@@ -351,7 +459,6 @@
 
     h1 {
       text-align: center;
-      // color: $accent-color;
       margin: 30px 0;
     }
 
@@ -386,9 +493,52 @@
         }
       }
     }
+
+    .errors {
+      color: $accent-color;
+    }
   }
 
-  .v-window__container {
-    border: solid 5px white;
+  .dialog-btn {
+    background-color: rgb(29, 29, 29) !important;
+    border: 2px solid $main-color;
+    color: $main-color !important;
+    display: inline-block;
+    margin: 15px;
+    width: 45%;
+    font-weight: bold;
+
+    .mdi-heart {
+      color: red !important;
+    }
+
+    &:hover {
+      border: 2px solid yellow;
+      color: yellow;
+    }
+  }
+
+  .headline {
+    color: $sub-color;
+  }
+
+  .guest {
+    text-align: center;
+
+    .guest-btn {
+      @include index-bottom-btn;
+      &:hover {
+        border: 2px solid yellow;
+        color: yellow !important;
+      }
+      @include sp {
+        font-size: 25px;
+        width: 80% !important;
+        height: 70px !important;
+      }
+      
+    }
+
+
   }
 </style>

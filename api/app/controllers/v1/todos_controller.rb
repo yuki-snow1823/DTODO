@@ -1,10 +1,17 @@
+require_relative '../../domain/user_level.rb'
+
 class V1::TodosController < ApplicationController
     def create
       todo = Todo.new(todo_params)
       if todo.save
         render json: todo, status: :created
       else
-        render json: todo.errors, status: :unprocessable_entity
+        if todo.errors.present?
+          # binding.pry
+          render json: {error_msg: todo.errors.full_messages}, status: :unprocessable_entity
+        else 
+          render json: todo.errors, status: :unprocessable_entity
+        end
       end
     end
 
@@ -33,22 +40,33 @@ class V1::TodosController < ApplicationController
       totalExp += todo.point
       user.experience_point = totalExp
       user.update(point: totalPoint,experience_point: totalExp)
-      # ポイントを加算to_iはいずれ消す
-      # なぜかキャッシュから読み込むから変数に入れる
-      levelSetting = LevelSetting.find_by(level: user.level + 1)
-      if levelSetting.present? 
-        levelSetting.thresold <= user.experience_point
-        user.level = user.level + 1
-        user.update(level: user.level)
-      end
+
+      # levelSetting = LevelSetting.find_by(level: user.level + 1)
+      # if levelSetting.present? && levelSetting.thresold <= user.experience_point
+      #   user.level = user.level + 1
+      #   user.update(level: user.level)
+      #   totalExp = 0
+      # end
+
+      # untilPercentage = totalExp.quo(levelSetting.thresold).to_f.round(2)*100
+      # untilLevel = levelSetting.thresold - totalExp
+      user_level = calc_user_level(user, totalExp)
 
       if todo.destroy
-        render json: {todo: todo, user: user}
+        render json: {todo: todo, user: user, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level] }
       end
+    end
+
+    def sort
+      params[:todo].each_with_index do |t,i|
+        @todo = Todo.find(t[:id])
+        @todo.update( sort: i )
+      end
+      render json: {result: "ok"}
     end
 
     private
       def todo_params
-        params.require(:todo).permit(:title, :user_id, :point)
+        params.require(:todo).permit(:id, :title, :user_id, :point, :sort)
       end
 end

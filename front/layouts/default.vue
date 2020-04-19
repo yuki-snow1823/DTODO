@@ -30,7 +30,7 @@
     </v-content>
 
     <v-footer :fixed="fixed" app>
-      <span>DETERMINATION.</span>
+      <span>DETERMINATION. 素材提供「RPGドット」様</span>
     </v-footer>
   </v-app>
 </template>
@@ -109,6 +109,7 @@
       font-size: 30px;
       font-weight: bold;
 
+<<<<<<< HEAD
       .title-first {
         color: $main-color;
       }
@@ -116,6 +117,17 @@
 
     .v-content__wrap {
       background-color: black !important;
+=======
+.app{
+  .toolbar-title {
+    color: white;
+    text-decoration: none;
+    font-family: 'Comic Sans MS','American Typewriter';
+    font-size: 30px;
+    font-weight: bold;
+    .title-first {
+      color: $main-color;
+>>>>>>> 6159249494551b5d28e614741d48dade79059218
     }
   }
 </style>
