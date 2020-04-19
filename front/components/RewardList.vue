@@ -14,8 +14,8 @@
             </v-icon>
           </v-hover>
           <span class="reward-title">{{ reward.title }}</span>
-          {{ reward.status }}
           <div class="reward-list-icon">
+            <span>{{ reward.status }}</span>
             <v-icon @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
             <v-icon midium @click="deleteItem(reward)">delete</v-icon>
           </div>
@@ -97,6 +97,7 @@
               point: item.point
             }
           });
+          console.log(item);
           const rewards = this.user.rewards;
           const updateUser = {
             // ...this.user,
@@ -106,6 +107,8 @@
             // untilLevel: getUser.data.untilLevel,
           };
           this.$store.commit("setUser", updateUser);
+          item.status = true;
+          this.user.rewards.status = true;
           this.snack = true;
           this.snackColor = "success";
           this.snackText = "ごほうびを解放した！";

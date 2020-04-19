@@ -1,6 +1,6 @@
 const mutations = {
   setUser(state, payload) {
-    console.log(payload)
+    // console.log(payload)
     state.currentUser = payload
   },
   setLoading(state, payload) {

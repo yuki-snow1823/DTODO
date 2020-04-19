@@ -100,7 +100,6 @@ export default {
         const { data } = await axios.post("/v1/rewards", {
           reward
         });
-        console.log(this.currentUser);
         const userReward = this.currentUser.rewards ? this.currentUser.rewards : []
         this.$store.commit("setUser", {
           ...this.currentUser,
