@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     get '/todos/:id', to: 'todos#complete'
     get '/rewards/:id', to: 'rewards#complete'
     patch '/todos', to: 'todos#sort'
+    patch '/rewards', to: 'rewards#sort'
   end
 end

@@ -1,11 +1,19 @@
 const state = {
-  currentUser: {},
+  currentUser: {
+    user: {
+      experience_point: 0
+    },
+    todos: [],
+    rewards: [],
+    untilPercentage: null,
+    untilLevel: null,
+  },
   loading: false,
-  notification: { 
+  notification: {
     status: false,
     message: ""
   },
-  errors:[]
+  errors: []
 }
- 
+
 export default state

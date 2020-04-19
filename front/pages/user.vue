@@ -1,13 +1,20 @@
 <template>
-  <v-container class="user-page" v-if="user">
+  <v-container class="user-page" v-if="currentUser">
     <v-row class="user-status" justify="center">
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
         <h1>STATUS</h1>
-        <p>NAME：{{ user.name }}</p>
-        <p>レベル：{{ user.level }}</p>
-        <p>次のレベルまであと {{}}</p>
-        <p>EXP：{{ user.experience_point }}</p>
-        <p>TP：{{ user.point }}</p>
+        <p>NAME：{{ currentUser.user.name }}</p>
+        <p>レベル：{{ currentUser.user.level }}</p>
+        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }}</p>
+        <v-progress-linear
+          :height="12"
+          :rounded="true"
+          :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0"
+          color="light-blue"
+        >
+        </v-progress-linear>
+        <p>EXP：{{ currentUser.user.experience_point }}</p>
+        <p>TP：{{ currentUser.user.point }}</p>
       </v-col>
 
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
@@ -37,14 +44,12 @@
       <span v-for="error in $store.state.errors" :key="error">
         <div>{{ error }}</div>
       </span>
-
-
     </div>
 
     <v-row justify="center">
       <v-col cols="12" xs="12" sm="12" md="12" lg="8">
         <div>
-          <TodoList :todos="user.todos" />
+          <TodoList :todos="currentUser.todos" />
         </div>
       </v-col>
     </v-row>
@@ -82,10 +87,10 @@ export default {
   },
   components: {
     AddTodo,
-    TodoList,
+    TodoList
   },
   computed: {
-    user() {
+    currentUser() {
       return this.$store.state.currentUser;
     }
   },
@@ -95,13 +100,15 @@ export default {
         const { data } = await axios.post("/v1/todos", {
           todo
         });
-        console.log(data);
+        console.log(this.currentUser);
+        const userTodo = this.currentUser.todos ? this.currentUser.todos : []
         this.$store.commit("setUser", {
-          ...this.user,
-          todos: [...this.user.todos, data]
+          ...this.currentUser,
+          todos: [...userTodo, data]
         });
         this.$store.commit("clearErrors");
       } catch (error) {
+        console.log("UserPage: 110", error);
         const { data } = error.response;
         this.$store.commit("setError", data.error_msg);
       }
@@ -202,6 +209,7 @@ $sp: 480px;
   .mdi-heart {
     color: red !important;
   }
+
   .errors {
     color: $accent-color;
   }

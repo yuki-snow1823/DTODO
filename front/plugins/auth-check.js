@@ -7,10 +7,13 @@ const authCheck = ({
 }) => {
   firebase.auth().onAuthStateChanged(async user => {
     if (user) {
+      console.log(user);
       const {
         data
       } = await axios.get(`/v1/users?uid=${user.uid}`)
-      store.commit("setUser", { ...data.user, todos: data.todos, rewards: data.rewards})
+      if (data) {
+        store.commit("setUser", data)
+      }
     } else {
       store.commit("setUser", null)
     }

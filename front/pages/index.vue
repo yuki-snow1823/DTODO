@@ -221,7 +221,10 @@
               })
               .then(res => {
                 this.$store.commit("setLoading", false);
-                this.$store.commit("setUser", res.data);
+                let param = {
+                  user : res.data
+                }
+                this.$store.commit("setUser", param);
                 this.$store.commit("setNotice", {
                   status: true,
                   message: "新規登録が完了しました"

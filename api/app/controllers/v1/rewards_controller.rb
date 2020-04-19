@@ -52,9 +52,9 @@ class V1::RewardsController < ApplicationController
     end
 
     def sort
-      params[:todo].each_with_index do |t,i|
-        @todo = Todo.find(t[:id])
-        @todo.update( sort: i )
+      params[:reward].each_with_index do |t,i|
+        @reward = Reward.find(t[:id])
+        @reward.update( sort: i )
       end
       render json: {result: "ok"}
     end
