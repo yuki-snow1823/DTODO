@@ -3,10 +3,18 @@
     <v-row class="user-status" justify="center">
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
         <h1>STATUS</h1>
-        <p>NAME：{{currentUser.user.name}}</p>
-        <p>LV：{{currentUser.user.level}}</p>
-        <p>EXP：{{currentUser.user.experience_point ? currentUser.user.experience_point : 50}}</p>
-        <p>TP：{{currentUser.user.point}}</p>
+        <p>NAME：{{ currentUser.user.name }}</p>
+        <p>レベル：{{ currentUser.user.level }}</p>
+        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }}</p>
+        <v-progress-linear
+          :height="12"
+          :rounded="true"
+          :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0"
+          color="light-blue"
+        >
+        </v-progress-linear>
+        <p>EXP：{{ currentUser.user.experience_point }}</p>
+        <p>TP：{{ currentUser.user.point }}</p>
       </v-col>
 
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
@@ -49,168 +57,161 @@
 </template>
 
 <script>
-  import AddReward from "@/components/AddReward";
-  import RewardList from "@/components/RewardList";
-  import axios from "@/plugins/axios";
-  import firebase from "@/plugins/firebase";
-  export default {
-    data() {
-      return {
-        email: "",
-        name: "",
-        level: "",
-        point: "",
-        experience_point: "",
-        show1: false,
-        show2: false,
-        error: "",
-        showContent: false,
-      };
-    },
-    fetch({
-      store,
-      redirect
-    }) {
-      store.watch(
-        state => state.currentUser,
-        (newUser, oldUser) => {
-          if (!newUser) {
-            return redirect("/");
-          }
+import AddReward from "@/components/AddReward";
+import RewardList from "@/components/RewardList";
+import axios from "@/plugins/axios";
+import firebase from "@/plugins/firebase";
+export default {
+  data() {
+    return {
+      email: "",
+      name: "",
+      level: "",
+      point: "",
+      experience_point: "",
+      show1: false,
+      show2: false,
+      error: "",
+      showContent: false
+    };
+  },
+  fetch({ store, redirect }) {
+    store.watch(
+      state => state.currentUser,
+      (newUser, oldUser) => {
+        if (!newUser) {
+          return redirect("/");
         }
-      );
-    },
-    components: {
-      AddReward,
-      RewardList
-    },
-    computed: {
-      currentUser() {
-        return this.$store.state.currentUser;
+      }
+    );
+  },
+  components: {
+    AddReward,
+    RewardList
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.currentUser;
+    }
+  },
+  methods: {
+    async addReward(reward) {
+      try {
+        const { data } = await axios.post("/v1/rewards", {
+          reward
+        });
+        console.log(this.currentUser);
+        const userReward = this.currentUser.rewards ? this.currentUser.rewards : []
+        this.$store.commit("setUser", {
+          ...this.currentUser,
+          rewards: [...userReward, data]
+        });
+        this.$store.commit("clearErrors");
+      } catch (error) {
+        console.log("UserPage: 110", error);
+        const { data } = error.response;
+        this.$store.commit("setError", data.error_msg);
       }
     },
-    methods: {
-      async addReward(reward) {
-        try {
-          const {
-            data
-          } = await axios.post("/v1/rewards", {
-            reward
-          });
-          console.log(data);
-          this.$store.commit("setUser", {
-            ...this.currentUser,
-            rewards: [...this.currentUser.rewards, data]
-          });
-          this.$store.commit("clearErrors");
-        } catch (error) {
+    logOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$store.commit("setUser", null);
+          this.$router.push("/");
+        })
+        .catch(error => {
           console.log(error);
-          const {
-            data
-          } = error.response;
-          this.$store.commit("setError", data.error_msg);
-        }
-      },
-      logOut() {
-        firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            this.$store.commit("setUser", null);
-            this.$router.push("/");
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      },
+        });
     }
-  };
+  }
+};
 </script>
 
 <style lang="scss">
-  $main-color: #fc7b03;
-  $sub-color: #33dddd;
+$main-color: #fc7b03;
+$sub-color: #33dddd;
+$accent-color: #f0353f;
 
-  $pc: 1024px;
-  $tab: 680px;
-  $sp: 480px;
+$pc: 1024px;
+$tab: 680px;
+$sp: 480px;
 
-  @mixin pc {
-    @media (max-width: ($pc)) {
-      @content;
-    }
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+.user-page {
+  .user-status {
+    border: 2px white solid;
+    margin: 0 auto;
+    width: 66%;
   }
 
-  @mixin tab {
-    @media (max-width: ($tab)) {
-      @content;
-    }
-  }
-
-  @mixin sp {
-    @media (max-width: ($sp)) {
-      @content;
-    }
-  }
-
-  .user-page {
-    .user-status {
-      border: 2px white solid;
-      margin: 0 auto;
-      width: 66%;
-    }
-
-    .user-status {
-      @include pc {
-        width: 100% !important;
-      }
-
-      ;
-
-      @include tab {
-        width: 100% !important;
-      }
-
-      ;
-
-      @include sp {
-        width: 100% !important;
-      }
-
-      ;
-    }
-
-    .user-btn {
-      background-color: black !important;
-      border: 2px solid $main-color;
-      color: $main-color;
+  .user-status {
+    @include pc {
       width: 100%;
-      font-weight: bold;
-      font-size: 18px;
-
-      &:hover {
-        border: 2px solid yellow;
-        color: yellow;
-      }
     }
 
-    h2,
-    h1 {
-      text-align: center;
-      color: $sub-color;
+    @include tab {
+      width: 100% !important;
     }
 
-    a {
-      text-decoration: none;
-    }
-
-    p {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .mdi-heart {
-      color: red !important;
+    @include sp {
+      width: 100% !important;
     }
   }
+
+  .user-btn {
+    background-color: black !important;
+    border: 2px solid $main-color;
+    color: $main-color;
+    width: 100%;
+    font-weight: bold;
+    font-size: 18px;
+
+    &:hover {
+      border: 2px solid yellow;
+      color: yellow;
+    }
+  }
+
+  .list-title,
+  h1 {
+    text-align: center;
+    color: $sub-color;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .mdi-heart {
+    color: red !important;
+  }
+
+  .errors {
+    color: $accent-color;
+  }
+}
 </style>

@@ -7,7 +7,7 @@
       </v-card-title>
       <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
         <li class="todo-list" v-for="todo in todos" :key="todo.sort">
-          <span class="todo-point">{{ todo.point }}</span>
+          <!-- <span class="todo-point">{{ todo.point }}</span> -->
           <v-icon size="30px">mdi-numeric-{{todo.point}}-box-outline</v-icon>
           <v-hover v-slot:default="{ hover }">
             <v-icon @click="completeItem(todo)" size="25px" color="blue" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
@@ -110,7 +110,7 @@
           this.$store.commit("setUser", updateUser);
           this.snack = true;
           this.snackColor = "success";
-          this.snackText = item.point + "タスクポイントを獲得した！";
+          this.snackText = item.point + "タスクポイントと経験値を獲得した！";
         }
       },
       async editItem(todo) {

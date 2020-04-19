@@ -2,16 +2,17 @@
   <div>
     <v-card class="pb-5">
       <v-card-title>
-        <h2 class="list-title">ごほうびリスト</h2>
+        <h2 class="list-title">reward LIST</h2>
         <v-spacer></v-spacer>
       </v-card-title>
       <draggable class="pl-0" v-model="rewards" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
         <li class="reward-list" v-for="reward in rewards" :key="reward.sort">
-          <span class="reward-point">{{ reward.point }}</span>
-          <!-- <v-hover v-slot:default="{ hover }">
+          <!-- <span class="reward-point">{{ reward.point }}</span> -->
+          <v-icon size="30px">mdi-numeric-{{reward.point}}-box-outline</v-icon>
+          <v-hover v-slot:default="{ hover }">
             <v-icon @click="completeItem(reward)" size="25px" color="blue" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
             </v-icon>
-          </v-hover> -->
+          </v-hover>
           <span class="reward-title">{{ reward.title }}</span>
           <div class="reward-list-icon">
             <v-icon @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
@@ -24,7 +25,7 @@
     <v-dialog class="edit-dialog" v-model="dialog">
       <v-card>
         <v-card-title>
-          <h2 class="list-title">TODO編集</h2>
+          <h2 class="list-title">reward編集</h2>
         </v-card-title>
         <p>内容</p>
         <v-text-field class="dialog-title" v-model="dialogText.title" filled></v-text-field>
@@ -43,7 +44,6 @@
   </div>
 
 </template>
-
 
 <script>
   const maxNumber = 11;
@@ -99,17 +99,18 @@
           const rewards = this.user.rewards.filter(reward => {
             return reward.id !== item.id;
           });
-          this.user.level = getUser.data.user.level;
-          this.user.point = getUser.data.user.point;
-          this.user.experience_point = getUser.data.user.experience_point;
           const updateUser = {
-            ...this.user,
-            rewards
+            // ...this.user,
+            user: getUser.data.user,
+            rewards,
+            untilPercentage: getUser.data.untilPercentage,
+            untilLevel: getUser.data.untilLevel,
           };
+          // this.user.level = getUser.data.user.level;
           this.$store.commit("setUser", updateUser);
           this.snack = true;
           this.snackColor = "success";
-          this.snackText = item.point + "タスクポイントを獲得した！";
+          this.snackText = item.point + "タスクポイントと経験値を獲得した！";
         }
       },
       async editItem(reward) {
