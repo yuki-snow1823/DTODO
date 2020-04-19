@@ -95,6 +95,7 @@
               point: item.point
             }
           });
+          console.log(getUser);
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
           });

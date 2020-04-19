@@ -41,14 +41,17 @@ class V1::TodosController < ApplicationController
       # ポイントを加算to_iはいずれ消す
       # なぜかキャッシュから読み込むから変数に入れる
       levelSetting = LevelSetting.find_by(level: user.level + 1)
+      binding.pry
       if levelSetting.present? && levelSetting.thresold <= user.experience_point
         user.level = user.level + 1
-
         user.update(level: user.level)
+        totalExp = 0
       end
 
+      untilPoint = totalExp.quo(levelSetting.thresold).to_f.round(2)*100
+
       if todo.destroy
-        render json: {todo: todo, user: user}
+        render json: {todo: todo, user: user, exp: untilPoint}
       end
     end
 
