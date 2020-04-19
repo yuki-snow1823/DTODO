@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_231812) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "status", default: false, null: false
-    t.integer "sort"
+    t.integer "sort", default: 0
   end
 
   create_table "todos", force: :cascade do |t|

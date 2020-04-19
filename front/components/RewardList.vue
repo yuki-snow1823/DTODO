@@ -96,7 +96,6 @@
               point: item.point
             }
           });
-          console.log(getUser.data.user.point);
           const rewards = this.user.rewards.filter(reward => {
             return reward.id !== item.id;
           });

@@ -1,8 +1,6 @@
 <template>
   <v-container class="user-page" v-if="user">
-
     <v-row class="user-status" justify="center">
-
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
         <h1>STATUS</h1>
         <p>NAME：{{user.name}}</p>
@@ -35,8 +33,9 @@
       </v-col>
     </v-row>
     <div class="errors text-center" v-if="$store.state.errors">
-      {{$store.state.errors[0]}}
-      <!-- <li v-for="(error, key) in errors" :key="key">{{ errors }}</li> -->
+      <span v-for="error in $store.state.errors" :key="error">
+        <div>{{ error }}</div>
+      </span>
     </div>
 
     <v-row justify="center">
@@ -57,8 +56,11 @@
   export default {
     data() {
       return {
+        email: "",
         name: "",
+        level: "",
         point: "",
+        experience_point: "",
         show1: false,
         show2: false,
         error: "",
@@ -95,6 +97,7 @@
           } = await axios.post("/v1/rewards", {
             reward
           });
+          console.log(error);
           this.$store.commit("setUser", {
             ...this.user,
             rewards: [...this.user.rewards, data]
@@ -106,12 +109,6 @@
           } = error.response;
           this.$store.commit("setError", data.error_msg);
         }
-      },
-      openModal: function () {
-        this.showContent = true
-      },
-      closeModal: function () {
-        this.showContent = false
       },
       logOut() {
         firebase

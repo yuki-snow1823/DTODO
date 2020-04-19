@@ -1,11 +1,21 @@
 class V1::RewardsController < ApplicationController
+  # def index
+  #   if params[:uid] 
+  #     user = User.find_by(uid: params[:uid])
+  #     todos = user.todos.order(sort: "ASC")
+  #     render json: {user: user, todos: todos}
+  #   else 
+  #     @users = User.all
+  #     render json: @users
+  #   end
+  # end
+
     def create
       reward = Reward.new(reward_params)
       if reward.save
         render json: reward, status: :created
       else
         if reward.errors.present?
-          # binding.pry
           render json: {error_msg: reward.errors.full_messages}, status: :unprocessable_entity
         else 
           render json: reward.errors, status: :unprocessable_entity

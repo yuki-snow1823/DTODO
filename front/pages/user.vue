@@ -29,7 +29,6 @@
       <v-col cols="12" xs="12" sm="12" md="12" lg="8">
         <div>
           <AddTodo @submit="addTodo" />
-          <!-- addTodoここのファイル内にないのに動く理由は？ -->
         </div>
       </v-col>
     </v-row>
@@ -38,7 +37,7 @@
         <div>{{ error }}</div>
       </span>
 
-      <!-- <li v-for="(error, key) in errors" :key="key">{{ errors }}</li> -->
+
     </div>
 
     <v-row justify="center">
@@ -56,8 +55,6 @@ import AddTodo from "@/components/AddTodo";
 import TodoList from "@/components/TodoList";
 import axios from "@/plugins/axios";
 import firebase from "@/plugins/firebase";
-// import draggable from '@/plugins/vue-draggable';
-// 追記した
 export default {
   data() {
     return {
@@ -70,8 +67,6 @@ export default {
       show2: false,
       error: "",
       showContent: false
-      // errors: [$store.state.errors]
-      // これだと表示できないが、thisをとるとエラーになる
     };
   },
   fetch({ store, redirect }) {
@@ -99,6 +94,7 @@ export default {
         const { data } = await axios.post("/v1/todos", {
           todo
         });
+        console.log(data);
         this.$store.commit("setUser", {
           ...this.user,
           todos: [...this.user.todos, data]
