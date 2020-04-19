@@ -4,7 +4,8 @@
       <v-col cols="12" xs="5" sm="6" md="5" lg="4">
         <h1>STATUS</h1>
         <p>NAME：{{ user.name }}</p>
-        <p>LV：{{ user.level }}</p>
+        <p>レベル：{{ user.level }}</p>
+        <p>次のレベルまであと {{}}</p>
         <p>EXP：{{ user.experience_point }}</p>
         <p>TP：{{ user.point }}</p>
       </v-col>
