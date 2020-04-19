@@ -6,6 +6,8 @@
         <p>NAME：{{ user.name }}</p>
         <p>レベル：{{ user.level }}</p>
         <p>次のレベルまであと {{}}</p>
+        <v-progress-linear :height="12" :rounded="true" :value="40" color="light-blue">
+        </v-progress-linear>
         <p>EXP：{{ user.experience_point }}</p>
         <p>TP：{{ user.point }}</p>
       </v-col>
@@ -52,158 +54,166 @@
 </template>
 
 <script>
-import AddTodo from "@/components/AddTodo";
-import TodoList from "@/components/TodoList";
-import axios from "@/plugins/axios";
-import firebase from "@/plugins/firebase";
-export default {
-  data() {
-    return {
-      email: "",
-      name: "",
-      level: "",
-      point: "",
-      experience_point: "",
-      show1: false,
-      show2: false,
-      error: "",
-      showContent: false
-    };
-  },
-  fetch({ store, redirect }) {
-    store.watch(
-      state => state.currentUser,
-      (newUser, oldUser) => {
-        if (!newUser) {
-          return redirect("/");
+  import AddTodo from "@/components/AddTodo";
+  import TodoList from "@/components/TodoList";
+  import axios from "@/plugins/axios";
+  import firebase from "@/plugins/firebase";
+  export default {
+    data() {
+      return {
+        email: "",
+        name: "",
+        level: "",
+        point: "",
+        experience_point: "",
+        show1: false,
+        show2: false,
+        error: "",
+        showContent: false
+      };
+    },
+    fetch({
+      store,
+      redirect
+    }) {
+      store.watch(
+        state => state.currentUser,
+        (newUser, oldUser) => {
+          if (!newUser) {
+            return redirect("/");
+          }
         }
-      }
-    );
-  },
-  components: {
-    AddTodo,
-    TodoList,
-  },
-  computed: {
-    user() {
-      return this.$store.state.currentUser;
-    }
-  },
-  methods: {
-    async addTodo(todo) {
-      try {
-        const { data } = await axios.post("/v1/todos", {
-          todo
-        });
-        console.log(data);
-        this.$store.commit("setUser", {
-          ...this.user,
-          todos: [...this.user.todos, data]
-        });
-        this.$store.commit("clearErrors");
-      } catch (error) {
-        const { data } = error.response;
-        this.$store.commit("setError", data.error_msg);
+      );
+    },
+    components: {
+      AddTodo,
+      TodoList,
+    },
+    computed: {
+      user() {
+        return this.$store.state.currentUser;
       }
     },
-    logOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$store.commit("setUser", null);
-          this.$router.push("/");
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    methods: {
+      async addTodo(todo) {
+        try {
+          const {
+            data
+          } = await axios.post("/v1/todos", {
+            todo
+          });
+          console.log(data);
+          this.$store.commit("setUser", {
+            ...this.user,
+            todos: [...this.user.todos, data]
+          });
+          this.$store.commit("clearErrors");
+        } catch (error) {
+          const {
+            data
+          } = error.response;
+          this.$store.commit("setError", data.error_msg);
+        }
+      },
+      logOut() {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            this.$store.commit("setUser", null);
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style lang="scss">
-$main-color: #fc7b03;
-$sub-color: #33dddd;
-$accent-color: #f0353f;
+  $main-color: #fc7b03;
+  $sub-color: #33dddd;
+  $accent-color: #f0353f;
 
-$pc: 1024px;
-$tab: 680px;
-$sp: 480px;
+  $pc: 1024px;
+  $tab: 680px;
+  $sp: 480px;
 
-@mixin pc {
-  @media (max-width: ($pc)) {
-    @content;
-  }
-}
-
-@mixin tab {
-  @media (max-width: ($tab)) {
-    @content;
-  }
-}
-
-@mixin sp {
-  @media (max-width: ($sp)) {
-    @content;
-  }
-}
-
-.user-page {
-  .user-status {
-    border: 2px white solid;
-    margin: 0 auto;
-    width: 66%;
+  @mixin pc {
+    @media (max-width: ($pc)) {
+      @content;
+    }
   }
 
-  .user-status {
-    @include pc {
+  @mixin tab {
+    @media (max-width: ($tab)) {
+      @content;
+    }
+  }
+
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
+  }
+
+  .user-page {
+    .user-status {
+      border: 2px white solid;
+      margin: 0 auto;
+      width: 66%;
+    }
+
+    .user-status {
+      @include pc {
+        width: 100%;
+      }
+
+      @include tab {
+        width: 100% !important;
+      }
+
+      @include sp {
+        width: 100% !important;
+      }
+    }
+
+    .user-btn {
+      background-color: black !important;
+      border: 2px solid $main-color;
+      color: $main-color;
       width: 100%;
+      font-weight: bold;
+      font-size: 18px;
+
+      &:hover {
+        border: 2px solid yellow;
+        color: yellow;
+      }
     }
 
-    @include tab {
-      width: 100% !important;
+    .list-title,
+    h1 {
+      text-align: center;
+      color: $sub-color;
     }
 
-    @include sp {
-      width: 100% !important;
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .mdi-heart {
+      color: red !important;
+    }
+
+    .errors {
+      color: $accent-color;
     }
   }
-
-  .user-btn {
-    background-color: black !important;
-    border: 2px solid $main-color;
-    color: $main-color;
-    width: 100%;
-    font-weight: bold;
-    font-size: 18px;
-
-    &:hover {
-      border: 2px solid yellow;
-      color: yellow;
-    }
-  }
-
-  .list-title,
-  h1 {
-    text-align: center;
-    color: $sub-color;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  p {
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .mdi-heart {
-    color: red !important;
-  }
-  .errors {
-    color: $accent-color;
-  }
-}
 </style>
