@@ -37,7 +37,7 @@
       </v-toolbar-title>
 
       <v-toolbar-items class="page-link" v-if="user">
-        <v-btn to="/reward" nuxt class="header-btn ml-2">
+        <v-btn to="/user" nuxt class="header-btn ml-2">
           <v-icon>mdi-feather</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -49,7 +49,7 @@
       </v-toolbar-items>
 
       <v-toolbar-items class="page-link" v-if="user">
-        <v-btn class="header-btn ml-1" @click="logOut">
+        <v-btn to="#" nuxt class="header-btn ml-1" @click="logOut">
           <v-icon>mdi-key</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -135,6 +135,8 @@ export default {
   },
   methods: {
     logOut() {
+      const res = confirm("本当にログアウトしますか？");
+      if (res) {
       firebase
         .auth()
         .signOut()
@@ -145,6 +147,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
+      }
     }
   }
 };
@@ -189,8 +192,7 @@ $main-color: #fc7b03;
   }
 
   .tool-bar {
-    // display: flex;
-
+    
     .page-link {
 
       .page-link-title {
