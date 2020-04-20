@@ -18,7 +18,6 @@
           v-for="reward in rewards"
           :key="reward.sort"
           >
-          <!-- <span class="reward-point">{{ reward.point }}</span> -->
           <v-icon size="30px"
             >mdi-numeric-{{ reward.point }}-box-outline</v-icon
           >
@@ -142,12 +141,13 @@ export default {
             point: item.point
           }
         });
-        console.log(item.point);
+        const todos = getUser.data.todos;
         const rewards = this.user.rewards;
         const updateUser = {
           // ...this.user,
           user: getUser.data.user,
           rewards,
+          todos,
           untilPercentage: getUser.data.untilPercentage,
           untilLevel: getUser.data.untilLevel,
         };
