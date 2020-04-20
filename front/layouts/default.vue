@@ -14,8 +14,9 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+    <v-app-bar class="tool-bar" :clipped-left="clipped" fixed app>
+      <v-app-bar-nav-icon id="v-step-2" @click.stop="drawer = !drawer" />
+
       <v-toolbar-title class="pl-0">
         <router-link to="/" class="toolbar-title">
           <v-icon class="mb-2" size="38">mdi-skull-outline</v-icon><span class="title-first">D</span>TODO
@@ -23,22 +24,10 @@
       </v-toolbar-title>
 
       <!-- <v-toolbar-items class="page-link">
-        <router-link class="page-link-title" to="/user">TODO</router-link>
-      </v-toolbar-items>
-      
-      <v-toolbar-items class="page-link">
-        <router-link class="page-link-title" to="/reward">ごほうび</router-link>
-      </v-toolbar-items>
-      
-      <v-toolbar-items class="page-link">
-        <router-link class="page-link-title" to="/reward">ログアウト</router-link>
-      </v-toolbar-items> -->
-
-      <v-hover v-slot:default="{ hover }">
-        <v-btn class="user-btn" @click="logOut">
-          <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT
+        <v-btn class="logout-btn ml-10" @click="logOut">
+          <v-icon>mdi-key</v-icon>
         </v-btn>
-      </v-hover>
+      </v-toolbar-items> -->
 
       <v-spacer />
     </v-app-bar>
@@ -57,7 +46,8 @@
 <script>
   import Loading from "@/components/Loading";
   import Success from "@/components/Success";
-
+  import firebase from "@/plugins/firebase";
+  import axios from "@/plugins/axios";
 
   export default {
     data() {
@@ -81,14 +71,20 @@
       },
       items() {
         if (this.user) {
-          return [{
+          return [
+            {
+              icon: "mdi-skull-crossbones",
+              title: "トップ",
+              to: "/"
+            },
+            {
               icon: "mdi-heart",
               title: "TODO",
               to: "/user"
             },
             {
               icon: "mdi-lock",
-              title: "REWARD",
+              title: "ごほうび",
               to: "/reward"
             }
           ];
@@ -110,6 +106,18 @@
             }
           ];
         }
+      },
+      logOut() {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            this.$store.commit("setUser", null);
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     }
   }
@@ -132,12 +140,20 @@
 
     }
 
-    .page-link {
-      background-color: yellow;
-      margin-left: 5%;
+    .tool-bar {
+      display: flex;
 
-      .page-link-title {
-        padding-top: 15px;
+      .page-link {
+        justify-content: right;
+
+        .page-link-title {
+          padding-top: 15px;
+        }
+
+        .logout-btn {
+          background-color: rgb(45, 47, 48) !important;
+          margin: 0 0 0 auto;
+        }
       }
     }
 

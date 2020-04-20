@@ -3,7 +3,7 @@
   <v-form>
     <v-container class="add-todo">
       <v-row>
-        <v-col class="pr-0 pb-0" cols="3" xs="2" sm="2" md="2" lg="2">
+        <v-col id="v-step-0" class="pr-0 pb-0" cols="3" xs="2" sm="2" md="2" lg="2">
           <v-select label="TP" v-model="number" :items="items" outlined>test</v-select>
         </v-col>
         <v-col class="pl-0 pb-0" cols="9" xs="8" sm="8" md="8" lg="8">

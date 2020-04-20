@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button @click="$tours['myTour'].start()" class="btn btn-lg">Start the tour</button>
+    <!-- <button @click="$tours['myTour'].start()" class="btn btn-lg">Start the tour</button>
     <button @click="nextStep" class="btn btn-lg">Next step</button>
-    <button @click="showLastStep" class="btn btn-lg">Show last step</button>
+    <button @click="showLastStep" class="btn btn-lg">Show last step</button> -->
 
     <v-tour name="myTour" :steps="steps" :callbacks="callbacks">
       <template slot-scope="tour">
@@ -19,12 +19,13 @@
             :is-last="tour.isLast"
             :labels="tour.labels"
           >
-            <template v-if="tour.currentStep === 2">
-              <div slot="actions">
+            <template v-if="tour.currentStep === 1">
+              <div>
                 <button @click="tour.previousStep" class="btn btn-primary">Previous step</button>
                 <button @click="tour.nextStep" class="btn btn-primary">Next step</button>
               </div>
             </template>
+
           </v-step>
         </transition>
       </template>
@@ -40,28 +41,40 @@
         steps: [
           {
             target: '#v-step-0',
-            content: `Discover <strong>Vue Tour</strong>!`
+            header: {
+              title: 'TODOの追加'
+            },
+            content: `まず、ここでTODOを登録しましょう。<br>TPは「タスクポイント」の略称です。<br>
+            TODOを達成した時にもらえるポイントなので、大変なTODOほど大きな数のTPを設定しましょう。<br>
+            TP「1」のTODOを登録したら次に進んでください。`
           },
           {
             target: '#v-step-1',
             header: {
-              title: 'Vue Tour'
+              title: 'TODOの一覧'
             },
-            content: 'An awesome plugin made with Vue.js!'
+            params: {
+              placement: 'right'
+            },
+            content: '左の数字がそのTODOのタスクポイントを示します。<br>ハートのアイコンで達成、鉛筆のアイコンで編集、ゴミ箱のアイコンで削除ができます。<br>ハートのアイコンを押して、達成してみましょう。'
           },
           {
             target: '#v-step-2',
-            content: 'Try it, you\'ll love it!<br>You can put HTML in the steps and completely customize the DOM to suit your needs.',
+            header: {
+              title: 'メニューの一覧'
+            },
+            content: '貯まったTPはごほうびを解放するために使えます。<br>三本線のアイコンをクリックしてメニューを開き、ごほうびページにいってみましょう。',
             params: {
               placement: 'top'
             }
           },
-          {
-            target: '#v-step-3',
-            params: {
-              placement: 'left'
-            }
-          }
+          // {
+          //   target: '#v-step-3',
+          //   content: 'これで終わりです',
+          //   params: {
+          //     placement: 'left'
+          //   }
+          // }
         ],
         callbacks: {
           onPreviousStep: this.myCustomPreviousStepCallback,

@@ -18,21 +18,6 @@
         </v-progress-linear>
 
       </v-col>
-
-      <!-- <v-col cols="12" xs="5" sm="6" md="5" lg="4"> -->
-      <!-- <v-hover v-slot:default="{ hover }"> -->
-      <!-- <router-link to="/reward"> -->
-      <!-- <v-btn class="user-btn my-10"> -->
-      <!-- <v-icon id="v-step-1" v-text="hover ? 'mdi-heart' : ''"></v-icon>REWARD PAGE -->
-      <!-- </v-btn> -->
-      <!-- </router-link> -->
-      <!-- </v-hover> -->
-      <!-- <v-hover v-slot:default="{ hover }"> -->
-      <!-- <v-btn class="user-btn" @click="logOut"> -->
-      <!-- <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT -->
-      <!-- </v-btn> -->
-      <!-- </v-hover> -->
-      <!-- </v-col> -->
     </v-row>
 
     <v-row justify="center">
@@ -56,7 +41,7 @@
       </v-col>
     </v-row>
 
-    <!-- <Tour /> -->
+    <Tour />
 
   </v-container>
 </template>

@@ -23,7 +23,7 @@
       </draggable>
     </v-card>
 
-    <v-dialog class="edit-dialog" v-model="dialog">
+    <v-dialog class="edit-dialog" v-model="dialog" @save="save" @cancel="cancel" @open="open" @close="close">
       <v-card>
         <v-card-title>
           <h2 class="list-title">ごほうび編集</h2>
