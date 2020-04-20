@@ -34,6 +34,7 @@
 </template>
 
 <script>
+  import axios from "@/plugins/axios";
   export default {
     name: 'my-tour',
     data () {
@@ -82,7 +83,7 @@
         callbacks: {
           onPreviousStep: this.myCustomPreviousStepCallback,
           onNextStep: this.myCustomNextStepCallback,
-          onFinish: this.myCustomFinishCallback,
+          onFinish: this.myCustomonFinishCallback,
         }
       }
     },
@@ -109,11 +110,17 @@
 
         if (currentStep === 1) {
           console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
+          console.log(this.myCustomonFinishCallback)
         }
       },
-      myCustomFinishCallback() {
-        this.$emit('finished')
-      }
+      // async
+      myCustomonFinishCallback() {
+        // await axios.patch(`/v1/user/${id}`, {
+        //     id: id
+        // });
+        console.log("finish-tour")
+      }  
+      
     }
   }
 </script>

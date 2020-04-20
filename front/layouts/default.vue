@@ -49,7 +49,8 @@
       </v-toolbar-items>
 
       <v-toolbar-items class="page-link" v-if="user">
-        <v-btn to="#" nuxt class="header-btn ml-1" @click="logOut">
+        <v-btn to="#" nuxt class=" ml-1" @click="logOut">
+          <!-- header-btnを追加するとスマホで消えるのでまだ追加していない -->
           <v-icon>mdi-key</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -110,6 +111,11 @@ export default {
             icon: "mdi-lock",
             title: "ごほうび",
             to: "/reward"
+          },
+          {
+            icon: "mdi-key",
+            title: "ログアウト",
+            to: "/"
           }
         ];
       } else {

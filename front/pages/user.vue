@@ -40,8 +40,7 @@
         </div>
       </v-col>
     </v-row>
-
-    <Tour v-if="false" />
+    <Tour v-if="currentUser.user.todo_tour" />
 
   </v-container>
 </template>
