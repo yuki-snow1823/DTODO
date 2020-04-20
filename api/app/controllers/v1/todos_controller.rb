@@ -40,16 +40,7 @@ class V1::TodosController < ApplicationController
       totalExp += todo.point
       user.experience_point = totalExp
       user.update(point: totalPoint,experience_point: totalExp)
-
-      # levelSetting = LevelSetting.find_by(level: user.level + 1)
-      # if levelSetting.present? && levelSetting.thresold <= user.experience_point
-      #   user.level = user.level + 1
-      #   user.update(level: user.level)
-      #   totalExp = 0
-      # end
-
-      # untilPercentage = totalExp.quo(levelSetting.thresold).to_f.round(2)*100
-      # untilLevel = levelSetting.thresold - totalExp
+      
       user_level = calc_user_level(user, totalExp)
 
       if todo.destroy

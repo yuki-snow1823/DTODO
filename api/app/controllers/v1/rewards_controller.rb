@@ -1,14 +1,6 @@
+require_relative '../../domain/user_level.rb'
+
 class V1::RewardsController < ApplicationController
-  # def index
-  #   if params[:uid] 
-  #     user = User.find_by(uid: params[:uid])
-  #     todos = user.todos.order(sort: "ASC")
-  #     render json: {user: user, todos: todos}
-  #   else 
-  #     @users = User.all
-  #     render json: @users
-  #   end
-  # end
 
     def create
       reward = Reward.new(reward_params)
@@ -46,9 +38,11 @@ class V1::RewardsController < ApplicationController
       losepoint -= reward.point
       user.point = losepoint
       user.update(point: losepoint)
-      # ポイントを加算to_iはいずれ消す
-      # なぜかキャッシュから読み込むから変数に入れる
-      render json: {reward: reward, user: user}
+
+      totalExp = user.experience_point
+      user_level = calc_user_level(user, totalExp)
+      render json: {user: user, reward: reward, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
+      # render json: {reward: reward, user: user}
     end
 
     def sort

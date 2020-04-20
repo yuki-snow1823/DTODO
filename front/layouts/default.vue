@@ -14,11 +14,21 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+    <v-app-bar class="tool-bar" :clipped-left="clipped" fixed app>
+      <v-app-bar-nav-icon id="v-step-3" @click.stop="drawer = !drawer" />
+
       <v-toolbar-title class="pl-0">
-        <router-link to="/" class="toolbar-title"><v-icon class="mb-2" size="38">mdi-skull-outline</v-icon><span class="title-first">D</span>TODO</router-link>
+        <router-link to="/" class="toolbar-title">
+          <v-icon class="mb-2" size="38">mdi-skull-outline</v-icon><span class="title-first">D</span>TODO
+        </router-link>
       </v-toolbar-title>
+
+      <v-toolbar-items class="page-link">
+        <v-btn class="logout-btn ml-10" @click="logOut">
+          <v-icon>mdi-key</v-icon>
+        </v-btn>
+      </v-toolbar-items>
+
       <v-spacer />
     </v-app-bar>
     <v-content>
@@ -34,81 +44,123 @@
 </template>
 
 <script>
-import Loading from "@/components/Loading";
-import Success from "@/components/Success";
+  import Loading from "@/components/Loading";
+  import Success from "@/components/Success";
+  import firebase from "@/plugins/firebase";
+  import axios from "@/plugins/axios";
 
-
-export default {
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: "DTODO"
-    };
-  },
-    components: {
-    Loading,
-    Success
-  },
-  computed: {
-    user() {
-      return this.$store.state.currentUser;
+  export default {
+    data() {
+      return {
+        clipped: false,
+        drawer: false,
+        fixed: false,
+        miniVariant: false,
+        right: true,
+        rightDrawer: false,
+        title: "DTODO"
+      };
     },
-    items() {
-      if (this.user) {
-        return [
-          {
-            icon: "mdi-heart",
-            title: "TODO",
-            to: "/user"
-          },
-          {
-            icon: "mdi-lock",
-            title: "REWARD",
-            to: "/reward"
-          }
-        ];
-      } else {
-        return [
-          {
-            icon: "mdi-key-variant",
-            title: "ログイン",
-            to: "/login"
-          },
-          {
-            icon: "mdi-account-arrow-right",
-            title: "新規登録",
-            to: "/signup"
-          }
-        ];
+    components: {
+      Loading,
+      Success
+    },
+    computed: {
+      user() {
+        return this.$store.state.currentUser;
+      },
+      items() {
+        if (this.user) {
+          return [
+            {
+              icon: "mdi-skull-crossbones",
+              title: "トップ",
+              to: "/"
+            },
+            {
+              icon: "mdi-heart",
+              title: "TODO",
+              to: "/user"
+            },
+            {
+              icon: "mdi-lock",
+              title: "ごほうび",
+              to: "/reward"
+            }
+          ];
+        } else {
+          return [{
+              icon: "mdi-skull-crossbones",
+              title: "トップ",
+              to: "/"
+            },
+            {
+              icon: "mdi-key-variant",
+              title: "ログイン",
+              to: "/login"
+            },
+            {
+              icon: "mdi-account-arrow-right",
+              title: "新規登録",
+              to: "/signup"
+            }
+          ];
+        }
+      }
+    },
+    methods: {
+      logOut() {
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            this.$store.commit("setUser", null);
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     }
- }
-}
-
+  }
 </script>
 
 <style lang="scss">
+  $main-color: #fc7b03;
 
-$main-color: #fc7b03;
+  .app {
+    .toolbar-title {
+      color: white;
+      text-decoration: none;
+      font-family: 'Comic Sans MS';
+      font-size: 30px;
+      font-weight: bold;
 
-.app{
-  .toolbar-title {
-    color: white;
-    text-decoration: none;
-    font-family: 'Comic Sans MS','American Typewriter';
-    font-size: 30px;
-    font-weight: bold;
-    .title-first {
-      color: $main-color;
+      .title-first {
+        color: $main-color;
+      }
+
+    }
+
+    .tool-bar {
+      display: flex;
+
+      .page-link {
+        justify-content: right;
+
+        .page-link-title {
+          padding-top: 15px;
+        }
+
+        .logout-btn {
+          background-color: rgb(45, 47, 48) !important;
+          margin: 0 0 0 auto;
+        }
+      }
+    }
+
+    .v-content__wrap {
+      background-color: black !important;
     }
   }
-  .v-content__wrap {
-    background-color: black !important;
-  }
-}
 </style>

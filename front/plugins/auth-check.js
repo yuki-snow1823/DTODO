@@ -7,7 +7,7 @@ const authCheck = ({
 }) => {
   firebase.auth().onAuthStateChanged(async user => {
     if (user) {
-      console.log(user);
+      // console.log(user);
       const {
         data
       } = await axios.get(`/v1/users?uid=${user.uid}`)
