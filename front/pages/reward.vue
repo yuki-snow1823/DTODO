@@ -1,6 +1,6 @@
 <template>
   <v-container class="user-page" v-if="currentUser">
-    <v-row class="user-status">
+    <v-row class="user-status" id="v-last-2">
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
         <p>名前：{{ currentUser.user.name }}</p>
         <div class="user-point">
@@ -38,14 +38,16 @@
         </div>
       </v-col>
     </v-row>
+  <TourReward />
   </v-container>
-</template>
-
+</template> 
 <script>
 import AddReward from "@/components/AddReward";
 import RewardList from "@/components/RewardList";
 import axios from "@/plugins/axios";
 import firebase from "@/plugins/firebase";
+import TourReward from '@/components/TourReward'
+
 export default {
   data() {
     return {
@@ -72,7 +74,8 @@ export default {
   },
   components: {
     AddReward,
-    RewardList
+    RewardList,
+    TourReward
   },
   computed: {
     currentUser() {
@@ -141,11 +144,28 @@ $sp: 480px;
 }
 
 .user-page {
-  .user-status {
-    border: 2px white solid;
-    margin: 0 auto;
-    width: 66%;
-  }
+    .user-status {
+      border: 2px white solid;
+      margin: 0 auto;
+      width: 66%;
+      background-color: rgb(60, 60, 65);
+
+      .coin-img {
+        width: 20%;
+        display: inline-block;
+      }
+
+      .user-point {
+        display: flex;
+        .user-task-point {
+          font-size: x-large;
+          color: rgb(238, 238, 37);
+          padding-left: 2%;
+          padding-top: 8px;
+          margin-bottom: 0px;
+        }
+      }
+    }
 
   .user-status {
     @include pc {

@@ -60,21 +60,21 @@
           },
           {
             target: '#v-step-2',
+            content: 'タスクポイントが増えました。<br>また、TODOを達成する度、あなたのレベルはアップします。<br>最大のレベル10を目指して毎日のTODOに取り組みましょう。',
+            params: {
+              placement: 'left'
+            }
+          },
+          {
+            target: '#v-step-3',
             header: {
               title: 'メニューの一覧'
             },
-            content: '貯まったTPはごほうびを解放するために使えます。<br>三本線のアイコンをクリックしてメニューを開き、ごほうびページにいってみましょう。',
+            content: '貯まったタスクポイントはごほうびを解放するために使えます。<br>三本線のアイコンをクリックしてメニューを開き、ごほうびページにいってみましょう。',
             params: {
               placement: 'top'
             }
           },
-          // {
-          //   target: '#v-step-3',
-          //   content: 'これで終わりです',
-          //   params: {
-          //     placement: 'left'
-          //   }
-          // }
         ],
         callbacks: {
           onPreviousStep: this.myCustomPreviousStepCallback,

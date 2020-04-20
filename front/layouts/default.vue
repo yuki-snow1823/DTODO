@@ -15,7 +15,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar class="tool-bar" :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon id="v-step-2" @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon id="v-step-3" @click.stop="drawer = !drawer" />
 
       <v-toolbar-title class="pl-0">
         <router-link to="/" class="toolbar-title">
