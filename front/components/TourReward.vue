@@ -48,8 +48,8 @@ export default {
             title: "ごほうびの登録"
           },
           content: `ここでごほうびを登録しましょう。（例：ゲームを１時間する！）<br>
-          登録したら次に進んでください。<br>
-          <strong>TPはここでは１にしておきましょう。</strong>`
+          <strong>TPはここでは１にしておきましょう。</strong><br>
+          登録したら次に進んでください。`
         },
         {
           target: "#v-step-1",
@@ -71,7 +71,9 @@ export default {
           },
           content:
            `ご褒美が解放され、鍵が開き、その分タスクポイントが消費されました。<br>
-            現実世界で消費したごほうびはゴミ箱マークをクリックして、削除しましょう。`,
+            現実世界で消費したごほうびは<strong>ゴミ箱マーク</strong>をクリックして、削除しましょう。<br>
+            無事削除できたら、これでチュートリアルは終わりです！<br>
+            <strong style="color: cyan; -webkit-font-smoothing: antialiased !important;">メンドクサイを楽しんでいきましょう！</strong>`,
           params: {
             placement: "right"
           }
