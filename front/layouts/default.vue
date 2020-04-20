@@ -24,7 +24,17 @@
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item @click="logOut">
+          <v-list-item-action>
+            <v-icon>mdi-key</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>ログアウト</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
+
     </v-navigation-drawer>
     <v-app-bar class="tool-bar" :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon id="v-step-3" @click.stop="drawer = !drawer" />
@@ -49,8 +59,7 @@
       </v-toolbar-items>
 
       <v-toolbar-items class="page-link" v-if="user">
-        <v-btn to="#" nuxt class=" ml-1" @click="logOut">
-          <!-- header-btnを追加するとスマホで消えるのでまだ追加していない -->
+        <v-btn to="#" nuxt class="header-btn ml-1" @click="logOut">
           <v-icon>mdi-key</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -111,11 +120,6 @@ export default {
             icon: "mdi-lock",
             title: "ごほうび",
             to: "/reward"
-          },
-          {
-            icon: "mdi-key",
-            title: "ログアウト",
-            to: "/"
           }
         ];
       } else {
@@ -143,16 +147,16 @@ export default {
     logOut() {
       const res = confirm("本当にログアウトしますか？");
       if (res) {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$store.commit("setUser", null);
-          this.$router.push("/");
-        })
-        .catch(error => {
-          console.log(error);
-        });
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            this.$store.commit("setUser", null);
+            this.$router.push("/");
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     }
   }
@@ -162,27 +166,27 @@ export default {
 <style lang="scss">
 $main-color: #fc7b03;
 
-  $pc: 1024px;
-  $tab: 680px;
-  $sp: 480px;
+$pc: 1024px;
+$tab: 680px;
+$sp: 480px;
 
-  @mixin pc {
-    @media (max-width: ($pc)) {
-      @content;
-    }
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
   }
+}
 
-  @mixin tab {
-    @media (max-width: ($tab)) {
-      @content;
-    }
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
   }
+}
 
-  @mixin sp {
-    @media (max-width: ($sp)) {
-      @content;
-    }
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
   }
+}
 
 .app {
   .toolbar-title {
@@ -198,22 +202,20 @@ $main-color: #fc7b03;
   }
 
   .tool-bar {
-    
     .page-link {
-
       .page-link-title {
         padding-top: 15px;
       }
 
       .header-btn {
         background-color: rgb(45, 47, 48) !important;
-      @include tab {
-        display: none;
-      }
+        @include tab {
+          display: none;
+        }
 
-      @include sp {
-        width: 100% !important;
-      }
+        @include sp {
+          width: 100% !important;
+        }
       }
     }
   }
