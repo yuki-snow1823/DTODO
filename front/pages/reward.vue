@@ -19,7 +19,7 @@
     </v-row>
 
     <v-row justify="center">
-      <v-col cols="12" xs="12" sm="12" md="12" lg="8">
+      <v-col class="pb-0" cols="12" xs="12" sm="12" md="12" lg="8">
         <div>
           <AddReward @submit="addReward" />
         </div>

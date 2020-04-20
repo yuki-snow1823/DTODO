@@ -21,6 +21,25 @@
           <v-icon class="mb-2" size="38">mdi-skull-outline</v-icon><span class="title-first">D</span>TODO
         </router-link>
       </v-toolbar-title>
+
+      <!-- <v-toolbar-items class="page-link">
+        <router-link class="page-link-title" to="/user">TODO</router-link>
+      </v-toolbar-items>
+      
+      <v-toolbar-items class="page-link">
+        <router-link class="page-link-title" to="/reward">ごほうび</router-link>
+      </v-toolbar-items>
+      
+      <v-toolbar-items class="page-link">
+        <router-link class="page-link-title" to="/reward">ログアウト</router-link>
+      </v-toolbar-items> -->
+
+      <v-hover v-slot:default="{ hover }">
+        <v-btn class="user-btn" @click="logOut">
+          <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT
+        </v-btn>
+      </v-hover>
+
       <v-spacer />
     </v-app-bar>
     <v-content>
@@ -62,8 +81,7 @@
       },
       items() {
         if (this.user) {
-          return [
-            {
+          return [{
               icon: "mdi-heart",
               title: "TODO",
               to: "/user"
@@ -75,8 +93,7 @@
             }
           ];
         } else {
-          return [
-            {
+          return [{
               icon: "mdi-skull-crossbones",
               title: "トップ",
               to: "/"
@@ -111,6 +128,16 @@
 
       .title-first {
         color: $main-color;
+      }
+
+    }
+
+    .page-link {
+      background-color: yellow;
+      margin-left: 5%;
+
+      .page-link-title {
+        padding-top: 15px;
       }
     }
 
