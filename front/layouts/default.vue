@@ -37,24 +37,22 @@
       </v-toolbar-title>
 
       <v-toolbar-items class="page-link" v-if="user">
-        <v-btn class="header-btn ml-1" @click="logOut">
+        <v-btn to="/reward" nuxt class="header-btn ml-2">
           <v-icon>mdi-feather</v-icon>
         </v-btn>
       </v-toolbar-items>
 
       <v-toolbar-items class="page-link" v-if="user">
-        <v-btn class="header-btn ml-1" @click="logOut">
+        <v-btn to="/reward" nuxt class="header-btn ml-1">
           <v-icon>mdi-lock</v-icon>
         </v-btn>
       </v-toolbar-items>
 
       <v-toolbar-items class="page-link" v-if="user">
-        <v-btn class="header-btn ml-2" @click="logOut">
+        <v-btn class="header-btn ml-1" @click="logOut">
           <v-icon>mdi-key</v-icon>
         </v-btn>
       </v-toolbar-items>
-
-
       <v-spacer />
     </v-app-bar>
     <v-content>
@@ -155,6 +153,28 @@ export default {
 <style lang="scss">
 $main-color: #fc7b03;
 
+  $pc: 1024px;
+  $tab: 680px;
+  $sp: 480px;
+
+  @mixin pc {
+    @media (max-width: ($pc)) {
+      @content;
+    }
+  }
+
+  @mixin tab {
+    @media (max-width: ($tab)) {
+      @content;
+    }
+  }
+
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
+  }
+
 .app {
   .toolbar-title {
     color: white;
@@ -172,7 +192,6 @@ $main-color: #fc7b03;
     // display: flex;
 
     .page-link {
-      // justify-content: right;
 
       .page-link-title {
         padding-top: 15px;
@@ -180,6 +199,13 @@ $main-color: #fc7b03;
 
       .header-btn {
         background-color: rgb(45, 47, 48) !important;
+      @include tab {
+        display: none;
+      }
+
+      @include sp {
+        width: 100% !important;
+      }
       }
     }
   }
