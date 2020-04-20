@@ -25,7 +25,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item @click="logOut">
+        <v-list-item v-if="user" @click="logOut">
           <v-list-item-action>
             <v-icon>mdi-key</v-icon>
           </v-list-item-action>

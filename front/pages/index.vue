@@ -185,17 +185,6 @@
       },
     },
     methods: {
-      async addTodo(todo) {
-        const {
-          data
-        } = await axios.post("/v1/todos", {
-          todo
-        });
-        this.$store.commit("setUser", {
-          ...this.user,
-          todos: [...this.user.todos, data]
-        });
-      },
       signup() {
         if (this.password !== this.passwordConfirm) {
           this.error = "パスワード確認が一致していません";
@@ -251,11 +240,11 @@
           });
       },
       login() {
-        this.$store.commit("setLoading", true);
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
+            this.$store.commit("setLoading", true);
             this.$store.commit("setNotice", {
               status: true,
               message: "ログインに成功しました"
