@@ -2,7 +2,7 @@
   <div>
     <v-card class="pb-5">
       <v-card-title>
-        <h2 class="list-title">reward LIST</h2>
+        <h2 class="list-title">ごほうびリスト</h2>
         <v-spacer></v-spacer>
       </v-card-title>
       <draggable class="pl-0" v-model="rewards" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
@@ -26,7 +26,7 @@
     <v-dialog class="edit-dialog" v-model="dialog">
       <v-card>
         <v-card-title>
-          <h2 class="list-title">reward編集</h2>
+          <h2 class="list-title">ごほうび編集</h2>
         </v-card-title>
         <p>内容</p>
         <v-text-field class="dialog-title" v-model="dialogText.title" filled></v-text-field>

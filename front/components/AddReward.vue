@@ -3,18 +3,18 @@
   <v-form>
     <v-container class="add-todo">
       <v-row>
-        <v-col class="pr-0" cols="3" xs="6" sm="2" md="1" lg="1">
-          <v-select label="TP" v-model="number" :items="items">test</v-select>
+        <v-col class="pr-0 pb-0" cols="3" xs="2" sm="2" md="2" lg="2">
+          <v-select label="必要TP" v-model="number" :items="items" outlined></v-select>
         </v-col>
-        <v-col class="pl-0" cols="9" xs="5" sm="6" md="7" lg="7">
-          <v-text-field v-model="title" :counter="20" label="reward" required></v-text-field>
+        <v-col class="pl-0 pb-0" cols="9" xs="8" sm="8" md="8" lg="8">
+          <v-text-field v-model="title" :counter="20" label="ごほうびの内容" required outlined></v-text-field>
         </v-col>
-        <v-col class="px-0" cols="12" xs="6" sm="4" md="4" lg="4">
-                   <v-hover v-slot:default="{ hover }">
-            <v-btn class="todo-btn" @click="handleSubmit">
+        <v-col class="px-0 pb-0" cols="12" xs="2" sm="2" md="2" lg="2">
+          <v-hover v-slot:default="{ hover }">
+            <v-btn class="todo-btn my-2 mx-1" @click="handleSubmit">
               <v-icon v-text="hover ? 'mdi-heart' : ''">
-                </v-icon>
-               CREATE
+              </v-icon>
+              登録
             </v-btn>
           </v-hover>
         </v-col>
@@ -24,30 +24,30 @@
 
 </template>
 <script>
-const maxNumber = 11;
-const numberRange = [...Array(maxNumber).keys()]
-export default {
-  data() {
-    return {
-      title: "",
-      items: numberRange,
-      number: '',
-    };
-  },
-  methods: {
-    handleSubmit() {
-      const reward = {
-        title: this.title,
-        user_id: this.$store.state.currentUser.user.id,
-        point: this.number
+  const maxNumber = 11;
+  const numberRange = [...Array(maxNumber).keys()]
+  export default {
+    data() {
+      return {
+        title: "",
+        items: numberRange,
+        number: '',
       };
-      this.$emit("submit", reward);
-      this.title = "";
-      this.number = "";
+    },
+    methods: {
+      handleSubmit() {
+        const reward = {
+          title: this.title,
+          user_id: this.$store.state.currentUser.user.id,
+          point: this.number
+        };
+        this.$emit("submit", reward);
+        this.title = "";
+        this.number = "";
+      }
+
     }
-    
-  }
-};
+  };
 </script>
 
 <style lang="scss">

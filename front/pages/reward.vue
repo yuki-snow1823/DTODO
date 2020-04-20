@@ -1,35 +1,20 @@
 <template>
   <v-container class="user-page" v-if="currentUser">
-    <v-row class="user-status" justify="center">
-      <v-col cols="12" xs="5" sm="6" md="5" lg="4">
-        <h1>STATUS</h1>
-        <p>NAME：{{ currentUser.user.name }}</p>
-        <p>レベル：{{ currentUser.user.level }}</p>
-        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }}</p>
-        <v-progress-linear
-          :height="12"
-          :rounded="true"
-          :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0"
-          color="light-blue"
-        >
-        </v-progress-linear>
-        <p>EXP：{{ currentUser.user.experience_point }}</p>
-        <p>TP：{{ currentUser.user.point }}</p>
+    <v-row class="user-status">
+      <v-col cols="12" xs="5" sm="6" md="5" lg="5">
+        <p>名前：{{ currentUser.user.name }}</p>
+        <div class="user-point">
+          <img class="coin-img" src="../assets/coin.png">
+          <p class="user-task-point">{{ currentUser.user.point }}</p>
+        </div>
       </v-col>
 
-      <v-col cols="12" xs="5" sm="6" md="5" lg="4">
-        <v-hover v-slot:default="{ hover }">
-          <router-link to="/user">
-            <v-btn class="user-btn my-10">
-              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>TODO PAGE
-            </v-btn>
-          </router-link>
-        </v-hover>
-        <v-hover v-slot:default="{ hover }">
-          <v-btn class="user-btn" @click="logOut">
-            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT
-          </v-btn>
-        </v-hover>
+      <v-col cols="12" xs="5" sm="6" md="5" lg="5">
+        <p class="user-level">レベル：{{ currentUser.user.level }}</p>
+        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }} EXP</p>
+        <v-progress-linear :height="12" :rounded="true"
+          :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0" color="light-blue">
+        </v-progress-linear>
       </v-col>
     </v-row>
 
