@@ -41,7 +41,7 @@
           <div class="reward-list-icon">
             <v-icon v-if="reward.status" big color="white" >lock_open</v-icon>
             <v-icon v-else big color="red" >lock</v-icon>
-            <v-icon @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
+            <v-icon v-if="!reward.status" @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
             <v-icon midium @click="deleteItem(reward)">delete</v-icon>
           </div>
         </li>

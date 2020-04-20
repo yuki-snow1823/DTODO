@@ -2,9 +2,21 @@
   <v-app class="app" dark>
     <Loading />
     <Success />
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      fixed
+      app
+    >
       <v-list>
-        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -19,15 +31,29 @@
 
       <v-toolbar-title class="pl-0">
         <router-link to="/" class="toolbar-title">
-          <v-icon class="mb-2" size="38">mdi-skull-outline</v-icon><span class="title-first">D</span>TODO
+          <v-icon class="mb-2" size="38">mdi-skull-outline</v-icon
+          ><span class="title-first">D</span>TODO
         </router-link>
       </v-toolbar-title>
 
-      <v-toolbar-items class="page-link">
-        <v-btn class="logout-btn ml-10" @click="logOut">
+      <v-toolbar-items class="page-link" v-if="user">
+        <v-btn class="header-btn ml-1" @click="logOut">
+          <v-icon>mdi-feather</v-icon>
+        </v-btn>
+      </v-toolbar-items>
+
+      <v-toolbar-items class="page-link" v-if="user">
+        <v-btn class="header-btn ml-1" @click="logOut">
+          <v-icon>mdi-lock</v-icon>
+        </v-btn>
+      </v-toolbar-items>
+
+      <v-toolbar-items class="page-link" v-if="user">
+        <v-btn class="header-btn ml-2" @click="logOut">
           <v-icon>mdi-key</v-icon>
         </v-btn>
       </v-toolbar-items>
+
 
       <v-spacer />
     </v-app-bar>
@@ -44,123 +70,122 @@
 </template>
 
 <script>
-  import Loading from "@/components/Loading";
-  import Success from "@/components/Success";
-  import firebase from "@/plugins/firebase";
-  import axios from "@/plugins/axios";
+import Loading from "@/components/Loading";
+import Success from "@/components/Success";
+import firebase from "@/plugins/firebase";
+import axios from "@/plugins/axios";
 
-  export default {
-    data() {
-      return {
-        clipped: false,
-        drawer: false,
-        fixed: false,
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: "DTODO"
-      };
+export default {
+  data() {
+    return {
+      clipped: false,
+      drawer: false,
+      fixed: false,
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: "DTODO"
+    };
+  },
+  components: {
+    Loading,
+    Success
+  },
+  computed: {
+    user() {
+      return this.$store.state.currentUser;
     },
-    components: {
-      Loading,
-      Success
-    },
-    computed: {
-      user() {
-        return this.$store.state.currentUser;
-      },
-      items() {
-        if (this.user) {
-          return [
-            {
-              icon: "mdi-skull-crossbones",
-              title: "トップ",
-              to: "/"
-            },
-            {
-              icon: "mdi-heart",
-              title: "TODO",
-              to: "/user"
-            },
-            {
-              icon: "mdi-lock",
-              title: "ごほうび",
-              to: "/reward"
-            }
-          ];
-        } else {
-          return [{
-              icon: "mdi-skull-crossbones",
-              title: "トップ",
-              to: "/"
-            },
-            {
-              icon: "mdi-key-variant",
-              title: "ログイン",
-              to: "/login"
-            },
-            {
-              icon: "mdi-account-arrow-right",
-              title: "新規登録",
-              to: "/signup"
-            }
-          ];
-        }
-      }
-    },
-    methods: {
-      logOut() {
-        firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            this.$store.commit("setUser", null);
-            this.$router.push("/");
-          })
-          .catch(error => {
-            console.log(error);
-          });
+    items() {
+      if (this.user) {
+        return [
+          {
+            icon: "mdi-skull-crossbones",
+            title: "トップ",
+            to: "/"
+          },
+          {
+            icon: "mdi-feather",
+            title: "TODO",
+            to: "/user"
+          },
+          {
+            icon: "mdi-lock",
+            title: "ごほうび",
+            to: "/reward"
+          }
+        ];
+      } else {
+        return [
+          {
+            icon: "mdi-skull-crossbones",
+            title: "トップ",
+            to: "/"
+          },
+          {
+            icon: "mdi-key-variant",
+            title: "ログイン",
+            to: "/login"
+          },
+          {
+            icon: "mdi-account-arrow-right",
+            title: "新規登録",
+            to: "/signup"
+          }
+        ];
       }
     }
+  },
+  methods: {
+    logOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$store.commit("setUser", null);
+          this.$router.push("/");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
+};
 </script>
 
 <style lang="scss">
-  $main-color: #fc7b03;
+$main-color: #fc7b03;
 
-  .app {
-    .toolbar-title {
-      color: white;
-      text-decoration: none;
-      font-family: 'Comic Sans MS';
-      font-size: 30px;
-      font-weight: bold;
+.app {
+  .toolbar-title {
+    color: white;
+    text-decoration: none;
+    font-family: "Comic Sans MS";
+    font-size: 30px;
+    font-weight: bold;
 
-      .title-first {
-        color: $main-color;
-      }
-
-    }
-
-    .tool-bar {
-      display: flex;
-
-      .page-link {
-        justify-content: right;
-
-        .page-link-title {
-          padding-top: 15px;
-        }
-
-        .logout-btn {
-          background-color: rgb(45, 47, 48) !important;
-          margin: 0 0 0 auto;
-        }
-      }
-    }
-
-    .v-content__wrap {
-      background-color: black !important;
+    .title-first {
+      color: $main-color;
     }
   }
+
+  .tool-bar {
+    // display: flex;
+
+    .page-link {
+      // justify-content: right;
+
+      .page-link-title {
+        padding-top: 15px;
+      }
+
+      .header-btn {
+        background-color: rgb(45, 47, 48) !important;
+      }
+    }
+  }
+
+  .v-content__wrap {
+    background-color: black !important;
+  }
+}
 </style>
