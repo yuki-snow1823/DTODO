@@ -135,14 +135,14 @@ export default {
       }
     },
     async completeItem(item) {
-      const res = confirm("本当に達成しますか？");
+      const res = confirm("本当に解放しますか？");
       if (res) {
         const getUser = await axios.get(`/v1/rewards/${item.id}`, {
           params: {
             point: item.point
           }
         });
-        console.log(item);
+        console.log(item.point);
         const rewards = this.user.rewards;
         const updateUser = {
           // ...this.user,

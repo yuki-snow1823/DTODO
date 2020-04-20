@@ -46,7 +46,10 @@
             },
             content: `まず、ここでTODOを登録しましょう。<br>TPは「タスクポイント」の略称です。<br>
             TODOを達成した時にもらえるポイントなので、大変なTODOほど大きな数のTPを設定しましょう。<br>
-            TP「1」のTODOを登録したら次に進んでください。`
+            TP「1」のTODOを登録したら次に進んでください。`,
+            params: {
+              placement: 'top'
+            },
           },
           {
             target: '#v-step-1',
@@ -54,7 +57,7 @@
               title: 'TODOの一覧'
             },
             params: {
-              placement: 'right'
+              placement: 'bottom'
             },
             content: '左の数字がそのTODOのタスクポイントを示します。<br>ハートのアイコンで達成、鉛筆のアイコンで編集、ゴミ箱のアイコンで削除ができます。<br>ハートのアイコンを押して、達成してみましょう。'
           },
@@ -62,7 +65,7 @@
             target: '#v-step-2',
             content: 'タスクポイントが増えました。<br>また、TODOを達成する度、あなたのレベルはアップします。<br>最大のレベル10を目指して毎日のTODOに取り組みましょう。',
             params: {
-              placement: 'left'
+              placement: 'bottom'
             }
           },
           {

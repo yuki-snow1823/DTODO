@@ -49,7 +49,10 @@ export default {
           },
           content: `ここでごほうびを登録しましょう。（例：ゲームを１時間する！）<br>
           <strong>TPはここでは１にしておきましょう。</strong><br>
-          登録したら次に進んでください。`
+          登録したら次に進んでください。`,
+            params: {
+              placement: 'top'
+            },
         },
         {
           target: "#v-step-1",
@@ -57,11 +60,11 @@ export default {
             title: "TODOの一覧"
           },
           params: {
-            placement: "right"
+            placement: "bottom"
           },
           content:
             `ごほうびを登録しても、そのまますぐ使ってはいけません。<br>
-            鍵がかかった状態で登録されるので、実際に使うにはハートのマークを押してご褒美を解放しましょう。<br>
+            鍵がかかった状態で登録されるので、実際に使うには<strong>ハートのマークを押してごほうびを解放しましょう。</strong><br>
             ご褒美を解放したら次に進んでください。`
         },
         {
@@ -75,7 +78,7 @@ export default {
             無事削除できたら、これでチュートリアルは終わりです！<br>
             <strong style="color: cyan; -webkit-font-smoothing: antialiased !important;">メンドクサイを楽しんでいきましょう！</strong>`,
           params: {
-            placement: "right"
+            placement: "bottom"
           }
         }
         // {
