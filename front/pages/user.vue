@@ -1,36 +1,42 @@
 <template>
   <v-container class="user-page" v-if="currentUser">
     <v-row class="user-status">
-      <v-col cols="12" xs="5" sm="6" md="5" lg="4">
-        <h1 id="v-step-0">ステータス</h1>
+      <v-col cols="12" xs="5" sm="6" md="5" lg="5">
         <p>名前：{{ currentUser.user.name }}</p>
-        <p>レベル：{{ currentUser.user.level }}</p>
-        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }}</p>
+        <!-- <p>EXP：{{ currentUser.user.experience_point }}</p> -->
+        <div class="user-point">
+          <img class="coin-img" src="../assets/coin.png">
+          <p class="user-task-point">{{ currentUser.user.point }}</p>
+        </div>
+      </v-col>
+
+      <v-col cols="12" xs="5" sm="6" md="5" lg="5">
+        <p class="user-level">レベル：{{ currentUser.user.level }}</p>
+        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }} EXP</p>
         <v-progress-linear :height="12" :rounded="true"
           :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0" color="light-blue">
         </v-progress-linear>
-        <p>EXP：{{ currentUser.user.experience_point }}</p>
-        <p>TP：{{ currentUser.user.point }}</p>
+
       </v-col>
 
       <!-- <v-col cols="12" xs="5" sm="6" md="5" lg="4"> -->
-        <v-hover v-slot:default="{ hover }">
-          <router-link to="/reward">
-            <v-btn class="user-btn my-10">
-              <v-icon id="v-step-1" v-text="hover ? 'mdi-heart' : ''"></v-icon>REWARD PAGE
-            </v-btn>
-          </router-link>
-        </v-hover>
-        <!-- <v-hover v-slot:default="{ hover }"> -->
-          <!-- <v-btn class="user-btn" @click="logOut"> -->
-            <!-- <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT -->
-          <!-- </v-btn> -->
-        <!-- </v-hover> -->
+      <!-- <v-hover v-slot:default="{ hover }"> -->
+      <!-- <router-link to="/reward"> -->
+      <!-- <v-btn class="user-btn my-10"> -->
+      <!-- <v-icon id="v-step-1" v-text="hover ? 'mdi-heart' : ''"></v-icon>REWARD PAGE -->
+      <!-- </v-btn> -->
+      <!-- </router-link> -->
+      <!-- </v-hover> -->
+      <!-- <v-hover v-slot:default="{ hover }"> -->
+      <!-- <v-btn class="user-btn" @click="logOut"> -->
+      <!-- <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>LOG OUT -->
+      <!-- </v-btn> -->
+      <!-- </v-hover> -->
       <!-- </v-col> -->
     </v-row>
 
     <v-row justify="center">
-      <v-col cols="12" xs="12" sm="12" md="12" lg="8">
+      <v-col class="pb-0" cols="12" xs="12" sm="12" md="12" lg="8">
         <div>
           <AddTodo @submit="addTodo" />
         </div>
@@ -170,6 +176,23 @@
       border: 2px white solid;
       margin: 0 auto;
       width: 66%;
+      background-color: rgb(60, 60, 65);
+
+      .coin-img {
+        width: 20%;
+        display: inline-block;
+      }
+
+      .user-point {
+        display: flex;
+        .user-task-point {
+          font-size: x-large;
+          color: rgb(238, 238, 37);
+          padding-left: 2%;
+          padding-top: 8px;
+          margin-bottom: 0px;
+        }
+      }
     }
 
     .user-status {
@@ -202,7 +225,6 @@
 
     .list-title,
     h1 {
-      text-align: center;
       color: $sub-color;
     }
 

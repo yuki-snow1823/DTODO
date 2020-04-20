@@ -3,18 +3,18 @@
   <v-form>
     <v-container class="add-todo">
       <v-row>
-        <v-col class="pr-0" cols="3" xs="6" sm="2" md="1" lg="1">
-          <v-select label="TP" v-model="number" :items="items">test</v-select>
+        <v-col class="pr-0 pb-0" cols="3" xs="2" sm="2" md="2" lg="2">
+          <v-select label="TP" v-model="number" :items="items" outlined>test</v-select>
         </v-col>
-        <v-col class="pl-0" cols="9" xs="5" sm="6" md="7" lg="7">
-          <v-text-field v-model="title" :counter="20" label="todo" required></v-text-field>
+        <v-col class="pl-0 pb-0" cols="9" xs="8" sm="8" md="8" lg="8">
+          <v-text-field v-model="title" :counter="20" label="TODOの内容" required outlined></v-text-field>
         </v-col>
-        <v-col class="px-0" cols="12" xs="6" sm="4" md="4" lg="4">
+        <v-col class="px-0 pb-0" cols="12" xs="2" sm="2" md="2" lg="2">
           <v-hover v-slot:default="{ hover }">
-            <v-btn class="todo-btn" @click="handleSubmit">
+            <v-btn class="todo-btn my-2 mx-1" @click="handleSubmit">
               <v-icon v-text="hover ? 'mdi-heart' : ''">
                 </v-icon>
-                DETERMINATION
+                登録
             </v-btn>
           </v-hover>
         </v-col>
@@ -25,8 +25,7 @@
 </template>
 
 <script>
-  const maxNumber = 11;
-  const numberRange = [...Array(maxNumber).keys()]
+  const numberRange = [...Array(9).keys()].map(i => ++i)
   
   export default {
     data() {
@@ -67,12 +66,11 @@
     display: inline-block;
     font-weight: bold;
     margin: 15px;
-    width: 90%;
+    width: 93%;
   }
 
   .add-todo {
-    border: 2px white solid;
-
+    
     .todo-btn {
       @include btn;
 

@@ -2,7 +2,7 @@
   <div>
     <v-card class="pb-5">
       <v-card-title>
-        <h2 class="list-title">TODO LIST</h2>
+        <h2 class="list-title">TODOリスト</h2>
         <v-spacer></v-spacer>
       </v-card-title>
       <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
