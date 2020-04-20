@@ -147,9 +147,9 @@ export default {
         const updateUser = {
           // ...this.user,
           user: getUser.data.user,
-          rewards
-          // untilPercentage: getUser.data.untilPercentage,
-          // untilLevel: getUser.data.untilLevel,
+          rewards,
+          untilPercentage: getUser.data.untilPercentage,
+          untilLevel: getUser.data.untilLevel,
         };
         this.$store.commit("setUser", updateUser);
         item.status = true;

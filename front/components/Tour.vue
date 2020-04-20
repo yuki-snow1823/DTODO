@@ -81,7 +81,8 @@
         ],
         callbacks: {
           onPreviousStep: this.myCustomPreviousStepCallback,
-          onNextStep: this.myCustomNextStepCallback
+          onNextStep: this.myCustomNextStepCallback,
+          onFinish: this.myCustomFinishCallback,
         }
       }
     },
@@ -109,6 +110,9 @@
         if (currentStep === 1) {
           console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
         }
+      },
+      myCustomFinishCallback() {
+        this.$emit('finished')
       }
     }
   }

@@ -23,11 +23,11 @@
         </router-link>
       </v-toolbar-title>
 
-      <!-- <v-toolbar-items class="page-link">
+      <v-toolbar-items class="page-link">
         <v-btn class="logout-btn ml-10" @click="logOut">
           <v-icon>mdi-key</v-icon>
         </v-btn>
-      </v-toolbar-items> -->
+      </v-toolbar-items>
 
       <v-spacer />
     </v-app-bar>
@@ -106,7 +106,9 @@
             }
           ];
         }
-      },
+      }
+    },
+    methods: {
       logOut() {
         firebase
           .auth()

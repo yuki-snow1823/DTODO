@@ -13,7 +13,7 @@
         <p class="user-level">レベル：{{ currentUser.user.level }}</p>
         <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }} EXP</p>
         <v-progress-linear :height="12" :rounded="true"
-          :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0" color="light-blue">
+          :value="currentUser.untilPercentage ? currentUser.untilPercentage : 0" color="light-blue">
         </v-progress-linear>
       </v-col>
     </v-row>
@@ -82,6 +82,7 @@ export default {
       return this.$store.state.currentUser;
     }
   },
+
   methods: {
     async addReward(reward) {
       try {

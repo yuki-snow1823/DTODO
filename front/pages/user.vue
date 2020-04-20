@@ -12,7 +12,7 @@
 
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
         <p class="user-level">レベル：{{ currentUser.user.level }}</p>
-        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }} EXP</p>
+        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 0 }} EXP</p>
         <v-progress-linear :height="12" :rounded="true"
           :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0" color="light-blue">
         </v-progress-linear>
@@ -41,7 +41,7 @@
       </v-col>
     </v-row>
 
-    <Tour />
+    <Tour v-if="false" />
 
   </v-container>
 </template>
