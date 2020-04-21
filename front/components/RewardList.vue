@@ -241,14 +241,14 @@ $accent-color: #f0353f;
 .reward-list {
   display: flex;
   list-style: none;
-  border-left: solid 8px $sub-color !important;
+  border-left: solid 8px rgb(255, 255, 99) !important;
   border-bottom: solid 2px rgb(121, 117, 117) !important;
-  color: rgb(22, 16, 32);
+  color: rgb(19, 32, 16);
   margin: 10px;
   padding: 10px;
   border: 1px solid #7f7f7f;
   border-radius: 6px;
-  background-color: #c2d9f5;
+  background-color: #6edb64;
   cursor: grab;
 
   .reward-list-icon {
