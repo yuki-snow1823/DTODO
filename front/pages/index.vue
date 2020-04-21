@@ -29,6 +29,7 @@
         <div class="instead-of-form">
           <p>＊ログインしているな？</p>
           <p>＊使い方を学んだら、さっさと戻ってTODOに取り掛かるんだな。</p>
+          <vue-typer :text="['テキスト1', 'テキスト2', 'テキスト3']"></vue-typer>
         </div>
       </v-col>
 

@@ -3,7 +3,6 @@
     <v-row class="user-status" id="v-step-2">
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
         <p>名前：{{ currentUser.user.name }}</p>
-        <!-- <p>EXP：{{ currentUser.user.experience_point }}</p> -->
         <div class="user-point">
           <img class="coin-img" src="../assets/coin.png">
           <p class="user-task-point">{{ currentUser.user.point }}</p>

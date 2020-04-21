@@ -130,7 +130,7 @@ export default {
         this.$store.commit("setUser", updateUser);
         this.snack = true;
         this.snackColor = "warning";
-        this.snackText = "Data deleted";
+        this.snackText = "削除しました。";
       }
     },
     async completeItem(item) {
@@ -144,7 +144,6 @@ export default {
         const todos = getUser.data.todos;
         const rewards = this.user.rewards;
         const updateUser = {
-          // ...this.user,
           user: getUser.data.user,
           rewards,
           todos,
