@@ -27,9 +27,21 @@
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
         <v-icon class="mb-2 skull" size="80">mdi-skull-outline</v-icon>
         <div class="instead-of-form">
-          <p>＊ログインしているな？</p>
-          <p>＊使い方を学んだら、さっさと戻ってTODOに取り掛かるんだな。</p>
-          <vue-typer :text="['テキスト1', 'テキスト2', 'テキスト3']"></vue-typer>
+          <vue-typer
+            :text="[
+              '＊俺が見えてるってことは',
+              '＊ログインしているってことだ',
+              '＊わざわざログインしたまま\nトップ画面に来るなんて',
+              '＊物好きだな。',
+              '＊じゃあ、そんなアンタに',
+              '＊おまけ情報を教えてやろう。',
+              '＊それは・・・'
+            ]"
+            erase-style="clear"
+            :type-delay="140"
+            :erase-delay="270"
+            :repeat="0"
+          ></vue-typer>
         </div>
       </v-col>
 
@@ -473,7 +485,8 @@ $sp: 480px;
 
   .instead-of-form {
     border: 2px white solid;
-    padding-top: 20px;
+    padding: 20px 0;
+    text-align: center;
   }
 
   .introduction {
@@ -573,5 +586,23 @@ $sp: 480px;
       height: 70px !important;
     }
   }
+}
+
+.vue-typer {
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.vue-typer .custom.char {
+  color: #d4d4bd;
+  background-color: #1e1e1e;
+}
+.vue-typer .custom.char.selected {
+  background-color: #264f78;
+}
+
+.vue-typer .custom.caret {
+  width: 10px;
+  background-color: #3f51b5;
 }
 </style>
