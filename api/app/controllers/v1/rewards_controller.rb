@@ -24,8 +24,13 @@ class V1::RewardsController < ApplicationController
 
     def destroy
       reward = Reward.find(params[:id])
+      
+      # チュートリアルを繰り返し発生させない処理
+      user = User.find(reward.user_id)
+      user.update(todo_tour: false, reward_tour: false)
+
       if reward.destroy
-        render json: reward
+        render json: {reward: reward, user: user}
       end
     end
 
