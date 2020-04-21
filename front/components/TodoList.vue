@@ -45,8 +45,8 @@
 </template>
 
 <script>
-  const maxNumber = 11;
-  const numberRange = [...Array(maxNumber).keys()]
+  const numberRange = [...Array(9).keys()].map(i => ++i);
+
   import axios from "@/plugins/axios";
   export default {
     props: ["todos"],
