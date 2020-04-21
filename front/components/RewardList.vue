@@ -17,31 +17,28 @@
           class="reward-list"
           v-for="reward in rewards"
           :key="reward.sort"
-          >
+        >
           <v-icon size="30px"
             >mdi-numeric-{{ reward.point }}-box-outline</v-icon
           >
           <v-hover v-slot:default="{ hover }">
             <v-icon
-              v-if ="!reward.status"
+              v-if="!reward.status"
               @click="completeItem(reward)"
               size="25px"
               color="blue"
               v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'"
             >
             </v-icon>
-            <v-icon
-              v-else
-              size="25px"
-              color="blue"
-            >check
-            </v-icon>  
+            <v-icon v-else size="25px" color="blue">check </v-icon>
           </v-hover>
           <span class="reward-title">{{ reward.title }}</span>
           <div class="reward-list-icon">
-            <v-icon v-if="reward.status" big color="white" >lock_open</v-icon>
-            <v-icon v-else big color="red" >lock</v-icon>
-            <v-icon v-if="!reward.status" @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
+            <v-icon v-if="reward.status" big color="white">lock_open</v-icon>
+            <v-icon v-else big color="red">lock</v-icon>
+            <v-icon v-if="!reward.status" @click="editItem(reward)" big
+              >mdi-pencil-plus</v-icon
+            >
             <v-icon midium @click="deleteItem(reward)">delete</v-icon>
           </div>
         </li>
@@ -148,7 +145,7 @@ export default {
           rewards,
           todos,
           untilPercentage: getUser.data.untilPercentage,
-          untilLevel: getUser.data.untilLevel,
+          untilLevel: getUser.data.untilLevel
         };
         this.$store.commit("setUser", updateUser);
         item.status = true;

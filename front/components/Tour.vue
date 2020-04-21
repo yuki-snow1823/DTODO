@@ -83,7 +83,7 @@
         callbacks: {
           onPreviousStep: this.myCustomPreviousStepCallback,
           onNextStep: this.myCustomNextStepCallback,
-          onFinish: this.myCustomonFinishCallback,
+          onStop: this.myCustomOnStopCallback,
         }
       }
     },
@@ -110,15 +110,15 @@
 
         if (currentStep === 1) {
           console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
-          console.log(this.myCustomonFinishCallback)
+          console.log(this.callbacks)
         }
       },
       // async
-      myCustomonFinishCallback() {
+      myCustomOnStopCallback() {
         // await axios.patch(`/v1/user/${id}`, {
         //     id: id
         // });
-        console.log("finish-tour")
+        console.log("案内が終わりました")
       }  
       
     }
