@@ -248,7 +248,7 @@ $accent-color: #f0353f;
   padding: 10px;
   border: 1px solid #7f7f7f;
   border-radius: 6px;
-  background-color: #6edb64;
+  background-color: #83dd7b;
   cursor: grab;
 
   .reward-list-icon {
