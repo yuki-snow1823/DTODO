@@ -13,7 +13,7 @@ class V1::UsersController < ApplicationController
           rewards = user.rewards.order(sort: "ASC")
 
           totalExp = user.experience_point
-          user_level = calc_user_level(user, totalExp)
+          user_level = CalcUserLevel.calc_user_level(user, totalExp)
 
           testLevel = user.level
           # binding.pry

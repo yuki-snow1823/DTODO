@@ -43,7 +43,7 @@ class V1::RewardsController < ApplicationController
 
       todos = user.todos.order(sort: "ASC")
       totalExp = user.experience_point
-      user_level = calc_user_level(user, totalExp)
+      user_level = CalcUserLevel.calc_user_level(user, totalExp)
       
       render json: {user: user, todos: todos, reward: reward, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
       # render json: {reward: reward, user: user}
