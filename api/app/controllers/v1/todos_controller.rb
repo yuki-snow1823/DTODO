@@ -42,7 +42,6 @@ class V1::TodosController < ApplicationController
       user.update(point: totalPoint,experience_point: totalExp)
 
       rewards = user.rewards.order(sort: "ASC")
-      # binding.pry
       user_level = calc_user_level(user, totalExp)
 
       if todo.destroy

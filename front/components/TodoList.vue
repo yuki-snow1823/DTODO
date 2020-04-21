@@ -95,11 +95,11 @@
               point: item.point
             }
           });
-          console.log(getUser.data.rewards);
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
           });
           const rewards = getUser.data.rewards;
+          console.log(getUser.data);
           const updateUser = {
             user: getUser.data.user,
             todos,

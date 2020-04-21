@@ -41,7 +41,7 @@
             erase-style="clear"
             :type-delay="140"
             :erase-delay="270"
-            :repeat="infinity"
+            :repeat="Infinity"
           ></vue-typer>
         </div>
       </v-col>
