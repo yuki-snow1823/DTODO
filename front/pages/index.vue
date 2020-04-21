@@ -339,7 +339,7 @@ export default {
       this.$store.commit("setLoading", true);
       firebase
         .auth()
-        .signInWithEmailAndPassword("test111@gmail.com", "aaaaaa")
+        .signInWithEmailAndPassword("testtest777@gmail.com", "aaaaaa")
         .then(() => {
           this.$store.commit("setNotice", {
             status: true,
