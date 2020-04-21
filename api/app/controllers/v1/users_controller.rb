@@ -1,4 +1,4 @@
-require_relative '../../domain/user_level.rb'
+require_relative '../../domain/calc_user_level.rb'
 
 class V1::UsersController < ApplicationController
     def index
