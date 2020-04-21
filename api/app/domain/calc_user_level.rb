@@ -1,4 +1,4 @@
-def calc_user_level(user, totalExp)
+def CalcUserLevel(user, totalExp)
   levelSetting = LevelSetting.find_by(level: user.level + 1)
 
   if levelSetting.present? && levelSetting.thresold <= user.experience_point
