@@ -107,7 +107,6 @@
             untilPercentage: getUser.data.untilPercentage,
             untilLevel: getUser.data.untilLevel,
           };
-          // this.user.level = getUser.data.user.level;
           this.$store.commit("setUser", updateUser);
           this.snack = true;
           this.snackColor = "success";
@@ -115,7 +114,6 @@
         }
       },
       async editItem(todo) {
-        console.log(todo);
         this.dialog = true;
         this.dialogText = todo;
       },
