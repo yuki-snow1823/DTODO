@@ -42,11 +42,11 @@ export default {
   },
   methods: {
     login() {
-      this.$store.commit("setLoading", true);
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
+      this.$store.commit("setLoading", true);
           this.$store.commit("setNotice", {
             status: true,
             message: "ログインに成功しました"

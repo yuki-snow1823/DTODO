@@ -24,10 +24,10 @@
             outlined
           ></v-text-field>
         </v-col>
-        <v-col class="px-0 pb-0" cols="12" xs="2" sm="2" md="2" lg="2">
+        <v-col class="px-0 pb-0" cols="12" xs="12" sm="2" md="2" lg="2">
           <v-hover v-slot:default="{ hover }">
-            <v-btn class="todo-btn my-2 mx-1" @click="handleSubmit">
-              <v-icon v-text="hover ? 'mdi-heart' : ''"> </v-icon>
+            <v-btn class="todo-btn" @click="handleSubmit">
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
               登録
             </v-btn>
           </v-hover>
@@ -72,26 +72,27 @@ export default {
 <style lang="scss">
 $main-color: #fc7b03;
 
-@mixin btn {
-  background-color: black !important;
-  border: 2px solid $main-color;
-  color: $main-color;
-  display: inline-block;
-  font-weight: bold;
-  margin: 15px;
-  width: 93%;
-}
+
 
 .add-todo {
   border: solid 2px white;
 
   .todo-btn {
-    @include btn;
+    background-color: black !important;
+    border: 2px solid $main-color;
+    color: $main-color;
+    display: inline-block;
+    font-weight: bold;
+    padding-bottom: 35px !important;
+    padding-top: 17px !important;
+    margin-left: 5%;
+    width: 90%;
 
     &:hover {
       border: 2px solid yellow;
       color: yellow;
     }
+
   }
 
   .mdi-heart {

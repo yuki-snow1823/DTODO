@@ -2,8 +2,7 @@
   <v-container class="user-page" v-if="currentUser">
     <v-row class="user-status" id="v-step-2">
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
-        <p>名前：{{ currentUser.user.name }}</p>
-        <!-- <p>EXP：{{ currentUser.user.experience_point }}</p> -->
+        <p>名前：{{ currentUser.user.name }}<v-icon class="mb-2" color="yellow" size="30" v-if="currentUser.user.level=10">mdi-crown</v-icon></p>
         <div class="user-point">
           <img class="coin-img" src="../assets/coin.png">
           <p class="user-task-point">{{ currentUser.user.point }}</p>
@@ -12,7 +11,8 @@
 
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
         <p class="user-level">レベル：{{ currentUser.user.level }}</p>
-        <p>次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 0 }} EXP</p>
+        <p v-if="!currentUser.user.level">次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 0 }} EXP</p>
+        <p v-else>あなたは最大レベルになりました！</p>
         <v-progress-linear :height="12" :rounded="true"
           :value="currentUser.untilPercentage ? currentUser.untilPercentage: 0" color="light-blue">
         </v-progress-linear>
@@ -40,8 +40,7 @@
         </div>
       </v-col>
     </v-row>
-
-    <Tour v-if="false" />
+    <Tour v-if="currentUser.user.todo_tour" />
 
   </v-container>
 </template>

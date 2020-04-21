@@ -7,7 +7,6 @@
       </v-card-title>
       <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
         <li id="v-step-1" class="todo-list" v-for="todo in todos" :key="todo.sort">
-          <!-- <span class="todo-point">{{ todo.point }}</span> -->
           <v-icon size="30px">mdi-numeric-{{todo.point}}-box-outline</v-icon>
            <v-hover v-slot:default="{ hover }">
             <v-icon @click="completeItem(todo)" size="25px" color="blue" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
@@ -96,13 +95,15 @@
               point: item.point
             }
           });
+          console.log(getUser.data.rewards);
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
           });
+          const rewards = getUser.data.rewards;
           const updateUser = {
-            // ...this.user,
             user: getUser.data.user,
             todos,
+            rewards,
             untilPercentage: getUser.data.untilPercentage,
             untilLevel: getUser.data.untilLevel,
           };

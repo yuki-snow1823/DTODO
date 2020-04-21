@@ -2,9 +2,21 @@
   <v-app class="app" dark>
     <Loading />
     <Success />
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
+    <v-navigation-drawer
+      v-model="drawer"
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      fixed
+      app
+    >
       <v-list>
-        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -12,23 +24,45 @@
             <v-list-item-title v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item v-if="user" @click="logOut">
+          <v-list-item-action>
+            <v-icon>mdi-key</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>ログアウト</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
+
     </v-navigation-drawer>
     <v-app-bar class="tool-bar" :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon id="v-step-3" @click.stop="drawer = !drawer" />
 
       <v-toolbar-title class="pl-0">
         <router-link to="/" class="toolbar-title">
-          <v-icon class="mb-2" size="38">mdi-skull-outline</v-icon><span class="title-first">D</span>TODO
+          <v-icon class="mb-2" size="38">mdi-skull-outline</v-icon
+          ><span class="title-first">D</span>TODO
         </router-link>
       </v-toolbar-title>
 
-      <v-toolbar-items class="page-link">
-        <v-btn class="logout-btn ml-10" @click="logOut">
-          <v-icon>mdi-key</v-icon>
+      <v-toolbar-items class="page-link" v-if="user">
+        <v-btn to="/user" nuxt class="header-btn ml-2">
+          <v-icon>mdi-feather</v-icon>
         </v-btn>
       </v-toolbar-items>
 
+      <v-toolbar-items class="page-link" v-if="user">
+        <v-btn to="/reward" nuxt class="header-btn ml-1">
+          <v-icon>mdi-lock</v-icon>
+        </v-btn>
+      </v-toolbar-items>
+
+      <v-toolbar-items class="page-link" v-if="user">
+        <v-btn to="#" nuxt class="header-btn ml-1" @click="logOut">
+          <v-icon>mdi-key</v-icon>
+        </v-btn>
+      </v-toolbar-items>
       <v-spacer />
     </v-app-bar>
     <v-content>
@@ -44,72 +78,75 @@
 </template>
 
 <script>
-  import Loading from "@/components/Loading";
-  import Success from "@/components/Success";
-  import firebase from "@/plugins/firebase";
-  import axios from "@/plugins/axios";
+import Loading from "@/components/Loading";
+import Success from "@/components/Success";
+import firebase from "@/plugins/firebase";
+import axios from "@/plugins/axios";
 
-  export default {
-    data() {
-      return {
-        clipped: false,
-        drawer: false,
-        fixed: false,
-        miniVariant: false,
-        right: true,
-        rightDrawer: false,
-        title: "DTODO"
-      };
+export default {
+  data() {
+    return {
+      clipped: false,
+      drawer: false,
+      fixed: false,
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: "DTODO"
+    };
+  },
+  components: {
+    Loading,
+    Success
+  },
+  computed: {
+    user() {
+      return this.$store.state.currentUser;
     },
-    components: {
-      Loading,
-      Success
-    },
-    computed: {
-      user() {
-        return this.$store.state.currentUser;
-      },
-      items() {
-        if (this.user) {
-          return [
-            {
-              icon: "mdi-skull-crossbones",
-              title: "トップ",
-              to: "/"
-            },
-            {
-              icon: "mdi-heart",
-              title: "TODO",
-              to: "/user"
-            },
-            {
-              icon: "mdi-lock",
-              title: "ごほうび",
-              to: "/reward"
-            }
-          ];
-        } else {
-          return [{
-              icon: "mdi-skull-crossbones",
-              title: "トップ",
-              to: "/"
-            },
-            {
-              icon: "mdi-key-variant",
-              title: "ログイン",
-              to: "/login"
-            },
-            {
-              icon: "mdi-account-arrow-right",
-              title: "新規登録",
-              to: "/signup"
-            }
-          ];
-        }
+    items() {
+      if (this.user) {
+        return [
+          {
+            icon: "mdi-skull-crossbones",
+            title: "トップ",
+            to: "/"
+          },
+          {
+            icon: "mdi-feather",
+            title: "TODO",
+            to: "/user"
+          },
+          {
+            icon: "mdi-lock",
+            title: "ごほうび",
+            to: "/reward"
+          }
+        ];
+      } else {
+        return [
+          {
+            icon: "mdi-skull-crossbones",
+            title: "トップ",
+            to: "/"
+          },
+          {
+            icon: "mdi-key-variant",
+            title: "ログイン",
+            to: "/login"
+          },
+          {
+            icon: "mdi-account-arrow-right",
+            title: "新規登録",
+            to: "/signup"
+          }
+        ];
       }
-    },
-    methods: {
-      logOut() {
+    }
+  },
+  methods: {
+    logOut() {
+      const res = confirm("本当にログアウトしますか？");
+      if (res) {
         firebase
           .auth()
           .signOut()
@@ -123,44 +160,68 @@
       }
     }
   }
+};
 </script>
 
 <style lang="scss">
-  $main-color: #fc7b03;
+$main-color: #fc7b03;
 
-  .app {
-    .toolbar-title {
-      color: white;
-      text-decoration: none;
-      font-family: 'Comic Sans MS';
-      font-size: 30px;
-      font-weight: bold;
+$pc: 1024px;
+$tab: 680px;
+$sp: 480px;
 
-      .title-first {
-        color: $main-color;
-      }
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
 
-    }
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
 
-    .tool-bar {
-      display: flex;
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
 
-      .page-link {
-        justify-content: right;
+.app {
+  .toolbar-title {
+    color: white;
+    text-decoration: none;
+    font-family: "Comic Sans MS";
+    font-size: 30px;
+    font-weight: bold;
 
-        .page-link-title {
-          padding-top: 15px;
-        }
-
-        .logout-btn {
-          background-color: rgb(45, 47, 48) !important;
-          margin: 0 0 0 auto;
-        }
-      }
-    }
-
-    .v-content__wrap {
-      background-color: black !important;
+    .title-first {
+      color: $main-color;
     }
   }
+
+  .tool-bar {
+    .page-link {
+      .page-link-title {
+        padding-top: 15px;
+      }
+
+      .header-btn {
+        background-color: rgb(45, 47, 48) !important;
+        @include tab {
+          display: none;
+        }
+
+        @include sp {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+
+  .v-content__wrap {
+    background-color: black !important;
+  }
+}
 </style>

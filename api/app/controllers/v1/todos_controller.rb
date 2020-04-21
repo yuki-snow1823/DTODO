@@ -40,11 +40,13 @@ class V1::TodosController < ApplicationController
       totalExp += todo.point
       user.experience_point = totalExp
       user.update(point: totalPoint,experience_point: totalExp)
-      
+
+      rewards = user.rewards.order(sort: "ASC")
+      # binding.pry
       user_level = calc_user_level(user, totalExp)
 
       if todo.destroy
-        render json: {todo: todo, user: user, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level] }
+        render json: {todo: todo, user: user, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level] }
       end
     end
 

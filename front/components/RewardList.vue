@@ -18,7 +18,6 @@
           v-for="reward in rewards"
           :key="reward.sort"
           >
-          <!-- <span class="reward-point">{{ reward.point }}</span> -->
           <v-icon size="30px"
             >mdi-numeric-{{ reward.point }}-box-outline</v-icon
           >
@@ -42,7 +41,7 @@
           <div class="reward-list-icon">
             <v-icon v-if="reward.status" big color="white" >lock_open</v-icon>
             <v-icon v-else big color="red" >lock</v-icon>
-            <v-icon @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
+            <v-icon v-if="!reward.status" @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
             <v-icon midium @click="deleteItem(reward)">delete</v-icon>
           </div>
         </li>
@@ -131,7 +130,7 @@ export default {
         this.$store.commit("setUser", updateUser);
         this.snack = true;
         this.snackColor = "warning";
-        this.snackText = "Data deleted";
+        this.snackText = "削除しました。";
       }
     },
     async completeItem(item) {
@@ -142,12 +141,12 @@ export default {
             point: item.point
           }
         });
-        console.log(item.point);
+        const todos = getUser.data.todos;
         const rewards = this.user.rewards;
         const updateUser = {
-          // ...this.user,
           user: getUser.data.user,
           rewards,
+          todos,
           untilPercentage: getUser.data.untilPercentage,
           untilLevel: getUser.data.untilLevel,
         };
@@ -242,14 +241,14 @@ $accent-color: #f0353f;
 .reward-list {
   display: flex;
   list-style: none;
-  border-left: solid 8px $sub-color !important;
+  border-left: solid 8px rgb(255, 255, 99) !important;
   border-bottom: solid 2px rgb(121, 117, 117) !important;
-  color: rgb(22, 16, 32);
+  color: rgb(19, 32, 16);
   margin: 10px;
   padding: 10px;
   border: 1px solid #7f7f7f;
   border-radius: 6px;
-  background-color: #c2d9f5;
+  background-color: #83dd7b;
   cursor: grab;
 
   .reward-list-icon {
