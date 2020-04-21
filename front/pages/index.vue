@@ -21,6 +21,7 @@
               <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログイン
             </v-btn>
           </v-hover>
+          <p>※ゲストはログイン後、毎回チュートリアルが再生されます。</p>
         </div>
       </v-col>
 

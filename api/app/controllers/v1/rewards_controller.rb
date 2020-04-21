@@ -27,7 +27,11 @@ class V1::RewardsController < ApplicationController
       
       # チュートリアルを繰り返し発生させない処理
       user = User.find(reward.user_id)
-      user.update(todo_tour: false, reward_tour: false)
+
+      # テストユーザーならチュートリアルを毎回行う
+      if user.email != "testtest777@gmail.com"
+        user.update(todo_tour: false, reward_tour: false)
+      end
 
       if reward.destroy
         render json: {reward: reward, user: user}
