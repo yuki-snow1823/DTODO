@@ -4,8 +4,7 @@
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
         <p>名前：{{ currentUser.user.name }}<v-icon class="mb-2" color="yellow" size="30" v-if="currentUser.user.level == 10">mdi-crown</v-icon></p>
         <div class="user-point">
-          <img v-if="currentUser.user" class="coin-img" src="../assets/coin.gif">
-          <p class="user-task-point">{{ currentUser.user.point }}</p>
+          <p class="user-task-point">TP:{{ currentUser.user.point }}</p>
         </div>
       </v-col>
 

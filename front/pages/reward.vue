@@ -6,8 +6,7 @@
             v-if="currentUser.user.level == 10">mdi-crown</v-icon>
         </p>
         <div class="user-point">
-          <img class="coin-img" src="../assets/coin.gif">
-          <p class="user-task-point">{{ currentUser.user.point }}</p>
+          <p class="user-task-point">TP:{{ currentUser.user.point }}</p>
         </div>
       </v-col>
 
