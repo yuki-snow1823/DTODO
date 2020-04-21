@@ -29,7 +29,7 @@
         </v-col>
         <v-col class="px-0 pb-0" cols="12" xs="2" sm="2" md="2" lg="2">
           <v-hover v-slot:default="{ hover }">
-            <v-btn class="reward-btn my-2 mx-1" @click="handleSubmit">
+            <v-btn class="reward-btn" @click="handleSubmit">
               <v-icon v-text="hover ? 'mdi-heart' : ''"> </v-icon>
               登録
             </v-btn>
@@ -69,13 +69,15 @@ export default {
 $main-color: #fc7b03;
 
 @mixin btn {
-  background-color: black !important;
-  border: 2px solid $main-color;
-  color: $main-color;
-  display: inline-block;
-  font-weight: bold;
-  margin: 15px;
-  width: 90%;
+    background-color: black !important;
+    border: 2px solid $main-color;
+    color: $main-color;
+    display: inline-block;
+    font-weight: bold;
+    padding-bottom: 35px !important;
+    padding-top: 17px !important;
+    margin-left: 5%;
+    width: 90%;
 }
 
 .add-reward {
