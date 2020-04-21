@@ -31,16 +31,20 @@ class V1::RewardsController < ApplicationController
 
     def complete
       reward = Reward.find(params[:id])
+      user = User.find(reward.user_id)
       # binding.pry
       reward.update(status: true)
-      user = User.find(reward.user_id)
+
       losepoint = user.point.to_i
       losepoint -= reward.point
       user.point = losepoint
+
       user.update(point: losepoint)
+
       todos = user.todos.order(sort: "ASC")
       totalExp = user.experience_point
       user_level = calc_user_level(user, totalExp)
+      
       render json: {user: user, todos: todos, reward: reward, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
       # render json: {reward: reward, user: user}
     end
