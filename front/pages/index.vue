@@ -37,7 +37,7 @@
               '＊じゃあ、そんなアンタに\nおまけ情報を教えてやろう。',
               '＊最大レベルの10になると',
               '＊名前の横に・・・',
-              'あとは自分でなってみるんだな。'
+              'あとは自分で確かめてみるんだな。'
             ]" erase-style="clear" :type-delay="140" :erase-delay="270" :repeat="Infinity"></vue-typer>
         </div>
       </v-col>
@@ -114,12 +114,6 @@
 
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
-        <!-- 
-        <div class="mb-10">
-          <v-carousel height="100%">
-            <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
-          </v-carousel>
-        </div> -->
 
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
