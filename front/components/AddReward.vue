@@ -74,6 +74,7 @@ $main-color: #fc7b03;
     color: $main-color;
     display: inline-block;
     font-weight: bold;
+    font-size: 25px;
     padding-bottom: 35px !important;
     padding-top: 17px !important;
     margin-left: 5%;
@@ -85,11 +86,17 @@ $main-color: #fc7b03;
 
   .reward-btn {
     @include btn;
+    
 
     &:hover {
       border: 2px solid yellow;
       color: yellow;
     }
+    
+    span {
+      margin-top: -9px;
+    }
+  
   }
 
   .mdi-heart {

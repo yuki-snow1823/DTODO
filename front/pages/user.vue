@@ -111,18 +111,6 @@
           this.$store.commit("setError", data.error_msg);
         }
       },
-      logOut() {
-        firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            this.$store.commit("setUser", null);
-            this.$router.push("/");
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
     }
   };
 </script>

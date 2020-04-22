@@ -63,8 +63,7 @@ export default {
             placement: "bottom"
           },
           content:
-            `ごほうびを登録しても、そのまますぐ使ってはいけません。<br>
-            鍵がかかった状態で登録されるので、実際に使うには<strong>ハートのマークを押してごほうびを解放しましょう。</strong><br>
+            `鍵がかかった状態で登録されるので、実際に使うには<strong>ハートのマークを押してごほうびを解放しましょう。</strong><br>
             ご褒美を解放したら次に進んでください。`
         },
         {
@@ -74,7 +73,7 @@ export default {
           },
           content:
            `ご褒美が解放され、鍵が開き、その分タスクポイントが消費されました。<br>
-            現実世界で消費したごほうびは<strong>ゴミ箱マーク</strong>をクリックして、削除しましょう。<br>
+            実際に使ったごほうびは<strong>ゴミ箱マークをクリックして、削除しましょう。</strong><br>
             無事削除できたら、これでチュートリアルは終わりです！<br>
             <strong style="color: cyan; -webkit-font-smoothing: antialiased !important;">メンドクサイを楽しんでいきましょう！</strong>`,
           params: {

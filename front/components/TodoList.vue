@@ -2,21 +2,39 @@
   <div>
     <v-card class="pb-5">
       <v-card-title>
-        <h2  class="list-title">TODOリスト</h2>
+        <h2 class="list-title">TODOリスト</h2>
         <v-spacer></v-spacer>
       </v-card-title>
       <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
         <li id="v-step-1" class="todo-list" v-for="todo in todos" :key="todo.sort">
           <v-icon size="30px">mdi-numeric-{{todo.point}}-box-outline</v-icon>
-           <v-hover v-slot:default="{ hover }">
-            <v-icon @click="completeItem(todo)" size="25px" color="blue" v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
+          <v-hover v-slot:default="{ hover }">
+            <v-icon @click="completeDialog = true" size="25px" color="blue"
+              v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
             </v-icon>
           </v-hover>
+          <v-dialog v-model="completeDialog">
+            <v-card>
+              <v-card-title>TODOを達成しますか？</v-card-title>
+              <v-btn @click="completeItem(todo)">はい</v-btn>
+              <v-btn @click="completeDialog = false">いいえ</v-btn>
+            </v-card>
+          </v-dialog>
+
           <span class="todo-title">{{ todo.title }}</span>
           <div class="todo-list-icon">
             <v-icon @click="editItem(todo)" big>mdi-pencil-plus</v-icon>
-            <v-icon midium @click="deleteItem(todo)">delete</v-icon>
+            <v-icon midium @click="deleteDialog = true">delete</v-icon>
           </div>
+
+          <v-dialog v-model="deleteDialog">
+            <v-card>
+              <v-card-title>TODOを削除しますか？</v-card-title>
+              <v-btn @click="deleteItem(todo)">はい</v-btn>
+              <v-btn @click="deleteDialog = false">いいえ</v-btn>
+            </v-card>
+          </v-dialog>
+
         </li>
       </draggable>
     </v-card>
@@ -45,8 +63,8 @@
 </template>
 
 <script>
-  const maxNumber = 11;
-  const numberRange = [...Array(maxNumber).keys()]
+  const numberRange = [...Array(9).keys()].map(i => ++i);
+
   import axios from "@/plugins/axios";
   export default {
     props: ["todos"],
@@ -61,7 +79,9 @@
         snackColor: "",
         snackText: "",
         dialogText: "",
-        dialog: false
+        dialog: false,
+        completeDialog: false,
+        deleteDialog: false,
       };
     },
     computed: {
@@ -71,8 +91,6 @@
     },
     methods: {
       async deleteItem(item) {
-        const res = confirm("本当に削除しますか？");
-        if (res) {
           await axios.delete(`/v1/todos/${item.id}`);
           const todos = this.user.todos.filter(todo => {
             return todo.id !== item.id;
@@ -85,37 +103,36 @@
           this.snack = true;
           this.snackColor = "warning";
           this.snackText = "Data deleted";
-        }
+          this.deleteDialog = false
       },
       async completeItem(item) {
-        const res = confirm("本当に達成しますか？");
-        if (res) {
-          const getUser = await axios.get(`/v1/todos/${item.id}`, {
-            params: {
-              point: item.point
-            }
-          });
-          const todos = this.user.todos.filter(todo => {
-            return todo.id !== item.id;
-          });
-          const rewards = getUser.data.rewards;
-          console.log(getUser.data);
-          const updateUser = {
-            user: getUser.data.user,
-            todos,
-            rewards,
-            untilPercentage: getUser.data.untilPercentage,
-            untilLevel: getUser.data.untilLevel,
-          };
-          this.$store.commit("setUser", updateUser);
-          this.snack = true;
-          this.snackColor = "success";
-          this.snackText = item.point + "タスクポイントと経験値を獲得した！";
-        }
+        const getUser = await axios.get(`/v1/todos/${item.id}`, {
+          params: {
+            point: item.point
+          }
+        });
+        const todos = this.user.todos.filter(todo => {
+          return todo.id !== item.id;
+        });
+        const rewards = getUser.data.rewards;
+        console.log(getUser.data);
+        const updateUser = {
+          user: getUser.data.user,
+          todos,
+          rewards,
+          untilPercentage: getUser.data.untilPercentage,
+          untilLevel: getUser.data.untilLevel,
+        };
+        this.$store.commit("setUser", updateUser);
+        this.snack = true;
+        this.snackColor = "success";
+        this.snackText = item.point + "タスクポイントと経験値を獲得した！";
+        this.completeDialog = false
       },
       async editItem(todo) {
         this.dialog = true;
         this.dialogText = todo;
+        // ここでdialogに引数を渡す処理をしている
       },
       async updateItem(id, title, point) {
         await axios.patch(`/v1/todos/${id}`, {
@@ -158,6 +175,7 @@
     },
     watch: {}
   };
+
 </script>
 
 <style lang="scss">
@@ -218,6 +236,7 @@
       padding-top: 2px;
       margin-left: 10px;
     }
+
     .todo-point {
       color: rgb(41, 79, 160);
       font-weight: bold;
@@ -258,5 +277,5 @@
     }
 
   }
-  
+
 </style>
