@@ -9,7 +9,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "test": "jest --config jest.config.js"
+    "test": "jest --config jest.config.js --silent=false"
   },
   "dependencies": {
     "@babel/core": "^7.9.0",

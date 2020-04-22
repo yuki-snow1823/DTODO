@@ -25,7 +25,7 @@ describe('pages/index.vue', () => {
 
     test('ログインしているときに、新規登録フォームが表示されない',() => {
       expect(wrapper.contains('#index-signup')).toBe(true)
-      // 不明
+      // ログインしている時という書き方が不明
     })
   })
   
