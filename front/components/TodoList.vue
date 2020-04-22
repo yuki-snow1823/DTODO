@@ -35,6 +35,14 @@
       </v-card>
     </v-dialog>
 
+    <v-dialog v-model="completeDialog">
+      <v-card>
+        <v-card-title>TODOを達成しますか？</v-card-title>
+        <v-btn @click="completeItem(todo)">はい</v-btn>
+        <v-btn @click="completeDialog = false">いいえ</v-btn>
+      </v-card>
+    </v-dialog>
+
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
@@ -61,7 +69,9 @@
         snackColor: "",
         snackText: "",
         dialogText: "",
-        dialog: false
+        dialog: false,
+        completeDialog: false,
+        complete: false
       };
     },
     computed: {
@@ -88,7 +98,8 @@
         }
       },
       async completeItem(item) {
-        const res = confirm("本当に達成しますか？");
+        this.completeDialog = true
+        const res = confirm('本当に達成しますか？')
         if (res) {
           const getUser = await axios.get(`/v1/todos/${item.id}`, {
             params: {
@@ -116,6 +127,7 @@
       async editItem(todo) {
         this.dialog = true;
         this.dialogText = todo;
+        // ここでdialogに引数を渡す処理をしている
       },
       async updateItem(id, title, point) {
         await axios.patch(`/v1/todos/${id}`, {
