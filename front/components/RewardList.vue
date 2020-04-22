@@ -93,7 +93,6 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
     },
     methods: {
       async deleteItem(item) {
-
           const getUser = await axios.delete(`/v1/rewards/${item.id}`);
           const rewards = this.user.rewards.filter(reward => {
             return reward.id !== item.id;
@@ -109,9 +108,9 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
           this.snack = true;
           this.snackColor = "warning";
           this.snackText = "削除しました。";
+          this.deleteDialog = false;
       },
       async completeItem(item) {
-
           const getUser = await axios.get(`/v1/rewards/${item.id}`, {
             params: {
               point: item.point
@@ -132,6 +131,7 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
           this.snack = true;
           this.snackColor = "success";
           this.snackText = "ごほうびを解放した！";
+          this.completeDialog = false;
       },
       async editItem(reward) {
         console.log(reward);
