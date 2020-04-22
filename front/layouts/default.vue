@@ -139,6 +139,7 @@
     },
     methods: {
       logOut() {
+        this.logOutWindow = false;
         firebase
           .auth()
           .signOut()
@@ -223,7 +224,13 @@
     display: flex;
 
     .v-btn {
-      justify-content: center;
+      background-color: rgb(29, 29, 29) !important;
+      border: 2px solid $main-color;
+      color: $main-color !important;
+      float: left;
+      margin: 0px 5% 15px;
+      width: 40%;
+      font-weight: bold;
     }
   }
 
