@@ -9,18 +9,35 @@
         <li id="v-step-1" class="reward-list" v-for="reward in rewards" :key="reward.sort">
           <v-icon size="30px">mdi-numeric-{{ reward.point }}-box-outline</v-icon>
           <v-hover v-slot:default="{ hover }">
-            <v-icon v-if="!reward.status" @click="completeItem(reward)" size="25px" color="blue"
+            <v-icon v-if="!reward.status" @click="completeDialog = true" size="25px" color="blue"
               v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
             </v-icon>
             <v-icon v-else size="25px" color="blue">check </v-icon>
           </v-hover>
+                    <v-dialog v-model="completeDialog">
+            <v-card>
+              <v-card-title>ごほうびを達成しますか？</v-card-title>
+              <v-btn @click="completeItem(reward)">はい</v-btn>
+              <v-btn @click="completeDialog = false">いいえ</v-btn>
+            </v-card>
+          </v-dialog>
+
           <span class="reward-title">{{ reward.title }}</span>
           <div class="reward-list-icon">
             <v-icon v-if="reward.status" big color="white">lock_open</v-icon>
             <v-icon v-else big color="red">lock</v-icon>
             <v-icon v-if="!reward.status" @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
-            <v-icon midium @click="deleteItem(reward)">delete</v-icon>
+            <v-icon midium @click="deleteDialog = true">delete</v-icon>
           </div>
+
+          <v-dialog v-model="deleteDialog">
+            <v-card>
+              <v-card-title>ごほうびを削除しますか？</v-card-title>
+              <v-btn @click="deleteItem(reward)">はい</v-btn>
+              <v-btn @click="deleteDialog = false">いいえ</v-btn>
+            </v-card>
+          </v-dialog>
+
         </li>
       </draggable>
     </v-card>
@@ -38,6 +55,7 @@
         <v-btn class="update-btn" @click="updateItem(dialogText.id, dialogText.title, dialogText.point)">保存</v-btn>
       </v-card>
     </v-dialog>
+
 
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
@@ -63,7 +81,9 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
         snackColor: "",
         snackText: "",
         dialogText: "",
-        dialog: false
+        dialog: false,
+        completeDialog: false,
+        deleteDialog: false,
       };
     },
     computed: {
@@ -73,8 +93,7 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
     },
     methods: {
       async deleteItem(item) {
-        const res = confirm("本当に削除しますか？");
-        if (res) {
+
           const getUser = await axios.delete(`/v1/rewards/${item.id}`);
           const rewards = this.user.rewards.filter(reward => {
             return reward.id !== item.id;
@@ -90,11 +109,9 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
           this.snack = true;
           this.snackColor = "warning";
           this.snackText = "削除しました。";
-        }
       },
       async completeItem(item) {
-        const res = confirm("本当に解放しますか？");
-        if (res) {
+
           const getUser = await axios.get(`/v1/rewards/${item.id}`, {
             params: {
               point: item.point
@@ -115,7 +132,6 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
           this.snack = true;
           this.snackColor = "success";
           this.snackText = "ごほうびを解放した！";
-        }
       },
       async editItem(reward) {
         console.log(reward);
