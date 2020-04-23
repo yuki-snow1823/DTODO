@@ -1,24 +1,24 @@
 <template>
-  <!-- <v-form> -->
+  <v-form>
     <v-container class="add-reward">
       <v-row>
-        <v-col id="v-step-0" class="pr-0 pb-0" cols="3" xs="2" sm="2" md="2" lg="2">
+        <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
           <v-select label="TP" v-model="number" :items="items" outlined></v-select>
         </v-col>
-        <v-col class="pl-0 pb-0" cols="9" xs="8" sm="8" md="8" lg="8">
+        <v-col class="pl-0 pb-0" cols="8" xs="8" sm="8" md="8" lg="8">
           <v-text-field v-model="title" :counter="20" label="ごほうびの内容" required outlined></v-text-field>
         </v-col>
         <v-col class="px-0 pb-0" cols="12" xs="2" sm="2" md="2" lg="2">
-          <!-- <v-hover v-slot:default="{ hover }"> -->
+          <v-hover v-slot:default="{ hover }">
             <v-btn class="reward-btn" @click="handleSubmit">
               <v-icon v-text="hover ? 'mdi-heart' : ''"> </v-icon>
               登録
             </v-btn>
-          <!-- </v-hover> -->
+          </v-hover>
         </v-col>
       </v-row>
     </v-container>
-  <!-- </v-form> -->
+  </v-form>
 </template>
 <script>
   const numberRange = [...Array(9).keys()].map(i => ++i);

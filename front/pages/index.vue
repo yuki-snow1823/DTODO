@@ -1,6 +1,12 @@
 <template>
   <v-container class="index-page">
-    <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
+
+    <h1 v-if="countHiddenPage >= 5" ><span>D</span>
+      means<span>
+        Determination</span>
+        to become an engineer and to challenge <span >Vue.js!</span></h1>
+
+    <h1 v-else class="index-title"><span class="index-title-first">D</span>TODO</h1>
 
     <v-row>
       <v-col cols="12" sm="12" md="6" lg="6">
@@ -27,17 +33,20 @@
       </v-col>
 
       <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
-        <v-icon class="mb-2 skull" size="80">mdi-skull-outline</v-icon>
+        <v-icon id="skull" :color="color" @click="countSkull()" class="mb-2 skull" :size="size">mdi-skull-outline</v-icon>
+        <h1 v-if="countHiddenPage >= 15" >押しすぎだ。</h1>
         <div class="instead-of-form">
           <vue-typer :text="[
               '＊俺が見えてるってことは',
               '＊ログインしているってことだ。',
               '＊わざわざログインしたまま\nトップ画面に来るなんて',
               '＊物好きだな。',
-              '＊じゃあ、そんなアンタに\nおまけ情報を教えてやろう。',
-              '＊最大レベルの10になると',
-              '＊名前の横に・・・',
-              'あとは自分で確かめてみるんだな。'
+              '＊ところでアンタ\nこのアプリの「D」の意味は知っているか？',
+              '＊フフフ・・・',
+              '＊俺様の顔を５回クリックすると',
+              '＊わかるかもな。',
+              '＊スマホのやつは\n上にスライドしてくれよな。',
+              '＊じゃあな。',
             ]" erase-style="clear" :type-delay="140" :erase-delay="270" :repeat="Infinity"></vue-typer>
         </div>
       </v-col>
@@ -174,14 +183,9 @@
         show2: false,
         error: "",
         dialog: false,
-        items: [{
-            // src: AssetsImage,
-            src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
-          },
-          {
-            src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
-          }
-        ],
+        countHiddenPage: 0,
+        color: "",
+        size: 80,
         showContent: false
       };
     },
@@ -324,7 +328,12 @@
           title.classList.add(name);
         };
         setTimeout(check, 1000, "checked");
-      }
+      },
+    countSkull(){
+      this.countHiddenPage ++;
+      this.size += 10;
+      this.color = "green"
+    }
     },
     created() {
       this.$vuetify.lang = {
@@ -555,4 +564,15 @@
     width: 10px;
     background-color: #3f51b5;
   }
+
+  .green {
+    color: green;
+  }
+
+div {
+  margin: 0 auto;
+  #skull {
+    margin: 0 auto;
+  }
+}
 </style>

@@ -66,7 +66,7 @@
     </v-content>
 
     <v-footer :fixed="fixed" app>
-      <span>DETERMINATION. 素材提供「RPGドット」様</span>
+      <span>トップページ素材提供「RPGドット」様</span>
     </v-footer>
   </v-app>
 </template>
