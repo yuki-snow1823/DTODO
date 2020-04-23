@@ -1,13 +1,40 @@
 require 'rails_helper'
 
-describe V1::TodosController , type: :controller do
-  
-    describe 'createアクションについて' do
-    it 'todoが期待される値を持つ' do
-      todo = create(:todo)
-      
-      expect(todo).to be_valid
-    end
-  end
+describe V1::TodosController , type: :request do
+  describe 'Todoコントローラーに関して' do
 
+    context 'パラメーターが妥当な場合' do
+      describe 'POST #create' do
+        it 'リクエストが成功する' do
+          post v1_todos_path, params: { todo: FactoryBot.attributes_for(:todo) }
+            expect(response.status).to eq 201
+        end
+
+        it 'TODOが登録される' do
+          expect do
+            post v1_todos_path, params: { todo: FactoryBot.attributes_for(:todo) }
+          end.to change(Todo, :count).by(1)
+        end
+
+      end
+    end
+
+    context 'パラメーターが不正な場合' do
+      describe 'POST #create' do
+        it 'リクエストが成功する' do
+          post v1_todos_path, params: { todo: FactoryBot.attributes_for(:todo, :invalid) }
+          # v1_todos_pathだとうまくいかない
+            expect(response.status).to eq 422
+        end
+
+        it 'Todoが登録されないこと' do
+          expect do
+            post v1_todos_path, params: { todo: FactoryBot.attributes_for(:todo, :invalid) }
+          end.to_not change(Todo, :count)
+        end
+
+      end
+    end
+
+  end
 end
