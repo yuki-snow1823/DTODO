@@ -14,7 +14,7 @@
             </v-icon>
             <v-icon v-else size="25px" color="blue">check </v-icon>
           </v-hover>
-                    <v-dialog v-model="completeDialog">
+          <v-dialog v-model="completeDialog">
             <v-card>
               <v-card-title>ごほうびを達成しますか？</v-card-title>
               <v-btn @click="completeItem(reward)">はい</v-btn>
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-const numberRange = [...Array(9).keys()].map(i => ++i);
+  const numberRange = [...Array(9).keys()].map(i => ++i);
 
   import axios from "@/plugins/axios";
   export default {
@@ -93,45 +93,45 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
     },
     methods: {
       async deleteItem(item) {
-          const getUser = await axios.delete(`/v1/rewards/${item.id}`);
-          const rewards = this.user.rewards.filter(reward => {
-            return reward.id !== item.id;
-          });
-          const updateUser = {
-            ...this.user,
-            user: getUser.data.user,
-            rewards,
+        const getUser = await axios.delete(`/v1/rewards/${item.id}`);
+        const rewards = this.user.rewards.filter(reward => {
+          return reward.id !== item.id;
+        });
+        const updateUser = {
+          ...this.user,
+          user: getUser.data.user,
+          rewards,
 
-          };
-          console.log(updateUser);
-          this.$store.commit("setUser", updateUser);
-          this.snack = true;
-          this.snackColor = "warning";
-          this.snackText = "削除しました。";
-          this.deleteDialog = false;
+        };
+        console.log(updateUser);
+        this.$store.commit("setUser", updateUser);
+        this.snack = true;
+        this.snackColor = "warning";
+        this.snackText = "削除しました。";
+        this.deleteDialog = false;
       },
       async completeItem(item) {
-          const getUser = await axios.get(`/v1/rewards/${item.id}`, {
-            params: {
-              point: item.point
-            }
-          });
-          const todos = getUser.data.todos;
-          const rewards = this.user.rewards;
-          const updateUser = {
-            user: getUser.data.user,
-            rewards,
-            todos,
-            untilPercentage: getUser.data.untilPercentage,
-            untilLevel: getUser.data.untilLevel
-          };
-          this.$store.commit("setUser", updateUser);
-          item.status = true;
-          this.user.rewards.status = true;
-          this.snack = true;
-          this.snackColor = "success";
-          this.snackText = "ごほうびを解放した！";
-          this.completeDialog = false;
+        const getUser = await axios.get(`/v1/rewards/${item.id}`, {
+          params: {
+            point: item.point
+          }
+        });
+        const todos = getUser.data.todos;
+        const rewards = this.user.rewards;
+        const updateUser = {
+          user: getUser.data.user,
+          rewards,
+          todos,
+          untilPercentage: getUser.data.untilPercentage,
+          untilLevel: getUser.data.untilLevel
+        };
+        this.$store.commit("setUser", updateUser);
+        item.status = true;
+        this.user.rewards.status = true;
+        this.snack = true;
+        this.snackColor = "success";
+        this.snackText = "ごほうびを解放した！";
+        this.completeDialog = false;
       },
       async editItem(reward) {
         console.log(reward);
@@ -237,6 +237,7 @@ const numberRange = [...Array(9).keys()].map(i => ++i);
     .reward-title {
       padding-top: 2px;
       margin-left: 10px;
+      max-width: 35%;
     }
 
     .reward-point {

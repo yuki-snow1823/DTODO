@@ -58,10 +58,10 @@ describe('components/AddTodo.vueのテスト', () => {
     expect(wrapper.vm.number).toBe("1")
   })
   
-  // test("フォームにタイトルがセットされること", () => {
-  //   wrapper.find('#input-52').setValue("test title") //　titleの部分（idやクラス指定がなぜかできない）：質問する
-  //   expect(wrapper.vm.title).toBe("1")
-  // })
+  test("フォームにタイトルがセットされること", () => {
+    wrapper.find('#todo-title').setValue("test title") //　titleの部分（idやクラス指定がなぜかできない）：質問する
+    expect(wrapper.vm.title).toBe("test title")
+  })
 
   test("親コンポーネントにイベントが渡せること", () => {
     wrapper.vm.$emit('submit')

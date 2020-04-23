@@ -51,6 +51,7 @@ describe('components/AddReward.vueのテスト', () => {
     wrapper.setMethods({
       handleSubmit: mock
     })
+      console.log(store)
     wrapper.find('.reward-btn').trigger('click')
     expect(mock).toHaveBeenCalled()
   })
