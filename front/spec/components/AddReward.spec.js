@@ -1,17 +1,10 @@
-// ここのテストはstateがなぜかないとエラーが出る
-
-// ライブラリ
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'
-// コンポーネント
 import AddReward from '@/components/AddReward'
-// ユーティリティ
 import {
   mount,
   createLocalVue
 } from '@vue/test-utils'
-//　ストア
 import * as store from '@/store'
 
 const localVue = createLocalVue()
@@ -45,8 +38,10 @@ describe('components/AddReward.vueのテスト', () => {
     })
   })
 
-  test(`登録ボタンクリックでhandleSubmitが呼ばれること
-  (※このテストを行う際は、v-formとv-hoverをコメントアウトしてください/vue-utils未対応のバグ）`, () => {
+// 以下のテストを行う際は、v-test-utilsとvuetifyの未解決のバグがあるため、AddReward.vueのv-formとv-hoverをコメントアウトしてください。
+
+  describe('フォームに関するテスト', () => {
+  test(`登録ボタンクリックでhandleSubmitが呼ばれること`, () => {
     const mock = jest.fn()
     wrapper.setMethods({
       handleSubmit: mock
@@ -57,17 +52,18 @@ describe('components/AddReward.vueのテスト', () => {
   })
 
   test("フォームにタスクポイントがセットされること", () => {
-    wrapper.find('input[type="text"]').setValue(1) //　pointの部分（idやクラス指定がなぜかできない）
+    wrapper.find('input[type="text"]').setValue(1) 
     expect(wrapper.vm.number).toBe("1")
   })
 
-  // test("フォームにタイトルがセットされること", () => {
-  //   wrapper.find('#input-52').setValue("test title") //　titleの部分（idやクラス指定がなぜかできない）：質問する
-  //   expect(wrapper.vm.title).toBe("1")
-  // })
+  test("フォームにタイトルがセットされること", () => {
+    wrapper.find('#reward-title').setValue("test title") 
+    expect(wrapper.vm.title).toBe("test title")
+  })
 
   test("親コンポーネントにイベントが渡せること", () => {
     wrapper.vm.$emit('submit')
     expect(wrapper.emitted().submit).toBeTruthy()
+  })
   })
 })

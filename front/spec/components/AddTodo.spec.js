@@ -1,15 +1,11 @@
-// ライブラリ
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'
-// コンポーネント
 import AddTodo from '@/components/AddTodo'
-// ユーティリティ
 import {
   mount,
   createLocalVue
 } from '@vue/test-utils'
-//　ストア
 import * as store from '@/store'
 
 const localVue = createLocalVue()
@@ -43,28 +39,40 @@ describe('components/AddTodo.vueのテスト', () => {
     })
   })
 
-  test(`登録ボタンクリックでhandleSubmitが呼ばれること
-  (※このテストを行う際は、v-formとv-hoverをコメントアウトしてください/vue-utils未対応のバグ）`, () => {
-    const mock = jest.fn()
-    wrapper.setMethods({
-      handleSubmit: mock
+  // 以下のテストを行う際は、v-test-utilsとvuetifyの未解決のバグがあるため、AddTodo.vueのv-formとv-hoverをコメントアウトしてください。
+  describe('フォームに関するテスト', () => {
+    test(`登録ボタンクリックでhandleSubmitが呼ばれること`, () => {
+      const mock = jest.fn()
+      wrapper.setMethods({
+        handleSubmit: mock
+      })
+      wrapper.find('.todo-btn').trigger('click')
+      expect(mock).toHaveBeenCalled()
     })
-    wrapper.find('.todo-btn').trigger('click')
-    expect(mock).toHaveBeenCalled()
-  })
 
   test("フォームにタスクポイントがセットされること", () => {
-    wrapper.find('input[type="text"]').setValue(1) //　pointの部分（idやクラス指定がなぜかできない）
+    wrapper.find('input[type="text"]').setValue(1) 
     expect(wrapper.vm.number).toBe("1")
   })
   
   test("フォームにタイトルがセットされること", () => {
-    wrapper.find('#todo-title').setValue("test title") //　titleの部分（idやクラス指定がなぜかできない）：質問する
+    wrapper.find('#todo-title').setValue("test title") 
     expect(wrapper.vm.title).toBe("test title")
   })
 
   test("親コンポーネントにイベントが渡せること", () => {
     wrapper.vm.$emit('submit')
     expect(wrapper.emitted().submit).toBeTruthy()
-    })
+  })
+  })
+  
+  // describe('フォームに関するテスト', () => {
+  //   beforeEach(() => wrapper.setProps({ posts: [] }))
+    
+  //   test("フォームにタスクポイントがセットされること", () => {
+  //     wrapper.find('input[type="text"]').setValue(1)
+  //     expect(wrapper.vm.number).toBe("1")
+
+  //   })
+  // })
 })
