@@ -1,9 +1,11 @@
+// ここのテストはstateがなぜかないとエラーが出る
+
 // ライブラリ
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'
 // コンポーネント
-import AddTodo from '@/components/AddTodo'
+import AddReward from '@/components/AddReward'
 // ユーティリティ
 import {
   mount,
@@ -15,14 +17,14 @@ import * as store from '@/store'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('components/AddTodo.vueのテスト', () => {
+describe('components/AddReward.vueのテスト', () => {
   let wrapper
   let vuetify
   let userStore
   let currentUser1
 
   beforeEach(() => {
-      wrapper = mount(AddTodo, {
+    wrapper = mount(AddReward, {
       localVue,
       store: userStore,
       vuetify,
@@ -49,7 +51,7 @@ describe('components/AddTodo.vueのテスト', () => {
     wrapper.setMethods({
       handleSubmit: mock
     })
-    wrapper.find('.todo-btn').trigger('click')
+    wrapper.find('.reward-btn').trigger('click')
     expect(mock).toHaveBeenCalled()
   })
 
@@ -57,7 +59,7 @@ describe('components/AddTodo.vueのテスト', () => {
     wrapper.find('input[type="text"]').setValue(1) //　pointの部分（idやクラス指定がなぜかできない）
     expect(wrapper.vm.number).toBe("1")
   })
-  
+
   // test("フォームにタイトルがセットされること", () => {
   //   wrapper.find('#input-52').setValue("test title") //　titleの部分（idやクラス指定がなぜかできない）：質問する
   //   expect(wrapper.vm.title).toBe("1")
@@ -66,5 +68,5 @@ describe('components/AddTodo.vueのテスト', () => {
   test("親コンポーネントにイベントが渡せること", () => {
     wrapper.vm.$emit('submit')
     expect(wrapper.emitted().submit).toBeTruthy()
-    })
+  })
 })
