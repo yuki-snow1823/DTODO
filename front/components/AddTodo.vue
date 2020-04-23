@@ -43,9 +43,6 @@
         this.title = "";
         this.number = "";
       },
-      test() {
-        console
-      }
     },
     created() {
       this.$vuetify.lang = {
