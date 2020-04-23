@@ -29,10 +29,10 @@ class V1::UsersController < ApplicationController
       if user.save
         render json: user, status: :created
       else
-        if reward.errors.present?
-          # binding.pry
-          render json: {error_msg: reward.errors.full_messages}, status: :unprocessable_entity
-        end
+        # if reward.errors.present?
+        #   render json: {error_msg: reward.errors.full_messages}, status: :unprocessable_entity
+        # end
+        # テストが全て通ったら消す
         render json: user.errors, status: :unprocessable_entity
       end
     end
