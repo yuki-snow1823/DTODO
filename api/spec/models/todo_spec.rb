@@ -44,7 +44,7 @@ RSpec.describe Todo, type: :model do
       @user = FactoryBot.create(:user)
     end
 
-    it 'Todoはtitleが空の場合保存されない' do
+    it 'titleが空の場合保存されない' do
       user = @user
       todo = Todo.new(
         user_id: 1,
@@ -55,13 +55,27 @@ RSpec.describe Todo, type: :model do
       expect(todo.errors[:title]).to include("can't be blank")
     end
 
-    # it 'Todoを削除' do
-    #   user = @user
-    #   todo =FactoryBot.create(:todo)
-    #   todo.destroy
-    #   expect{Todo.find(1)}.to raise_exception(ActiveRecord::RecordNotFound)
-    # end
+    it 'titleが20文字の以上の場合保存されない' do
+      user = @user
+      todo = Todo.new(
+        user_id: 1,
+        title: "テストテストテストテストテストテストテストテストテストテスト",
+        point: 1,
+      )
+      todo.valid?
+      expect(todo.errors[:title]).to include("is too long (maximum is 20 characters)")
+    end
 
+    it 'pointが空の場合保存されない' do
+      user = @user
+      todo = Todo.new(
+        user_id: 1,
+        title: "テスト",
+        point: "",
+      )
+      todo.valid?
+      expect(todo.errors[:point]).to include("can't be blank")
+    end
   
   end
 end

@@ -15,9 +15,8 @@ class V1::UsersController < ApplicationController
           totalExp = user.experience_point
           user_level = CalcUserLevel.calc_user_level(user, totalExp)
 
-          testLevel = user.level
           # binding.pry
-          render json: {user: user, testLevel: testLevel, todos: todos, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
+          render json: {user: user,  todos: todos, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
         end
       else 
         @users = User.all
@@ -30,10 +29,10 @@ class V1::UsersController < ApplicationController
       if user.save
         render json: user, status: :created
       else
-        if reward.errors.present?
-          # binding.pry
-          render json: {error_msg: reward.errors.full_messages}, status: :unprocessable_entity
-        end
+        # if reward.errors.present?
+        #   render json: {error_msg: reward.errors.full_messages}, status: :unprocessable_entity
+        # end
+        # テストが全て通ったら消す
         render json: user.errors, status: :unprocessable_entity
       end
     end
