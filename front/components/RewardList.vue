@@ -9,40 +9,41 @@
         <li id="v-step-1" class="reward-list" v-for="reward in rewards" :key="reward.sort">
           <v-icon size="30px">mdi-numeric-{{ reward.point }}-box-outline</v-icon>
           <v-hover v-slot:default="{ hover }">
-            <v-icon v-if="!reward.status" @click="completeDialog = true" size="25px" color="blue"
+            <v-icon v-if="!reward.status" @click="openCompleteDialog(reward)" size="25px" color="blue"
               v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
             </v-icon>
             <v-icon v-else size="25px" color="blue">check </v-icon>
           </v-hover>
-          <v-dialog v-model="completeDialog">
-            <v-card>
-              <v-card-title>ごほうびを達成しますか？</v-card-title>
-              <v-btn @click="completeItem(reward)">はい</v-btn>
-              <v-btn @click="completeDialog = false">いいえ</v-btn>
-            </v-card>
-          </v-dialog>
 
           <span class="reward-title">{{ reward.title }}</span>
           <div class="reward-list-icon">
-            <v-icon v-if="reward.status" big color="white">lock_open</v-icon>
+            <v-icon v-if="reward.status" big color="yellow">lock_open</v-icon>
             <v-icon v-else big color="red">lock</v-icon>
-            <v-icon v-if="!reward.status" @click="editItem(reward)" big>mdi-pencil-plus</v-icon>
-            <v-icon midium @click="deleteDialog = true">delete</v-icon>
+            <v-icon v-if="!reward.status" @click="editItem(reward); open(reward)" big>mdi-pencil-plus</v-icon>
+            <v-icon midium @click="openDeleteDialog(reward)">delete</v-icon>
           </div>
-
-          <v-dialog v-model="deleteDialog">
-            <v-card>
-              <v-card-title>ごほうびを削除しますか？</v-card-title>
-              <v-btn @click="deleteItem(reward)">はい</v-btn>
-              <v-btn @click="deleteDialog = false">いいえ</v-btn>
-            </v-card>
-          </v-dialog>
 
         </li>
       </draggable>
     </v-card>
 
-    <v-dialog class="edit-dialog" v-model="dialog" @save="save" @cancel="cancel" @open="open" @close="close">
+    <v-dialog v-model="completeDialog">
+      <v-card>
+        <v-card-title>『{{selectedItem.title}}』を達成しますか？</v-card-title>
+        <v-btn @click="completeItem(selectedItem)">はい</v-btn>
+        <v-btn @click="completeDialog = false">いいえ</v-btn>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="deleteDialog">
+      <v-card>
+        <v-card-title>『{{selectedItem.title}}』を削除しますか？</v-card-title>
+        <v-btn @click="deleteItem(selectedItem)">はい</v-btn>
+        <v-btn @click="deleteDialog = false">いいえ</v-btn>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog class="edit-dialog" v-model="dialog">
       <v-card>
         <v-card-title>
           <h2 class="list-title">ごほうび編集</h2>
@@ -82,8 +83,9 @@
         snackText: "",
         dialogText: "",
         dialog: false,
-        completeDialog: false,
         deleteDialog: false,
+        completeDialog: false,
+        selectedItem: "",
       };
     },
     computed: {
@@ -167,13 +169,21 @@
         this.snackColor = "error";
         this.snackText = "Canceled";
       },
-      open() {
+      open(name) {
         this.snack = true;
         this.snackColor = "info";
-        this.snackText = "Dialog opened";
+        this.snackText =  "『" + name.title + "』" + "を編集します。";
       },
       close() {
         console.log("Dialog closed");
+      },
+      openCompleteDialog(reward) {
+        this.completeDialog = true;
+        this.selectedItem = reward;
+      },
+      openDeleteDialog(reward) {
+        this.deleteDialog = true;
+        this.selectedItem = reward;
       }
     },
     watch: {}
