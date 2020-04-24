@@ -101,7 +101,6 @@
           } = await axios.post("/v1/todos", {
             todo
           });
-          console.log(this.currentUser);
           const userTodo = this.currentUser.todos ? this.currentUser.todos : []
           this.$store.commit("setUser", {
             ...this.currentUser,
@@ -114,6 +113,7 @@
             data
           } = error.response;
           this.$store.commit("setError", data.error_msg);
+          console.log(error)
         }
       },
     }
