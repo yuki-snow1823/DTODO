@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'
-import AddTodo from '@/components/AddTodo'
+import User from '@/pages/user.vue'
 import {
   mount,
   createLocalVue
@@ -11,14 +11,14 @@ import * as store from '@/store'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-describe('components/AddTodo.vueのテスト', () => {
+describe('pages/user.vueのテスト', () => {
   let wrapper
   let vuetify
   let userStore
   let currentUser1
 
   beforeEach(() => {
-      wrapper = mount(AddTodo, {
+    wrapper = mount(User, {
       localVue,
       store: userStore,
       vuetify,
@@ -50,19 +50,19 @@ describe('components/AddTodo.vueのテスト', () => {
       expect(mock).toHaveBeenCalled()
     })
 
-  test("フォームにタスクポイントがセットされること", () => {
-    wrapper.find('input[type="text"]').setValue(1) 
-    expect(wrapper.vm.number).toBe("1")
-  })
-  
-  test("フォームにタイトルがセットされること", () => {
-    wrapper.find('#todo-title').setValue("test title") 
-    expect(wrapper.vm.title).toBe("test title")
-  })
+    test("フォームにタスクポイントがセットされること", () => {
+      wrapper.find('input[type="text"]').setValue(1)
+      expect(wrapper.vm.number).toBe("1")
+    })
 
-  test("親コンポーネントにイベントが渡せること", () => {
-    wrapper.vm.$emit('submit')
-    expect(wrapper.emitted().submit).toBeTruthy()
-  })
+    test("フォームにタイトルがセットされること", () => {
+      wrapper.find('#todo-title').setValue("test title")
+      expect(wrapper.vm.title).toBe("test title")
+    })
+
+    test("親コンポーネントにイベントが渡せること", () => {
+      wrapper.vm.$emit('submit')
+      expect(wrapper.emitted().submit).toBeTruthy()
+    })
   })
 })
