@@ -265,7 +265,7 @@
             });
             setTimeout(() => {
               this.$store.commit("setLoading", false);
-            }, 2000);
+            }, 2500);
             setTimeout(() => {
               this.$store.commit("setNotice", {});
             }, 2000);

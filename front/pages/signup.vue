@@ -1,7 +1,7 @@
 <template>
   <v-row class="signup-wrapper">
     <v-col cols="12" md="6">
-      <h2 class="signup-title">Sign Up</h2>
+      <h2 class="signup-title">新規登録</h2>
       <form>
         <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
         <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
@@ -13,7 +13,7 @@
           @click:append="show2 = !show2"></v-text-field>
         <v-hover v-slot:default="{ hover }">
           <v-btn class="bottom-btn" @click="signup">
-            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>DETERMINATION
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>START
           </v-btn>
         </v-hover>
         <p v-if="error" class="errors">{{error}}</p>
@@ -38,19 +38,19 @@
         error: ""
       };
     },
-    fetch({
-      store,
-      redirect
-    }) {
-      store.watch(
-        state => state.currentUser,
-        (newUser, oldUser) => {
-          if (newUser) {
-            return redirect("/");
-          }
-        }
-      );
-    },
+    // fetch({
+    //   store,
+    //   redirect
+    // }) {
+    //   store.watch(
+    //     state => state.currentUser,
+    //     (newUser, oldUser) => {
+    //       if (newUser) {
+    //         return redirect("/");
+    //       }
+    //     }
+    //   );
+    // },
     methods: {
       signup() {
         if (this.password !== this.passwordConfirm) {

@@ -1,7 +1,7 @@
 <template>
   <v-row class="login-wrapper">
     <v-col cols="12" md="6">
-      <h2 class="login-title">Login</h2>
+      <h2 class="login-title">ログイン</h2>
       <form>
         <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
         <v-text-field v-model="password" label="password" data-vv-name="password" required
@@ -9,7 +9,7 @@
           @click:append="show1 = !show1"></v-text-field>
         <v-hover v-slot:default="{ hover }">
           <v-btn class="bottom-btn" @click="login">
-            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>DETERMINATION
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>START
           </v-btn>
         </v-hover>
         <p v-if="error" class="errors">{{ error }}</p>
@@ -28,19 +28,19 @@
         error: ""
       };
     },
-    fetch({
-      store,
-      redirect
-    }) {
-      store.watch(
-        state => state.currentUser,
-        (newUser, oldUser) => {
-          if (newUser) {
-            return redirect("/");
-          }
-        }
-      );
-    },
+    // fetch({
+    //   store,
+    //   redirect
+    // }) {
+    //   store.watch(
+    //     state => state.currentUser,
+    //     (newUser, oldUser) => {
+    //       if (newUser) {
+    //         return redirect("/");
+    //       }
+    //     }
+    //   );
+    // },
     methods: {
       login() {
         firebase
@@ -54,7 +54,7 @@
             });
             setTimeout(() => {
               this.$store.commit("setLoading", false);
-            }, 1500);
+            }, 2500);
             setTimeout(() => {
               this.$store.commit("setNotice", {});
             }, 2000);
