@@ -6,7 +6,7 @@
             v-if="currentUser.user.level == 10">mdi-crown</v-icon>
         </p>
         <div class="user-point">
-          <p class="user-task-point">TP:{{ currentUser.user.point }}</p>
+          <p class="user-task-point"><v-icon class="mb-1" size="30" color="yellow">mdi-alpha-p-circle</v-icon>{{ currentUser.user.point }}</p>
         </div>
       </v-col>
 
@@ -166,8 +166,6 @@
       }
 
       .user-point {
-        display: flex;
-
         .user-task-point {
           font-size: x-large;
           color: rgb(238, 238, 37);

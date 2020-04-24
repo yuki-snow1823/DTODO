@@ -1,8 +1,10 @@
-import Index from "./../../pages/index.vue";
+import Index from "@/pages/index.vue";
 import Vuex from 'vuex'
-import { mount, createLocalVue } from '@vue/test-utils'
-import * as indexStore from './../../store'
-// @だとうまく読み込めなかったため、直接相対パスを指定しています。
+import {
+  mount,
+  createLocalVue
+} from '@vue/test-utils'
+import * as indexStore from '@/store'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -23,10 +25,12 @@ describe('pages/index.vue', () => {
       expect(wrapper.contains('.index-title')).toBe(true)
     })
 
-    test('ログインしているときに、新規登録フォームが表示されない',() => {
-      expect(wrapper.contains('#index-signup')).toBe(true)
-      // ログインしている時という書き方が不明
+    test('ログインしているときに、新規登録フォームが表示されない', () => {
+    })
+
+    test('ログインしているときに、ページ下部のログインボタンと新規登録ボタンが表示されない', () => {
+      expect(wrapper.find('#index-signup').exists()).toBe(false)
     })
   })
-  
+
 })

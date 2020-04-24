@@ -9,35 +9,28 @@
         <li id="v-step-1" class="todo-list" v-for="todo in todos" :key="todo.sort">
           <v-icon size="30px">mdi-numeric-{{todo.point}}-box-outline</v-icon>
           <v-hover v-slot:default="{ hover }">
-            <v-icon @click="completeDialog = true" size="25px" color="blue"
+            <v-icon @click="openCompleteDialog(todo)" size="25px" color="blue"
               v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
             </v-icon>
           </v-hover>
-          <v-dialog v-model="completeDialog">
-            <v-card>
-              <v-card-title>TODOを達成しますか？</v-card-title>
-              <v-btn @click="completeItem(todo)">はい</v-btn>
-              <v-btn @click="completeDialog = false">いいえ</v-btn>
-            </v-card>
-          </v-dialog>
 
           <span class="todo-title">{{ todo.title }}</span>
           <div class="todo-list-icon">
-            <v-icon @click="editItem(todo)" big>mdi-pencil-plus</v-icon>
-            <v-icon midium @click="deleteDialog = true">delete</v-icon>
+            <v-icon @click="editItem(todo); open(todo)" big>mdi-pencil-plus</v-icon>
+            <v-icon midium @click="openDeleteDialog(todo)">delete</v-icon>
           </div>
-
-          <v-dialog v-model="deleteDialog">
-            <v-card>
-              <v-card-title>TODOを削除しますか？</v-card-title>
-              <v-btn @click="deleteItem(todo)">はい</v-btn>
-              <v-btn @click="deleteDialog = false">いいえ</v-btn>
-            </v-card>
-          </v-dialog>
 
         </li>
       </draggable>
     </v-card>
+
+    <v-dialog v-model="completeDialog">
+      <v-card>
+        <v-card-title>『{{selectedItem.title}}』を達成しますか？</v-card-title>
+        <v-btn @click="completeItem(selectedItem)">はい</v-btn>
+        <v-btn @click="completeDialog = false">いいえ</v-btn>
+      </v-card>
+    </v-dialog>
 
     <v-dialog class="edit-dialog" v-model="dialog">
       <v-card>
@@ -49,7 +42,16 @@
         <p>ポイント</p>
         <v-select class="dialog-point" single-line :items="items" v-model="dialogText.point" :value="dialogText.point"
           filled></v-select>
-        <v-btn class="update-btn" @click="updateItem(dialogText.id, dialogText.title, dialogText.point)">保存</v-btn>
+        <v-btn class="update-btn" @click="updateItem(dialogText.id, dialogText.title, dialogText.point); save()">保存
+        </v-btn>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="deleteDialog">
+      <v-card>
+        <v-card-title>『{{selectedItem.title}}』を削除しますか？</v-card-title>
+        <v-btn @click="deleteItem(selectedItem)">はい</v-btn>
+        <v-btn @click="deleteDialog = false">いいえ</v-btn>
       </v-card>
     </v-dialog>
 
@@ -80,8 +82,9 @@
         snackText: "",
         dialogText: "",
         dialog: false,
-        completeDialog: false,
         deleteDialog: false,
+        completeDialog: false,
+        selectedItem: "",
       };
     },
     computed: {
@@ -91,19 +94,19 @@
     },
     methods: {
       async deleteItem(item) {
-          await axios.delete(`/v1/todos/${item.id}`);
-          const todos = this.user.todos.filter(todo => {
-            return todo.id !== item.id;
-          });
-          const updateUser = {
-            ...this.user,
-            todos
-          };
-          this.$store.commit("setUser", updateUser);
-          this.snack = true;
-          this.snackColor = "warning";
-          this.snackText = "Data deleted";
-          this.deleteDialog = false
+        await axios.delete(`/v1/todos/${item.id}`);
+        const todos = this.user.todos.filter(todo => {
+          return todo.id !== item.id;
+        });
+        const updateUser = {
+          ...this.user,
+          todos
+        };
+        this.$store.commit("setUser", updateUser);
+        this.snack = true;
+        this.snackColor = "warning";
+        this.snackText = "削除しました。";
+        this.deleteDialog = false
       },
       async completeItem(item) {
         const getUser = await axios.get(`/v1/todos/${item.id}`, {
@@ -157,25 +160,32 @@
       save() {
         this.snack = true;
         this.snackColor = "success";
-        this.snackText = "Data saved";
+        this.snackText = "保存しました。";
       },
       cancel() {
         this.snack = true;
         this.snackColor = "error";
         this.snackText = "Canceled";
       },
-      open() {
+      open(name) {
         this.snack = true;
         this.snackColor = "info";
-        this.snackText = "Dialog opened";
+        this.snackText = "『" + name.title + "』" + "を編集します。";
       },
       close() {
         console.log("Dialog closed");
+      },
+      openCompleteDialog(todo) {
+        this.completeDialog = true;
+        this.selectedItem = todo;
+      },
+      openDeleteDialog(todo) {
+        this.deleteDialog = true;
+        this.selectedItem = todo;
       }
     },
     watch: {}
   };
-
 </script>
 
 <style lang="scss">
@@ -235,6 +245,7 @@
     .todo-title {
       padding-top: 2px;
       margin-left: 10px;
+      max-width: 47%;
     }
 
     .todo-point {
@@ -277,5 +288,4 @@
     }
 
   }
-
 </style>

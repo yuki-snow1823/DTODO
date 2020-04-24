@@ -2,11 +2,11 @@
   <!-- <v-form> -->
     <v-container class="add-todo">
       <v-row>
-        <v-col id="v-step-0" class="pr-0 pb-0" cols="3" xs="2" sm="2" md="2" lg="2">
+        <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
           <v-select class="point" label="TP" v-model="number" :items="items" outlined>test</v-select>
         </v-col>
-        <v-col class="pl-0 pb-0" cols="9" xs="8" sm="8" md="8" lg="8">
-          <v-text-field class="text" v-model="title" :counter="20" label="TODOの内容" required outlined></v-text-field>
+        <v-col class="pl-0 pb-0" cols="8" xs="8" sm="8" md="8" lg="8">
+          <v-text-field id="todo-title" class="text" name="text" v-model="title" :counter="20" label="TODOの内容" required outlined></v-text-field>
         </v-col>
         <v-col class="px-0 pb-0" cols="12" xs="12" sm="2" md="2" lg="2">
           <!-- <v-hover v-slot:default="{ hover }"> -->
@@ -56,9 +56,7 @@
 
 <style lang="scss">
   $main-color: #fc7b03;
-
-
-
+  
   .add-todo {
     border: solid 2px white;
 
