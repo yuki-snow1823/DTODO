@@ -1,10 +1,10 @@
 <template>
   <v-container class="index-page">
 
-    <h1 v-if="countHiddenPage >= 5" ><span>D</span>
+    <h1 v-if="countHiddenPage >= 5"><span>D</span>
       means<span>
         Determination</span>
-        to become an engineer and to challenge <span >Vue.js!</span></h1>
+      to become an engineer and to challenge <span>Vue.js!</span></h1>
 
     <h1 v-else class="index-title"><span class="index-title-first">D</span>TODO</h1>
 
@@ -32,9 +32,10 @@
         </div>
       </v-col>
 
-      <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
-        <v-icon id="skull" :color="color" @click="countSkull()" class="mb-2 skull" :size="size">mdi-skull-outline</v-icon>
-        <h1 v-if="countHiddenPage >= 15" >押しすぎだ。</h1>
+      <v-col class="wrapper-skull" v-if="user" cols="12" sm="12" md="6" lg="6">
+        <v-icon id="skull" :color="color" @click="countSkull()" class="mb-2 skull" :size="size">mdi-skull-outline
+        </v-icon>
+        <h1 v-if="countHiddenPage >= 15">押しすぎだ。</h1>
         <div class="instead-of-form">
           <vue-typer :text="[
               '＊俺が見えてるってことは',
@@ -161,6 +162,10 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+
+    <iframe class="how-to-use" src="https://www.youtube.com/embed/bg72-7woCI4?rel=0" frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
   </v-container>
 </template>
 
@@ -265,7 +270,7 @@
             });
             setTimeout(() => {
               this.$store.commit("setLoading", false);
-            }, 1500);
+            }, 2500);
             setTimeout(() => {
               this.$store.commit("setNotice", {});
             }, 2000);
@@ -329,11 +334,11 @@
         };
         setTimeout(check, 1000, "checked");
       },
-    countSkull(){
-      this.countHiddenPage ++;
-      this.size += 10;
-      this.color = "green"
-    }
+      countSkull() {
+        this.countHiddenPage++;
+        this.size += 10;
+        this.color = "green"
+      }
     },
     created() {
       this.$vuetify.lang = {
@@ -569,10 +574,22 @@
     color: green;
   }
 
-div {
-  margin: 0 auto;
-  #skull {
+  .wrapper-skull {
     margin: 0 auto;
+    #skull {
+      margin: 0 auto;
+    }
   }
-}
+
+  .how-to-use {
+    width: 100%;
+    height: 500px;
+
+    @include tab {
+      height: 300px
+    }
+    @include sp {
+      height: 200px;
+    }
+  }
 </style>

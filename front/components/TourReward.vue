@@ -75,6 +75,7 @@ export default {
            `ご褒美が解放され、鍵が開き、その分タスクポイントが消費されました。<br>
             実際に使ったごほうびは<strong>ゴミ箱マークをクリックして、削除しましょう。</strong><br>
             無事削除できたら、これでチュートリアルは終わりです！<br>
+            ※ご褒美を削除しない限りチュートリアルは再生されます。（テストユーザーは削除しても再生されます。）<br>
             <strong style="color: cyan; -webkit-font-smoothing: antialiased !important;">メンドクサイを楽しんでいきましょう！</strong>`,
           params: {
             placement: "bottom"

@@ -66,7 +66,7 @@
     </v-content>
 
     <v-footer :fixed="fixed" app>
-      <span>トップページ素材提供「RPGドット」様</span>
+      <span>トップページ素材提供「RPGドット」様｜ご意見、ご要望は<a href="mailto:dtodo.contact@gmail.com">こちら</a>まで</span>
     </v-footer>
   </v-app>
 </template>
@@ -153,7 +153,6 @@
       }
     }
   };
-
 </script>
 
 <style lang="scss">
@@ -232,6 +231,10 @@
       width: 40%;
       font-weight: bold;
     }
+  }
+
+  .v-navigation-drawer__content {
+    margin: 0;
   }
 
 </style>

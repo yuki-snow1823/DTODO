@@ -103,9 +103,7 @@
           ...this.user,
           user: getUser.data.user,
           rewards,
-
         };
-        console.log(updateUser);
         this.$store.commit("setUser", updateUser);
         this.snack = true;
         this.snackColor = "warning";
@@ -113,81 +111,91 @@
         this.deleteDialog = false;
       },
       async completeItem(item) {
-        const getUser = await axios.get(`/v1/rewards/${item.id}`, {
-          params: {
-            point: item.point
-          }
-        });
-        const todos = getUser.data.todos;
-        const rewards = this.user.rewards;
-        const updateUser = {
-          user: getUser.data.user,
-          rewards,
-          todos,
-          untilPercentage: getUser.data.untilPercentage,
-          untilLevel: getUser.data.untilLevel
-        };
-        this.$store.commit("setUser", updateUser);
-        item.status = true;
-        this.user.rewards.status = true;
-        this.snack = true;
-        this.snackColor = "success";
-        this.snackText = "ごほうびを解放した！";
-        this.completeDialog = false;
+        try {
+          const getUser = await axios.get(`/v1/rewards/${item.id}`, {
+            params: {
+              point: item.point
+            }
+          });
+          const todos = getUser.data.todos;
+          const rewards = this.user.rewards;
+          const updateUser = {
+            user: getUser.data.user,
+            rewards,
+            todos,
+            untilPercentage: getUser.data.untilPercentage,
+            untilLevel: getUser.data.untilLevel
+          };
+          this.$store.commit("setUser", updateUser);
+          item.status = true;
+          this.user.rewards.status = true;
+          this.snack = true;
+          this.snackColor = "success";
+          this.snackText = "ごほうびを解放した！";
+          this.completeDialog = false;
+          this.$store.commit("clearErrors");
+        } catch (error) {
+          console.log("UserPage: 110", error);
+          const {
+            data
+          } = error.response;
+          this.$store.commit("setError", data.error_msg);
+          this.completeDialog = false;
+        }
+        },
+        async editItem(reward) {
+            console.log(reward);
+            this.dialog = true;
+            this.dialogText = reward;
+          },
+          async updateItem(id, title, point) {
+              await axios.patch(`/v1/rewards/${id}`, {
+                reward: {
+                  title: title,
+                  point: point
+                }
+              });
+              this.dialog = false;
+            },
+            async atEnd() {
+                let result = await axios.patch(`v1/rewards`, {
+                  reward: this.rewards
+                });
+                const updateUser = {
+                  ...this.user,
+                  rewards: this.rewards
+                };
+                this.$store.commit("setUser", updateUser);
+              },
+              save() {
+                this.snack = true;
+                this.snackColor = "success";
+                this.snackText = "Data saved";
+              },
+              cancel() {
+                this.snack = true;
+                this.snackColor = "error";
+                this.snackText = "Canceled";
+              },
+              open(name) {
+                this.snack = true;
+                this.snackColor = "info";
+                this.snackText = "『" + name.title + "』" + "を編集します。";
+              },
+              close() {
+                console.log("Dialog closed");
+              },
+              openCompleteDialog(reward) {
+                this.completeDialog = true;
+                this.selectedItem = reward;
+              },
+              openDeleteDialog(reward) {
+                this.deleteDialog = true;
+                this.selectedItem = reward;
+              }
       },
-      async editItem(reward) {
-        console.log(reward);
-        this.dialog = true;
-        this.dialogText = reward;
-      },
-      async updateItem(id, title, point) {
-        await axios.patch(`/v1/rewards/${id}`, {
-          reward: {
-            title: title,
-            point: point
-          }
-        });
-        this.dialog = false;
-      },
-      async atEnd() {
-        let result = await axios.patch(`v1/rewards`, {
-          reward: this.rewards
-        });
-        const updateUser = {
-          ...this.user,
-          rewards: this.rewards
-        };
-        this.$store.commit("setUser", updateUser);
-      },
-      save() {
-        this.snack = true;
-        this.snackColor = "success";
-        this.snackText = "Data saved";
-      },
-      cancel() {
-        this.snack = true;
-        this.snackColor = "error";
-        this.snackText = "Canceled";
-      },
-      open(name) {
-        this.snack = true;
-        this.snackColor = "info";
-        this.snackText =  "『" + name.title + "』" + "を編集します。";
-      },
-      close() {
-        console.log("Dialog closed");
-      },
-      openCompleteDialog(reward) {
-        this.completeDialog = true;
-        this.selectedItem = reward;
-      },
-      openDeleteDialog(reward) {
-        this.deleteDialog = true;
-        this.selectedItem = reward;
-      }
-    },
-    watch: {}
-  };
+      watch: {}
+    };
 </script>
 
 <style lang="scss">
