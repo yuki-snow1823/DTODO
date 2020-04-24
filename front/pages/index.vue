@@ -32,7 +32,7 @@
         </div>
       </v-col>
 
-      <v-col v-if="user" cols="12" sm="12" md="6" lg="6">
+      <v-col class="wrapper-skull" v-if="user" cols="12" sm="12" md="6" lg="6">
         <v-icon id="skull" :color="color" @click="countSkull()" class="mb-2 skull" :size="size">mdi-skull-outline
         </v-icon>
         <h1 v-if="countHiddenPage >= 15">押しすぎだ。</h1>
@@ -574,9 +574,8 @@
     color: green;
   }
 
-  div {
-
-    // margin: 0 auto;
+  .wrapper-skull {
+    margin: 0 auto;
     #skull {
       margin: 0 auto;
     }
