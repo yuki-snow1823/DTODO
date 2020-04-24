@@ -153,7 +153,6 @@
       }
     }
   };
-
 </script>
 
 <style lang="scss">
@@ -232,6 +231,10 @@
       width: 40%;
       font-weight: bold;
     }
+  }
+
+  .v-navigation-drawer__content {
+    margin: 0;
   }
 
 </style>

@@ -28,6 +28,7 @@
         </div>
       </v-col>
     </v-row>
+    
     <div class="errors text-center" v-if="$store.state.errors">
       <span v-for="error in $store.state.errors" :key="error">
         <div>{{ error }}</div>

@@ -570,7 +570,7 @@
   }
 
 div {
-  margin: 0 auto;
+  // margin: 0 auto;
   #skull {
     margin: 0 auto;
   }

@@ -17,7 +17,6 @@ class V1::RewardsController < ApplicationController
 
     def update
       reward = Reward.find(params[:id])
-      # binding.pry
       reward.update(reward_params)
       render json: reward
     end
@@ -41,21 +40,23 @@ class V1::RewardsController < ApplicationController
     def complete
       reward = Reward.find(params[:id])
       user = User.find(reward.user_id)
-      # binding.pry
-      reward.update(status: true)
 
-      losepoint = user.point.to_i
-      losepoint -= reward.point
-      user.point = losepoint
-
-      user.update(point: losepoint)
-
-      todos = user.todos.order(sort: "ASC")
-      totalExp = user.experience_point
-      user_level = CalcUserLevel.calc_user_level(user, totalExp)
-      
-      render json: {user: user, todos: todos, reward: reward, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
-      # render json: {reward: reward, user: user}
+      if user.point <= reward.point
+        render json: {error_msg: ["タスクポイントが足りません"]}, status: :unprocessable_entity
+      else
+        losepoint = user.point.to_i
+        losepoint -= reward.point
+        user.point = losepoint
+        
+        reward.update(status: true)
+        user.update(point: losepoint)
+        
+        todos = user.todos.order(sort: "ASC")
+        totalExp = user.experience_point
+        user_level = CalcUserLevel.calc_user_level(user, totalExp)
+        
+        render json: {user: user, todos: todos, reward: reward, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
+      end
     end
 
     def sort
