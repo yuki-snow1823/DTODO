@@ -113,13 +113,11 @@
           const {
             data
           } = error.response;
-          // const userTodo = this.currentUser.todos ? this.currentUser.todos : [];
           this.$store.commit("setUser", {
            ...this.currentUser,
            todo: data.todo
           });
           this.$store.commit("setError", data.error_msg);
-          console.log("data",data.todo.point);
           console.log("data",data.todo);
         }
       }

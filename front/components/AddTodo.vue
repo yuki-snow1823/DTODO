@@ -20,7 +20,6 @@
         </v-col>
       </v-row>
     </v-container>
-  {{ todo }}
   </v-form>
 </template>
 
@@ -30,10 +29,6 @@
     props: ["todo"],
     data() {
       return {
-
-          // title: "",
-          // number: "",
-  
         items: numberRange
       };
     },
