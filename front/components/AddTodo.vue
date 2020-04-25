@@ -3,10 +3,11 @@
     <v-container class="add-todo">
       <v-row>
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
-          <v-select class="point" label="TP" v-model="number" :items="items" outlined>test</v-select>
+          <v-select class="point" label="TP" v-model="todo" :items="items" outlined >test</v-select>
         </v-col>
         <v-col class="pl-0 pb-0" cols="8" xs="8" sm="8" md="8" lg="8">
-          <v-text-field id="todo-title" class="text" name="text" v-model="title" :counter="20" label="TODOの内容" required outlined></v-text-field>
+          <v-text-field id="todo-title" class="text" name="text" v-model="todo" :counter="20" label="TODOの内容"
+            required outlined></v-text-field>
         </v-col>
         <v-col class="px-0 pb-0" cols="12" xs="12" sm="2" md="2" lg="2">
           <v-hover v-slot:default="{ hover }">
@@ -23,13 +24,13 @@
 
 <script>
   const numberRange = [...Array(9).keys()].map(i => ++i);
-
   export default {
+    props: ["todo"],
     data() {
       return {
-        title: "",
-        items: numberRange,
-        number: ""
+        // title: "",
+        // number: "",
+        items: numberRange
       };
     },
     methods: {
@@ -40,23 +41,23 @@
           point: this.number
         };
         this.$emit("submit", todo);
-        this.title = "";
-        this.number = "";
-      },
+        // this.title = "";
+        // this.number = "";
+      }
     },
     created() {
+      console.log(this.todo);
       this.$vuetify.lang = {
         t: () => {}
       };
       //testを実行する際に直接関係ないエラーを回避する為に記述してあります。
     }
   };
-
 </script>
 
 <style lang="scss">
   $main-color: #fc7b03;
-  
+
   .add-todo {
     border: solid 2px white;
 
@@ -86,5 +87,4 @@
       color: red !important;
     }
   }
-
 </style>

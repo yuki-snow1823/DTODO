@@ -2,8 +2,9 @@
   <v-container class="user-page" v-if="currentUser">
     <v-row class="user-status" id="v-step-2">
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
-        <p>名前：{{ currentUser.user.name }}<v-icon class="mb-2" color="yellow" size="30"
-            v-if="currentUser.user.level == 10">mdi-crown</v-icon>
+        <p>
+          名前：{{ currentUser.user.name}}
+          <v-icon class="mb-2" color="yellow" size="30" v-if="currentUser.user.level == 10">mdi-crown</v-icon>
         </p>
         <div class="user-point">
           <p class="user-task-point">
@@ -14,20 +15,21 @@
 
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
         <p class="user-level">レベル：{{ currentUser.user.level }}</p>
-        <p v-if="currentUser.user.level !== 10">次のレベルまであと {{ currentUser.untilLevel ? currentUser.untilLevel: 50 }} EXP
+        <p v-if="currentUser.user.level !== 10">
+          次のレベルまであと
+          {{ currentUser.untilLevel ? currentUser.untilLevel : 50 }} EXP
         </p>
         <p v-else>最大レベルです！</p>
         <v-progress-linear :height="12" :rounded="true"
           :value="currentUser.untilPercentage ? currentUser.untilPercentage : 0" color="light-blue">
         </v-progress-linear>
-
       </v-col>
     </v-row>
 
     <v-row justify="center">
       <v-col class="pb-0" cols="12" xs="12" sm="12" md="12" lg="8">
         <div>
-          <AddTodo @submit="addTodo" />
+          <AddTodo @submit="addTodo" :todo="currentUser.todo" />
         </div>
       </v-col>
     </v-row>
@@ -45,7 +47,6 @@
       </v-col>
     </v-row>
     <Tour v-if="currentUser.user.todo_tour" />
-
   </v-container>
 </template>
 
@@ -54,7 +55,7 @@
   import TodoList from "@/components/TodoList";
   import axios from "@/plugins/axios";
   import firebase from "@/plugins/firebase";
-  import Tour from '@/components/Tour'
+  import Tour from "@/components/Tour";
 
   export default {
     data() {
@@ -101,7 +102,7 @@
           } = await axios.post("/v1/todos", {
             todo
           });
-          const userTodo = this.currentUser.todos ? this.currentUser.todos : []
+          const userTodo = this.currentUser.todos ? this.currentUser.todos : [];
           this.$store.commit("setUser", {
             ...this.currentUser,
             todos: [...userTodo, data]
@@ -112,10 +113,16 @@
           const {
             data
           } = error.response;
+          // const userTodo = this.currentUser.todos ? this.currentUser.todos : [];
+          this.$store.commit("setUser", {
+           ...this.currentUser,
+           todo: data.todo.point
+          });
           this.$store.commit("setError", data.error_msg);
-          console.log(error)
+          console.log("data",data.todo);
+          console.log(error);
         }
-      },
+      }
     }
   };
 </script>

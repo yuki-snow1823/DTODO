@@ -8,7 +8,7 @@ class V1::TodosController < ApplicationController
       else
         if todo.errors.present?
           # binding.pry
-          render json: {error_msg: todo.errors.full_messages}, todo: todo, status: :unprocessable_entity
+          render json: {error_msg: todo.errors.full_messages, todo: todo}, status: :unprocessable_entity
         else 
           render json: todo.errors, status: :unprocessable_entity
         end

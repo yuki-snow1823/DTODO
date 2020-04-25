@@ -31,7 +31,7 @@
 
 ## :skull: App URL
 
-### **https://horikoshi-yuki.work** 
+**https://horikoshi-yuki.work** 
 　
 ## 💬 Usage
 
@@ -39,10 +39,8 @@
 TODOの細かい説明・・・など
 
  <br><br>
-　
+
 ## 📦 Features
-
-
 
 <h3 align="center">- Responsive design -</h3>
 

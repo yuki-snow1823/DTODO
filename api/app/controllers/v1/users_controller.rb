@@ -16,7 +16,7 @@ class V1::UsersController < ApplicationController
           user_level = CalcUserLevel.calc_user_level(user, totalExp)
 
           # binding.pry
-          render json: {user: user,  todos: todos, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
+          render json: {user: user, todos: todos, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
         end
       else 
         @users = User.all
