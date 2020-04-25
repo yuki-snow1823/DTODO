@@ -68,7 +68,7 @@
         show1: false,
         show2: false,
         error: "",
-        showContent: false
+        showContent: false,
       };
     },
     // fetch({
@@ -116,11 +116,11 @@
           // const userTodo = this.currentUser.todos ? this.currentUser.todos : [];
           this.$store.commit("setUser", {
            ...this.currentUser,
-           todo: data.todo.point
+           todo: data.todo
           });
           this.$store.commit("setError", data.error_msg);
+          console.log("data",data.todo.point);
           console.log("data",data.todo);
-          console.log(error);
         }
       }
     }

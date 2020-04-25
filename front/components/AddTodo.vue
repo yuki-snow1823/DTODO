@@ -3,10 +3,11 @@
     <v-container class="add-todo">
       <v-row>
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
-          <v-select class="point" label="TP" v-model="todo" :items="items" outlined >test</v-select>
+          <v-select class="point" label="TP" v-model="todo.point" :items="items" outlined ></v-select>
+          <!-- todoをつけるとundefinedになる -->
         </v-col>
         <v-col class="pl-0 pb-0" cols="8" xs="8" sm="8" md="8" lg="8">
-          <v-text-field id="todo-title" class="text" name="text" v-model="todo" :counter="20" label="TODOの内容"
+          <v-text-field id="todo-title" class="text" name="text" v-model="todo.title" :counter="20" label="TODOの内容"
             required outlined></v-text-field>
         </v-col>
         <v-col class="px-0 pb-0" cols="12" xs="12" sm="2" md="2" lg="2">
@@ -19,6 +20,7 @@
         </v-col>
       </v-row>
     </v-container>
+  {{ todo }}
   </v-form>
 </template>
 
@@ -28,21 +30,24 @@
     props: ["todo"],
     data() {
       return {
-        // title: "",
-        // number: "",
+
+          // title: "",
+          // number: "",
+  
         items: numberRange
       };
     },
     methods: {
       handleSubmit() {
         const todo = {
-          title: this.title,
+          title: this.todo.title,
           user_id: this.$store.state.currentUser.user.id,
-          point: this.number
+          point: this.todo.point
         };
         this.$emit("submit", todo);
-        // this.title = "";
-        // this.number = "";
+        this.todo.title = "";
+        this.todo.point = "";
+        // ここがあるとリセットされる
       }
     },
     created() {
