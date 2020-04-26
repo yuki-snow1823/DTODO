@@ -86,6 +86,7 @@
         deleteDialog: false,
         completeDialog: false,
         selectedItem: "",
+        dialogReward: {},
       };
     },
     computed: {
@@ -145,8 +146,15 @@
         },
         async editItem(reward) {
             console.log(reward);
-            this.dialog = true;
-            this.dialogText = reward;
+        this.dialog = true;
+        // 参照渡し-代入ではなく紐づかせるイメージ
+        this.dialogReward = reward;
+        // 値渡し
+        this.dialogText = {
+          id: reward.id,
+          title: reward.title,
+          point: reward.point
+        };
           },
           async updateItem(id, title, point) {
               await axios.patch(`/v1/rewards/${id}`, {
@@ -155,6 +163,8 @@
                   point: point
                 }
               });
+              this.dialogReward.title = title;
+              this.dialogReward.point = point;
               this.dialog = false;
             },
             async atEnd() {
