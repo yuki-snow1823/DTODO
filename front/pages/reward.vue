@@ -24,7 +24,7 @@
     <v-row justify="center">
       <v-col class="pb-0" cols="12" xs="12" sm="12" md="12" lg="8">
         <div>
-          <AddReward @submit="addReward" />
+          <AddReward @submit="addReward" :reward="currentUser.reward" />
         </div>
       </v-col>
     </v-row>
@@ -108,6 +108,10 @@
           const {
             data
           } = error.response;
+          this.$store.commit("setUser", {
+           ...this.currentUser,
+           reward: data.reward
+          });
           this.$store.commit("setError", data.error_msg);
         }
       },

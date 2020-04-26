@@ -4,7 +4,11 @@ const state = {
       experience_point: 0
     },
     todo: {
-      number: "",
+      point: "",
+      title: "",
+    },
+    reward: {
+      point: "",
       title: "",
     },
     todos: [],

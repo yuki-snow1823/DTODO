@@ -1,14 +1,14 @@
 require_relative '../../domain/calc_user_level.rb'
 
 class V1::RewardsController < ApplicationController
-
     def create
       reward = Reward.new(reward_params)
       if reward.save
         render json: reward, status: :created
       else
         if reward.errors.present?
-          render json: {error_msg: reward.errors.full_messages}, status: :unprocessable_entity
+          render json: {error_msg: reward.errors.full_messages, reward: reward}, status: :unprocessable_entity
+          # エラーメッセージと一緒に作成前の入力データをとっておいています
         else 
           render json: reward.errors, status: :unprocessable_entity
         end

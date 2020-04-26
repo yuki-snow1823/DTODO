@@ -22,10 +22,6 @@
   <a href="https://jestjs.io/ja/"><img src="https://user-images.githubusercontent.com/59280290/80302231-caebd300-87e3-11ea-9d0d-fdcedb301027.png" width="80px;" height="80px;" />　　</a>
     <a href="https://github.com/rspec/rspec-rails"><img src="https://user-images.githubusercontent.com/59280290/80302256-e22ac080-87e3-11ea-9355-1d703e345f02.png" height="80px;" /></a></p>
 
-
-</p>
-<br><br><br>
-
 ## :mortar_board: Overview
 ゲーミフィケーションを取り入れたタスク管理SPA
 

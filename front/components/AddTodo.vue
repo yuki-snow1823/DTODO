@@ -4,7 +4,6 @@
       <v-row>
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
           <v-select class="point" label="TP" v-model="todo.point" :items="items" outlined ></v-select>
-          <!-- todoをつけるとundefinedになる -->
         </v-col>
         <v-col class="pl-0 pb-0" cols="8" xs="8" sm="8" md="8" lg="8">
           <v-text-field id="todo-title" class="text" name="text" v-model="todo.title" :counter="20" label="TODOの内容"

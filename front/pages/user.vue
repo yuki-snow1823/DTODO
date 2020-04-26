@@ -2,9 +2,9 @@
   <v-container class="user-page" v-if="currentUser">
     <v-row class="user-status" id="v-step-2">
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
-        <p>
-          名前：{{ currentUser.user.name}}
-          <v-icon class="mb-2" color="yellow" size="30" v-if="currentUser.user.level == 10">mdi-crown</v-icon>
+        <p>名前：{{ currentUser.user.name}}
+          <v-icon class="mb-2" color="yellow" size="30"
+          v-if="currentUser.user.level == 10">mdi-crown</v-icon>
         </p>
         <div class="user-point">
           <p class="user-task-point">
