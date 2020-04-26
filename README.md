@@ -1,4 +1,4 @@
-![introduction](https://user-images.githubusercontent.com/59280290/80267072-39446e80-86da-11ea-8429-b56b8b880658.gif)
+![introduction](https://user-images.githubusercontent.com/59280290/80301821-49934100-87e1-11ea-8b15-d38c5969c74c.gif)
 
 <h2 align="center">DTODO</h2>
 
