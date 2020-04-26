@@ -2,15 +2,12 @@
 ja:
   activerecord:
     models:
-      reward: ごほうび
-    attributes:
-      reward:
-        title: 内容
-        point: タスクポイント
-    models:
-      todo: TODO
+      todo:
     attributes:
       todo:
+        title: 内容
+        point: タスクポイント
+      reward:
         title: 内容
         point: タスクポイント
     errors:
