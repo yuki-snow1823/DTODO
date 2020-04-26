@@ -7,7 +7,7 @@
       </v-card-title>
       <draggable class="pl-0" v-model="todos" :options="{ animation: 200, delay: 50 }" @end="atEnd" element="ul">
         <li id="v-step-1" class="todo-list" v-for="todo in todos" :key="todo.sort">
-          <v-icon size="30px">mdi-numeric-{{todo.point}}-box-outline</v-icon>
+          <v-icon size="30px">mdi-numeric-{{ todo.point }}-box-outline</v-icon>
           <v-hover v-slot:default="{ hover }">
             <v-icon @click="openCompleteDialog(todo)" size="25px" color="blue"
               v-text="hover ? 'mdi-heart' : 'mdi-heart-outline'">
@@ -16,17 +16,19 @@
 
           <span class="todo-title">{{ todo.title }}</span>
           <div class="todo-list-icon">
-            <v-icon @click="editItem(todo); open(todo)" big>mdi-pencil-plus</v-icon>
+            <v-icon @click="
+                editItem(todo);
+                open(todo);
+              " big>mdi-pencil-plus</v-icon>
             <v-icon midium @click="openDeleteDialog(todo)">delete</v-icon>
           </div>
-
         </li>
       </draggable>
     </v-card>
 
     <v-dialog v-model="completeDialog">
       <v-card>
-        <v-card-title>『{{selectedItem.title}}』を達成しますか？</v-card-title>
+        <v-card-title>『{{ selectedItem.title }}』を達成しますか？</v-card-title>
         <v-btn @click="completeItem(selectedItem)">はい</v-btn>
         <v-btn @click="completeDialog = false">いいえ</v-btn>
       </v-card>
@@ -42,14 +44,17 @@
         <p>ポイント</p>
         <v-select class="dialog-point" single-line :items="items" v-model="dialogText.point" :value="dialogText.point"
           filled></v-select>
-        <v-btn class="update-btn" @click="updateItem(dialogText.id, dialogText.title, dialogText.point); save()">保存
+        <v-btn class="update-btn" @click="
+            updateItem(dialogText.id, dialogText.title, dialogText.point);
+            save();
+          ">保存
         </v-btn>
       </v-card>
     </v-dialog>
 
     <v-dialog v-model="deleteDialog">
       <v-card>
-        <v-card-title>『{{selectedItem.title}}』を削除しますか？</v-card-title>
+        <v-card-title>『{{ selectedItem.title }}』を削除しますか？</v-card-title>
         <v-btn @click="deleteItem(selectedItem)">はい</v-btn>
         <v-btn @click="deleteDialog = false">いいえ</v-btn>
       </v-card>
@@ -59,9 +64,7 @@
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
     </v-snackbar>
-
   </div>
-
 </template>
 
 <script>
@@ -81,10 +84,11 @@
         snackColor: "",
         snackText: "",
         dialogText: "",
+        dialogTodo: {},
         dialog: false,
         deleteDialog: false,
         completeDialog: false,
-        selectedItem: "",
+        selectedItem: ""
       };
     },
     computed: {
@@ -106,7 +110,7 @@
         this.snack = true;
         this.snackColor = "warning";
         this.snackText = "削除しました。";
-        this.deleteDialog = false
+        this.deleteDialog = false;
       },
       async completeItem(item) {
         const getUser = await axios.get(`/v1/todos/${item.id}`, {
@@ -124,18 +128,24 @@
           todos,
           rewards,
           untilPercentage: getUser.data.untilPercentage,
-          untilLevel: getUser.data.untilLevel,
+          untilLevel: getUser.data.untilLevel
         };
         this.$store.commit("setUser", updateUser);
         this.snack = true;
         this.snackColor = "success";
         this.snackText = item.point + "タスクポイントと経験値を獲得した！";
-        this.completeDialog = false
+        this.completeDialog = false;
       },
       async editItem(todo) {
         this.dialog = true;
-        this.dialogText = todo;
-        // ここでdialogに引数を渡す処理をしている
+        // 参照渡し
+        this.dialogTodo = todo;
+        // 値渡し
+        this.dialogText = {
+          id: todo.id,
+          title: todo.title,
+          point: todo.point
+        };
       },
       async updateItem(id, title, point) {
         await axios.patch(`/v1/todos/${id}`, {
@@ -144,13 +154,14 @@
             point: point
           }
         });
+        this.dialogTodo.title = title;
+        this.dialogTodo.point = point;
         this.dialog = false;
       },
       async atEnd() {
-        let result =
-          await axios.patch(`v1/todos`, {
-            todo: this.todos
-          });
+        let result = await axios.patch(`v1/todos`, {
+          todo: this.todos
+        });
         const updateUser = {
           ...this.user,
           todos: this.todos
@@ -284,8 +295,7 @@
     }
 
     .update-btn {
-      @include btn
+      @include btn;
     }
-
   }
 </style>

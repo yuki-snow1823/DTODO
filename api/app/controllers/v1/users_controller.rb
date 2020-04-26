@@ -15,7 +15,8 @@ class V1::UsersController < ApplicationController
           totalExp = user.experience_point
           user_level = CalcUserLevel.calc_user_level(user, totalExp)
           todo = {"title" => "","point" => ""}
-          # binding.pry
+          # エラーメッセージで入力前のデータが削除されないようにする際に、エラーを起こさないように空のjsonを送っています。
+
           render json: {user: user, todo: todo, todos: todos, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
         end
       else 

@@ -66,19 +66,19 @@
         showContent: false
       };
     },
-    // fetch({
-    //   store,
-    //   redirect
-    // }) {
-    //   store.watch(
-    //     state => state.currentUser,
-    //     (newUser, oldUser) => {
-    //       if (!newUser) {
-    //         return redirect("/");
-    //       }
-    //     }
-    //   );
-    // },
+    fetch({
+      store,
+      redirect
+    }) {
+      store.watch(
+        state => state.currentUser,
+        (newUser, oldUser) => {
+          if (!newUser) {
+            return redirect("/");
+          }
+        }
+      );
+    },
     components: {
       AddReward,
       RewardList,
