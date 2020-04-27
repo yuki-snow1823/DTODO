@@ -52,7 +52,7 @@ RSpec.describe Todo, type: :model do
         point: 1,
       )
       todo.valid?
-      expect(todo.errors[:title]).to include("can't be blank")
+      expect(todo.errors[:title]).to include("を入力してください")
     end
 
     it 'titleが20文字の以上の場合保存されない' do
@@ -63,7 +63,7 @@ RSpec.describe Todo, type: :model do
         point: 1,
       )
       todo.valid?
-      expect(todo.errors[:title]).to include("is too long (maximum is 20 characters)")
+      expect(todo.errors[:title]).to include("は20文字以内で入力してください")
     end
 
     it 'pointが空の場合保存されない' do
@@ -74,7 +74,7 @@ RSpec.describe Todo, type: :model do
         point: "",
       )
       todo.valid?
-      expect(todo.errors[:point]).to include("can't be blank")
+      expect(todo.errors[:point]).to include("を入力してください")
     end
   
   end

@@ -19,7 +19,6 @@ describe V1::TodosController , type: :request do
     context 'パラメーターが不正な場合' do
       it 'リクエストが成功する' do
         post v1_todos_path, params: { todo: FactoryBot.attributes_for(:todo, :invalid) }
-        # v1_todos_pathだとうまくいかない
           expect(response.status).to eq 422
       end
 
@@ -30,5 +29,37 @@ describe V1::TodosController , type: :request do
       end
 
     end
+  end
+
+  describe 'PATCH #update' do
+    context 'パラメータが妥当な場合' do
+      it 'リクエストが成功すること' do
+        put :update, params: { id: takashi, user: FactoryBot.attributes_for(:satoshi) }
+        expect(response.status).to eq 302
+      end
+
+      it 'ユーザー名が更新されること' do
+        expect do
+          put :update, params: { id: takashi, user: FactoryBot.attributes_for(:satoshi) }
+        end.to change { User.find(takashi.id).name }.from('Takashi').to('Satoshi')
+      end
+
+      it 'リダイレクトすること' do
+        put :update, params: { id: takashi, user: FactoryBot.attributes_for(:satoshi) }
+        expect(response).to redirect_to User.last
+      end
+    end
+
+    context 'パラメータが不正な場合' do
+      it 'リクエストが成功すること' do
+        put :update, params: { id: takashi, user: FactoryBot.attributes_for(:user, :invalid) }
+        expect(response.status).to eq 200
+      end
+
+      it 'ユーザー名が変更されないこと' do
+        expect do
+          put :update, params: { id: takashi, user: FactoryBot.attributes_for(:user, :invalid) }
+        end.to_not change(User.find(takashi.id), :name)
+      end
   end
 end
