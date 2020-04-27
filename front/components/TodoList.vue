@@ -41,13 +41,12 @@
         </v-card-title>
         <p>内容</p>
         <v-text-field class="dialog-title" v-model="dialogText.title" filled></v-text-field>
+          <p class="errormsg">{{ errorMsg }}</p>
         <p>ポイント</p>
         <v-select class="dialog-point" single-line :items="items" v-model="dialogText.point" :value="dialogText.point"
           filled></v-select>
         <v-btn class="update-btn" @click="
-            updateItem(dialogText.id, dialogText.title, dialogText.point);
-            save();
-          ">保存
+            updateItem(dialogText.id, dialogText.title, dialogText.point);">保存
         </v-btn>
       </v-card>
     </v-dialog>
@@ -88,7 +87,8 @@
         dialog: false,
         deleteDialog: false,
         completeDialog: false,
-        selectedItem: ""
+        selectedItem: "",
+        errorMsg: "",
       };
     },
     computed: {
@@ -148,6 +148,13 @@
         };
       },
       async updateItem(id, title, point) {
+        if(!title){
+          this.errorMsg = "タイトルが空欄です。"
+          return console.log("空欄")
+        }else if(title.length >= 20){
+          this.errorMsg = "タイトルは1文字以上20文字以下にしてください。"
+          return console.log("文字が多い")
+        }
         await axios.patch(`/v1/todos/${id}`, {
           todo: {
             title: title,
@@ -157,6 +164,10 @@
         this.dialogTodo.title = title;
         this.dialogTodo.point = point;
         this.dialog = false;
+        this.snack = true;
+        this.snackColor = "success";
+        this.snackText = "保存しました。";
+        this.errorMsg = ""
       },
       async atEnd() {
         let result = await axios.patch(`v1/todos`, {
@@ -297,5 +308,8 @@
     .update-btn {
       @include btn;
     }
+  }
+  .errormsg {
+    color: red;
   }
 </style>
