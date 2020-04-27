@@ -50,6 +50,7 @@
         </v-card-title>
         <p>内容</p>
         <v-text-field class="dialog-title" v-model="dialogText.title" filled></v-text-field>
+        <p class="errormsg">{{ errorMsg }}</p>
         <p>ポイント</p>
         <v-select class="dialog-point" single-line :items="items" v-model="dialogText.point" :value="dialogText.point"
           filled></v-select>
@@ -87,6 +88,7 @@
         completeDialog: false,
         selectedItem: "",
         dialogReward: {},
+        errorMsg: "",
       };
     },
     computed: {
@@ -143,9 +145,9 @@
           this.$store.commit("setError", data.error_msg);
           this.completeDialog = false;
         }
-        },
-        async editItem(reward) {
-            console.log(reward);
+      },
+      async editItem(reward) {
+        console.log(reward);
         this.dialog = true;
         // 参照渡し-代入ではなく紐づかせるイメージ
         this.dialogReward = reward;
@@ -155,57 +157,67 @@
           title: reward.title,
           point: reward.point
         };
-          },
-          async updateItem(id, title, point) {
-              await axios.patch(`/v1/rewards/${id}`, {
-                reward: {
-                  title: title,
-                  point: point
-                }
-              });
-              this.dialogReward.title = title;
-              this.dialogReward.point = point;
-              this.dialog = false;
-            },
-            async atEnd() {
-                let result = await axios.patch(`v1/rewards`, {
-                  reward: this.rewards
-                });
-                const updateUser = {
-                  ...this.user,
-                  rewards: this.rewards
-                };
-                this.$store.commit("setUser", updateUser);
-              },
-              save() {
-                this.snack = true;
-                this.snackColor = "success";
-                this.snackText = "Data saved";
-              },
-              cancel() {
-                this.snack = true;
-                this.snackColor = "error";
-                this.snackText = "Canceled";
-              },
-              open(name) {
-                this.snack = true;
-                this.snackColor = "info";
-                this.snackText = "『" + name.title + "』" + "を編集します。";
-              },
-              close() {
-                console.log("Dialog closed");
-              },
-              openCompleteDialog(reward) {
-                this.completeDialog = true;
-                this.selectedItem = reward;
-              },
-              openDeleteDialog(reward) {
-                this.deleteDialog = true;
-                this.selectedItem = reward;
-              }
       },
-      watch: {}
-    };
+      async updateItem(id, title, point) {
+        if (!title) {
+          this.errorMsg = "タイトルが空欄です。"
+          return console.log("空欄")
+        } else if (title.length >= 20) {
+          this.errorMsg = "タイトルは1文字以上20文字以下にしてください。"
+          return console.log("文字が多い")
+        }
+        await axios.patch(`/v1/rewards/${id}`, {
+          reward: {
+            title: title,
+            point: point
+          }
+        });
+        this.snack = true;
+        this.snackColor = "success";
+        this.snackText = "保存しました。";
+        this.dialogReward.title = title;
+        this.dialogReward.point = point;
+        this.dialog = false;
+      },
+      async atEnd() {
+        let result = await axios.patch(`v1/rewards`, {
+          reward: this.rewards
+        });
+        const updateUser = {
+          ...this.user,
+          rewards: this.rewards
+        };
+        this.$store.commit("setUser", updateUser);
+      },
+      save() {
+        this.snack = true;
+        this.snackColor = "success";
+        this.snackText = "保存しました。";
+      },
+      cancel() {
+        this.snack = true;
+        this.snackColor = "error";
+        this.snackText = "Canceled";
+      },
+      open(name) {
+        this.snack = true;
+        this.snackColor = "info";
+        this.snackText = "『" + name.title + "』" + "を編集します。";
+      },
+      close() {
+        console.log("Dialog closed");
+      },
+      openCompleteDialog(reward) {
+        this.completeDialog = true;
+        this.selectedItem = reward;
+      },
+      openDeleteDialog(reward) {
+        this.deleteDialog = true;
+        this.selectedItem = reward;
+      }
+    },
+    watch: {}
+  };
 </script>
 
 <style lang="scss">
@@ -306,5 +318,9 @@
     .update-btn {
       @include btn;
     }
+  }
+
+  .errormsg {
+    color: red;
   }
 </style>

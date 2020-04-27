@@ -18,7 +18,11 @@ class V1::RewardsController < ApplicationController
     def update
       reward = Reward.find(params[:id])
       reward.update(reward_params)
-      render json: reward
+        if reward.errors.present?
+          render json: {error_msg: reward.errors.full_messages, reward: reward}, status: :unprocessable_entity
+        else 
+        render json: reward
+      end
     end
 
     def destroy

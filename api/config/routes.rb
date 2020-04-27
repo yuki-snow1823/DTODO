@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :create]
     get '/todos/:id', to: 'todos#complete'
     get '/rewards/:id', to: 'rewards#complete'
-    patch '/todos', to: 'todos#sort'
-    patch '/rewards', to: 'rewards#sort'
+    patch '/todos', to: 'todos#sort', as: 'todo_sort'
+    patch '/rewards', to: 'rewards#sort', as: 'reward_sort'
   end
 end

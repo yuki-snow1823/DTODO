@@ -18,7 +18,11 @@ class V1::TodosController < ApplicationController
     def update
       todo = Todo.find(params[:id])
       todo.update(todo_params)
-      render json: todo
+      if todo.errors.present?
+        render json: {error_msg: todo.errors.full_messages, todo: todo}, status: :unprocessable_entity
+      else 
+        render json: todo
+      end
     end
 
     def destroy

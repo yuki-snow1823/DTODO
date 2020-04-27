@@ -32,34 +32,47 @@ describe V1::TodosController , type: :request do
   end
 
   describe 'PATCH #update' do
+      let!(:todo){ create(:todo) }
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
-        put :update, params: { id: takashi, user: FactoryBot.attributes_for(:satoshi) }
-        expect(response.status).to eq 302
+        patch v1_todo_path(id: 1), params: { id:1, todo: FactoryBot.attributes_for(:todo)}
+        expect(response.status).to eq 200
       end
 
-      it 'ユーザー名が更新されること' do
+      it 'タイトルが更新されること' do
         expect do
-          put :update, params: { id: takashi, user: FactoryBot.attributes_for(:satoshi) }
-        end.to change { User.find(takashi.id).name }.from('Takashi').to('Satoshi')
-      end
-
-      it 'リダイレクトすること' do
-        put :update, params: { id: takashi, user: FactoryBot.attributes_for(:satoshi) }
-        expect(response).to redirect_to User.last
+          patch v1_todo_path(id: 1), params: { id:1, todo: FactoryBot.attributes_for(:todo_changed) }
+        end.to change { Todo.find(1).title }.from('test').to('changed')
       end
     end
 
     context 'パラメータが不正な場合' do
       it 'リクエストが成功すること' do
-        put :update, params: { id: takashi, user: FactoryBot.attributes_for(:user, :invalid) }
-        expect(response.status).to eq 200
+        patch v1_todo_path(id: 1), params: { id:1, todo: FactoryBot.attributes_for(:todo_changed, :invalid) }
+        expect(response.status).to eq 422
       end
 
-      it 'ユーザー名が変更されないこと' do
+      it 'タイトルが変更されないこと' do
         expect do
-          put :update, params: { id: takashi, user: FactoryBot.attributes_for(:user, :invalid) }
-        end.to_not change(User.find(takashi.id), :name)
+          patch v1_todo_path(id: 1), params: { id:1, todo: FactoryBot.attributes_for(:todo, :invalid) }
+        end.to_not change(Todo.find(1), :title)
       end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    let!(:todo) { FactoryBot.create :todo }
+
+    it 'リクエストが成功すること' do
+      delete v1_todo_path(id: 1)
+      expect(response.status).to eq 200
+    end
+
+    it 'ユーザーが削除されること' do
+      expect do
+        delete v1_todo_path(id: 1)
+      end.to change(Todo, :count).by(-1)
+    end
+
   end
 end
