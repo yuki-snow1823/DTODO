@@ -59,4 +59,20 @@ describe V1::TodosController , type: :request do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    let!(:todo) { FactoryBot.create :todo }
+
+    it 'リクエストが成功すること' do
+      delete v1_todo_path(id: 1)
+      expect(response.status).to eq 200
+    end
+
+    it 'ユーザーが削除されること' do
+      expect do
+        delete v1_todo_path(id: 1)
+      end.to change(Todo, :count).by(-1)
+    end
+
+  end
 end
