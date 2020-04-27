@@ -4,10 +4,12 @@
 <h3 align="center">Frontend</h3>
 
 <p align="center">
-  <a href="https://jp.vuejs.org/index.html"><img src="https://user-images.githubusercontent.com/39142850/71645835-a98d4580-2d21-11ea-9693-348d12101bb4.png" width="80px;" />　　</a>
+  <a href="https://jp.vuejs.org/index.html"><img src="https://user-images.githubusercontent.com/39142850/71645835-a98d4580-2d21-11ea-9693-348d12101bb4.png" width="80px;" /></a>
+  <a>　</a>
   <a href="https://ja.nuxtjs.org/guide/"><img src="https://user-images.githubusercontent.com/59280290/80292478-f645d200-8791-11ea-9a0b-57ec5a7ec487.png" height="80px" /></a>
 <a>　</a>
     <a href="https://firebase.google.com/"><img src="https://user-images.githubusercontent.com/59280290/80302028-90356b00-87e2-11ea-854c-c234307f3299.png" height="80px;" /></a></p>
+
 <h3 align="center">Backend</h3>
 <p align="center">
 <a>　</a>
@@ -26,9 +28,9 @@
 ゲーミフィケーションを取り入れたタスク管理SPA
 
 ## :chart_with_upwards_trend: Purpose
-①日々の大変な・後回しにしがちなタスクをより楽しく行ってもらうため  
-②やるべきことも、ご褒美も自分で決める経験をしてもらうため  
-③自分の生きがいである「力をつけ続けること」をアプリを通じて表現するため
+- 日々の大変な・後回しにしがちなタスクをより楽しく行ってもらうため  
+- やるべきことも、ご褒美も自分で決める経験をしてもらうため  
+- 自分の生きがいである「力をつけ続けること」をアプリを通じて表現するため
 
 ## :pencil2: Description
 ・TODO管理  
@@ -73,9 +75,38 @@ TODOをこなすたびにユーザーには経験値が与えられ、レベル�
 - シングルページアプリケーション設計による快適な操作感
 - フロントエンドとバックエンドを分離させた開発手法
 
+## :computer: Version
+setup  
+Ruby: 2.6.3  
+Rails 6.0.2.2  
+Bundler version 2.1.4  
+Node: 12.16.2  
+npm: 6.14.4  
+mysql: 5.7.2.2  
+
+web server  
+nginx: 1.16.1
+
+application server  
+puma: 4.3.3
+
+frontend  
+@nuxt/core@2.12.2  
+@babel/core@7.9.0  
+@vue/test-utils@1.0.0-beta.33  
+@nuxtjs/axios@5.9.7  
+jest@25.3.0  
+vuex@3.1.3  
+vuedraggable@2.23.2  
+firebase@7.13.1  
+vue-typer@1.2.0
+
+backend  
+rack-cors: 1.1.1  
+gem 'mysql2'  
 ## 👀 Author
 
 Yuki Horikoshi
 - [Github](https://github.com/yuki-snow1823)
-- [Twitter](#)
+- [Twitter](https://twitter.com/yuki82511988)
 - [Qiita](https://qiita.com/yuki_snow1823/items/fa70ce035962ed5bd34d)
