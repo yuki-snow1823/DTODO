@@ -1,45 +1,61 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'
-import AddTodo from '@/components/AddTodo'
+import AddTodo from '@/components/AddTodo.vue'
+
 import {
   mount,
   createLocalVue
 } from '@vue/test-utils'
-import * as store from '@/store'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
+localVue.use(Vuetify)
 
 describe('components/AddTodo.vueのテスト', () => {
   let wrapper
-  let vuetify
-  let userStore
-  let currentUser1
 
   beforeEach(() => {
-      wrapper = mount(AddTodo, {
-      localVue,
-      store: userStore,
-      vuetify,
-    })
-    vuetify = new Vuetify()
-    userStore = new Vuex.Store(store)
-    currentUser1 = {
-      user: {
-        experience_point: 0
+    wrapper = mount(AddTodo, {
+      propsData: {
+        todo: {
+          title: "hoge",
+          point: 1
+        }
       },
-      todos: [],
-      rewards: [],
-      untilPercentage: null,
-      untilLevel: null,
-    }
-    userStore.replaceState({
-      currentUser: currentUser1
+      mocks: {
+        $store: {
+          state: {
+            currentUser: {
+              user: {
+                experience_point: 0
+              },
+              todo: {
+                point: "",
+                title: "",
+              },
+              reward: {
+                point: "",
+                title: "",
+              },
+              todos: [],
+              rewards: [],
+              untilPercentage: null,
+              untilLevel: null,
+            },
+            loading: false,
+            notification: {
+              status: false,
+              message: ""
+            },
+            errors: []
+          }
+        },
+      },
+      localVue,
     })
   })
 
-  // 以下のテストを行う際は、v-test-utilsとvuetifyの未解決のバグがあるため、AddTodo.vueのv-formとv-hoverをコメントアウトしてください。
   describe('フォームに関するテスト', () => {
     test(`登録ボタンクリックでhandleSubmitが呼ばれること`, () => {
       const mock = jest.fn()
@@ -50,19 +66,19 @@ describe('components/AddTodo.vueのテスト', () => {
       expect(mock).toHaveBeenCalled()
     })
 
-  test("フォームにタスクポイントがセットされること", () => {
-    wrapper.find('input[type="text"]').setValue(1) 
-    expect(wrapper.vm.number).toBe("1")
-  })
-  
-  test("フォームにタイトルがセットされること", () => {
-    wrapper.find('#todo-title').setValue("test title") 
-    expect(wrapper.vm.title).toBe("test title")
+    test("フォームにタスクポイントがセットされること", () => {
+      wrapper.find('input[type="text"]').setValue(1)
+      expect(wrapper.vm.todo.point).toBe("1")
+    })
   })
 
-  test("親コンポーネントにイベントが渡せること", () => {
-    wrapper.vm.$emit('submit')
-    expect(wrapper.emitted().submit).toBeTruthy()
-  })
-  })
+    test("フォームにタイトルがセットされること", () => {
+      wrapper.find('#todo-title').setValue("test title")
+      expect(wrapper.vm.title).toBe("test title")
+    })
+
+    test("親コンポーネントにイベントが渡せること", () => {
+      wrapper.vm.$emit('submit')
+      expect(wrapper.emitted().submit).toBeTruthy()
+    })
 })
