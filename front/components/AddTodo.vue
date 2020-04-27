@@ -31,6 +31,16 @@
         items: numberRange
       };
     },
+    // computed: {
+    //   point: {
+    //     get() {
+    //       return this.todo.point
+    //     },
+    //     set(newValue) {
+    //       this.$emit('input', newValue)
+    //     }
+    //   }
+    // }
     methods: {
       handleSubmit() {
         const todo = {
@@ -45,7 +55,7 @@
       }
     },
     created() {
-      console.log(this.todo);
+      //console.log(this.todo);
       this.$vuetify.lang = {
         t: () => {}
       };
