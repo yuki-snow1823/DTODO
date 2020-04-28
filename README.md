@@ -104,6 +104,14 @@ vue-typer@1.2.0
 backend  
 rack-cors: 1.1.1  
 gem 'mysql2'  
+
+  
+ER  
+https://drive.google.com/file/d/1-wCdOxrMf7JH9MOPJb7xGWlWaX72ESkH/view?usp=sharing  
+
+List of Features  
+https://docs.google.com/spreadsheets/d/10EkgefVrWOcUwnqEYp09vCmVcveE4DfNdiKm0f2-4Qg/edit?usp=sharing  
+
 ## 👀 Author
 
 Yuki Horikoshi
