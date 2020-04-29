@@ -3,6 +3,7 @@ import Vuetify from 'vuetify'
 import Vuex from 'vuex'
 import AddTodo from '@/components/AddTodo.vue'
 
+// import * as store from '@/store'
 import {
   mount,
   createLocalVue
@@ -14,6 +15,7 @@ localVue.use(Vuetify)
 
 describe('components/AddTodo.vueのテスト', () => {
   let wrapper
+  const mock = jest.fn()
 
   beforeEach(() => {
     wrapper = mount(AddTodo, {
@@ -22,6 +24,9 @@ describe('components/AddTodo.vueのテスト', () => {
           title: "hoge",
           point: 1
         }
+      },
+      methods: {
+        handleSubmit: mock,
       },
       mocks: {
         $store: {
@@ -58,10 +63,6 @@ describe('components/AddTodo.vueのテスト', () => {
 
   describe('フォームに関するテスト', () => {
     test(`登録ボタンクリックでhandleSubmitが呼ばれること`, () => {
-      const mock = jest.fn()
-      wrapper.setMethods({
-        handleSubmit: mock
-      })
       wrapper.find('.todo-btn').trigger('click')
       expect(mock).toHaveBeenCalled()
     })
@@ -72,13 +73,21 @@ describe('components/AddTodo.vueのテスト', () => {
     })
   })
 
-    test("フォームにタイトルがセットされること", () => {
-      wrapper.find('#todo-title').setValue("test title")
-      expect(wrapper.vm.title).toBe("test title")
-    })
+  // test(`storeの値が増えるテスト`, () => {
+  //   wrapper.find('input[type="text"]').setValue(1)
+  //   wrapper.find('#todo-title').setValue("test title")
+  //   wrapper.find('.todo-btn').trigger('click')
+  //   console.log()
+  //   expect(store.state.currentUser).toBe(1)
+  // })
 
-    test("親コンポーネントにイベントが渡せること", () => {
-      wrapper.vm.$emit('submit')
-      expect(wrapper.emitted().submit).toBeTruthy()
-    })
+  test("フォームにタイトルがセットされること", () => {
+    wrapper.find('#todo-title').setValue("test title")
+    expect(wrapper.vm.todo.title).toBe("test title")
+  })
+
+  test("親コンポーネントにイベントが渡せること", () => {
+    wrapper.vm.$emit('submit')
+    expect(wrapper.emitted().submit).toBeTruthy()
+  })
 })
