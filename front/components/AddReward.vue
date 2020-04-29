@@ -3,10 +3,10 @@
     <v-container class="add-reward">
       <v-row>
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
-          <v-select label="TP" v-model="reward.point" :items="items" outlined></v-select>
+          <v-select label="TP" v-model="point" :items="items" outlined></v-select>
         </v-col>
         <v-col class="pl-0 pb-0" cols="8" xs="8" sm="8" md="8" lg="8">
-          <v-text-field id="reward-title" v-model="reward.title" :counter="20" label="ごほうびの内容" required outlined></v-text-field>
+          <v-text-field id="reward-title" v-model="title" :counter="20" label="ごほうびの内容" required outlined></v-text-field>
         </v-col>
         <v-col class="px-0 pb-0" cols="12" xs="2" sm="2" md="2" lg="2">
           <v-hover v-slot:default="{ hover }">
@@ -28,18 +28,20 @@
     data() {
       return {
         items: numberRange,
+        point: "",
+        title: ""
       };
     },
     methods: {
       handleSubmit() {
         const reward = {
-          title: this.reward.title,
+          title: this.title,
           user_id: this.$store.state.currentUser.user.id,
-          point: this.reward.point
+          point: this.point
         };
         this.$emit("submit", reward);
-        this.reward.title = "";
-        this.reward.point = "";
+        this.title = "";
+        this.point = "";
       }
     },
     created() {
