@@ -374,6 +374,7 @@
   $tab: 680px;
   $sp: 480px;
 
+// レスポンシブデザイン用
   @mixin pc {
     @media (max-width: ($pc)) {
       @content;
