@@ -1,5 +1,4 @@
 <template>
-  <v-container class="user-page" v-if="currentUser">
     <v-row class="user-status" id="v-step-2">
       <v-col cols="12" xs="5" sm="6" md="5" lg="5">
         <p>
@@ -24,7 +23,6 @@
           :value="currentUser.untilPercentage ? currentUser.untilPercentage : 0" color="light-blue"></v-progress-linear>
       </v-col>
     </v-row>
-  </v-container>
 </template>
 
 <script>
