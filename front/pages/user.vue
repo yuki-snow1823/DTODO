@@ -131,7 +131,7 @@
   }
 
   .user-page {
-    
+
     .user-btn {
       background-color: black !important;
       border: 2px solid $main-color;
@@ -144,20 +144,6 @@
         border: 2px solid yellow;
         color: yellow;
       }
-    }
-
-    .list-title,
-    h1 {
-      color: $sub-color;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    p {
-      font-size: 20px;
-      font-weight: bold;
     }
 
     .mdi-heart {
