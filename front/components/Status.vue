@@ -1,43 +1,45 @@
 <template>
-  <v-container class="user-page" v-if="user">
-    <v-row justify="center">
-      <v-col class="user-status" cols="12" xs="6" sm="8" md="10" lg="7">
-        <v-row>
-        <v-col cols="12" xs="6" sm="8" md="10" lg="6">
-            <h2>ステータス</h2>
-            <p>お名前：{{user.name}}</p>
-            <p>レベル：{{user.level}}</p>
-            <p>経験値：{{user.experience_point}}</p>
-            <p>TP：{{user.point}}</p>
-        </v-col>
-        <v-col cols="12" xs="6" sm="8" md="5" lg="6">
-          <p>右半分</p>
-          <router-link to="/reward">ご褒美ページへ</router-link>
-        </v-col>
-        </v-row>
+  <v-container class="user-page" v-if="currentUser">
+    <v-row class="user-status" id="v-step-2">
+      <v-col cols="12" xs="5" sm="6" md="5" lg="5">
+        <p>
+          名前：{{ currentUser.user.name}}
+          <v-icon class="mb-2" color="yellow" size="30" v-if="currentUser.user.level == 10">mdi-crown</v-icon>
+        </p>
+        <div class="user-point">
+          <p class="user-task-point">
+            <v-icon class="mb-1" size="30" color="yellow">mdi-alpha-p-circle</v-icon>
+            {{ currentUser.user.point }}
+          </p>
+        </div>
+      </v-col>
+      <v-col cols="12" xs="5" sm="6" md="5" lg="5">
+        <p class="user-level">レベル：{{ currentUser.user.level }}</p>
+        <p v-if="currentUser.user.level !== 10">
+          次のレベルまであと
+          {{ currentUser.untilLevel ? currentUser.untilLevel : 50 }} EXP
+        </p>
+        <p v-else>最大レベルです！</p>
+        <v-progress-linear :height="12" :rounded="true"
+          :value="currentUser.untilPercentage ? currentUser.untilPercentage : 0" color="light-blue"></v-progress-linear>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-  import AddTodo from "@/components/AddTodo";
-  import TodoList from "@/components/TodoList";
-  import axios from "@/plugins/axios";
-  import firebase from "@/plugins/firebase";
   export default {
     data() {
       return {
-        email: "",
-        name: "",
-        level: "",
-        point: "",
-        experience_point: "",
-        password: "",
-        passwordConfirm: "",
+        // email: "",
+        // name: "",
+        // level: "",
+        // point: "",
+        // experience_point: "",
         show1: false,
         show2: false,
         error: "",
+        showContent: false
       };
     },
     fetch({
@@ -47,94 +49,119 @@
       store.watch(
         state => state.currentUser,
         (newUser, oldUser) => {
+          console.log(newUser, oldUser);
           if (!newUser) {
             return redirect("/");
           }
         }
       );
     },
-    components: {
-      AddTodo,
-      TodoList
-    },
     computed: {
-      user() {
+      currentUser() {
         return this.$store.state.currentUser;
-      },
-    },
-    methods: {
-      async addTodo(todo) {
-        const {
-          data
-        } = await axios.post("/v1/todos", {
-          todo
-        });
-        this.$store.commit("setUser", {
-          ...this.user,
-          todos: [...this.user.todos, data]
-        });
-      },
-      signup() {
-        if (this.password !== this.passwordConfirm) {
-          this.error = "※パスワードとパスワード確認が一致していません";
-        }
-        this.$store.commit("setLoading", true);
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then(res => {
-            const user = {
-              email: res.user.email,
-              name: this.name,
-              uid: res.user.uid
-            };
-            axios
-              .post("/v1/users", {
-                user
-              })
-              .then(res => {
-                this.$store.commit("setLoading", false);
-                this.$store.commit("setUser", res.data);
-                this.$router.push("/user");
-              });
-          })
-          .catch(error => {
-            this.error = (code => {
-              switch (code) {
-                case "auth/email-already-in-use":
-                  return "既にそのメールアドレスは使われています";
-                case "auth/wrong-password":
-                  return "※パスワードが正しくありません";
-                case "auth/weak-password":
-                  return "※パスワードは最低6文字以上にしてください";
-                default:
-                  return "※メールアドレスとパスワードをご確認ください";
-              }
-            })(error.code);
-          });
-      },
-      login() {
-        this.$store.dispatch("login", {
-          email: this.email,
-          password: this.password
-        });
-      },
-      openModal: function () {
-        this.showContent = true;
-      },
-      closeModal: function () {
-        this.showContent = false;
-      },
+      }
     }
-  };
+  }
 </script>
 
 <style lang="scss">
-  .user-page {
-    .user-status {
-      border: 2px white solid;
-      // display: inline-block;
+  $main-color: #fc7b03;
+  $sub-color: #33dddd;
+  $accent-color: #f0353f;
+
+  $pc: 1024px;
+  $tab: 680px;
+  $sp: 480px;
+
+  @mixin pc {
+    @media (max-width: ($pc)) {
+      @content;
     }
   }
 
+  @mixin tab {
+    @media (max-width: ($tab)) {
+      @content;
+    }
+  }
+
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
+  }
+
+  .user-page {
+    .user-status {
+      border: 2px white solid;
+      margin: 0 auto;
+      width: 66%;
+      background-color: rgb(60, 60, 65);
+
+      .coin-img {
+        width: 20% !important;
+        display: inline-block;
+      }
+
+      .user-point {
+        .user-task-point {
+          font-size: x-large;
+          color: rgb(238, 238, 37);
+          padding-left: 2%;
+          padding-top: 8px;
+          margin-bottom: 0px;
+        }
+      }
+    }
+
+    .user-status {
+      @include pc {
+        width: 100%;
+      }
+
+      @include tab {
+        width: 100% !important;
+      }
+
+      @include sp {
+        width: 100% !important;
+      }
+    }
+
+    .user-btn {
+      background-color: black !important;
+      border: 2px solid $main-color;
+      color: $main-color;
+      width: 100%;
+      font-weight: bold;
+      font-size: 18px;
+
+      &:hover {
+        border: 2px solid yellow;
+        color: yellow;
+      }
+    }
+
+    .list-title,
+    h1 {
+      color: $sub-color;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .mdi-heart {
+      color: red !important;
+    }
+
+    .errors {
+      color: $accent-color;
+    }
+  }
 </style>
