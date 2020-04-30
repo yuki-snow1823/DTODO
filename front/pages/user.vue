@@ -131,42 +131,7 @@
   }
 
   .user-page {
-    .user-status {
-      border: 2px white solid;
-      margin: 0 auto;
-      width: 66%;
-      background-color: rgb(60, 60, 65);
-
-      .coin-img {
-        width: 20% !important;
-        display: inline-block;
-      }
-
-      .user-point {
-        .user-task-point {
-          font-size: x-large;
-          color: rgb(238, 238, 37);
-          padding-left: 2%;
-          padding-top: 8px;
-          margin-bottom: 0px;
-        }
-      }
-    }
-
-    .user-status {
-      @include pc {
-        width: 100%;
-      }
-
-      @include tab {
-        width: 100% !important;
-      }
-
-      @include sp {
-        width: 100% !important;
-      }
-    }
-
+    
     .user-btn {
       background-color: black !important;
       border: 2px solid $main-color;
