@@ -1,26 +1,13 @@
 <template>
   <v-container class="user-page" v-if="currentUser">
-    <Status />
-    <v-row justify="center">
-      <v-col class="pb-0" cols="12" xs="12" sm="12" md="12" lg="8">
-        <div>
-          <AddTodo @submit="addTodo" :todo="currentUser.todo" />
-        </div>
-      </v-col>
-    </v-row>
+    <Status class="mb-5" />
+    <AddTodo class="mb-5" @submit="addTodo" :todo="currentUser.todo" />
     <div class="errors text-center" v-if="$store.state.errors">
       <span v-for="error in $store.state.errors" :key="error">
         <div>{{ error }}</div>
       </span>
     </div>
-
-    <v-row justify="center">
-      <v-col cols="12" xs="12" sm="12" md="12" lg="8">
-        <div>
-          <TodoList :todos="currentUser.todos" />
-        </div>
-      </v-col>
-    </v-row>
+    <TodoList :todos="currentUser.todos" />
     <Tour v-if="currentUser.user.todo_tour" />
   </v-container>
 </template>
@@ -104,54 +91,4 @@
 </script>
 
 <style lang="scss">
-  $main-color: #fc7b03;
-  $sub-color: #33dddd;
-  $accent-color: #f0353f;
-
-  $pc: 1024px;
-  $tab: 680px;
-  $sp: 480px;
-
-  @mixin pc {
-    @media (max-width: ($pc)) {
-      @content;
-    }
-  }
-
-  @mixin tab {
-    @media (max-width: ($tab)) {
-      @content;
-    }
-  }
-
-  @mixin sp {
-    @media (max-width: ($sp)) {
-      @content;
-    }
-  }
-
-  .user-page {
-
-    .user-btn {
-      background-color: black !important;
-      border: 2px solid $main-color;
-      color: $main-color;
-      width: 100%;
-      font-weight: bold;
-      font-size: 18px;
-
-      &:hover {
-        border: 2px solid yellow;
-        color: yellow;
-      }
-    }
-
-    .mdi-heart {
-      color: red !important;
-    }
-
-    .errors {
-      color: $accent-color;
-    }
-  }
 </style>
