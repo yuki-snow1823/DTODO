@@ -2,9 +2,9 @@
   <v-container class="user-page" v-if="currentUser">
     <Status class="mb-5" />
     <AddTodo class="mb-5" @submit="addTodo" :todo="currentUser.todo" />
-    <div class="errors text-center" v-if="$store.state.errors">
+    <div class="text-center" v-if="$store.state.errors">
       <span v-for="error in $store.state.errors" :key="error">
-        <div>{{ error }}</div>
+        <div class="errors mb-1">{{ error }}</div>
       </span>
     </div>
     <TodoList :todos="currentUser.todos" />
@@ -90,4 +90,7 @@
 </script>
 
 <style lang="scss">
+.errors {
+  color: red;
+}
 </style>

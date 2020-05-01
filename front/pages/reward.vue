@@ -2,9 +2,9 @@
   <v-container class="user-page" v-if="currentUser">
     <Status class="mb-5"/>
     <AddReward class="mb-5" @submit="addReward" :reward="currentUser.reward" />
-    <div class="errors text-center" v-if="$store.state.errors">
+    <div class="text-center" v-if="$store.state.errors">
       <span v-for="error in $store.state.errors" :key="error">
-        <div>{{ error }}</div>
+        <div class="errors mb-1">{{ error }}</div>
       </span>
     </div>
     <RewardList :rewards="currentUser.rewards" />
@@ -102,4 +102,7 @@
 </script>
 
 <style lang="scss">
+.errors {
+  color: red;
+}
 </style>
