@@ -83,7 +83,6 @@
             // 追加するはずだったがエラーで消えてしまうtodoを入れておくもの
           });
           this.$store.commit("setError", data.error_msg);
-          console.log("data", data.todo);
         }
       }
     }

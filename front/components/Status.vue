@@ -1,6 +1,6 @@
 <template>
   <v-row class="user-status" id="v-step-2">
-    <v-col cols="12" xs="5" sm="6" md="5" lg="5">
+    <v-col cols="12" xs="5" sm="6" md="6" lg="6">
       <p>
         名前：{{ currentUser.user.name}}
         <v-icon class="mb-2" color="yellow" size="30" v-if="currentUser.user.level == 10">mdi-crown</v-icon>
@@ -12,7 +12,7 @@
         </p>
       </div>
     </v-col>
-    <v-col cols="12" xs="5" sm="6" md="5" lg="5">
+    <v-col cols="12" xs="5" sm="6" md="6" lg="6">
       <p class="user-level">レベル：{{ currentUser.user.level }}</p>
       <p v-if="currentUser.user.level !== 10">
         次のレベルまであと
@@ -83,7 +83,6 @@
   .user-status {
     border: 2px white solid;
     margin: 0 auto;
-    width: 66%;
     background-color: rgb(60, 60, 65);
 
     .coin-img {
@@ -102,17 +101,17 @@
     }
   }
 
-  .user-status {
-    @include pc {
-      width: 100%;
-    }
+  // .user-status {
+  //   @include pc {
+  //     width: 100%;
+  //   }
 
-    @include tab {
-      width: 100% !important;
-    }
+  //   @include tab {
+  //     width: 100% !important;
+  //   }
 
-    @include sp {
-      width: 100% !important;
-    }
-  }
+  //   @include sp {
+  //     width: 100% !important;
+  //   }
+  // }
 </style>

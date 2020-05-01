@@ -1,7 +1,6 @@
 <template>
-  <v-form>
-    <v-container class="add-reward">
-      <v-row>
+  <!-- <v-form> -->
+      <v-row class="add-reward">
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
           <v-select label="TP" v-model="reward.point" :items="items" outlined></v-select>
         </v-col>
@@ -18,8 +17,7 @@
           </v-hover>
         </v-col>
       </v-row>
-    </v-container>
-  </v-form>
+  <!-- </v-form> -->
 </template>
 <script>
   const numberRange = [...Array(9).keys()].map(i => ++i);
@@ -77,7 +75,6 @@
   }
 
   .add-reward {
-    border: 2px white solid;
 
     .reward-btn {
       @include btn;
