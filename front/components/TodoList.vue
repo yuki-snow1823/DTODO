@@ -41,7 +41,7 @@
         </v-card-title>
         <p>内容</p>
         <v-text-field class="dialog-title" v-model="dialogText.title" filled></v-text-field>
-          <p class="errormsg">{{ errorMsg }}</p>
+        <p class="errormsg">{{ errorMsg }}</p>
         <p>ポイント</p>
         <v-select class="dialog-point" single-line :items="items" v-model="dialogText.point" :value="dialogText.point"
           filled></v-select>
@@ -148,10 +148,10 @@
         };
       },
       async updateItem(id, title, point) {
-        if(!title){
+        if (!title) {
           this.errorMsg = "タイトルが空欄です。"
           return console.log("空欄")
-        }else if(title.length >= 20){
+        } else if (title.length >= 20) {
           this.errorMsg = "タイトルは1文字以上20文字以下にしてください。"
           return console.log("文字が多い")
         }
@@ -310,7 +310,22 @@
       @include btn;
     }
   }
+
   .errormsg {
     color: red;
+  }
+
+  .list-title,
+  h1 {
+    color: $sub-color;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: bold;
   }
 </style>

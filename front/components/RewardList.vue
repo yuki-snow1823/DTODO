@@ -14,7 +14,6 @@
             </v-icon>
             <v-icon v-else size="25px" color="blue">check </v-icon>
           </v-hover>
-
           <span class="reward-title">{{ reward.title }}</span>
           <div class="reward-list-icon">
             <v-icon v-if="reward.status" big color="yellow">lock_open</v-icon>
@@ -22,7 +21,6 @@
             <v-icon v-if="!reward.status" @click="editItem(reward); open(reward)" big>mdi-pencil-plus</v-icon>
             <v-icon midium @click="openDeleteDialog(reward)">delete</v-icon>
           </div>
-
         </li>
       </draggable>
     </v-card>
@@ -149,7 +147,7 @@
       async editItem(reward) {
         console.log(reward);
         this.dialog = true;
-        // 参照渡し-代入ではなく紐づかせるイメージ
+        // 参照渡し
         this.dialogReward = reward;
         // 値渡し
         this.dialogText = {
@@ -175,6 +173,7 @@
         this.snack = true;
         this.snackColor = "success";
         this.snackText = "保存しました。";
+        // ここで値渡しをしてエラー文を反映させています。
         this.dialogReward.title = title;
         this.dialogReward.point = point;
         this.dialog = false;
@@ -263,7 +262,7 @@
     padding: 10px;
     border: 1px solid #7f7f7f;
     border-radius: 6px;
-    background-color: #83dd7b;
+    background-color: #a0e09a;
     cursor: grab;
 
     .reward-list-icon {

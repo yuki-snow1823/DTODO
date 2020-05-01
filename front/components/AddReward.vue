@@ -1,39 +1,37 @@
 <template>
-  <v-form>
-    <v-container class="add-reward">
-      <v-row>
+  <!-- <v-form> -->
+      <v-row class="add-reward">
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
           <v-select label="TP" v-model="reward.point" :items="items" outlined></v-select>
         </v-col>
         <v-col class="pl-0 pb-0" cols="8" xs="8" sm="8" md="8" lg="8">
-          <v-text-field id="reward-title" v-model="reward.title" :counter="20" label="ごほうびの内容" required outlined></v-text-field>
+          <v-text-field id="reward-title" v-model="reward.title" :counter="20" label="ごほうびの内容" required outlined>
+          </v-text-field>
         </v-col>
         <v-col class="px-0 pb-0" cols="12" xs="2" sm="2" md="2" lg="2">
           <v-hover v-slot:default="{ hover }">
             <v-btn class="reward-btn" @click="handleSubmit">
-              <v-icon v-text="hover ? 'mdi-heart' : ''"> </v-icon>
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
               登録
             </v-btn>
           </v-hover>
         </v-col>
       </v-row>
-    </v-container>
-  </v-form>
+  <!-- </v-form> -->
 </template>
 <script>
   const numberRange = [...Array(9).keys()].map(i => ++i);
-
   export default {
-  props: {
-    reward: {
-      type: Object,
-      default: {
-        title: "",
-        point: null
-      },
-      required: true // プロパティを絶対渡すと言うこと
-    }
-  },
+    props: {
+      reward: {
+        type: Object,
+        default: {
+          title: "",
+          point: null
+        },
+        required: true // プロパティを絶対渡すと言うこと
+      }
+    },
     data() {
       return {
         items: numberRange,
@@ -77,7 +75,6 @@
   }
 
   .add-reward {
-    border: 2px white solid;
 
     .reward-btn {
       @include btn;
