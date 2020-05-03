@@ -1,14 +1,15 @@
 import AddTodo from '@/components/AddTodo'
 import {
-  mount
+  mount,
+  createLocalVue
 } from '@vue/test-utils'
 import Vuex from 'vuex';
+import * as store from '@/store'
 
 let wrapper
-// let store
 
-// const localVue = createLocalVue();
-// localVue.use(Vuex);
+const localVue = createLocalVue();
+localVue.use(Vuex);
 
 beforeEach(() => {
   wrapper = mount(AddTodo, {
@@ -18,42 +19,21 @@ beforeEach(() => {
         point: null
       }
     },
-    mocks: {
-      $store: {
-        state: {
-          currentUser: {
-            user: {
-              experience_point: 0
-            },
-            todo: {
-              point: "",
-              title: "",
-            },
-            reward: {
-              point: "",
-              title: "",
-            },
-            todos: [],
-            rewards: [],
-            untilPercentage: null,
-            untilLevel: null,
-          },
-          loading: false,
-          notification: {
-            status: false,
-            message: ""
-          },
-          errors: []
-        }
-      },
-    },
+    store: store,
+    localVue
   })
 })
 
 describe('DOMイベントのテスト', () => {
 
   it('Testの詳細', () => {
-    // wrapper.find('.todo-btn').trigger('click')
-    expect (wrapper.find('errors')).toBeTruthy()
+    const hundleSubmit = jest.fn()
+
+    wrapper.setMethods({
+      hundleSubmit
+    })
+
+    wrapper.find('.todo-btn').trigger('click')
+    expect(hundleSubmit).toBeCalled()
   })
 })
