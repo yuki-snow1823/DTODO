@@ -81,13 +81,6 @@ export default {
             placement: "bottom"
           }
         }
-        // {
-        //   target: '#v-step-3',
-        //   content: 'これで終わりです',
-        //   params: {
-        //     placement: 'left'
-        //   }
-        // }
       ],
       callbacks: {
         onPreviousStep: this.myCustomPreviousStepCallback,

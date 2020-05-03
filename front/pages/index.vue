@@ -270,7 +270,7 @@
             });
             setTimeout(() => {
               this.$store.commit("setLoading", false);
-            }, 2500);
+            }, 3000);
             setTimeout(() => {
               this.$store.commit("setNotice", {});
             }, 2000);
@@ -374,6 +374,7 @@
   $tab: 680px;
   $sp: 480px;
 
+// レスポンシブデザイン用
   @mixin pc {
     @media (max-width: ($pc)) {
       @content;
