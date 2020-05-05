@@ -1,5 +1,4 @@
 <template>
-  <!-- <v-form> -->
       <v-row class="add-todo">
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
           <v-select class="point" label="TP" v-model="todo.point" :items="items" outlined></v-select>
@@ -16,7 +15,6 @@
           </v-hover>
         </v-col>
       </v-row>
-  <!-- </v-form> -->
 </template>
 
 <script>

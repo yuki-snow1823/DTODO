@@ -58,7 +58,7 @@
         </h1>
         <form>
           <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
-          <v-text-field v-model="email" :counter="20" label="Email" data-vv-name="email" required></v-text-field>
+          <v-text-field v-model="email" :counter="30" label="Email" data-vv-name="email" required></v-text-field>
           <v-text-field v-model="password" label="password" data-vv-name="password" required
             :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="show1 = !show1"></v-text-field>
@@ -394,6 +394,7 @@
   }
 
   .index-page {
+    // background-color: purple;
     .mon {
       width: 9%;
 
@@ -411,6 +412,7 @@
       font-size: 70px;
       font-family: "Comic Sans MS";
       margin-bottom: 0px;
+      color: white;
 
       .index-title-first {
         color: $main-color;
