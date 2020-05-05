@@ -21,9 +21,6 @@ class V1::UsersController < ApplicationController
 
           render json: {user: user, reward: reward, todo: todo, todos: todos, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
         end
-      else 
-        @users = User.all
-        render json: @users
       end
     end
 
