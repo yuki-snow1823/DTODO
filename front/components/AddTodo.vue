@@ -27,7 +27,8 @@
           title: "",
           point: null
         },
-        required: true // プロパティを絶対渡すと言うこと
+        // プロパティを必ず渡し、エラーを防ぐために記載
+        required: true
       }
     },
     data() {
@@ -43,7 +44,7 @@
           point: this.todo.point
         };
         this.$emit("submit", todo);
-        // 登録後に値をリセットしています。
+        // 登録後に入力した値をリセットしています。
         this.todo.title = "";
         this.todo.point = "";
       }

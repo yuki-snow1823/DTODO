@@ -374,7 +374,7 @@
   $tab: 680px;
   $sp: 480px;
 
-// レスポンシブデザイン用
+// レスポンシブデザイン用の指定です。
   @mixin pc {
     @media (max-width: ($pc)) {
       @content;
@@ -394,7 +394,6 @@
   }
 
   .index-page {
-    // background-color: purple;
     .mon {
       width: 9%;
 

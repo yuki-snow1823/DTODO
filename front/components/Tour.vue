@@ -1,24 +1,13 @@
 <template>
   <div>
-    <!-- <button @click="$tours['myTour'].start()" class="btn btn-lg">Start the tour</button>
-    <button @click="nextStep" class="btn btn-lg">Next step</button>
-    <button @click="showLastStep" class="btn btn-lg">Show last step</button> -->
 
     <v-tour name="myTour" :steps="steps" :callbacks="callbacks">
       <template slot-scope="tour">
         <transition name="fade">
-<v-step
-            v-if="tour.currentStep === index"
-            v-for="(step, index) of tour.steps"
-            :key="index"
-            :step="step"
-            :previous-step="tour.previousStep"
-            :next-step="tour.nextStep"
-            :stop="tour.stop"
-            :is-first="tour.isFirst"
-            :is-last="tour.isLast"
-            :labels="tour.labels"
-          >
+          <!-- 警告が出ますが問題ありません -->
+          <v-step v-if="tour.currentStep === index" v-for="(step, index) of tour.steps" :key="index" :step="step"
+            :previous-step="tour.previousStep" :next-step="tour.nextStep" :stop="tour.stop" :is-first="tour.isFirst"
+            :is-last="tour.isLast" :labels="tour.labels">
             <template v-if="tour.currentStep === 1">
               <div>
                 <button @click="tour.previousStep" class="btn btn-primary">Previous step</button>
@@ -37,10 +26,9 @@
   import axios from "@/plugins/axios";
   export default {
     name: 'my-tour',
-    data () {
+    data() {
       return {
-        steps: [
-          {
+        steps: [{
             target: '#v-step-0',
             header: {
               title: 'TODOの追加'
@@ -89,23 +77,23 @@
     },
     mounted: function () {
       this.$tours['myTour'].start()
-
-      // A dynamically added onStop callback
       this.callbacks.onStop = () => {
-        document.querySelector('#v-step-0').scrollIntoView({behavior: 'smooth'})
+        document.querySelector('#v-step-0').scrollIntoView({
+          behavior: 'smooth'
+        })
       }
     },
     methods: {
-      nextStep () {
+      nextStep() {
         this.$tours['myTour'].nextStep()
       },
-      showLastStep () {
+      showLastStep() {
         this.$tours['myTour'].currentStep = this.steps.length - 1
       },
-      myCustomPreviousStepCallback (currentStep) {
+      myCustomPreviousStepCallback(currentStep) {
         console.log('[Vue Tour] A custom previousStep callback has been called on step ' + (currentStep + 1))
       },
-      myCustomNextStepCallback (currentStep) {
+      myCustomNextStepCallback(currentStep) {
         console.log('[Vue Tour] A custom nextStep callback has been called on step ' + (currentStep + 1))
         if (currentStep === 1) {
           console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
@@ -117,11 +105,13 @@
 </script>
 
 <style scoped>
-  .fade-enter-active, .fade-leave-active {
+  .fade-enter-active,
+  .fade-leave-active {
     transition: opacity .5s;
   }
 
-  .fade-enter, .fade-leave-to {
+  .fade-enter,
+  .fade-leave-to {
     opacity: 0;
   }
 </style>

@@ -27,7 +27,8 @@
           title: "",
           point: null
         },
-        required: true // プロパティを絶対渡すと言うこと
+        // プロパティを必ず渡し、エラーを防ぐために記載
+        required: true
       }
     },
     data() {
@@ -43,6 +44,7 @@
           point: this.reward.point
         };
         this.$emit("submit", reward);
+        // 登録後に入力した値をリセットしています
         this.reward.title = "";
         this.reward.point = "";
       }

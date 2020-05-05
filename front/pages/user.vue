@@ -80,7 +80,6 @@
           this.$store.commit("setUser", {
             ...this.currentUser,
             todo: data.todo
-            // 追加するはずだったがエラーで消えてしまうtodoを入れておくもの
           });
           this.$store.commit("setError", data.error_msg);
         }

@@ -147,9 +147,8 @@
       async editItem(reward) {
         console.log(reward);
         this.dialog = true;
-        // 参照渡し
+        // 参照渡し（入力の際の文章を受け取る役割をしています）
         this.dialogReward = reward;
-        // 値渡し
         this.dialogText = {
           id: reward.id,
           title: reward.title,
@@ -173,7 +172,6 @@
         this.snack = true;
         this.snackColor = "success";
         this.snackText = "保存しました。";
-        // ここで値渡しをしてエラー文を反映させています。
         this.dialogReward.title = title;
         this.dialogReward.point = point;
         this.dialog = false;

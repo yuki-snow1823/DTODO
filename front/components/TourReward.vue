@@ -1,12 +1,9 @@
 <template>
   <div>
-    <!-- <button @click="$tours['myTour'].start()" class="btn btn-lg">Start the tour</button>
-    <button @click="nextStep" class="btn btn-lg">Next step</button>
-    <button @click="showLastStep" class="btn btn-lg">Show last step</button> -->
-
     <v-tour name="myTour" :steps="steps" :callbacks="callbacks">
       <template slot-scope="tour">
         <transition name="fade">
+          <!-- 警告が出ますが問題ありません -->
           <v-step
             v-if="tour.currentStep === index"
             v-for="(step, index) of tour.steps"
@@ -90,8 +87,6 @@ export default {
   },
   mounted: function() {
     this.$tours["myTour"].start();
-
-    // A dynamically added onStop callback
     this.callbacks.onStop = () => {
       document
         .querySelector("#v-step-0")
