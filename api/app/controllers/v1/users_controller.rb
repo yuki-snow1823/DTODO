@@ -3,7 +3,7 @@ require_relative '../../domain/calc_user_level.rb'
 class V1::UsersController < ApplicationController
     def index
       if params[:uid] 
-
+        # firebaseの認証後、uidをもとに該当ユーザーを検索しています
         user = User.find_by(uid: params[:uid])
 
         if !user.present?
@@ -17,7 +17,7 @@ class V1::UsersController < ApplicationController
 
           todo = {"title" => "","point" => ""}
           reward = {"title" => "","point" => ""}
-          # エラーメッセージで入力前のデータが削除されないようにする際に、エラーを起こさないように空のjsonを送っています。
+          # 入力前のデータが削除されないようにする際に、エラーを起こさないように空のjsonを送っています
 
           render json: {user: user, reward: reward, todo: todo, todos: todos, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level]}
         end

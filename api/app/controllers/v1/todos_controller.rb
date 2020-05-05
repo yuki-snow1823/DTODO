@@ -7,8 +7,8 @@ class V1::TodosController < ApplicationController
         render json: todo, status: :created
       else
         if todo.errors.present?
-          # binding.pry
           render json: {error_msg: todo.errors.full_messages, todo: todo}, status: :unprocessable_entity
+          # エラーメッセージと一緒に、作成前の入力データを取得しています。
         else 
           render json: todo.errors, status: :unprocessable_entity
         end
@@ -36,18 +36,21 @@ class V1::TodosController < ApplicationController
       todo = Todo.find(params[:id])
       user = User.find(todo.user_id)
 
+      # タスクポイントの追加処理
       totalPoint = user.point.to_i
       totalPoint += todo.point
       user.point = totalPoint
 
+      # 経験値の追加処理
       totalExp = user.experience_point
       totalExp += todo.point
       user.experience_point = totalExp
       user.update(point: totalPoint,experience_point: totalExp)
 
       rewards = user.rewards.order(sort: "ASC")
+      # レベルアップの処理、./domainに処理を分離
       user_level = CalcUserLevel.calc_user_level(user, totalExp)
-
+      
       if todo.destroy
         render json: {todo: todo, user: user, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level] }
       end
