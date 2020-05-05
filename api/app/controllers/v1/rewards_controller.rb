@@ -8,7 +8,7 @@ class V1::RewardsController < ApplicationController
       else
         if reward.errors.present?
           render json: {error_msg: reward.errors.full_messages, reward: reward}, status: :unprocessable_entity
-          # エラーメッセージと一緒に作成前の入力データをとっておいています
+          # エラーメッセージと一緒に、作成前の入力データを取得しています。
         else 
           render json: reward.errors, status: :unprocessable_entity
         end

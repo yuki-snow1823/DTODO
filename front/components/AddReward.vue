@@ -1,5 +1,4 @@
 <template>
-  <!-- <v-form> -->
       <v-row class="add-reward">
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
           <v-select label="TP" v-model="reward.point" :items="items" outlined></v-select>
@@ -17,7 +16,6 @@
           </v-hover>
         </v-col>
       </v-row>
-  <!-- </v-form> -->
 </template>
 <script>
   const numberRange = [...Array(9).keys()].map(i => ++i);
@@ -29,7 +27,8 @@
           title: "",
           point: null
         },
-        required: true // プロパティを絶対渡すと言うこと
+        // プロパティを必ず渡し、エラーを防ぐために記載
+        required: true
       }
     },
     data() {
@@ -45,6 +44,7 @@
           point: this.reward.point
         };
         this.$emit("submit", reward);
+        // 登録後に入力した値をリセットしています
         this.reward.title = "";
         this.reward.point = "";
       }

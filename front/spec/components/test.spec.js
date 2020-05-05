@@ -74,7 +74,6 @@ describe('components/AddTodo.vueのテスト', () => {
       wrapper.find('.todo-btn').trigger('click')
       console.log(store)
       expect(store.state.currentUser.todos.length).toBe(1)
-      // expect(store.getters['messages'].length).not.toBe(0)
     })
 
     test("フォームにタスクポイントがセットされること", () => {
@@ -82,11 +81,6 @@ describe('components/AddTodo.vueのテスト', () => {
       expect(wrapper.vm.todo.point).toBe("1")
     })
   })
-
-  // test("フォームにタイトルがセットされること", () => {
-  //   wrapper.find('#todo-title').setValue("test title")
-  //   expect(wrapper.vm.title).toBe("test title")
-  // })
 
   test("親コンポーネントにイベントが渡せること", () => {
     wrapper.vm.$emit('submit')

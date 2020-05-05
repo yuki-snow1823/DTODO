@@ -138,9 +138,8 @@
       },
       async editItem(todo) {
         this.dialog = true;
-        // 参照渡し、一旦ここでdialogTodoとtodoを紐づけることで保存後に画面に反映させる
         this.dialogTodo = todo;
-        // 値渡し、dialog上のものを変更しても保存されるまでリストに反映されない
+        // 参照渡し（入力最中の文章を受け取る役割をしています）
         this.dialogText = {
           id: todo.id,
           title: todo.title,
@@ -163,7 +162,6 @@
         });
         this.dialogTodo.title = title;
         this.dialogTodo.point = point;
-        // 参照渡しで元データに反映させている
         this.dialog = false;
         this.snack = true;
         this.snackColor = "success";

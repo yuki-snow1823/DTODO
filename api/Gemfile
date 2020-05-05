@@ -51,4 +51,4 @@ gem 'dotenv-rails'
 # group :production do
 #   gem 'mysql2'
 # end
-# # 本番で使用
+# 本番環境で使用するためのもの

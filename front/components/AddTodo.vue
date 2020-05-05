@@ -1,5 +1,4 @@
 <template>
-  <!-- <v-form> -->
       <v-row class="add-todo">
         <v-col id="v-step-0" class="pr-0 pb-0" cols="4" xs="2" sm="2" md="2" lg="2">
           <v-select class="point" label="TP" v-model="todo.point" :items="items" outlined></v-select>
@@ -16,7 +15,6 @@
           </v-hover>
         </v-col>
       </v-row>
-  <!-- </v-form> -->
 </template>
 
 <script>
@@ -29,7 +27,8 @@
           title: "",
           point: null
         },
-        required: true // プロパティを絶対渡すと言うこと
+        // プロパティを必ず渡し、エラーを防ぐために記載
+        required: true
       }
     },
     data() {
@@ -45,7 +44,7 @@
           point: this.todo.point
         };
         this.$emit("submit", todo);
-        // 登録後に値をリセットしています。
+        // 登録後に入力した値をリセットしています。
         this.todo.title = "";
         this.todo.point = "";
       }
