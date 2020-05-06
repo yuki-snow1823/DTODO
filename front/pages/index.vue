@@ -78,7 +78,7 @@
     </v-row>
 
     <v-row class="introduction">
-      <v-col class="sub-introduction main" cols="12" sm="12" md="12" lg="12">
+      <v-col class="main" cols="12" sm="12" md="12" lg="12">
         <h1>やらなければならないことを楽しむ</h1>
         <h2 class="index-explain">
           毎日、何かやらなければならないTODOに追われていませんか？
@@ -94,7 +94,7 @@
     </v-row>
 
     <v-row class="introduction mb-0 justify-center">
-      <v-col class="sub-introduction mr-5" cols="12" sm="12" md="4" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="4" lg="3">
         <img src="../assets/mon_259.gif" />
         <h2 class="index-subtitle text-center">タスクポイントを<br>設定しよう！</h2>
         <h3 class="index-explain">
@@ -103,7 +103,7 @@
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction mr-5" cols="12" sm="12" md="4" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="4" lg="3">
         <img src="../assets/mon_237.gif" />
         <h2 class="index-subtitle text-center">レベルアップを<br>目指そう！</h2>
         <h3 class="index-explain">
@@ -112,7 +112,7 @@
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="4" lg="3">
         <img class="pt-10" src="../assets/mon_278.gif" />
         <h2 class="index-subtitle text-center">自分にごほうびを<br>あげよう！</h2>
         <h3 class="index-explain">
@@ -338,6 +338,17 @@
         this.countHiddenPage++;
         this.size += 10;
         this.color = "green"
+      },
+      handleScroll: function (evt, el) {
+        console.log(window.scrollY);
+        if (window.scrollY > 50) {
+          el.setAttribute(
+            "style",
+            "opacity: 1; transform: translate3d(0, -10px, 0)",
+            "transform: translateY(0);"
+          );
+        }
+        return window.scrollY > 100;
       }
     },
     created() {
@@ -374,7 +385,7 @@
   $tab: 680px;
   $sp: 480px;
 
-// レスポンシブデザイン用の指定です。
+  // レスポンシブデザイン用の指定です。
   @mixin pc {
     @media (max-width: ($pc)) {
       @content;
@@ -418,7 +429,9 @@
       }
     }
 
-    .index-subtitle,
+    .index-subtitle {
+      color: rgb(32, 23, 23);
+    }
     .index-form-title {
       @include explain;
     }
@@ -462,7 +475,11 @@
 
       .sub-introduction {
         text-align: center;
-        background-color: purple;
+        opacity: 0;
+        transition: 4s all cubic-bezier(0.39, 0.575, 0.565, 1);
+        transform: translateY(-60px);
+        background: #726a6a;
+        border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
       }
     }
 
@@ -579,6 +596,7 @@
 
   .wrapper-skull {
     margin: 0 auto;
+
     #skull {
       margin: 0 auto;
     }
@@ -591,6 +609,7 @@
     @include tab {
       height: 300px
     }
+
     @include sp {
       height: 200px;
     }
