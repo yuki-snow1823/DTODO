@@ -94,7 +94,7 @@
     </v-row>
 
     <v-row class="introduction mb-0 justify-center">
-      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="4" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="3" lg="3">
         <img src="../assets/mon_259.gif" />
         <h2 class="index-subtitle text-center">タスクポイントを<br>設定しよう！</h2>
         <h3 class="index-explain">
@@ -103,7 +103,7 @@
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="4" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="3" lg="3">
         <img src="../assets/mon_237.gif" />
         <h2 class="index-subtitle text-center">レベルアップを<br>目指そう！</h2>
         <h3 class="index-explain">
@@ -112,7 +112,7 @@
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="4" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="3" lg="3">
         <img class="pt-10" src="../assets/mon_278.gif" />
         <h2 class="index-subtitle text-center">自分にごほうびを<br>あげよう！</h2>
         <h3 class="index-explain">
@@ -480,6 +480,7 @@
         transform: translateY(-60px);
         background: #726a6a;
         border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
+        border: 6px solid #333;
       }
     }
 
