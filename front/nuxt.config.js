@@ -46,7 +46,8 @@ export default {
     "@/plugins/auth-check",
     "@/plugins/vue-draggable",
     "@/plugins/vue-tour",
-    "@/plugins/vue-typer"
+    "@/plugins/vue-typer",
+    "@/plugins/scroll"
   ],
   /*
    ** Nuxt.js dev-modules

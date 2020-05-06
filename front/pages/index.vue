@@ -8,9 +8,9 @@
 
     <h1 v-else class="index-title"><span class="index-title-first">D</span>TODO</h1>
 
-    <v-row>
+    <v-row class="justify-center">
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h1 class="index-subtitle text-center">DTODOとは</h1>
+        <h1 class="text-center">DTODOとは</h1>
         <h2 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h2>
@@ -21,18 +21,18 @@
           <img class="mon" src="../assets/mon_091.gif" />
         </div>
         <div v-if="user"></div>
-        <div class="guest" v-else>
+        <div class="guest mt-4" v-else>
           <v-hover v-slot:default="{ hover }">
             <v-btn class="guest-btn" @click="guestLogin">
               <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログイン
             </v-btn>
           </v-hover>
-          <p>※ゲストはログイン後、毎回チュートリアルが再生されます。</p>
-          <p>1回だけでいい場合は新規登録をお願いします。</p>
+          <h4>※ゲストはログイン後、毎回チュートリアルが再生されます。</h4>
+          <h4>1回だけでいい場合は新規登録をお願いします。</h4>
         </div>
       </v-col>
 
-      <v-col class="wrapper-skull" v-if="user" cols="12" sm="12" md="6" lg="6">
+      <v-col class="wrapper-skull" v-if="user" cols="12" sm="10" md="6" lg="6">
         <v-icon id="skull" :color="color" @click="countSkull()" class="mb-2 skull" :size="size">mdi-skull-outline
         </v-icon>
         <h1 v-if="countHiddenPage >= 15">押しすぎだ。</h1>
@@ -52,7 +52,7 @@
         </div>
       </v-col>
 
-      <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
+      <v-col class="index-button-wrapper" v-else cols="12" sm="10" md="6" lg="6">
         <h1 id="index-signup" class="index-form-title text-center">
           新規登録はこちらから
         </h1>
@@ -77,8 +77,8 @@
       </v-col>
     </v-row>
 
-    <v-row class="introduction">
-      <v-col class="sub-introduction main" cols="12" sm="12" md="12" lg="12">
+    <v-row class="justify-center">
+      <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
         <h1>やらなければならないことを楽しむ</h1>
         <h2 class="index-explain">
           毎日、何かやらなければならないTODOに追われていませんか？
@@ -93,28 +93,28 @@
       </v-col>
     </v-row>
 
-    <v-row class="introduction mb-0">
-      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+    <v-row class="introduction mb-0 justify-center">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="9" md="3" lg="3">
         <img src="../assets/mon_259.gif" />
-        <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
+        <h2 class="index-subtitle text-center">タスクポイントを<br>設定しよう！</h2>
         <h3 class="index-explain">
           DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
           TPはご褒美の解放に使用できます。
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="9" md="3" lg="3">
         <img src="../assets/mon_237.gif" />
-        <h2 class="index-subtitle text-center">レベルアップを目指そう！</h2>
+        <h2 class="index-subtitle text-center">レベルアップを<br>目指そう！</h2>
         <h3 class="index-explain">
           TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
           レベルが高くなると、何かいいことが…？
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="9" md="3" lg="3">
         <img class="pt-10" src="../assets/mon_278.gif" />
-        <h2 class="index-subtitle text-center">自分にごほうびをあげよう！</h2>
+        <h2 class="index-subtitle text-center">自分にごほうびを<br>あげよう！</h2>
         <h3 class="index-explain">
           DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
           たくさんのTODOをこなして、自分にごほうびをあげましょう。
@@ -338,6 +338,16 @@
         this.countHiddenPage++;
         this.size += 10;
         this.color = "green"
+      },
+      handleScroll: function (evt, el) {
+        if (window.scrollY > 50) {
+          el.setAttribute(
+            "style",
+            "opacity: 1; transform: translate3d(0, -10px, 0)",
+            "transform: translateY(0);"
+          );
+        }
+        return window.scrollY > 100;
       }
     },
     created() {
@@ -374,7 +384,7 @@
   $tab: 680px;
   $sp: 480px;
 
-// レスポンシブデザイン用の指定です。
+  // レスポンシブデザイン用の指定です。
   @mixin pc {
     @media (max-width: ($pc)) {
       @content;
@@ -411,19 +421,55 @@
       font-size: 70px;
       font-family: "Comic Sans MS";
       margin-bottom: 0px;
-      color: white;
+      color: white !important;
 
       .index-title-first {
         color: $main-color;
       }
     }
 
-    .index-subtitle,
+    .main-introduction {
+      margin: 2em 0;
+      position: relative;
+      padding: 0.5em 1.5em;
+      border-top: solid 2px white;
+      border-bottom: solid 2px white;
+
+      h1 {
+        color: $sub-color;
+        font-family: 'ヒラギノ角ゴシック';
+      }
+    }
+
+    .main-introduction:before,
+    .main-introduction:after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: -webkit-calc(100% + 20px);
+      height: calc(100% + 20px);
+      background-color: white;
+    }
+
+    .main-introduction:before {
+      left: 10px;
+    }
+
+    .main-introduction:after {
+      right: 10px;
+    }
+
+    .index-subtitle {
+      color: rgb(32, 23, 23);
+    }
+
     .index-form-title {
       @include explain;
     }
 
     .index-explain {
+      color: white;
       text-align: center;
       margin: 30px 0;
     }
@@ -462,11 +508,14 @@
 
       .sub-introduction {
         text-align: center;
+        opacity: 0;
+        transition: 4s all cubic-bezier(0.39, 0.575, 0.565, 1);
+        transform: translateY(-60px);
+        background: #726a6a;
+        border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
+        border: 6px solid #333;
+        font-family: 'ヒラギノ角ゴシック';
       }
-    }
-
-    .main {
-      border: 1px white solid;
     }
 
     h1 {
@@ -578,6 +627,7 @@
 
   .wrapper-skull {
     margin: 0 auto;
+
     #skull {
       margin: 0 auto;
     }
@@ -590,6 +640,7 @@
     @include tab {
       height: 300px
     }
+
     @include sp {
       height: 200px;
     }
