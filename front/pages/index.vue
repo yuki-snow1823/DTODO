@@ -8,7 +8,7 @@
 
     <h1 v-else class="index-title"><span class="index-title-first">D</span>TODO</h1>
 
-    <v-row>
+    <v-row class="justify-center">
       <v-col cols="12" sm="12" md="6" lg="6">
         <h1 class="text-center">DTODOとは</h1>
         <h2 class="index-explain">
@@ -32,7 +32,7 @@
         </div>
       </v-col>
 
-      <v-col class="wrapper-skull" v-if="user" cols="12" sm="12" md="6" lg="6">
+      <v-col class="wrapper-skull" v-if="user" cols="12" sm="10" md="6" lg="6">
         <v-icon id="skull" :color="color" @click="countSkull()" class="mb-2 skull" :size="size">mdi-skull-outline
         </v-icon>
         <h1 v-if="countHiddenPage >= 15">押しすぎだ。</h1>
@@ -52,7 +52,7 @@
         </div>
       </v-col>
 
-      <v-col class="index-button-wrapper" v-else cols="12" sm="12" md="6" lg="6">
+      <v-col class="index-button-wrapper" v-else cols="12" sm="10" md="6" lg="6">
         <h1 id="index-signup" class="index-form-title text-center">
           新規登録はこちらから
         </h1>
@@ -94,7 +94,7 @@
     </v-row>
 
     <v-row class="introduction mb-0 justify-center">
-      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="3" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="9" md="3" lg="3">
         <img src="../assets/mon_259.gif" />
         <h2 class="index-subtitle text-center">タスクポイントを<br>設定しよう！</h2>
         <h3 class="index-explain">
@@ -103,7 +103,7 @@
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="3" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="9" md="3" lg="3">
         <img src="../assets/mon_237.gif" />
         <h2 class="index-subtitle text-center">レベルアップを<br>目指そう！</h2>
         <h3 class="index-explain">
@@ -112,7 +112,7 @@
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="12" md="3" lg="3">
+      <v-col class="sub-introduction mx-2 mb-2" v-scroll="handleScroll" cols="12" sm="9" md="3" lg="3">
         <img class="pt-10" src="../assets/mon_278.gif" />
         <h2 class="index-subtitle text-center">自分にごほうびを<br>あげよう！</h2>
         <h3 class="index-explain">
@@ -340,7 +340,6 @@
         this.color = "green"
       },
       handleScroll: function (evt, el) {
-        console.log(window.scrollY);
         if (window.scrollY > 50) {
           el.setAttribute(
             "style",
