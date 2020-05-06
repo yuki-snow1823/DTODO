@@ -21,7 +21,7 @@
           <img class="mon" src="../assets/mon_091.gif" />
         </div>
         <div v-if="user"></div>
-        <div class="guest" v-else>
+        <div class="guest mt-4" v-else>
           <v-hover v-slot:default="{ hover }">
             <v-btn class="guest-btn" @click="guestLogin">
               <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログイン
