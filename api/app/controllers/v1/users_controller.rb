@@ -12,8 +12,8 @@ class V1::UsersController < ApplicationController
           todos = user.todos.order(sort: "ASC")
           rewards = user.rewards.order(sort: "ASC")
 
-          totalExp = user.experience_point
-          user_level = CalcUserLevel.calc_user_level(user, totalExp)
+          total_exp = user.experience_point
+          user_level = CalcUserLevel.calc_user_level(user, total_exp)
 
           todo = {"title" => "","point" => ""}
           reward = {"title" => "","point" => ""}

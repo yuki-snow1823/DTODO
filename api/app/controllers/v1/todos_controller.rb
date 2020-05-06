@@ -37,19 +37,19 @@ class V1::TodosController < ApplicationController
       user = User.find(todo.user_id)
 
       # タスクポイントの追加処理
-      totalPoint = user.point.to_i
-      totalPoint += todo.point
-      user.point = totalPoint
+      total_point = user.point.to_i
+      total_point += todo.point
+      user.point = total_point
 
       # 経験値の追加処理
-      totalExp = user.experience_point
-      totalExp += todo.point
-      user.experience_point = totalExp
-      user.update(point: totalPoint,experience_point: totalExp)
+      total_exp = user.experience_point
+      total_exp += todo.point
+      user.experience_point = total_exp
+      user.update(point: total_point,experience_point: total_exp)
 
       rewards = user.rewards.order(sort: "ASC")
       # レベルアップの処理、./domainに処理を分離
-      user_level = CalcUserLevel.calc_user_level(user, totalExp)
+      user_level = CalcUserLevel.calc_user_level(user, total_exp)
       
       if todo.destroy
         render json: {todo: todo, user: user, rewards: rewards, untilPercentage: user_level[:until_percentage], untilLevel: user_level[:until_level] }
