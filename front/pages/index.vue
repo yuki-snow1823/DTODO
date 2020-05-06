@@ -93,28 +93,28 @@
       </v-col>
     </v-row>
 
-    <v-row class="introduction mb-0">
-      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+    <v-row class="introduction mb-0 justify-center">
+      <v-col class="sub-introduction mr-5" cols="12" sm="12" md="4" lg="3">
         <img src="../assets/mon_259.gif" />
-        <h2 class="index-subtitle text-center">タスクポイントを設定しよう！</h2>
+        <h2 class="index-subtitle text-center">タスクポイントを<br>設定しよう！</h2>
         <h3 class="index-explain">
           DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
           TPはご褒美の解放に使用できます。
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+      <v-col class="sub-introduction mr-5" cols="12" sm="12" md="4" lg="3">
         <img src="../assets/mon_237.gif" />
-        <h2 class="index-subtitle text-center">レベルアップを目指そう！</h2>
+        <h2 class="index-subtitle text-center">レベルアップを<br>目指そう！</h2>
         <h3 class="index-explain">
           TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
           レベルが高くなると、何かいいことが…？
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="4">
+      <v-col class="sub-introduction" cols="12" sm="12" md="4" lg="3">
         <img class="pt-10" src="../assets/mon_278.gif" />
-        <h2 class="index-subtitle text-center">自分にごほうびをあげよう！</h2>
+        <h2 class="index-subtitle text-center">自分にごほうびを<br>あげよう！</h2>
         <h3 class="index-explain">
           DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
           たくさんのTODOをこなして、自分にごほうびをあげましょう。
@@ -411,7 +411,7 @@
       font-size: 70px;
       font-family: "Comic Sans MS";
       margin-bottom: 0px;
-      color: white;
+      color: white !important;
 
       .index-title-first {
         color: $main-color;
@@ -462,6 +462,7 @@
 
       .sub-introduction {
         text-align: center;
+        background-color: purple;
       }
     }
 
