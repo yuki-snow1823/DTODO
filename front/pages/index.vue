@@ -10,7 +10,7 @@
 
     <v-row>
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h1 class="index-subtitle text-center">DTODOとは</h1>
+        <h1 class="text-center">DTODOとは</h1>
         <h2 class="index-explain">
           TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
         </h2>
@@ -27,8 +27,8 @@
               <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログイン
             </v-btn>
           </v-hover>
-          <p>※ゲストはログイン後、毎回チュートリアルが再生されます。</p>
-          <p>1回だけでいい場合は新規登録をお願いします。</p>
+          <h4>※ゲストはログイン後、毎回チュートリアルが再生されます。</h4>
+          <h4>1回だけでいい場合は新規登録をお願いします。</h4>
         </div>
       </v-col>
 
@@ -77,8 +77,8 @@
       </v-col>
     </v-row>
 
-    <v-row class="introduction">
-      <v-col class="main" cols="12" sm="12" md="12" lg="12">
+    <v-row class="justify-center">
+      <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
         <h1>やらなければならないことを楽しむ</h1>
         <h2 class="index-explain">
           毎日、何かやらなければならないTODOに追われていませんか？
@@ -429,14 +429,48 @@
       }
     }
 
+    .main-introduction {
+      margin: 2em 0;
+      position: relative;
+      padding: 0.5em 1.5em;
+      border-top: solid 2px white;
+      border-bottom: solid 2px white;
+
+      h1 {
+        color: $sub-color;
+        font-family: 'ヒラギノ角ゴシック';
+      }
+    }
+
+    .main-introduction:before,
+    .main-introduction:after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      height: -webkit-calc(100% + 20px);
+      height: calc(100% + 20px);
+      background-color: white;
+    }
+
+    .main-introduction:before {
+      left: 10px;
+    }
+
+    .main-introduction:after {
+      right: 10px;
+    }
+
     .index-subtitle {
       color: rgb(32, 23, 23);
     }
+
     .index-form-title {
       @include explain;
     }
 
     .index-explain {
+      color: white;
       text-align: center;
       margin: 30px 0;
     }
@@ -481,11 +515,8 @@
         background: #726a6a;
         border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
         border: 6px solid #333;
+        font-family: 'ヒラギノ角ゴシック';
       }
-    }
-
-    .main {
-      border: 1px white solid;
     }
 
     h1 {
