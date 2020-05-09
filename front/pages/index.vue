@@ -347,6 +347,7 @@
             "transform: translateY(0);"
           );
         }
+        console.log(el)
         return window.scrollY > 100;
       }
     },
