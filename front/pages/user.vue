@@ -45,6 +45,7 @@
       );
     },
     created() {
+      // testの際に活用するため、残してあります。
       console.log(this.currentUser);
     },
     components: {
