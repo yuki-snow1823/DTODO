@@ -52,15 +52,6 @@ describe('components/AddReward.vueのテスト', () => {
   })
 
   describe('フォームに関するテスト', () => {
-    test(`登録ボタンクリックでhandleSubmitが呼ばれること`, () => {
-      const mock = jest.fn()
-      wrapper.setMethods({
-        handleSubmit: mock
-      })
-      console.log(store)
-      wrapper.find('.reward-btn').trigger('click')
-      expect(mock).toHaveBeenCalled()
-    })
 
     test("フォームにタスクポイントがセットされること", () => {
       wrapper.find('input[type="text"]').setValue(1)

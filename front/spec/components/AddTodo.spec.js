@@ -24,16 +24,20 @@ beforeEach(() => {
   })
 })
 
-describe('DOMイベントのテスト', () => {
+describe('フォームのテスト', () => {
 
-  it('Testの詳細', () => {
-    const hundleSubmit = jest.fn()
+  test("フォームにタスクポイントがセットされること", () => {
+    wrapper.find('input[type="text"]').setValue(1)
+    expect(wrapper.vm.todo.point).toBe("1")
+  })
 
-    wrapper.setMethods({
-      hundleSubmit
-    })
+  test("フォームにタイトルがセットされること", () => {
+    wrapper.find('#todo-title').setValue("test title")
+    expect(wrapper.vm.todo.title).toBe("test title")
+  })
 
-    wrapper.find('.todo-btn').trigger('click')
-    expect(hundleSubmit).toBeCalled()
+  test("親コンポーネントにイベントが渡せること", () => {
+    wrapper.vm.$emit('submit')
+    expect(wrapper.emitted().submit).toBeTruthy()
   })
 })
