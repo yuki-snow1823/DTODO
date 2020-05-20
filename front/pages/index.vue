@@ -163,7 +163,7 @@
       </v-card>
     </v-dialog>
 
-    <iframe class="how-to-use" src="https://www.youtube.com/embed/bg72-7woCI4?rel=0" frameborder="0"
+    <iframe class="how-to-use" src="https://www.youtube.com/embed/HsJrTMvUQOw?rel=0" frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
   </v-container>
