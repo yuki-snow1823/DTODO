@@ -414,7 +414,7 @@
     }
 
     .monster {
-      text-align: center;
+      text-align: center ;
     }
 
     .index-title {
