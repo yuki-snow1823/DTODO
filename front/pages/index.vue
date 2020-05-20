@@ -509,9 +509,9 @@
 
       .sub-introduction {
         text-align: center;
-        opacity: 0;
-        transition: 4s all cubic-bezier(0.39, 0.575, 0.565, 1);
-        transform: translateY(-60px);
+        // opacity: 0;
+        // transition: 4s all cubic-bezier(0.39, 0.575, 0.565, 1);
+        // transform: translateY(-60px);
         background: #726a6a;
         border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
         border: 6px solid #333;
