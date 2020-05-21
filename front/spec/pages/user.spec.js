@@ -1,6 +1,6 @@
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'
-import AddReward from '@/components/AddReward'
+import user from '@/pages/user'
 import {
   mount,
   createLocalVue
@@ -11,14 +11,14 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 localVue.use(Vuetify)
 
-describe('components/AddReward.vueのテスト', () => {
+describe('pages/user.vueのテスト', () => {
   let wrapper
   let vuetify
   let userStore
   let currentUser1
 
   beforeEach(() => {
-    wrapper = mount(AddReward, {
+    wrapper = mount(user, {
       propsData: {
         reward: {
           title: "hoge",
@@ -30,8 +30,7 @@ describe('components/AddReward.vueのテスト', () => {
       vuetify,
       mocks: {
         $store: {
-          state: {
-          }
+          state: {}
         }
       }
     })
@@ -49,23 +48,17 @@ describe('components/AddReward.vueのテスト', () => {
   }
   userStore.replaceState({
     currentUser: currentUser1
-  })
+  }) 
 
-  describe('フォームに関するテスト', () => {
+  describe('画面に関するテスト', () => {
 
-    test("フォームにタスクポイントがセットされること", () => {
+    test("正しい値をセットしてボタンを押した場合、TODOが追加されること", () => {
       wrapper.find('input[type="text"]').setValue(1)
-      expect(wrapper.vm.number).toBe("1")
+      wrapper.find('#todo-title').
+      setValue("test title")
+      wrapper.find('.todo-btn').trigger('click')
+      expect(wrapper.find('.todo-title')).toBe(true)
     })
 
-    test("フォームにタイトルがセットされること", () => {
-      wrapper.find('#reward-title').setValue("test title")
-      expect(wrapper.vm.title).toBe("test title")
-    })
-
-    test("親コンポーネントにイベントが渡せること", () => {
-      wrapper.vm.$emit('submit')
-      expect(wrapper.emitted().submit).toBeTruthy()
-    })
   })
 })

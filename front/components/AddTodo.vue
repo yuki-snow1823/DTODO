@@ -50,7 +50,6 @@
       }
     },
     created() {
-      console.log(this.todo);
       this.$vuetify.lang = {
         t: () => {}
       };
