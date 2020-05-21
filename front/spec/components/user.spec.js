@@ -1,22 +1,21 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import { createLocalVue, mount, shallowMount } from '@vue/test-utils'
-import user from '@/pages/user.vue'
+import user from "@/pages/user";
+import { mount, createLocalVue } from "@vue/test-utils";
+import Vuex from "vuex";
+import * as store from "@/store";
 
-Vue.use(Vuetify)
+let wrapper;
 
-const localVue = createLocalVue()
+const localVue = createLocalVue();
+localVue.use(Vuex);
+
+beforeEach(() => {
+  wrapper = mount(user, {
+    store: store,
+    localVue
+  });
+});
 
 describe('CustomCard.vue', () => {
-  let vuetify
-  let wrapper
-  beforeEach(() => {
-    vuetify = new Vuetify()
-    wrapper = mount(user, {
-      localVue,
-      vuetify,
-    })
-  })
   test("TODOが追加されること", () => {
     console.log(wrapper);
     expect(wrapper.vm.todo.point).toBe("1");

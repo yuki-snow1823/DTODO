@@ -48,7 +48,7 @@ describe('pages/user.vueのテスト', () => {
   }
   userStore.replaceState({
     currentUser: currentUser1
-  })
+  }) 
 
   describe('画面に関するテスト', () => {
 
