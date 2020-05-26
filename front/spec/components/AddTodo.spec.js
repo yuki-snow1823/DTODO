@@ -4,21 +4,25 @@ import {
   createLocalVue
 } from '@vue/test-utils'
 import Vuex from 'vuex';
-import * as store from '@/store'
+// import * as store from '@/store'
+import state from "@/store/state";
+import mutations from "@/store/mutations";
+import actions from "@/store/actions";
 
 // let wrapper
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-// let store;
-
+let store;
 
 describe('フォームのテスト', () => {
   beforeEach(() => {
     store = new Vuex.Store({
-     store
-    })
+      state,
+      mutations,
+      actions
+    });
   })
 
   const wrapper = mount(AddTodo, { store, localVue });
