@@ -25,7 +25,8 @@ describe('フォームのテスト', () => {
     });
   })
 
-  const wrapper = mount(AddTodo, { store, localVue });
+  const handleSubmit = jest.fn();
+  const wrapper = mount(AddTodo, { store, localVue, methods: {handleSubmit} });
 
   test("フォームにタスクポイントがセットされること", () => {
     wrapper.find('input[type="text"]').setValue(1)
@@ -38,6 +39,8 @@ describe('フォームのテスト', () => {
   })
 
   test("親コンポーネントにイベントが渡せること", () => {
+    wrapper.find('input[type="text"]').setValue(1);
+    wrapper.find("#todo-title").setValue("test title");
     wrapper.find(".todo-btn").trigger("click");
     expect(store.state.currentUser).toBe(1)
   })
