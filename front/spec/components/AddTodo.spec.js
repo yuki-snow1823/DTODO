@@ -4,12 +4,9 @@ import {
   createLocalVue
 } from '@vue/test-utils'
 import Vuex from 'vuex';
-// import * as store from '@/store'
 import state from "@/store/state";
 import mutations from "@/store/mutations";
 import actions from "@/store/actions";
-
-// let wrapper
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -25,9 +22,16 @@ describe('フォームのテスト', () => {
     });
   })
 
-  const handleSubmit = jest.fn();
-  const wrapper = mount(AddTodo, { store, localVue, methods: { handleSubmit } });
-  // wrapper.setProps({ todo: store.state.currentUser.todo })
+  const wrapper = mount(AddTodo, { store, localVue, } );
+  wrapper.setProps({
+    todo: {
+      type: Object,
+      default: {
+        title: "",
+        point: null
+      }
+    }
+    })
 
   test("フォームにタスクポイントがセットされること", () => {
     wrapper.find('input[type="text"]').setValue(1)
@@ -43,7 +47,8 @@ describe('フォームのテスト', () => {
     wrapper.find('input[type="text"]').setValue(1);
     wrapper.find("#todo-title").setValue("test title");
     wrapper.find(".todo-btn").trigger("click");
-    expect(store.state.currentUser).toBe(1)
+    // 1にはならないがgotを表示させるため
+    expect(store.state.currentUser.todos).toBe(1)
   })
 
   test("親コンポーネントにイベントが渡せること", () => {
