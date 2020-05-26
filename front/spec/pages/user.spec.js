@@ -51,12 +51,11 @@ describe('pages/user.vueのテスト', () => {
   }) 
 
   describe('画面に関するテスト', () => {
-
     test("正しい値をセットしてボタンを押した場合、TODOが追加されること", () => {
       wrapper.find('input[type="text"]').setValue(1)
-      wrapper.find('#todo-title').
-      setValue("test title")
+      wrapper.find('#todo-title').setValue("test title")
       wrapper.find('.todo-btn').trigger('click')
+      console.log(wrapper)
       expect(wrapper.find('.todo-title')).toBe(true)
     })
 
