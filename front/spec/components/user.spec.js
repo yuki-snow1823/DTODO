@@ -1,3 +1,4 @@
+// 一応保存しているだけのファイル
 import user from "@/pages/user";
 import { mount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
