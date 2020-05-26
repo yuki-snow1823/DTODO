@@ -6,25 +6,22 @@ import {
 import Vuex from 'vuex';
 import * as store from '@/store'
 
-let wrapper
+// let wrapper
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-beforeEach(() => {
-  wrapper = mount(AddTodo, {
-    propsData: {
-      todo: {
-        title: "",
-        point: null
-      }
-    },
-    store: store,
-    localVue
-  })
-})
+// let store;
+
 
 describe('フォームのテスト', () => {
+  beforeEach(() => {
+    store = new Vuex.Store({
+     store
+    })
+  })
+
+  const wrapper = mount(AddTodo, { store, localVue });
 
   test("フォームにタスクポイントがセットされること", () => {
     wrapper.find('input[type="text"]').setValue(1)
@@ -34,6 +31,11 @@ describe('フォームのテスト', () => {
   test("フォームにタイトルがセットされること", () => {
     wrapper.find('#todo-title').setValue("test title")
     expect(wrapper.vm.todo.title).toBe("test title")
+  })
+
+  test("親コンポーネントにイベントが渡せること", () => {
+    wrapper.find(".todo-btn").trigger("click");
+    expect(store.state.currentUser).toBe(1)
   })
 
   test("親コンポーネントにイベントが渡せること", () => {
