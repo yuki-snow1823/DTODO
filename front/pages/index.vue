@@ -404,6 +404,11 @@
     }
   }
 
+  @font-face {
+    font-family: "test";
+    src: url("/front/assets/fonts/ChelseaMarket-Regular.ttf");
+  }
+
   .index-page {
     .mon {
       width: 9%;
@@ -420,7 +425,7 @@
     .index-title {
       text-align: center;
       font-size: 70px;
-      font-family: "8bitOperatorPlus-Bold", monospace;
+      font-family: "test";
       text-shadow: 3px 5px #6b6b6b;
       margin-bottom: 0px;
       color: white !important;
