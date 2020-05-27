@@ -420,7 +420,8 @@
     .index-title {
       text-align: center;
       font-size: 70px;
-      font-family: "Comic Sans MS";
+      font-family: "8bitOperatorPlus-Bold", monospace;
+      text-shadow: 3px 5px #6b6b6b;
       margin-bottom: 0px;
       color: white !important;
 
