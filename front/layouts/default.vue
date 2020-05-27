@@ -184,7 +184,7 @@
     .toolbar-title {
       color: white;
       text-decoration: none;
-      font-family: "Comic Sans MS";
+      font-family: "8bitOperatorPlus-Bold", monospace;
       font-size: 30px;
       font-weight: bold;
 
