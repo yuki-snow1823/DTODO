@@ -409,7 +409,7 @@
   }
 
   @font-face {
-    font-family: "test";
+    font-family: "dot";
     src: url("../assets/fonts/k8x12S.ttf") format("truetype");
   }
 
@@ -437,13 +437,13 @@
 
     .index-title {
       text-align: center;
-      font-size: 100px;
-      font-family: "test" !important;
+      font-size: 150px;
+      font-family: "dot";
       text-shadow: 3px 5px #6b6b6b;
       margin-bottom: 0px;
       color: white !important;
       position: absolute;
-      top: 15%;
+      top: 10%;
       left: 20%;
       letter-spacing: 10px;
       @include sp {
@@ -463,6 +463,9 @@
       padding: 0.5em 1.5em;
       border-top: solid 2px white;
       border-bottom: solid 2px white;
+      font-size: 20px;
+      font-family: "dot";
+      letter-spacing: 10px;
 
       h1 {
         color: $sub-color;
@@ -550,6 +553,8 @@
     h1 {
       text-align: center;
       margin: 30px 0;
+      font-family: "dot" !important;
+      letter-spacing: 10px;
     }
 
     .mdi-heart {
