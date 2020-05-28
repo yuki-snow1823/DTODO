@@ -12,6 +12,20 @@
       <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
     </div>
 
+    <h2></h2>
+
+    <v-row class="justify-center">
+      <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
+        <h1>やらなければならないことを楽しむ</h1>
+        <h2 class="index-explain">
+        <vue-typer style="font-family: dot;" :text="[
+        '＊毎日、いやいやTODOをこなしていませんか？',
+        '＊DTODOを使って、メンドクサイをタノシイに変えましょう。',
+        ]" erase-style="clear" :type-delay="150" :erase-delay="300" :repeat="Infinity"></vue-typer>
+        </h2>
+      </v-col>
+    </v-row>
+
     <v-row class="justify-center">
       <v-col cols="12" sm="12" md="6" lg="6">
         <h1 class="text-center">DTODOとは</h1>
@@ -28,7 +42,7 @@
         <div class="guest mt-4" v-else>
           <v-hover v-slot:default="{ hover }">
             <v-btn class="guest-btn" @click="guestLogin">
-              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログイン
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>登録ナシで試してみる
             </v-btn>
           </v-hover>
           <h4>※ゲストはログイン後、毎回チュートリアルが再生されます。</h4>
@@ -81,21 +95,6 @@
       </v-col>
     </v-row>
 
-    <v-row class="justify-center">
-      <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
-        <h1>やらなければならないことを楽しむ</h1>
-        <h2 class="index-explain">
-          毎日、何かやらなければならないTODOに追われていませんか？
-        </h2>
-        <h2 class="index-explain">
-          めんどくさい、後回しにしたい、やりたくない…好きなことだけをしたい。
-        </h2>
-        <h2 class="index-explain">
-          では、そのTODOすらも楽しいものに変えてみましょう！
-        </h2>
-        <h2 class="index-explain">DTODOがお手伝いします。</h2>
-      </v-col>
-    </v-row>
 
     <v-row class="introduction mb-0 justify-center">
       <v-col class="sub-introduction mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
@@ -643,12 +642,12 @@
 
   .vue-typer .custom.char {
     color: #d4d4bd;
-    background-color: #1e1e1e;
+    // background-color: #1e1e1e;
   }
 
-  .vue-typer .custom.char.selected {
-    background-color: #264f78;
-  }
+  // .vue-typer .custom.char.selected {
+  //   background-color: #264f78;
+  // }
 
   .vue-typer .custom.caret {
     width: 10px;
