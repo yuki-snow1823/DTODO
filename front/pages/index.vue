@@ -59,30 +59,7 @@
             ]" erase-style="clear" :type-delay="140" :erase-delay="270" :repeat="Infinity"></vue-typer>
         </div>
       </v-col>
-
-      <v-col class="index-button-wrapper" v-else cols="12" sm="10" md="6" lg="6">
-        <h1 id="index-signup" class="index-form-title text-center">
-          新規登録はこちらから
-        </h1>
-        <form>
-          <v-text-field v-model="name" :counter="10" label="name" data-vv-name="name" required></v-text-field>
-          <v-text-field v-model="email" :counter="30" label="email" data-vv-name="email" required></v-text-field>
-          <v-text-field v-model="password" label="password" data-vv-name="password" required
-            :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="show1 = !show1"></v-text-field>
-          <v-text-field v-model="passwordConfirm" label="passwordConfirm" data-vv-name="passwordConfirm" required
-            :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="show2 = !show2"></v-text-field>
-
-          <p v-if="error" class="errors">{{ error }}</p>
-        </form>
-        <v-hover v-slot:default="{ hover }">
-          <v-btn class="index-button" @click="signup">
-            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
-            START
-          </v-btn>
-        </v-hover>
-      </v-col>
+      <div v-else></div>
     </v-row>
 
 
@@ -114,6 +91,33 @@
         </h3>
       </v-col>
     </v-row>
+
+      <v-col class="index-button-wrapper" cols="12" sm="10" md="6" lg="6">
+        <h1 id="index-signup" class="index-form-title text-center">
+          新規登録はこちらから
+        </h1>
+        <form>
+          <v-text-field v-model="name" :counter="10" label="name" data-vv-name="name" required></v-text-field>
+          <v-text-field v-model="email" :counter="30" label="email" data-vv-name="email" required></v-text-field>
+          <v-text-field v-model="password" label="password" data-vv-name="password" required
+            :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show1 = !show1"></v-text-field>
+          <v-text-field v-model="passwordConfirm" label="passwordConfirm" data-vv-name="passwordConfirm" required
+            :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show2 = !show2"></v-text-field>
+
+          <p v-if="error" class="errors">{{ error }}</p>
+        </form>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="index-button" @click="signup">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
+            START
+          </v-btn>
+        </v-hover>
+      </v-col>
+
+
+
 
     <v-row>
       <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
@@ -539,8 +543,9 @@
         // opacity: 0;
         // transition: 4s all cubic-bezier(0.39, 0.575, 0.565, 1);
         // transform: translateY(-60px);
-        background: #726a6a;
-        border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
+        // background: #23611a;
+        background-image: url("../assets/haikei.png");
+        // border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
         border: 6px solid #333;
         font-family: 'ヒラギノ角ゴシック';
       }
