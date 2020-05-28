@@ -410,7 +410,7 @@
 
   @font-face {
     font-family: "test";
-    src: url("/front/assets/fonts/k8x12S.ttf");
+    src: url("../assets/fonts/k8x12S.ttf") format("truetype");
   }
 
   .index-page {
@@ -437,14 +437,15 @@
 
     .index-title {
       text-align: center;
-      font-size: 90px;
-      font-family: "test";
+      font-size: 100px;
+      font-family: "test" !important;
       text-shadow: 3px 5px #6b6b6b;
       margin-bottom: 0px;
       color: white !important;
       position: absolute;
       top: 15%;
       left: 20%;
+      letter-spacing: 10px;
       @include sp {
         font-size: 40px;
         top: 5%;
