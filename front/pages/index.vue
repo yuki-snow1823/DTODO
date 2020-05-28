@@ -1,14 +1,16 @@
 <template>
   <v-container class="index-page">
 
-    <h1 v-if="countHiddenPage >= 5"><span>D</span>
+    <h1 v-if="countHiddenPage > 5"><span>D</span>
       means<span>
         Determination</span>
       to become an engineer and to challenge <span>Vue.js!</span></h1>
 
 
-    <h1 v-else class="index-title"><span class="index-title-first">D</span>TODO</h1>
-    <div class="top-img"><img src="../assets/haikei.png" /></div>
+    <div class="top-img">
+      <img src="../assets/haikei.png" />
+      <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
+    </div>
 
     <v-row class="justify-center">
       <v-col cols="12" sm="12" md="6" lg="6">
@@ -413,6 +415,7 @@
 
   .index-page {
     .top-img {
+      position: relative;
       text-align: center;
       img {
         margin: 0 auto;
@@ -434,11 +437,19 @@
 
     .index-title {
       text-align: center;
-      font-size: 70px;
+      font-size: 90px;
       font-family: "test";
       text-shadow: 3px 5px #6b6b6b;
       margin-bottom: 0px;
       color: white !important;
+      position: absolute;
+      top: 15%;
+      left: 20%;
+      @include sp {
+        font-size: 40px;
+        top: 5%;
+        left: 15%;
+      }
 
       .index-title-first {
         color: $main-color;
