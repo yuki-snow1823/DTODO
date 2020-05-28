@@ -10,9 +10,9 @@
     <div class="top-img">
       <img src="../assets/haikei.png" />
       <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
+      <h2 class="index-sub-title justify-center mt-5">Gamefy your TODO.</h2>
     </div>
 
-    <h2></h2>
 
     <v-row class="justify-center">
       <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
@@ -369,7 +369,7 @@
   $accent-color: #f0353f;
 
   @mixin explain {
-    color: $sub-color;
+    color: $main-color;
     font-family: "ヒラギノ角ゴシック";
     margin-bottom: 10px;
   }
@@ -413,6 +413,9 @@
   }
 
   .index-page {
+    * {
+      font-family: dot;
+    }
     .top-img {
       position: relative;
       text-align: center;
@@ -455,7 +458,10 @@
         color: $main-color;
       }
     }
-
+    .index-sub-title {
+      font-size: 40px;
+      letter-spacing: 10px;
+    }
     .main-introduction {
       margin: 2em 0;
       position: relative;
@@ -467,7 +473,7 @@
       letter-spacing: 10px;
 
       h1 {
-        color: $sub-color;
+        color: $main-color;
         font-family: 'ヒラギノ角ゴシック';
       }
     }
