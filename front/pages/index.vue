@@ -407,10 +407,10 @@
       @content;
     }
   }
-
+ 
   @font-face {
     font-family: "dot";
-    src: url("../assets/fonts/k8x12S.ttf") format("truetype");
+    src: url("../assets/fonts/k8x12L.ttf") format("truetype");
   }
 
   .index-page {
@@ -419,8 +419,8 @@
       text-align: center;
       img {
         margin: 0 auto;
-        width: 90%;
-        height: 90%;
+        width: 70%;
+        height: 70%;
       }
     }
     .mon {
