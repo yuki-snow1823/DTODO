@@ -6,7 +6,9 @@
         Determination</span>
       to become an engineer and to challenge <span>Vue.js!</span></h1>
 
+
     <h1 v-else class="index-title"><span class="index-title-first">D</span>TODO</h1>
+    <div class="top-img"><img src="../assets/haikei.png" /></div>
 
     <v-row class="justify-center">
       <v-col cols="12" sm="12" md="6" lg="6">
@@ -406,10 +408,18 @@
 
   @font-face {
     font-family: "test";
-    src: url("/front/assets/fonts/ChelseaMarket-Regular.ttf");
+    src: url("/front/assets/fonts/k8x12S.ttf");
   }
 
   .index-page {
+    .top-img {
+      text-align: center;
+      img {
+        margin: 0 auto;
+        width: 90%;
+        height: 90%;
+      }
+    }
     .mon {
       width: 9%;
 
