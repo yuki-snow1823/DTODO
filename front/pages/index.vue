@@ -14,7 +14,7 @@
     </div>
 
 
-    <v-row class="justify-center">
+    <v-row class="justify-center mt-10">
       <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
         <h1>やらなければならないことを楽しむ</h1>
         <h2 class="index-explain">
@@ -28,21 +28,11 @@
 
     <v-row class="justify-center">
       <v-col cols="12" sm="12" md="6" lg="6">
-        <h1 class="text-center">DTODOとは</h1>
-        <h2 class="index-explain">
-          TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
-        </h2>
-        <div class="monster">
-          <img class="mon" src="../assets/mon_284.gif" />
-          <img class="mon" src="../assets/mon_199.gif" />
-          <img class="mon" src="../assets/mon_100.gif" />
-          <img class="mon" src="../assets/mon_091.gif" />
-        </div>
         <div v-if="user"></div>
         <div class="guest mt-4" v-else>
           <v-hover v-slot:default="{ hover }">
             <v-btn class="guest-btn" @click="guestLogin">
-              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>登録ナシで試してみる
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>サッソク試してみる
             </v-btn>
           </v-hover>
           <h4>※ゲストはログイン後、毎回チュートリアルが再生されます。</h4>
@@ -75,8 +65,8 @@
           新規登録はこちらから
         </h1>
         <form>
-          <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
-          <v-text-field v-model="email" :counter="30" label="Email" data-vv-name="email" required></v-text-field>
+          <v-text-field v-model="name" :counter="10" label="name" data-vv-name="name" required></v-text-field>
+          <v-text-field v-model="email" :counter="30" label="email" data-vv-name="email" required></v-text-field>
           <v-text-field v-model="password" label="password" data-vv-name="password" required
             :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="show1 = !show1"></v-text-field>
@@ -415,6 +405,7 @@
   .index-page {
     * {
       font-family: dot;
+      letter-spacing: 5px;
     }
     .top-img {
       position: relative;
