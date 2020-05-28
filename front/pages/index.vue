@@ -1,12 +1,16 @@
 <template>
   <v-container class="index-page">
 
-    <h1 v-if="countHiddenPage >= 5"><span>D</span>
+    <h1 v-if="countHiddenPage > 5"><span>D</span>
       means<span>
         Determination</span>
       to become an engineer and to challenge <span>Vue.js!</span></h1>
 
-    <h1 v-else class="index-title"><span class="index-title-first">D</span>TODO</h1>
+
+    <div class="top-img">
+      <img src="../assets/haikei.png" />
+      <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
+    </div>
 
     <v-row class="justify-center">
       <v-col cols="12" sm="12" md="6" lg="6">
@@ -404,7 +408,21 @@
     }
   }
 
+  @font-face {
+    font-family: "dot";
+    src: url("../assets/fonts/k8x12S.ttf") format("truetype");
+  }
+
   .index-page {
+    .top-img {
+      position: relative;
+      text-align: center;
+      img {
+        margin: 0 auto;
+        width: 90%;
+        height: 90%;
+      }
+    }
     .mon {
       width: 9%;
 
@@ -419,10 +437,20 @@
 
     .index-title {
       text-align: center;
-      font-size: 70px;
-      font-family: "Comic Sans MS";
+      font-size: 150px;
+      font-family: "dot";
+      text-shadow: 3px 5px #6b6b6b;
       margin-bottom: 0px;
       color: white !important;
+      position: absolute;
+      top: 10%;
+      left: 20%;
+      letter-spacing: 10px;
+      @include sp {
+        font-size: 40px;
+        top: 5%;
+        left: 15%;
+      }
 
       .index-title-first {
         color: $main-color;
@@ -435,6 +463,9 @@
       padding: 0.5em 1.5em;
       border-top: solid 2px white;
       border-bottom: solid 2px white;
+      font-size: 20px;
+      font-family: "dot";
+      letter-spacing: 10px;
 
       h1 {
         color: $sub-color;
@@ -522,6 +553,8 @@
     h1 {
       text-align: center;
       margin: 30px 0;
+      font-family: "dot" !important;
+      letter-spacing: 10px;
     }
 
     .mdi-heart {
