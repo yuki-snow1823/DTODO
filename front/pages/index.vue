@@ -64,28 +64,28 @@
 
 
     <v-row class="introduction mb-0 justify-center">
-      <v-col class="sub-introduction mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
+      <v-col class="sub-introduction-1 mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
         <img src="../assets/mon_259.gif" />
-        <h2 class="index-subtitle text-center">タスクポイントを<br>設定しよう！</h2>
-        <h3 class="index-explain">
+        <h2 class="index-subtitle-1 text-center">タスクポイントを<br>設定しよう！</h2>
+        <h3 class="index-explain-1">
           DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
           TPはご褒美の解放に使用できます。
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
+      <v-col class="sub-introduction-2 mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
         <img src="../assets/mon_237.gif" />
-        <h2 class="index-subtitle text-center">レベルアップを<br>目指そう！</h2>
-        <h3 class="index-explain">
+        <h2 class="index-subtitle-2 text-center">レベルアップを<br>目指そう！</h2>
+        <h3 class="index-explain-2">
           TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
           レベルが高くなると、何かいいことが…？
         </h3>
       </v-col>
 
-      <v-col class="sub-introduction mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
+      <v-col class="sub-introduction-3 mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
         <img class="pt-10" src="../assets/mon_278.gif" />
-        <h2 class="index-subtitle text-center">自分にごほうびを<br>あげよう！</h2>
-        <h3 class="index-explain">
+        <h2 class="index-subtitle-3 text-center">自分にごほうびを<br>あげよう！</h2>
+        <h3 class="index-explain-3">
           DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
           たくさんのTODOをこなして、自分にごほうびをあげましょう。
         </h3>
@@ -492,18 +492,44 @@
       right: 10px;
     }
 
-    .index-subtitle {
-      color: rgb(32, 23, 23);
-    }
-
     .index-form-title {
       @include explain;
     }
+    .index-subtitle-1 {
+      color: rgb(255, 255, 255);
+      background: rgb(62, 172, 35);
+    }
 
-    .index-explain {
-      color: white;
+    .index-explain-1 {
+      color: rgb(0, 0, 0);
       text-align: center;
       margin: 30px 0;
+      background: rgb(62, 172, 35);
+      
+    }
+    .index-subtitle-2 {
+      color: rgb(255, 255, 255);
+      background: rgb(65, 46, 46);
+    }
+
+    .index-explain-2 {
+      color: rgb(0, 0, 0);
+      text-align: center;
+      margin: 30px 0;
+      background-color: rgb(65, 46, 46,0.5);
+      
+    }
+    .index-subtitle-3 {
+      color: rgb(255, 255, 255);
+      // background: rgb(62, 172, 35);
+    }
+
+    .index-explain-3 {
+      color: rgb(255, 255, 255);
+      text-align: center;
+      margin: 30px 0;
+      // background: rgb(62, 172, 35);
+      
     }
 
     .index-button-wrapper {
@@ -538,16 +564,20 @@
         display: block;
       }
 
-      .sub-introduction {
+      .sub-introduction-1 {
         text-align: center;
-        // opacity: 0;
-        // transition: 4s all cubic-bezier(0.39, 0.575, 0.565, 1);
-        // transform: translateY(-60px);
-        // background: #23611a;
-        background-image: url("../assets/haikei.png");
-        // border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
+        background-image: url("../assets/kusamura.jpg");
         border: 6px solid #333;
-        font-family: 'ヒラギノ角ゴシック';
+      }
+      .sub-introduction-2 {
+        text-align: center;
+        background-image: url("../assets/kojyou.jpg");
+        border: 6px solid #333;
+      }
+      .sub-introduction-3 {
+        text-align: center;
+        background-image: url("../assets/yoru.jpg");
+        border: 6px solid #333;
       }
     }
 
