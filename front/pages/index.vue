@@ -17,8 +17,8 @@
     <v-row class="justify-center mt-10">
       <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
         <h1>やらなければならないことを楽しむ</h1>
-        <h2 justify="center" class="">
-          <vue-typer style="font-family: dot;" :text="[
+        <h2 style="text-align:center;">
+          <vue-typer style="font-family: dot; text-align:center;" :text="[
         '＊毎日、いやいやTODOをこなしていませんか？',
         '＊DTODOを使って、メンドクサイをタノシイに変えましょう。',
         ]" erase-style="clear" :type-delay="150" :erase-delay="300" :repeat="Infinity"></vue-typer>
@@ -27,7 +27,7 @@
     </v-row>
 
     <v-row class="justify-center">
-      <v-col cols="12" sm="12" md="6" lg="6">
+      <v-col cols="12" sm="12" md="8" lg="6">
         <div v-if="user"></div>
         <div class="guest mt-4" v-else>
           <v-hover v-slot:default="{ hover }">
@@ -63,7 +63,7 @@
       <div v-else></div>
     </v-row>
     <v-row justify="center">
-      <v-col class="index-button-wrapper" cols="12" sm="12" md="6" lg="6">
+      <v-col class="index-button-wrapper" cols="12" sm="12" md="8" lg="6">
 
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
