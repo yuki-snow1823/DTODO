@@ -1,7 +1,7 @@
 <template>
   <v-container class="index-page">
 
-    <h1 v-if="countHiddenPage > 5"><span>D</span>
+    <h1 v-if="countHiddenPage >= 5"><span>D</span>
       means<span>
         Determination</span>
       to become an engineer and to challenge <span>Vue.js!</span></h1>
