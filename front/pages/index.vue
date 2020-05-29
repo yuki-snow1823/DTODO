@@ -62,8 +62,8 @@
       </v-col>
       <div v-else></div>
     </v-row>
-    <v-row>
-      <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
+    <v-row justify="center">
+      <v-col class="index-button-wrapper" cols="12" sm="12" md="6" lg="6">
 
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
