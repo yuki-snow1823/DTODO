@@ -10,15 +10,15 @@
     <div class="top-img">
       <img src="../assets/haikei.png" />
       <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
-      <h2 class="index-sub-title justify-center mt-5">Gamefy your TODO.</h2>
+      <h2 class="index-sub-title mt-5">Gamefy your TODO.</h2>
     </div>
 
 
     <v-row class="justify-center mt-10">
       <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
         <h1>やらなければならないことを楽しむ</h1>
-        <h2 class="index-explain">
-        <vue-typer style="font-family: dot;" :text="[
+        <h2 justify="center" class="">
+          <vue-typer style="font-family: dot;" :text="[
         '＊毎日、いやいやTODOをこなしていませんか？',
         '＊DTODOを使って、メンドクサイをタノシイに変えましょう。',
         ]" erase-style="clear" :type-delay="150" :erase-delay="300" :repeat="Infinity"></vue-typer>
@@ -92,6 +92,7 @@
       </v-col>
     </v-row>
 
+    <v-row justify="center">
       <v-col class="index-button-wrapper" cols="12" sm="10" md="6" lg="6">
         <h1 id="index-signup" class="index-form-title text-center">
           新規登録はこちらから
@@ -115,7 +116,7 @@
           </v-btn>
         </v-hover>
       </v-col>
-
+    </v-row>
 
 
 
@@ -400,7 +401,7 @@
       @content;
     }
   }
- 
+
   @font-face {
     font-family: "dot";
     src: url("../assets/fonts/k8x12L.ttf") format("truetype");
@@ -411,15 +412,18 @@
       font-family: dot;
       letter-spacing: 5px;
     }
+
     .top-img {
       position: relative;
       text-align: center;
+
       img {
         margin: 0 auto;
         width: 70%;
         height: 70%;
       }
     }
+
     .mon {
       width: 9%;
 
@@ -429,7 +433,7 @@
     }
 
     .monster {
-      text-align: center ;
+      text-align: center;
     }
 
     .index-title {
@@ -443,6 +447,7 @@
       top: 10%;
       left: 20%;
       letter-spacing: 10px;
+
       @include sp {
         font-size: 40px;
         top: 5%;
@@ -453,10 +458,12 @@
         color: $main-color;
       }
     }
+
     .index-sub-title {
       font-size: 40px;
       letter-spacing: 10px;
     }
+
     .main-introduction {
       margin: 2em 0;
       position: relative;
@@ -495,30 +502,33 @@
     .index-form-title {
       @include explain;
     }
+
     .index-subtitle-1 {
       color: rgb(255, 255, 255);
-      background-color: rgb(62, 172, 35,0.4);
+      background-color: rgb(62, 172, 35, 0.4);
     }
 
     .index-explain-1 {
       color: rgb(255, 255, 255);
       text-align: center;
       margin: 30px 0;
-      background-color: rgb(62, 172, 35,0.4);
-      
+      background-color: rgb(62, 172, 35, 0.4);
+
     }
+
     .index-subtitle-2 {
       color: rgb(255, 255, 255);
-      background-color: rgb(65, 46, 46,0.4);
+      background-color: rgb(65, 46, 46, 0.4);
     }
 
     .index-explain-2 {
       color: rgb(255, 255, 255);
       text-align: center;
       margin: 30px 0;
-      background-color: rgb(65, 46, 46,0.4);
-      
+      background-color: rgb(65, 46, 46, 0.4);
+
     }
+
     .index-subtitle-3 {
       color: rgb(255, 255, 255);
       background-color: rgba(46, 75, 204, 0.4);
@@ -569,11 +579,13 @@
         background-image: url("../assets/kusamura.jpg");
         border: 3px solid rgb(255, 255, 255);
       }
+
       .sub-introduction-2 {
         text-align: center;
         background-image: url("../assets/kojyou.jpg");
         border: 3px solid rgb(255, 255, 255);
       }
+
       .sub-introduction-3 {
         text-align: center;
         background-image: url("../assets/yoru.jpg");
