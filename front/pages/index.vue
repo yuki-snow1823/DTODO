@@ -40,6 +40,7 @@
         </div>
       </v-col>
 
+
       <v-col class="wrapper-skull" v-if="user" cols="12" sm="10" md="6" lg="6">
         <v-icon id="skull" :color="color" @click="countSkull()" class="mb-2 skull" :size="size">mdi-skull-outline
         </v-icon>
@@ -60,6 +61,24 @@
         </div>
       </v-col>
       <div v-else></div>
+    </v-row>
+    <v-row>
+      <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
+
+        <v-hover v-slot:default="{ hover }">
+          <div v-if="user"></div>
+          <v-btn v-else class="bottom-btn" @click.stop="dialog = true">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
+          </v-btn>
+        </v-hover>
+
+        <v-hover v-slot:default="{ hover }">
+          <div v-if="user"></div>
+          <v-btn v-else class="bottom-btn" v-on:click="moveToTop">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>新規登録
+          </v-btn>
+        </v-hover>
+      </v-col>
     </v-row>
 
 
@@ -92,8 +111,35 @@
       </v-col>
     </v-row>
 
+    <v-dialog content-class="dialog" v-model="dialog" max-width="60%">
+      <v-card>
+        <v-card-title class="headline">
+          <h3>Login</h3>
+        </v-card-title>
+        <v-card-text>
+          <form>
+            <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
+            <v-text-field v-model="password" label="password" data-vv-name="password" required
+              :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="show1 = !show1"></v-text-field>
+            <v-hover v-slot:default="{ hover }">
+              <v-btn class="dialog-btn" @click="login">
+                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>START
+              </v-btn>
+            </v-hover>
+            <p v-if="error" class="errors">{{ error }}</p>
+          </form>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <v-row justify="center">
-      <v-col class="index-button-wrapper" cols="12" sm="10" md="6" lg="6">
+      <iframe class="how-to-use" src="https://www.youtube.com/embed/HsJrTMvUQOw?rel=0" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </v-row>
+
+    <v-row justify="center">
+      <v-col class="index-button-wrapper" cols="12" sm="10" md="8" lg="8">
         <h1 id="index-signup" class="index-form-title text-center">
           新規登録はこちらから
         </h1>
@@ -117,52 +163,6 @@
         </v-hover>
       </v-col>
     </v-row>
-
-
-
-    <v-row>
-      <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
-
-        <v-hover v-slot:default="{ hover }">
-          <div v-if="user"></div>
-          <v-btn v-else class="bottom-btn" @click.stop="dialog = true">
-            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
-          </v-btn>
-        </v-hover>
-
-        <v-hover v-slot:default="{ hover }">
-          <div v-if="user"></div>
-          <v-btn v-else class="bottom-btn" v-on:click="moveToTop">
-            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>新規登録
-          </v-btn>
-        </v-hover>
-      </v-col>
-    </v-row>
-
-    <v-dialog content-class="dialog" v-model="dialog" max-width="60%">
-      <v-card>
-        <v-card-title class="headline">
-          <h3>Login</h3>
-        </v-card-title>
-        <v-card-text>
-          <form>
-            <v-text-field v-model="email" :counter="20" label="email" data-vv-name="email" required></v-text-field>
-            <v-text-field v-model="password" label="password" data-vv-name="password" required
-              :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              @click:append="show1 = !show1"></v-text-field>
-            <v-hover v-slot:default="{ hover }">
-              <v-btn class="dialog-btn" @click="login">
-                <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>START
-              </v-btn>
-            </v-hover>
-            <p v-if="error" class="errors">{{ error }}</p>
-          </form>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
-
-    <iframe class="how-to-use" src="https://www.youtube.com/embed/HsJrTMvUQOw?rel=0" frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
   </v-container>
 </template>
@@ -711,7 +711,7 @@
   }
 
   .how-to-use {
-    width: 100%;
+    width: 75%;
     height: 500px;
 
     @include tab {
