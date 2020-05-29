@@ -19,8 +19,10 @@
         <h1>やらなければならないことを楽しむ</h1>
         <h2 style="text-align:center;">
           <vue-typer style="font-family: dot; text-align:center;" :text="[
-        '＊毎日、いやいやTODOをこなしていませんか？',
-        '＊DTODOを使って、メンドクサイをタノシイに変えましょう。',
+        '＊毎日のTODO',
+        '＊メンドクサイですよね',
+        '＊DTODOを使って',
+        'タノシイに変えましょう！',
         ]" erase-style="clear" :type-delay="150" :erase-delay="300" :repeat="Infinity"></vue-typer>
         </h2>
       </v-col>
@@ -57,11 +59,12 @@
               '＊わかるかもな。',
               '＊スマホのやつは\n上にスライドしてくれよな。',
               '＊じゃあな。',
-            ]" erase-style="clear" :type-delay="140" :erase-delay="270" :repeat="Infinity"></vue-typer>
+            ]" erase-style="clear" :type-delay="140" :erase-delay="400" :repeat="Infinity"></vue-typer>
         </div>
       </v-col>
       <div v-else></div>
     </v-row>
+
     <v-row justify="center">
       <v-col class="index-button-wrapper" cols="12" sm="12" md="8" lg="6">
 
@@ -71,7 +74,8 @@
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ログイン
           </v-btn>
         </v-hover>
-
+        </v-col>
+      <v-col class="index-button-wrapper" cols="12" sm="12" md="8" lg="6">
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
           <v-btn v-else class="bottom-btn" v-on:click="moveToTop">
