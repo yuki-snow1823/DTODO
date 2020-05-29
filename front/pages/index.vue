@@ -408,13 +408,14 @@
 
   @font-face {
     font-family: "dot";
-    src: url("../assets/fonts/k8x12L.ttf") format("truetype");
+    src: url("../assets/fonts/PixelMplus12-Regular.ttf") format("truetype");
   }
 
   .index-page {
     * {
       font-family: dot;
       letter-spacing: 5px;
+      -webkit-text-stroke: thin;
     }
 
     .top-img {
