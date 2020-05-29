@@ -497,39 +497,39 @@
     }
     .index-subtitle-1 {
       color: rgb(255, 255, 255);
-      background: rgb(62, 172, 35);
+      background-color: rgb(62, 172, 35,0.4);
     }
 
     .index-explain-1 {
-      color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
       text-align: center;
       margin: 30px 0;
-      background: rgb(62, 172, 35);
+      background-color: rgb(62, 172, 35,0.4);
       
     }
     .index-subtitle-2 {
       color: rgb(255, 255, 255);
-      background: rgb(65, 46, 46);
+      background-color: rgb(65, 46, 46,0.4);
     }
 
     .index-explain-2 {
-      color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
       text-align: center;
       margin: 30px 0;
-      background-color: rgb(65, 46, 46,0.5);
+      background-color: rgb(65, 46, 46,0.4);
       
     }
     .index-subtitle-3 {
       color: rgb(255, 255, 255);
-      // background: rgb(62, 172, 35);
+      background-color: rgba(46, 75, 204, 0.4);
     }
 
     .index-explain-3 {
       color: rgb(255, 255, 255);
       text-align: center;
       margin: 30px 0;
-      // background: rgb(62, 172, 35);
-      
+      background-color: rgba(46, 75, 204, 0.4);
+
     }
 
     .index-button-wrapper {
@@ -567,17 +567,17 @@
       .sub-introduction-1 {
         text-align: center;
         background-image: url("../assets/kusamura.jpg");
-        border: 6px solid #333;
+        border: 3px solid rgb(255, 255, 255);
       }
       .sub-introduction-2 {
         text-align: center;
         background-image: url("../assets/kojyou.jpg");
-        border: 6px solid #333;
+        border: 3px solid rgb(255, 255, 255);
       }
       .sub-introduction-3 {
         text-align: center;
         background-image: url("../assets/yoru.jpg");
-        border: 6px solid #333;
+        border: 3px solid rgb(255, 255, 255);
       }
     }
 
