@@ -143,13 +143,13 @@
     </v-row>
 
     <v-row justify="center">
-      <v-col class="side-monster" lg="2">
+      <v-col class="side-monster" sm="4" md="2" lg="2">
         <img src="../assets/mon_199.gif" alt="">
         <p>共に楽しもう。</p>
       </v-col>
       <v-col class="index-button-wrapper" cols="12" sm="10" md="8" lg="8">
         <h1 id="index-signup" class="index-form-title text-center">
-          新規登録はこちらから
+          新規登録
         </h1>
         <form>
           <v-text-field v-model="name" :counter="10" label="name" data-vv-name="name" required></v-text-field>
@@ -170,7 +170,7 @@
           </v-btn>
         </v-hover>
       </v-col>
-      <v-col class="side-monster mt-5" lg="2">
+      <v-col class="side-monster mt-5" sm="4" md="2" lg="2">
         <img src="../assets/mon_284.gif" alt="">
         <p>待っているわ。</p>
       </v-col>
@@ -467,6 +467,12 @@
 
       @include sp {
         font-size: 40px;
+        top: 5%;
+        left: 15%;
+      }
+
+      @include tab {
+        font-size: 30px;
         top: 5%;
         left: 15%;
       }
