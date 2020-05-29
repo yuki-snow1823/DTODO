@@ -421,6 +421,10 @@
         margin: 0 auto;
         width: 70%;
         height: 70%;
+        @include sp {
+        width: 100%;
+        height: 100%;
+      }
       }
     }
 
@@ -462,6 +466,10 @@
     .index-sub-title {
       font-size: 40px;
       letter-spacing: 10px;
+      @include sp {
+        font-size: 30px;
+        margin-bottom: -20px;
+      }
     }
 
     .main-introduction {
