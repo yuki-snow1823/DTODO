@@ -10,31 +10,36 @@
     <div class="top-img">
       <img src="../assets/haikei.png" />
       <h1 class="index-title"><span class="index-title-first">D</span>TODO</h1>
+      <h2 class="index-sub-title mt-5">Gamefy your TODO.</h2>
     </div>
 
-    <v-row class="justify-center">
-      <v-col cols="12" sm="12" md="6" lg="6">
-        <h1 class="text-center">DTODOとは</h1>
-        <h2 class="index-explain">
-          TODOに「タスクポイント」を設定し、日々こなすことであなたのレベルアップを手助けするアプリケーションです。
+
+    <v-row class="justify-center mt-10">
+      <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
+        <h1>やらなければならないことを楽しむ</h1>
+        <h2 style="text-align:center;">
+          <vue-typer style="font-family: dot; text-align:center;" :text="[
+        '＊毎日、いやいやTODOをこなしていませんか？',
+        '＊DTODOを使って、メンドクサイをタノシイに変えましょう。',
+        ]" erase-style="clear" :type-delay="150" :erase-delay="300" :repeat="Infinity"></vue-typer>
         </h2>
-        <div class="monster">
-          <img class="mon" src="../assets/mon_284.gif" />
-          <img class="mon" src="../assets/mon_199.gif" />
-          <img class="mon" src="../assets/mon_100.gif" />
-          <img class="mon" src="../assets/mon_091.gif" />
-        </div>
+      </v-col>
+    </v-row>
+
+    <v-row class="justify-center">
+      <v-col cols="12" sm="12" md="8" lg="6">
         <div v-if="user"></div>
         <div class="guest mt-4" v-else>
           <v-hover v-slot:default="{ hover }">
             <v-btn class="guest-btn" @click="guestLogin">
-              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>ゲストログイン
+              <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>サッソク試してみる
             </v-btn>
           </v-hover>
           <h4>※ゲストはログイン後、毎回チュートリアルが再生されます。</h4>
           <h4>1回だけでいい場合は新規登録をお願いします。</h4>
         </div>
       </v-col>
+
 
       <v-col class="wrapper-skull" v-if="user" cols="12" sm="10" md="6" lg="6">
         <v-icon id="skull" :color="color" @click="countSkull()" class="mb-2 skull" :size="size">mdi-skull-outline
@@ -55,79 +60,10 @@
             ]" erase-style="clear" :type-delay="140" :erase-delay="270" :repeat="Infinity"></vue-typer>
         </div>
       </v-col>
-
-      <v-col class="index-button-wrapper" v-else cols="12" sm="10" md="6" lg="6">
-        <h1 id="index-signup" class="index-form-title text-center">
-          新規登録はこちらから
-        </h1>
-        <form>
-          <v-text-field v-model="name" :counter="10" label="Name" data-vv-name="name" required></v-text-field>
-          <v-text-field v-model="email" :counter="30" label="Email" data-vv-name="email" required></v-text-field>
-          <v-text-field v-model="password" label="password" data-vv-name="password" required
-            :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="show1 = !show1"></v-text-field>
-          <v-text-field v-model="passwordConfirm" label="passwordConfirm" data-vv-name="passwordConfirm" required
-            :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="show2 = !show2"></v-text-field>
-
-          <p v-if="error" class="errors">{{ error }}</p>
-        </form>
-        <v-hover v-slot:default="{ hover }">
-          <v-btn class="index-button" @click="signup">
-            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
-            START
-          </v-btn>
-        </v-hover>
-      </v-col>
+      <div v-else></div>
     </v-row>
-
-    <v-row class="justify-center">
-      <v-col class="main-introduction" cols="12" sm="10" md="10" lg="10">
-        <h1>やらなければならないことを楽しむ</h1>
-        <h2 class="index-explain">
-          毎日、何かやらなければならないTODOに追われていませんか？
-        </h2>
-        <h2 class="index-explain">
-          めんどくさい、後回しにしたい、やりたくない…好きなことだけをしたい。
-        </h2>
-        <h2 class="index-explain">
-          では、そのTODOすらも楽しいものに変えてみましょう！
-        </h2>
-        <h2 class="index-explain">DTODOがお手伝いします。</h2>
-      </v-col>
-    </v-row>
-
-    <v-row class="introduction mb-0 justify-center">
-      <v-col class="sub-introduction mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
-        <img src="../assets/mon_259.gif" />
-        <h2 class="index-subtitle text-center">タスクポイントを<br>設定しよう！</h2>
-        <h3 class="index-explain">
-          DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
-          TPはご褒美の解放に使用できます。
-        </h3>
-      </v-col>
-
-      <v-col class="sub-introduction mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
-        <img src="../assets/mon_237.gif" />
-        <h2 class="index-subtitle text-center">レベルアップを<br>目指そう！</h2>
-        <h3 class="index-explain">
-          TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
-          レベルが高くなると、何かいいことが…？
-        </h3>
-      </v-col>
-
-      <v-col class="sub-introduction mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
-        <img class="pt-10" src="../assets/mon_278.gif" />
-        <h2 class="index-subtitle text-center">自分にごほうびを<br>あげよう！</h2>
-        <h3 class="index-explain">
-          DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
-          たくさんのTODOをこなして、自分にごほうびをあげましょう。
-        </h3>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col class="index-button-wrapper" cols="12" sm="12" md="12" lg="12">
+    <v-row justify="center">
+      <v-col class="index-button-wrapper" cols="12" sm="12" md="8" lg="6">
 
         <v-hover v-slot:default="{ hover }">
           <div v-if="user"></div>
@@ -142,6 +78,36 @@
             <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>新規登録
           </v-btn>
         </v-hover>
+      </v-col>
+    </v-row>
+
+
+    <v-row class="introduction mb-0 justify-center">
+      <v-col class="sub-introduction-1 mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
+        <img src="../assets/mon_259.gif" />
+        <h2 class="index-subtitle-1 text-center">タスクポイントを<br>設定しよう！</h2>
+        <h3 class="index-explain-1">
+          DTODOは日々のやらなければならないこと「TODO」を作成する時に、にタスクポイント（TP）を設定することができます。
+          TPはご褒美の解放に使用できます。
+        </h3>
+      </v-col>
+
+      <v-col class="sub-introduction-2 mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
+        <img src="../assets/mon_237.gif" />
+        <h2 class="index-subtitle-2 text-center">レベルアップを<br>目指そう！</h2>
+        <h3 class="index-explain-2">
+          TODOを完了するたびに経験値がたまります。より高いレベルを目指して頑張りましょう。
+          レベルが高くなると、何かいいことが…？
+        </h3>
+      </v-col>
+
+      <v-col class="sub-introduction-3 mx-2 mb-2" cols="12" sm="9" md="3" lg="3">
+        <img class="pt-10" src="../assets/mon_278.gif" />
+        <h2 class="index-subtitle-3 text-center">自分にごほうびを<br>あげよう！</h2>
+        <h3 class="index-explain-3">
+          DTODOを利用する際は、まずごほうびを作成しましょう。ご褒美の解放にはTPが必要です。
+          たくさんのTODOをこなして、自分にごほうびをあげましょう。
+        </h3>
       </v-col>
     </v-row>
 
@@ -167,8 +133,36 @@
       </v-card>
     </v-dialog>
 
-    <iframe class="how-to-use" src="https://www.youtube.com/embed/HsJrTMvUQOw?rel=0" frameborder="0"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <v-row justify="center">
+      <iframe class="how-to-use" src="https://www.youtube.com/embed/HsJrTMvUQOw?rel=0" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </v-row>
+
+    <v-row justify="center">
+      <v-col class="index-button-wrapper" cols="12" sm="10" md="8" lg="8">
+        <h1 id="index-signup" class="index-form-title text-center">
+          新規登録はこちらから
+        </h1>
+        <form>
+          <v-text-field v-model="name" :counter="10" label="name" data-vv-name="name" required></v-text-field>
+          <v-text-field v-model="email" :counter="30" label="email" data-vv-name="email" required></v-text-field>
+          <v-text-field v-model="password" label="password" data-vv-name="password" required
+            :type="show1 ? 'text' : 'password'" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show1 = !show1"></v-text-field>
+          <v-text-field v-model="passwordConfirm" label="passwordConfirm" data-vv-name="passwordConfirm" required
+            :type="show2 ? 'text' : 'password'" :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show2 = !show2"></v-text-field>
+
+          <p v-if="error" class="errors">{{ error }}</p>
+        </form>
+        <v-hover v-slot:default="{ hover }">
+          <v-btn class="index-button" @click="signup">
+            <v-icon v-text="hover ? 'mdi-heart' : ''"></v-icon>
+            START
+          </v-btn>
+        </v-hover>
+      </v-col>
+    </v-row>
 
   </v-container>
 </template>
@@ -370,7 +364,7 @@
   $accent-color: #f0353f;
 
   @mixin explain {
-    color: $sub-color;
+    color: $main-color;
     font-family: "ヒラギノ角ゴシック";
     margin-bottom: 10px;
   }
@@ -410,19 +404,30 @@
 
   @font-face {
     font-family: "dot";
-    src: url("../assets/fonts/k8x12S.ttf") format("truetype");
+    src: url("../assets/fonts/k8x12L.ttf") format("truetype");
   }
 
   .index-page {
+    * {
+      font-family: dot;
+      letter-spacing: 5px;
+    }
+
     .top-img {
       position: relative;
       text-align: center;
+
       img {
         margin: 0 auto;
-        width: 90%;
-        height: 90%;
+        width: 70%;
+        height: 70%;
+        @include sp {
+        width: 100%;
+        height: 100%;
+      }
       }
     }
+
     .mon {
       width: 9%;
 
@@ -432,7 +437,7 @@
     }
 
     .monster {
-      text-align: center ;
+      text-align: center;
     }
 
     .index-title {
@@ -446,6 +451,7 @@
       top: 10%;
       left: 20%;
       letter-spacing: 10px;
+
       @include sp {
         font-size: 40px;
         top: 5%;
@@ -454,6 +460,15 @@
 
       .index-title-first {
         color: $main-color;
+      }
+    }
+
+    .index-sub-title {
+      font-size: 40px;
+      letter-spacing: 10px;
+      @include sp {
+        font-size: 30px;
+        margin-bottom: -20px;
       }
     }
 
@@ -468,7 +483,7 @@
       letter-spacing: 10px;
 
       h1 {
-        color: $sub-color;
+        color: $main-color;
         font-family: 'ヒラギノ角ゴシック';
       }
     }
@@ -492,18 +507,47 @@
       right: 10px;
     }
 
-    .index-subtitle {
-      color: rgb(32, 23, 23);
-    }
-
     .index-form-title {
       @include explain;
     }
 
-    .index-explain {
-      color: white;
+    .index-subtitle-1 {
+      color: rgb(255, 255, 255);
+      background-color: rgb(62, 172, 35, 0.4);
+    }
+
+    .index-explain-1 {
+      color: rgb(255, 255, 255);
       text-align: center;
       margin: 30px 0;
+      background-color: rgb(62, 172, 35, 0.4);
+
+    }
+
+    .index-subtitle-2 {
+      color: rgb(255, 255, 255);
+      background-color: rgb(65, 46, 46, 0.4);
+    }
+
+    .index-explain-2 {
+      color: rgb(255, 255, 255);
+      text-align: center;
+      margin: 30px 0;
+      background-color: rgb(65, 46, 46, 0.4);
+
+    }
+
+    .index-subtitle-3 {
+      color: rgb(255, 255, 255);
+      background-color: rgba(46, 75, 204, 0.4);
+    }
+
+    .index-explain-3 {
+      color: rgb(255, 255, 255);
+      text-align: center;
+      margin: 30px 0;
+      background-color: rgba(46, 75, 204, 0.4);
+
     }
 
     .index-button-wrapper {
@@ -538,15 +582,22 @@
         display: block;
       }
 
-      .sub-introduction {
+      .sub-introduction-1 {
         text-align: center;
-        // opacity: 0;
-        // transition: 4s all cubic-bezier(0.39, 0.575, 0.565, 1);
-        // transform: translateY(-60px);
-        background: #726a6a;
-        border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
-        border: 6px solid #333;
-        font-family: 'ヒラギノ角ゴシック';
+        background-image: url("../assets/kusamura.jpg");
+        border: 3px solid rgb(255, 255, 255);
+      }
+
+      .sub-introduction-2 {
+        text-align: center;
+        background-image: url("../assets/kojyou.jpg");
+        border: 3px solid rgb(255, 255, 255);
+      }
+
+      .sub-introduction-3 {
+        text-align: center;
+        background-image: url("../assets/yoru.jpg");
+        border: 3px solid rgb(255, 255, 255);
       }
     }
 
@@ -643,12 +694,12 @@
 
   .vue-typer .custom.char {
     color: #d4d4bd;
-    background-color: #1e1e1e;
+    // background-color: #1e1e1e;
   }
 
-  .vue-typer .custom.char.selected {
-    background-color: #264f78;
-  }
+  // .vue-typer .custom.char.selected {
+  //   background-color: #264f78;
+  // }
 
   .vue-typer .custom.caret {
     width: 10px;
@@ -668,7 +719,7 @@
   }
 
   .how-to-use {
-    width: 100%;
+    width: 75%;
     height: 500px;
 
     @include tab {
