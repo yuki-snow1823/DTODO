@@ -29,7 +29,7 @@
     </v-row>
 
     <v-row class="justify-center">
-      <v-col cols="12" sm="12" md="8" lg="6">
+      <v-col cols="12" sm="12" md="8" lg="7">
         <div v-if="user"></div>
         <div class="guest mt-4" v-else>
           <v-hover v-slot:default="{ hover }">
@@ -143,6 +143,10 @@
     </v-row>
 
     <v-row justify="center">
+      <v-col class="side-monster" lg="2">
+        <img src="../assets/mon_199.gif" alt="">
+        <p>共に楽しもう。</p>
+      </v-col>
       <v-col class="index-button-wrapper" cols="12" sm="10" md="8" lg="8">
         <h1 id="index-signup" class="index-form-title text-center">
           新規登録はこちらから
@@ -165,6 +169,10 @@
             START
           </v-btn>
         </v-hover>
+      </v-col>
+      <v-col class="side-monster mt-5" lg="2">
+        <img src="../assets/mon_284.gif" alt="">
+        <p>待っているわ。</p>
       </v-col>
     </v-row>
 
@@ -647,6 +655,13 @@
 
     .errors {
       color: $accent-color;
+    }
+    .side-monster {
+      text-align: center;
+      p {
+        border: 2px solid white;
+        font-size: 15px;
+      }
     }
   }
 
