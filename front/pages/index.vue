@@ -1,7 +1,7 @@
 <template>
   <v-container class="index-page">
 
-    <h1 v-if="countHiddenPage > 5"><span>D</span>
+    <h1 v-if="countHiddenPage >= 5"><span>D</span>
       means<span>
         Determination</span>
       to become an engineer and to challenge <span>Vue.js!</span></h1>
@@ -29,7 +29,7 @@
     </v-row>
 
     <v-row class="justify-center">
-      <v-col cols="12" sm="12" md="8" lg="6">
+      <v-col cols="12" sm="12" md="8" lg="7">
         <div v-if="user"></div>
         <div class="guest mt-4" v-else>
           <v-hover v-slot:default="{ hover }">
@@ -143,9 +143,13 @@
     </v-row>
 
     <v-row justify="center">
+      <v-col class="side-monster" sm="4" md="2" lg="2">
+        <img src="../assets/mon_199.gif" alt="">
+        <p>共に楽しもう。</p>
+      </v-col>
       <v-col class="index-button-wrapper" cols="12" sm="10" md="8" lg="8">
         <h1 id="index-signup" class="index-form-title text-center">
-          新規登録はこちらから
+          新規登録
         </h1>
         <form>
           <v-text-field v-model="name" :counter="10" label="name" data-vv-name="name" required></v-text-field>
@@ -165,6 +169,10 @@
             START
           </v-btn>
         </v-hover>
+      </v-col>
+      <v-col class="side-monster mt-5" sm="4" md="2" lg="2">
+        <img src="../assets/mon_284.gif" alt="">
+        <p>待っているわ。</p>
       </v-col>
     </v-row>
 
@@ -408,13 +416,14 @@
 
   @font-face {
     font-family: "dot";
-    src: url("../assets/fonts/k8x12L.ttf") format("truetype");
+    src: url("../assets/fonts/PixelMplus12-Regular.ttf") format("truetype");
   }
 
   .index-page {
     * {
       font-family: dot;
       letter-spacing: 5px;
+      -webkit-text-stroke: thin;
     }
 
     .top-img {
@@ -458,6 +467,12 @@
 
       @include sp {
         font-size: 40px;
+        top: 5%;
+        left: 15%;
+      }
+
+      @include tab {
+        font-size: 30px;
         top: 5%;
         left: 15%;
       }
@@ -646,6 +661,13 @@
 
     .errors {
       color: $accent-color;
+    }
+    .side-monster {
+      text-align: center;
+      p {
+        border: 2px solid white;
+        font-size: 15px;
+      }
     }
   }
 
