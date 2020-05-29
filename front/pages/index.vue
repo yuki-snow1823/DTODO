@@ -170,7 +170,7 @@
           </v-btn>
         </v-hover>
       </v-col>
-      <v-col class="side-monster mt-5" sm="4" md="2" lg="2">
+      <v-col class="side-monster pt-8" sm="4" md="2" lg="2">
         <img src="../assets/mon_284.gif" alt="">
         <p>待っているわ。</p>
       </v-col>
@@ -391,13 +391,20 @@
     font-weight: bold;
   }
 
-  $pc: 1024px;
+  $pc: 2024px;
+  $mid: 1024px;
   $tab: 680px;
   $sp: 480px;
 
   // レスポンシブデザイン用の指定です。
   @mixin pc {
     @media (max-width: ($pc)) {
+      @content;
+    }
+  }
+
+  @mixin mid {
+    @media (max-width: ($mid)) {
       @content;
     }
   }
@@ -466,13 +473,13 @@
       letter-spacing: 10px;
 
       @include sp {
-        font-size: 40px;
+        font-size: 60px;
         top: 5%;
         left: 15%;
       }
 
       @include tab {
-        font-size: 30px;
+        font-size: 60px;
         top: 5%;
         left: 15%;
       }
@@ -668,6 +675,16 @@
         border: 2px solid white;
         font-size: 15px;
       }
+      margin-top: 300px;
+      // @include pc {
+      //   margin-top: 300px
+      // }
+      @include mid {
+        margin-top: 0px
+      }
+      @include sp {
+        margin-top: 0px
+      }
     }
   }
 
@@ -706,7 +723,7 @@
       }
 
       @include sp {
-        font-size: 25px;
+        font-size: 20px;
         width: 80% !important;
         height: 70px !important;
       }
