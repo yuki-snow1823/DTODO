@@ -59,16 +59,18 @@
       </v-card>
     </v-dialog>
 
-    <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
+    <Snack :snack="snack" :snackColor="snackColor" :snackText="snackText"/>
+
+    <!-- <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
-    </v-snackbar>
+    </v-snackbar> -->
   </div>
 </template>
 
 <script>
   const numberRange = [...Array(9).keys()].map(i => ++i);
-
+  import Snack from "@/components/Snack";
   import axios from "@/plugins/axios";
   export default {
     props: ["todos"],
@@ -90,6 +92,9 @@
         selectedItem: "",
         errorMsg: "",
       };
+    },
+    components: {
+      Snack
     },
     computed: {
       user() {

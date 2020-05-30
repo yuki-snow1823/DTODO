@@ -1,19 +1,27 @@
 <template>
+<div>
+  a
   <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
     {{ snackText }}
     <v-btn text @click="snack = false">Close</v-btn>
   </v-snackbar>
+  </div>
 </template>
 
 <script>
   export default {
-    data() {
-      return {
+    props: {
         snack: false,
         snackColor: "",
-        snackText: "",
-      };
+        snackText: ""
     },
+    // data() {
+    //   return {
+    //     snack: false,
+    //     snackColor: "",
+    //     snackText: "",
+    //   };
+    // },
   };
 </script>
 
