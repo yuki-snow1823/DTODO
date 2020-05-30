@@ -1,6 +1,5 @@
 <template>
   <div>
-    a
     <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
       {{ snackText }}
       <v-btn text @click="snack = false">Close</v-btn>
@@ -13,7 +12,7 @@
     props: {
       snack: {
         type: Boolean,
-        'default': () => (false),
+        default: false,
         required: true
       },
       snackColor: {
@@ -27,13 +26,6 @@
         required: true
       }
     },
-    // data() {
-    //   return {
-    //     snack: false,
-    //     snackColor: "",
-    //     snackText: "",
-    //   };
-    // },
   };
 </script>
 
