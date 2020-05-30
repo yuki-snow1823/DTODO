@@ -16,8 +16,16 @@
         'default': () => (false),
         required: true
       },
-      snackColor: "",
-      snackText: ""
+      snackColor: {
+        type: String,
+        'default': () => (""),
+        required: true
+      },
+      snackText: {
+        type: String,
+        'default': () => (""),
+        required: true
+      }
     },
     // data() {
     //   return {
