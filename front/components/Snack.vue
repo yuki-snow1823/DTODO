@@ -27,13 +27,13 @@
         required: true
       }
     },
-    // data() {
-    //   return {
-    //     snack: false,
-    //     snackColor: "",
-    //     snackText: "",
-    //   };
-    // },
+    data() {
+      return {
+        snack: this.snack,
+        snackColor: this.snackColor,
+        snackText: this.snackText
+      };
+    },
   };
 </script>
 
