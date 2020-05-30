@@ -177,7 +177,7 @@
         this.dialog = false;
       },
       async atEnd() {
-        let result = await axios.patch(`v1/rewards`, {
+        await axios.patch(`v1/rewards`, {
           reward: this.rewards
         });
         const updateUser = {
