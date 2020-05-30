@@ -169,7 +169,7 @@
         this.errorMsg = ""
       },
       async atEnd() {
-        let result = await axios.patch(`v1/todos`, {
+         await axios.patch(`v1/todos`, {
           todo: this.todos
         });
         const updateUser = {
