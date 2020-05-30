@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 Vue.directive('scroll', {
   inserted: function (el, binding) {
-    let f = function (evt) {
+    const f = function (evt) {
       if (binding.value(evt, el)) {
         window.removeEventListener('scroll', f)
       }

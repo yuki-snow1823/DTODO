@@ -239,7 +239,7 @@
               })
               .then(res => {
                 this.$store.commit("setLoading", false);
-                let param = {
+                const param = {
                   user: res.data
                 };
                 this.$store.commit("setUser", param);
@@ -333,7 +333,7 @@
           });
       },
       moveToTop() {
-        let element = document.getElementById("index-signup");
+        const element = document.getElementById("index-signup");
         element.scrollIntoView({
           behavior: "smooth",
           block: "center"
