@@ -136,7 +136,6 @@
           this.completeDialog = false;
           this.$store.commit("clearErrors");
         } catch (error) {
-          console.log("UserPage: 110", error);
           const {
             data
           } = error.response;
@@ -145,7 +144,6 @@
         }
       },
       async editItem(reward) {
-        console.log(reward);
         this.dialog = true;
         // 参照渡し（入力の際の文章を受け取る役割をしています）
         this.dialogReward = reward;
@@ -158,10 +156,10 @@
       async updateItem(id, title, point) {
         if (!title) {
           this.errorMsg = "タイトルが空欄です。"
-          return console.log("空欄")
+          return
         } else if (title.length >= 20) {
           this.errorMsg = "タイトルは1文字以上20文字以下にしてください。"
-          return console.log("文字が多い")
+          return 
         }
         await axios.patch(`/v1/rewards/${id}`, {
           reward: {
@@ -201,9 +199,7 @@
         this.snackColor = "info";
         this.snackText = "『" + name.title + "』" + "を編集します。";
       },
-      close() {
-        console.log("Dialog closed");
-      },
+
       openCompleteDialog(reward) {
         this.completeDialog = true;
         this.selectedItem = reward;

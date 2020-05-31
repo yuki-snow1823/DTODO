@@ -124,7 +124,6 @@
           return todo.id !== item.id;
         });
         const rewards = getUser.data.rewards;
-        console.log(getUser.data);
         const updateUser = {
           user: getUser.data.user,
           todos,
@@ -151,10 +150,10 @@
       async updateItem(id, title, point) {
         if (!title) {
           this.errorMsg = "タイトルが空欄です。"
-          return console.log("空欄")
+          return
         } else if (title.length >= 20) {
           this.errorMsg = "タイトルは1文字以上20文字以下にしてください。"
-          return console.log("文字が多い")
+          return
         }
         await axios.patch(`/v1/todos/${id}`, {
           todo: {
@@ -194,9 +193,6 @@
         this.snack = true;
         this.snackColor = "info";
         this.snackText = "『" + name.title + "』" + "を編集します。";
-      },
-      close() {
-        console.log("Dialog closed");
       },
       openCompleteDialog(todo) {
         this.completeDialog = true;
