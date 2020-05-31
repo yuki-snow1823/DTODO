@@ -61,10 +61,7 @@
 
     <Snack :prop_snack="snack" :prop_snackColor="snackColor" :prop_snackText="snackText"/>
 
-    <!-- <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
-      {{ snackText }}
-      <v-btn text @click="snack = false">Close</v-btn>
-    </v-snackbar> -->
+
   </div>
 </template>
 

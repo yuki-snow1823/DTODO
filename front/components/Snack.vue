@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-snackbar v-model="prop_snack" :timeout="3000" :color="prop_snackColor">
-      {{ prop_snackText }}
-      <v-btn text @click="prop_snack = false">Close</v-btn>
+    <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
+      {{ snackText }}
+      <v-btn text @click="snack = false">Close</v-btn>
     </v-snackbar>
   </div>
 </template>
@@ -28,9 +28,9 @@
     },
     data() {
       return {
-        // prop_snack: this.snack,
-        // prop_snackColor: this.snackColor,
-        // prop_snackText: this.snackText,
+        snack: this.prop_snack,
+        snackColor: this.prop_snackColor,
+        snackText: this.prop_snackText,
       };
     },
   };
