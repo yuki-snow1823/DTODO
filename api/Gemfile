@@ -52,3 +52,6 @@ gem 'dotenv-rails'
 #   gem 'mysql2'
 # end
 # 本番環境で使用するためのもの
+
+gem 'grape-swagger-rails', '~> 0.3.0' 
+gem 'swagger-docs', '~> 0.2.9'
