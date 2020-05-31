@@ -10,21 +10,28 @@
 <script>
   export default {
     props: {
-      snack: {
+      prop_snack: {
         type: Boolean,
         default: false,
         required: true
       },
-      snackColor: {
+      prop_snackColor: {
         type: String,
         'default': () => (""),
         required: true
       },
-      snackText: {
+      prop_snackText: {
         type: String,
         'default': () => (""),
         required: true
       }
+    },
+    data() {
+      return {
+        snack: this.prop_snack,
+        snackColor: this.prop_snackColor,
+        snackText: this.prop_snackText,
+      };
     },
   };
 </script>

@@ -23,11 +23,7 @@
     props: {
       todo: {
         type: Object,
-        default: {
-          title: "",
-          point: null
-        },
-        // プロパティを必ず渡し、エラーを防ぐために記載
+        'default': () => ({ title:"",point: 0 }) ,
         required: true
       }
     },

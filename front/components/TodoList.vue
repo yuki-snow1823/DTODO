@@ -59,12 +59,9 @@
       </v-card>
     </v-dialog>
 
-    <Snack :snack="snack" :snackColor="snackColor" :snackText="snackText"/>
+    <Snack :prop_snack="snack" :prop_snackColor="snackColor" :prop_snackText="snackText"/>
 
-    <!-- <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
-      {{ snackText }}
-      <v-btn text @click="snack = false">Close</v-btn>
-    </v-snackbar> -->
+
   </div>
 </template>
 
@@ -81,9 +78,9 @@
         search: "",
         editOn: true,
         items: numberRange,
-        snack: this.snack,
-        snackColor: this.snackColor,
-        snackText: this.snackText,
+        snack: false,
+        snackColor: "",
+        snackText: "",
         dialogText: "",
         dialogTodo: {},
         dialog: false,
