@@ -51,14 +51,15 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="deleteDialog">
+    <!-- <v-dialog v-model="deleteDialog">
       <v-card>
         <v-card-title>『{{ selectedItem.title }}』を削除しますか？</v-card-title>
         <v-btn @click="deleteItem(selectedItem)">はい</v-btn>
         <v-btn @click="deleteDialog = false">いいえ</v-btn>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
 
+    <DeleteDialog :prop_deleteDialog="deleteDialog" :prop_selectedItem="selectedItem"/>
     <Snack :prop_snack="snack" :prop_snackColor="snackColor" :prop_snackText="snackText"/>
 
 
@@ -68,6 +69,7 @@
 <script>
   const numberRange = [...Array(9).keys()].map(i => ++i);
   import Snack from "@/components/Snack";
+  import DeleteDialog from "@/components/DeleteDialog";
   import axios from "@/plugins/axios";
   export default {
     props: ["todos"],
@@ -91,7 +93,8 @@
       };
     },
     components: {
-      Snack
+      Snack,
+      DeleteDialog
     },
     computed: {
       user() {

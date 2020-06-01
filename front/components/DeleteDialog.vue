@@ -11,31 +11,26 @@
 <script>
 export default {
   props: {
-    prop_snack: {
+    prop_deleteDialog: {
       type: Boolean,
-      default: false,
+      default: () => false,
       required: true
     },
-    prop_snackColor: {
-      type: String,
-      default: () => "",
-      required: true
-    },
-    prop_snackText: {
-      type: String,
-      default: () => "",
-      required: true
+    prop_selectedItem: {
+      // type: String,
+      // default: () => "",
+      // required: true
     }
   },
   data() {
     return {
-        dialog: false,
-        deleteDialog: false,
-        selectedItem: "",
+      deleteDialog: this.prop_deleteDialog,
+      selectedItem: this.prop_selectedItem
     };
   },
   methods: {
     openDeleteDialog(todo) {
+      console.log("delete");
       this.deleteDialog = true;
       this.selectedItem = todo;
     },
