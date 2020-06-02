@@ -194,6 +194,7 @@
         this.snackText = "Canceled";
       },
       open(name) {
+        console.log("test");
         this.snack = true;
         this.snackColor = "info";
         this.snackText = "『" + name.title + "』" + "を編集します。";
