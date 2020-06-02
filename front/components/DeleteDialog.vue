@@ -1,9 +1,9 @@
 <template>
   <v-dialog v-model="prop_deleteDialog">
     <v-card>
-      <v-card-title>『{{ selectedItem.title }}』を削除しますか？</v-card-title>
-      <v-btn @click="handleSubmit(selectedItem)">はい</v-btn>
-      <v-btn @click="handleSubmit2()">いいえ</v-btn>
+      <v-card-title>『{{ prop_selectedItem.title }}』を削除しますか？</v-card-title>
+      <v-btn @click="handleSubmit(prop_selectedItem)">はい</v-btn>
+      <v-btn @click="deleteDialog = false">いいえ</v-btn>
     </v-card>
   </v-dialog>
 </template>
@@ -32,9 +32,6 @@ export default {
     handleSubmit(selectedItem) {
       this.$emit("delete", selectedItem);
     },
-    handleSubmit2() {
-      this.$emit("open", selectedItem);
-    }
   }
 };
 </script>
