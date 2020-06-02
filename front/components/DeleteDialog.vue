@@ -2,8 +2,8 @@
   <v-dialog v-model="deleteDialog">
     <v-card>
       <v-card-title>『{{ selectedItem.title }}』を削除しますか？</v-card-title>
-      <v-btn @click="deleteItem(selectedItem)">はい</v-btn>
-      <v-btn @click="deleteDialog = false">いいえ</v-btn>
+      <v-btn @click="handleSubmit(selectedItem)">はい</v-btn>
+      <v-btn @click="handleSubmit2()">いいえ</v-btn>
     </v-card>
   </v-dialog>
 </template>
@@ -29,25 +29,11 @@ export default {
     };
   },
   methods: {
-    openDeleteDialog(todo) {
-      console.log("delete");
-      this.deleteDialog = true;
-      this.selectedItem = todo;
+    handleSubmit(selectedItem) {
+      this.$emit("delete", selectedItem);
     },
-    async deleteItem(item) {
-      await axios.delete(`/v1/todos/${item.id}`);
-      const todos = this.user.todos.filter(todo => {
-        return todo.id !== item.id;
-      });
-      const updateUser = {
-        ...this.user,
-        todos
-      };
-      this.$store.commit("setUser", updateUser);
-      this.snack = true;
-      this.snackColor = "warning";
-      this.snackText = "削除しました。";
-      this.deleteDialog = false;
+    handleSubmit2() {
+      this.$emit("open", selectedItem);
     }
   }
 };

@@ -59,7 +59,7 @@
       </v-card>
     </v-dialog> -->
 
-    <DeleteDialog :prop_deleteDialog="deleteDialog" :prop_selectedItem="selectedItem"/>
+    <DeleteDialog :prop_deleteDialog="deleteDialog" :prop_selectedItem="selectedItem" @delete="deleteItem" @open="openDeleteDialog"/>
     <Snack :prop_snack="snack" :prop_snackColor="snackColor" :prop_snackText="snackText"/>
 
 
@@ -102,21 +102,6 @@
       }
     },
     methods: {
-      async deleteItem(item) {
-        await axios.delete(`/v1/todos/${item.id}`);
-        const todos = this.user.todos.filter(todo => {
-          return todo.id !== item.id;
-        });
-        const updateUser = {
-          ...this.user,
-          todos
-        };
-        this.$store.commit("setUser", updateUser);
-        this.snack = true;
-        this.snackColor = "warning";
-        this.snackText = "削除しました。";
-        this.deleteDialog = false;
-      },
       async completeItem(item) {
         const getUser = await axios.get(`/v1/todos/${item.id}`, {
           params: {
@@ -172,6 +157,21 @@
         this.snackText = "保存しました。";
         this.errorMsg = ""
       },
+    async deleteItem(item) {
+      await axios.delete(`/v1/todos/${item.id}`);
+      const todos = this.user.todos.filter(todo => {
+        return todo.id !== item.id;
+      });
+      const updateUser = {
+        ...this.user,
+        todos
+      };
+      this.$store.commit("setUser", updateUser);
+      this.snack = true;
+      this.snackColor = "warning";
+      this.snackText = "削除しました。";
+      this.deleteDialog = false;
+    },
       async atEnd() {
          await axios.patch(`v1/todos`, {
           todo: this.todos
