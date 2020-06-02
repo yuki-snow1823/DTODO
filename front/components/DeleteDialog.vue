@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="deleteDialog">
+  <v-dialog v-model="prop_deleteDialog">
     <v-card>
       <v-card-title>『{{ selectedItem.title }}』を削除しますか？</v-card-title>
       <v-btn @click="handleSubmit(selectedItem)">はい</v-btn>
