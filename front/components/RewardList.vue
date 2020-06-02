@@ -218,6 +218,14 @@
   $sub-color: #33dddd;
   $accent-color: #f0353f;
 
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
+  }
+  $sp: 480px;
+
+
   @mixin btn {
     background-color: rgb(29, 29, 29) !important;
     border: 2px solid $main-color;
@@ -261,6 +269,9 @@
 
     .reward-list-icon {
       margin-left: auto;
+    @include sp {
+
+      }
     }
 
     .reward-list-btn {
@@ -270,7 +281,11 @@
     .reward-title {
       padding-top: 2px;
       margin-left: 10px;
-      max-width: 35%;
+      max-width: 80%;
+
+      @include sp {
+        max-width: 46%;
+      }
     }
 
     .reward-point {
