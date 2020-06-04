@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>『{{ prop_selectedItem.title }}』を削除しますか？</v-card-title>
       <v-btn @click="handleSubmit(prop_selectedItem)">はい</v-btn>
-      <v-btn @click="deleteDialog = false">いいえ</v-btn>
+      <v-btn @click="closeDialog()">いいえ</v-btn>
     </v-card>
   </v-dialog>
 </template>
@@ -24,14 +24,16 @@ export default {
   },
   data() {
     return {
-      deleteDialog: this.prop_deleteDialog,
-      selectedItem: this.prop_selectedItem
+      // prop_deleteDialog: this.prop_deleteDialog
     };
   },
   methods: {
     handleSubmit(selectedItem) {
       this.$emit("delete", selectedItem);
     },
+    closeDialog(){
+      this.$emit("close");
+    }
   }
 };
 </script>
