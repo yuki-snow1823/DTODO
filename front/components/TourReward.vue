@@ -101,21 +101,21 @@ export default {
       this.$tours["myTour"].currentStep = this.steps.length - 1;
     },
     myCustomPreviousStepCallback(currentStep) {
-      console.log(
-        "[Vue Tour] A custom previousStep callback has been called on step " +
-          (currentStep + 1)
-      );
+      // console.log(
+      //   "[Vue Tour] A custom previousStep callback has been called on step " +
+      //     (currentStep + 1)
+      // );
     },
     myCustomNextStepCallback(currentStep) {
-      console.log(
-        "[Vue Tour] A custom nextStep callback has been called on step " +
-          (currentStep + 1)
-      );
+      // console.log(
+      //   "[Vue Tour] A custom nextStep callback has been called on step " +
+      //     (currentStep + 1)
+      // );
 
       if (currentStep === 1) {
-        console.log(
-          "[Vue Tour] A custom nextStep callback has been called from step 2 to step 3"
-        );
+        // console.log(
+        //   "[Vue Tour] A custom nextStep callback has been called from step 2 to step 3"
+        // );
       }
     }
   }
