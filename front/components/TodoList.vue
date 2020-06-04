@@ -61,6 +61,7 @@
 
     <DeleteDialog :prop_deleteDialog="deleteDialog" :prop_selectedItem="selectedItem"
     @delete="deleteItem" @open="openDeleteDialog"/>
+    
     <Snack :prop_snack="snack" :prop_snackColor="snackColor" :prop_snackText="snackText"/>
 
 
