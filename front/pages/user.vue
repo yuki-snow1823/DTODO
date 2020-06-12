@@ -37,7 +37,6 @@
       store.watch(
         state => state.currentUser,
         (newUser, oldUser) => {
-          // console.log(newUser, oldUser);
           if (!newUser) {
             return redirect("/");
           }
