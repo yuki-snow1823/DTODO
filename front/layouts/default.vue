@@ -36,7 +36,7 @@
 
       <v-toolbar-title class="pl-0">
         <router-link to="/" class="toolbar-title">
-          <v-icon class="mb-2" size="38">mdi-skull-outline</v-icon><span class="title-first">D</span>TODO
+          <span class="title-first">D</span>TODO
         </router-link>
       </v-toolbar-title>
 
@@ -180,11 +180,17 @@
     }
   }
 
+  @font-face {
+    font-family: "dot";
+    src: url("../assets/fonts/k8x12L.ttf") format("truetype");
+  }
+
   .app {
     .toolbar-title {
       color: white;
       text-decoration: none;
-      font-family: "Comic Sans MS";
+      font-family: "dot";
+      letter-spacing: 7px;
       font-size: 30px;
       font-weight: bold;
 

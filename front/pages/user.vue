@@ -37,16 +37,11 @@
       store.watch(
         state => state.currentUser,
         (newUser, oldUser) => {
-          console.log(newUser, oldUser);
           if (!newUser) {
             return redirect("/");
           }
         }
       );
-    },
-    created() {
-      // testの際に活用するため、残してあります。
-      console.log(this.currentUser);
     },
     components: {
       Status,
@@ -74,7 +69,6 @@
           });
           this.$store.commit("clearErrors");
         } catch (error) {
-          console.log("UserPage: 110", error);
           const {
             data
           } = error.response;

@@ -136,7 +136,6 @@
           this.completeDialog = false;
           this.$store.commit("clearErrors");
         } catch (error) {
-          console.log("UserPage: 110", error);
           const {
             data
           } = error.response;
@@ -145,7 +144,6 @@
         }
       },
       async editItem(reward) {
-        console.log(reward);
         this.dialog = true;
         // 参照渡し（入力の際の文章を受け取る役割をしています）
         this.dialogReward = reward;
@@ -158,10 +156,10 @@
       async updateItem(id, title, point) {
         if (!title) {
           this.errorMsg = "タイトルが空欄です。"
-          return console.log("空欄")
+          return
         } else if (title.length >= 20) {
           this.errorMsg = "タイトルは1文字以上20文字以下にしてください。"
-          return console.log("文字が多い")
+          return 
         }
         await axios.patch(`/v1/rewards/${id}`, {
           reward: {
@@ -177,7 +175,7 @@
         this.dialog = false;
       },
       async atEnd() {
-        let result = await axios.patch(`v1/rewards`, {
+        await axios.patch(`v1/rewards`, {
           reward: this.rewards
         });
         const updateUser = {
@@ -201,9 +199,7 @@
         this.snackColor = "info";
         this.snackText = "『" + name.title + "』" + "を編集します。";
       },
-      close() {
-        console.log("Dialog closed");
-      },
+
       openCompleteDialog(reward) {
         this.completeDialog = true;
         this.selectedItem = reward;
@@ -221,6 +217,14 @@
   $main-color: #fc7b03;
   $sub-color: #33dddd;
   $accent-color: #f0353f;
+
+  @mixin sp {
+    @media (max-width: ($sp)) {
+      @content;
+    }
+  }
+  $sp: 480px;
+
 
   @mixin btn {
     background-color: rgb(29, 29, 29) !important;
@@ -265,6 +269,9 @@
 
     .reward-list-icon {
       margin-left: auto;
+    @include sp {
+
+      }
     }
 
     .reward-list-btn {
@@ -274,7 +281,11 @@
     .reward-title {
       padding-top: 2px;
       margin-left: 10px;
-      max-width: 35%;
+      max-width: 80%;
+
+      @include sp {
+        max-width: 46%;
+      }
     }
 
     .reward-point {
